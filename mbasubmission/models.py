@@ -18,6 +18,7 @@ class Application(models.Model):
     middle_name = models.CharField(max_length=254, null=True, blank=True)
     last_name = models.CharField(max_length=254)
     photo = models.ImageField()
+    documents = models.ManyToManyField('Document', verbose_name="Documents")
     application_state = models.CharField(max_length=8, choices=ApplicationState.choices, default=ApplicationState.PENDING)
     
     created = models.DateTimeField(auto_now_add=True)
@@ -36,7 +37,6 @@ class Document(models.Model):
     """
     name = models.CharField(max_length=254, null=True, blank=True)
     file = models.FileField()
-    application = models.ForeignKey(Application, on_delete=models.CASCADE, related_name='documents')
     
     created = models.DateTimeField(auto_now_add=True)
     id = models.UUIDField(default=uuid.uuid4, unique=True,
