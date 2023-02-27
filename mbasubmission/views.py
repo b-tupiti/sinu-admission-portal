@@ -1,3 +1,6 @@
 from django.shortcuts import render
 
-# Create your views here.
+def submission_form(request):
+    
+    context = {}
+    return render(request, 'mbasubmission/submission_form.html',context)
