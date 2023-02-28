@@ -35,7 +35,6 @@ class Document(models.Model):
     """
     Document model
     """
-    name = models.CharField(max_length=254, null=True, blank=True)
     file = models.FileField(upload_to='documents/')
     application = models.ForeignKey(Application, on_delete=models.CASCADE)
     
