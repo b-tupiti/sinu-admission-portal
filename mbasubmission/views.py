@@ -9,7 +9,7 @@ def submission_form(request):
     is_submitted = False
     
     DocumentFormSet = formset_factory(DocumentForm, extra=1)
-    document_formset = DocumentFormSet(prefix='documents')
+    document_formset = DocumentFormSet(prefix='document')
     application_form = ApplicationForm()
     
     if request.method == 'POST':

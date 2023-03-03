@@ -1,0 +1,48 @@
+{% load static %}
+ <!-- Add document button-->
+ <div class="icon-text has-text-info" id="add-document">
+    <span class="icon  has-text-info" >
+        <ion-icon name="add-circle-outline"></ion-icon>
+    </span>
+    <small class="is-small">Add document</small>
+</div>
+<!-- traversing through forms -->
+<div id="document-formset-wrapper" style="margin-bottom:7px;margin-top:7px;">
+    
+    {% for form in document_formset %}
+        
+        <div class="form-wrapper file is-info is-small has-name is-fullwidth is-flex is-align-items-center" style="margin-bottom:5px;gap: 5px;">
+            
+            
+
+                <label class="file-label ">
+                    {{form.file }}
+                    <span class="file-cta">
+                        <span class="file-icon">
+                            <ion-icon name="document"></ion-icon>
+                        </span>
+                        <span class="file-label">
+                        Browse
+                        </span>
+                    </span>
+                    <span class="file-name">
+                        <span class="filename" style="margin-right:5px">no document selected</span>
+
+                        {% comment %} choose icon to display depending on file type {% endcomment %}
+                        {% comment %} <i class="fa-solid fa-file-word" style="margin-left:5px"></i> {% endcomment %}
+                        {% comment %} <i class="fa-solid fa-file-pdf " style="margin-left:5px"></i> {% endcomment %}
+                    </span>
+                    
+                </label>  
+                <button type="button" class="delete is-small " ></button>
+
+            
+
+        </div> 
+        
+
+    {% endfor %}
+
+</div>
+
+<script src="{% static 'mbasubmission/js/document-forms.js' %}"></script>

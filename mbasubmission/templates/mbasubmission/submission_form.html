@@ -1,41 +1,61 @@
-<h1>This is for submission</h1>
+{% load static %}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"  />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+
+<div class="container">
 
 {% if is_submitted %}
 
-<h6>Thank you for submitting! </h6>
+    <h6>Thank you for submitting! </h6>
+    <a href="{% url 'submission-form' %}">Go back to form</a>
+
+
 
 {% else %}
-<form method="post">
-    {%csrf_token %}
-    <button type="submit">submit</button>
-</form>
-<form method="post"> 
-    {%csrf_token %}
-    {{application_form.as_p}}
-    {% for form in document_formset %}
-            <div class="document-formset">
-                {{ form.as_p }}
-            </div>
-    {% endfor %}
-    <button type="button" id="add-document-formset">Add Another Document</button>
-    <button type="submit">Submit</button>
-</form>
+
+    <form 
+        method="post" 
+        enctype="multipart/form-data"
+        class="box m-1 has-text-dark"
+        style="max-width:615px;"
+    >
+    {% csrf_token %}
+
+        
+
+        {{ document_formset.management_form }}
+
+        
+
+        {% include 'mbasubmission/document_forms.html' %}
+
+        <!-- Submit button -->
+        
+
+        <div class="is-flex is-align-items-center is-justify-content-center mt-5">
+            <button type="submit" class="button is-small">
+                <div class="icon-text has-text">
+                    <span>Submit My Application</span>
+                    
+                </div>
+            </button>
+          </div>
+          
+        
+    </form>
+
+
+
 
 {% endif %}
 
 
-<script>
-    $(document).ready(function() {
-        var formCount = {{ document_formset.total_form_count }};
-        $('#add-document-formset').click(function() {
-            var newForm = $('.document-formset:last').clone(true);
-            newForm.find(':input').each(function() {
-                var name = $(this).attr('name').replace('-' + (formCount - 1) + '-', '-' + formCount + '-');
-                var id = 'id_' + name;
-                $(this).attr({'name': name, 'id': id}).val('').removeAttr('checked');
-            });
-            formCount++;
-            $('.document-formset:last').after(newForm);
-        });
-    });
-</script>
+</div>
+
+<!-- Scripts -->
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+
+
