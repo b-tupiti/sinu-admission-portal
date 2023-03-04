@@ -21,4 +21,4 @@ def submission_form(request):
         'is_submitted': is_submitted,
     }
     
-    return render(request, 'mbasubmission/submission_form.html',context)
+    return render(request, 'mbasubmission/right-section/template.html',context)
