@@ -1,17 +1,17 @@
 {% load static %}
  <!-- Add document button-->
- <div class="icon-text has-text-info" id="add-document">
-    <span class="icon  has-text-info" >
+ <div class="icon-text " id="add-document">
+    <span class="icon has-text-dark " >
         <ion-icon name="add-circle-outline"></ion-icon>
     </span>
-    <small class="is-small">Add document</small>
+    <small class="is-small has-text-dark">Add document</small>
 </div>
 <!-- traversing through forms -->
 <div id="document-formset-wrapper" style="margin-bottom:7px;margin-top:7px;">
     
     {% for form in document_formset %}
         
-        <div class="form-wrapper file is-info is-small has-name is-fullwidth is-flex is-align-items-center" style="margin-bottom:5px;gap: 5px;">
+        <div class="form-wrapper file  is-small has-name is-fullwidth is-flex is-align-items-center" style="margin-bottom:5px;gap: 5px;">
             
             
 
@@ -26,7 +26,7 @@
                         </span>
                     </span>
                     <span class="file-name">
-                        <span class="filename" style="margin-right:5px">no document selected</span>
+                        <span class="filename has-text-dark has-text-weight-light" style="margin-right:5px">no document selected</span>
 
                         {% comment %} choose icon to display depending on file type {% endcomment %}
                         {% comment %} <i class="fa-solid fa-file-word" style="margin-left:5px"></i> {% endcomment %}

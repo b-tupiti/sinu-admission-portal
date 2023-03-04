@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+  {% if is_submitted %}
+
+    <div class="m-1 p-5 mb-1 " style=" border-bottom:1px solid transparent;height:100%;">
+      <h6 class="is-size-3 has-text-white mb-4">You successfully submitted your application! </h6>
+      <p class="has-text-white mb-5">Please check your email to confirm your submission.</p>
+      <a class="button is-small" href="{% url 'submission-form' %}">Back to form</a>
+      <a class="button is-small">Back to website</a>
+    </div>
+      
+      
+  {% else %}
+
+    {% include 'mbasubmission/right-section/form.html'%}
+
+  {% endif %}
+
+
+
+
+{% endblock %}
+
+
+
+
+

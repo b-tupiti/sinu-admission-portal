@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'mbasubmission\styles\main.css' %}"
+    />
+    <title>MBA Submission - SINU</title>
+  </head>
+  <body>
+    <div
+      style=" height: 100vh"
+      class="wrapper is-align-items-center"
+    >
+      <main
+        class="p-5"
+        style="height: 100vh; background: #1b647e4d"
+      >
+        <section class="hero">
+          <div class="hero-body">
+            <div class="columns" style="min-height: 671px;">
+              <!-- Left Section START -->
+              <section class="column p-0" style="background: rgba(62, 36, 36, 0.5);background: rgba(27, 100, 126, 0.8);">
+                {% include 'mbasubmission\left-section\left.html' %}
+              </section>
+              <!-- Left Section END -->
+              <!-- Right Section START -->
+              <section class="column" style="background: rgba(62, 36, 36, 0.5);background: #1b647ecc;">
+                {% block content %} {% endblock %}
+              </section>
+              <!-- Right Section END -->
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    {% include 'footer.html' %}
+
+    <!-- Scripts -->
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+  </body>
+</html>
