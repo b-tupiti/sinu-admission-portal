@@ -1,0 +1,31 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;800;900&display=swap");
+
+body {
+  background: #1b647e;
+  font-family: "Outfit", sans-serif;
+  background-image: url('/static/images/bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  
+  
+}
+
+
+
+hr {
+  
+  background-image: linear-gradient(to right, #1b647e, #6586a0, #9eabc0, #d1d3df, #ffffff);
+}
+
+#submit-form {
+  background: white;
+  color: #8cc8ed;
+  border: .5px solid #8cc8ed;
+}
+#submit-form:hover {
+  background: #8cc8ed;
+  color: white;
+  font-weight: bold;
+
+}
