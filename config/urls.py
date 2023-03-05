@@ -15,6 +15,8 @@ urlpatterns = [
     path('dashboard/applications/235532/', ApplicationDetail, name='application-detail'),
 ]
 
-
+if not settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
