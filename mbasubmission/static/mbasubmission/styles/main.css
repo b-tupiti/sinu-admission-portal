@@ -3,16 +3,18 @@
 body {
   background: #1b647e;
   font-family: "Outfit", sans-serif;
+  background-image: url('/static/mbasubmission/images/bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  
+  
 }
 
-.wrapper {
-   
-    background-image: url('/static/mbasubmission/images/bg.jpg');
-    background-size: cover;
-}
+
 
 hr {
-  background-color: #1b647ee6;
+  
   background-image: linear-gradient(to right, #1b647e, #6586a0, #9eabc0, #d1d3df, #ffffff);
 }
 
