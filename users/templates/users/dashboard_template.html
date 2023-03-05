@@ -1,0 +1,49 @@
+{% extends 'user_base.html' %}
+
+{% block dashboardcontent %}
+
+
+    <nav class="panel"  >
+        <p class="panel-heading" style="background-color: #fff;">
+          MBA Submission 
+        </p>
+        
+        <div class="container">
+            <div class=" mb-2 mt-3 is-flex is-justify-content-space-between" style="background:#fff">
+                
+                
+                <div class="tabs " style="margin-bottom: 0;">
+                    <ul>
+                      
+                      <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                      <li><a href="{% url 'applications' %}">Applications</a></li>
+                      <li><a>Accepted</a></li>
+                      <li><a>Rejected</a></li>
+                    </ul>
+                  </div>
+
+                <div class="is-size-6 has-background-white p-2 pr-5 " style="font-weight:lighter">
+                    <span class="mr-4 has-text-info">Total Applications: 5 </span>
+                    <span class="mr-4 has-text-info">Accepted: 5 </span>
+                    <span class="mr-4 has-text-info">Rejected: 5 </span>
+                </div>
+                
+
+            </div>
+
+           
+           
+              
+        </div>
+      
+      </nav>
+
+      <div class="has-background-white container" style="min-height:600px; margin-bottom:50px">
+                
+        {% block dashboard %}
+        {% endblock %}
+      
+    </div>
+
+
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'user_base.html' %}
+
+{%block dashboardcontent %}
+<section class="hero">
+    <div class="hero-body">
+      <div class="is-flex is-align-items-center  is-justify-content-center" style="min-height: 671px;">
+        <!-- Left Section START -->
+        <section class=" is-two-fifths p-5" style="background: rgba(62, 36, 36, 0.5);background: rgba(27, 100, 126, .95);">
+          
+          <form method="POST">
+            {% csrf_token %} 
+              <p class="is-size-4 has-text-white mb-4">MBA Applications Admin</p>
+              <hr class="mb-4">
+              <div class="field">
+                  <p class="control has-icons-left has-icons-right">
+                    <input class="input" type="email" placeholder="Email">
+                    <span class="icon is-small is-left">
+                      <i class="fas fa-envelope"></i>
+                    </span>
+                  </p>
+                </div>
+                <div class="field">
+                  <p class="control has-icons-left">
+                    <input class="input" type="password" placeholder="Password">
+                    <span class="icon is-small is-left">
+                      <i class="fas fa-lock"></i>
+                    </span>
+                  </p>
+                </div>
+                <hr class="mb-4">
+                <button class="button  is-rounded is-fullwidth  has-text-weight-semibold">Login</button>
+            </form>
+
+        </section>
+        <!-- Left Section END -->
+        
+      </div>
+    </div>
+  </section>
+
+  {%endblock %}
