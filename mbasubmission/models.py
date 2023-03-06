@@ -39,7 +39,7 @@ class Application(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
-        return self.id
+        return str(self.id)
     
     def get_absolute_url(self):
         return reverse("application-detail", kwargs={"pk": self.pk})
