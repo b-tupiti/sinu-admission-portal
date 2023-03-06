@@ -13,7 +13,7 @@ environ.Env.read_env()
 SECRET_KEY = env('SECRET_KEY')
 DEBUG = bool(strtobool(env('DEBUG')))
 
-ALLOWED_HOSTS = ['mba-submission.up.railway.app','localhost']
+ALLOWED_HOSTS = ['mba-submission.up.railway.app','127.0.0.1']
 
 # Application definition
 
