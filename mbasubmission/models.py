@@ -17,6 +17,10 @@ class Application(models.Model):
         MRS = "MRS","MRS"
         MS = "MS","MS"
         DR = "DR","DR"
+    
+    class Gender(models.TextChoices):
+        MALE = "Male", "Male"
+        FEMALE = "Female", "Female"
         
     email = models.EmailField(max_length=254)
     phone_number = models.IntegerField()
@@ -24,6 +28,8 @@ class Application(models.Model):
     first_name = models.CharField(max_length=254)
     middle_name = models.CharField(max_length=254, null=True, blank=True)
     last_name = models.CharField(max_length=254)
+    date_of_birth = models.DateField()
+    gender = models.CharField(max_length=6,choices=Gender.choices)
     job_title = models.CharField(max_length=254)
     employer = models.CharField(max_length=254)
     photo = models.ImageField(upload_to='photos/')
