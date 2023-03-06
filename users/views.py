@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from .models import User
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 
 def LoginUser(request):
@@ -30,7 +30,11 @@ def LoginUser(request):
     return render(request, 'users/login.html')
 
 
-
+def LogoutUser(request):
+    if request.user.is_authenticated:
+        logout(request)
+        messages.info(request, 'you signed out!')
+    return redirect('login')
 
 
 

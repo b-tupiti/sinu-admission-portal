@@ -3,13 +3,14 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from users.views import LoginUser, Dashboard, Applications, ApplicationDetail
+from users.views import LoginUser, LogoutUser, Dashboard, Applications, ApplicationDetail
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('mbasubmission.urls')),
     
-    path('login/', LoginUser, name='login-user'),
+    path('login/', LoginUser, name='login'),
+    path('logout/', LogoutUser, name='logout'),
     path('dashboard/', Dashboard, name='dashboard'),
     path('dashboard/applications/', Applications, name='applications'),
     path('dashboard/applications/235532/', ApplicationDetail, name='application-detail'),
