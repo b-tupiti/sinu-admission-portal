@@ -1,19 +1,50 @@
-from django.forms import ModelForm, ClearableFileInput
+from django.forms import ModelForm, ClearableFileInput, TextInput, EmailInput, NumberInput, DateInput, Select, FileInput
 from .models import Application, Document
 from django.core.exceptions import ValidationError
 
 class ApplicationForm(ModelForm):
     class Meta:
         model = Application
-        fields = ('email', 
+        fields = ('title', 
+                  'email',
                   'phone_number',
                   'first_name',
                   'middle_name',
                   'last_name',
+                  'date_of_birth',
+                  'gender',
+                  'employer',
+                  'job_title',
                   'photo',
                   'proposal',
                   )
+        widgets = {
+            'title': Select(attrs={'class': 'input is-small '}),
+            'first_name': TextInput(attrs={'placeholder': 'First Name'}),
+            'middle_name': TextInput(attrs={'placeholder': 'Middle Name (optional)'}),
+            'last_name': TextInput(attrs={'placeholder': 'Last Name'}),
+            'email': EmailInput(attrs={'placeholder': 'Email'}),
+            'phone_number': NumberInput(attrs={'placeholder': 'Phone Number'}),
+            'date_of_birth': DateInput(attrs={'type':'date','placeholder':'YYYY-MM-DD'}),
+            'gender': Select(attrs={'class': 'input is-small ','style':'width:200px'}),
+            'employer': TextInput(attrs={'class': 'input is-small ','placeholder':'Enter name here'}),
+            'job_title': TextInput(attrs={'class': 'input is-small ','placeholder':'Enter title here'}),
+            'photo': FileInput(attrs={'class':'file-input is-small'}),
+        }
+        
+    
+    def __init__(self, *args, **kwargs):
+        super(ApplicationForm, self).__init__(*args, **kwargs)
+        self.fields['title'].empty_label = None
+        self.fields['title'].choices = [(None, 'title')] + list(self.fields['title'].choices)[1:]
+        self.fields['gender'].empty_label = None
+        self.fields['gender'].choices = [(None, '')] + list(self.fields['gender'].choices)[1:]
+        for name, field in self.fields.items():
+            if name == 'photo':
+                continue
+            field.widget.attrs.update({'class': 'input is-small',})
    
+        
         
 class DocumentForm(ModelForm):
     
