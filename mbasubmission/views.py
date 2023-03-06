@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from .forms import ApplicationForm, DocumentForm
 from django.forms import formset_factory
+from .models import Application, Document
+
 
 def submission_form(request):
     """
@@ -13,6 +15,19 @@ def submission_form(request):
     application_form = ApplicationForm()
     
     if request.method == 'POST':
+        
+        # get photos and all documents
+        photo = request.FILES['photo']
+        doc_keys = [key for key in request.FILES if key != 'photo']
+        documents = [request.FILES[key] for key in doc_keys]
+        
+        application_form = ApplicationForm(request.POST, {'photo': photo})
+        
+        if application_form.is_valid():
+            application = application_form.save()
+            for document in documents:
+                Document.objects.create(file=document,application=application)
+
         is_submitted = True
     
     context = {

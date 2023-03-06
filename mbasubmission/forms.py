@@ -23,7 +23,7 @@ class ApplicationForm(ModelForm):
             'first_name': TextInput(attrs={'placeholder': 'First Name'}),
             'middle_name': TextInput(attrs={'placeholder': 'Middle Name (optional)'}),
             'last_name': TextInput(attrs={'placeholder': 'Last Name'}),
-            'email': EmailInput(attrs={'placeholder': 'Email'}),
+            'email': EmailInput(attrs={'placeholder': 'Email', 'pattern':'^[^@\s]+@[^\s@]+\.[^.\s]{2,}$'}), 
             'phone_number': NumberInput(attrs={'placeholder': 'Phone Number'}),
             'date_of_birth': DateInput(attrs={'type':'date','placeholder':'YYYY-MM-DD'}),
             'gender': Select(attrs={'class': 'input is-small ','style':'width:200px'}),
