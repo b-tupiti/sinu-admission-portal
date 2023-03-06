@@ -1,4 +1,4 @@
-from django.forms import ModelForm, ClearableFileInput, TextInput, EmailInput, NumberInput, DateInput, Select, FileInput
+from django.forms import ModelForm, ClearableFileInput, TextInput, EmailInput, NumberInput, DateInput, Select, FileInput, Textarea
 from .models import Application, Document
 from django.core.exceptions import ValidationError
 
@@ -30,6 +30,7 @@ class ApplicationForm(ModelForm):
             'employer': TextInput(attrs={'class': 'input is-small ','placeholder':'Enter name here'}),
             'job_title': TextInput(attrs={'class': 'input is-small ','placeholder':'Enter title here'}),
             'photo': FileInput(attrs={'class':'file-input is-small'}),
+            'proposal': Textarea(attrs={'class':'textarea input','placeholder':'Write proposal Here (1000 words)','rows':2,}),
         }
         
     
@@ -40,7 +41,7 @@ class ApplicationForm(ModelForm):
         self.fields['gender'].empty_label = None
         self.fields['gender'].choices = [(None, '')] + list(self.fields['gender'].choices)[1:]
         for name, field in self.fields.items():
-            if name == 'photo':
+            if name == 'photo' or name == 'proposal':
                 continue
             field.widget.attrs.update({'class': 'input is-small',})
    
