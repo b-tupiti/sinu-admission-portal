@@ -11,12 +11,21 @@ class Application(models.Model):
         PENDING = "PENDING", "PENDING"
         ACCEPTED = "ACCEPTED", "ACCEPTED"
         REJECTED = "REJECTED", "REJECTED"
+    
+    class Title(models.TextChoices):
+        MR = "MR","MR"
+        MRS = "MRS","MRS"
+        MS = "MS","MS"
+        DR = "DR","DR"
         
     email = models.EmailField(max_length=254)
     phone_number = models.IntegerField(null=True,blank=True)
+    title = models.CharField(max_length=3, choices=Title.choices)
     first_name = models.CharField(max_length=254)
     middle_name = models.CharField(max_length=254, null=True, blank=True)
     last_name = models.CharField(max_length=254)
+    job_title = models.CharField(max_length=254)
+    employer = models.CharField(max_length=254)
     photo = models.ImageField(upload_to='photos/')
     proposal = models.TextField()
     application_state = models.CharField(max_length=8, choices=ApplicationState.choices, default=ApplicationState.PENDING)
