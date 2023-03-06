@@ -36,14 +36,14 @@ def LogoutUser(request):
         messages.info(request, 'you signed out!')
     return redirect('login')
 
-
+from mbasubmission.utils import get_totals
 
 def Dashboard(request):
-    context = {}
-    return render(request, 'users/dashboard.html', context)
+    return render(request, 'users/dashboard.html', {'totals': get_totals()})
 
 def Applications(request):
-    context = {}
+    context = {
+    }
     return render(request, 'users/applications.html', context)
 
 def ApplicationDetail(request):
