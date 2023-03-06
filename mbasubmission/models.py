@@ -19,7 +19,7 @@ class Application(models.Model):
         DR = "DR","DR"
         
     email = models.EmailField(max_length=254)
-    phone_number = models.IntegerField(null=True,blank=True)
+    phone_number = models.IntegerField()
     title = models.CharField(max_length=3, choices=Title.choices)
     first_name = models.CharField(max_length=254)
     middle_name = models.CharField(max_length=254, null=True, blank=True)
