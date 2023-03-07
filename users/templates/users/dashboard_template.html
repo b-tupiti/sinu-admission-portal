@@ -6,7 +6,11 @@
     <nav class="panel"  >
       <div class="panel-heading is-flex is-justify-content-space-between">
         <div>MBA Submission </div>
-        <a href="{% url 'logout' %}" class="button is-small">sign out</a>
+        <div>
+          <span class="is-size-6 has-text-weight-semibold mr-4">Hi, {{user.email}}</span>
+          <a href="{% url 'logout' %}" class="button is-small">sign out</a>
+        </div>
+       
       </div>
        
         
