@@ -1,6 +1,8 @@
 from pathlib import Path
 from distutils.util import strtobool
 import environ
+from dj_static import Cling
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -119,7 +121,6 @@ STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
-    BASE_DIR / 'media/photos/',
 ]
 
 MEDIA_URL = '/media/'
@@ -133,3 +134,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'users.User'
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+
