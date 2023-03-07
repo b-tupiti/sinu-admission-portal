@@ -2,6 +2,9 @@ from django.shortcuts import render,redirect
 from .models import User
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from mbasubmission.utils import get_totals
+from mbasubmission.models import Application, Document
 
 def LoginUser(request):
     
@@ -36,12 +39,16 @@ def LogoutUser(request):
         messages.info(request, 'you signed out!')
     return redirect('login')
 
-from mbasubmission.utils import get_totals
-from mbasubmission.models import Application, Document
 
+
+
+@login_required(login_url="login")
 def Dashboard(request):
-    return render(request, 'users/dashboard.html', {'totals': get_totals()})
+    user = request.user
+    return render(request, 'users/dashboard.html', {'totals': get_totals(),'user':user})
 
+
+@login_required(login_url="login")
 def Applications(request):
     context = {
         'pending_applications': Application.objects.filter(application_state=Application.ApplicationState.PENDING),
@@ -49,6 +56,8 @@ def Applications(request):
     }
     return render(request, 'users/applications.html', context)
 
+
+@login_required(login_url="login")
 def AcceptedApplications(request):
     context = {
         'accepted_applications': Application.objects.filter(application_state=Application.ApplicationState.ACCEPTED),
@@ -56,6 +65,8 @@ def AcceptedApplications(request):
     }
     return render(request, 'users/accepted_applications.html', context)
 
+
+@login_required(login_url="login")
 def RejectedApplications(request):
     context = {
         'rejected_applications': Application.objects.filter(application_state=Application.ApplicationState.REJECTED),
@@ -63,6 +74,8 @@ def RejectedApplications(request):
     }
     return render(request, 'users/rejected_applications.html', context)
 
+
+@login_required(login_url="login")
 def ApplicationDetail(request, pk):
     application = Application.objects.get(id=pk)
     documents = Document.objects.filter(application=application)
