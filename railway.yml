@@ -6,4 +6,8 @@ build:
 migrate:
   - python manage.py migrate
 
+run: 
+  command: echo "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('admin@site.com', 'admin',**{'noinput':True})" | python manage.py shell
+
 start: gunicorn config.wsgi:application --bind 0.0.0.0:$PORT
+
