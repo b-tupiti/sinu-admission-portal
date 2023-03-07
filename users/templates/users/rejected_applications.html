@@ -1,0 +1,40 @@
+{% extends 'users/dashboard_template.html' %}
+
+{% block dashboard %}
+<div class="p-5 ">
+
+    {% if rejected_applications %}
+
+        <div class="panel-block columns is-paddingless is-marginless">
+            <span class="panel-icon column is-paddingless is-size-6 has-text-weight-bold" style="color:#3c3b3b">
+            
+                <span>Application ID</span> 
+            </span>
+            <span class="column has-text-weight-bold">Name</span>
+            <span class="column has-text-weight-bold">Email</span>
+            <span class="column has-text-weight-bold">Phone Number</span>
+            <span class="column has-text-weight-bold">Submmited </span>
+        </div>
+
+        {% for application in pending_applications %}
+        <a href= "{% url 'application-detail' application.id %}" class="panel-block columns is-paddingless is-marginless">
+            <span class="panel-icon column is-paddingless" >
+                <i class="fas fa-book mr-2" aria-hidden="true"></i>
+                    <span>{{application.id}}</span> 
+                </span>
+            <span class="column">{{application.first_name}}</span>
+            <span class="column">{{application.email}}</span>
+            <span class="column">{{application.phone_number}}</span>
+            <span class="column">{{application.created}} </span>
+        </a>
+        {% endfor %}
+
+    {% else %}
+
+        <p class="is-size-5  " style="margin-left:10px">There are no rejected applications</p>
+
+    {% endif %}
+
+</div>
+
+  {% endblock %}

@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from users.views import LoginUser, LogoutUser, Dashboard, Applications, ApplicationDetail
+from users.views import LoginUser, LogoutUser, Dashboard, Applications, ApplicationDetail, AcceptedApplications, RejectedApplications
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -13,7 +13,9 @@ urlpatterns = [
     path('logout/', LogoutUser, name='logout'),
     path('dashboard/', Dashboard, name='dashboard'),
     path('dashboard/applications/', Applications, name='applications'),
-    path('dashboard/applications/<str:pk>/', ApplicationDetail, name='application-detail'),
+    path('dashboard/applications/accepted/', AcceptedApplications, name='accepted-applications'),
+    path('dashboard/applications/rejected/', RejectedApplications, name='rejected-applications'),
+    path('dashboard/application/<str:pk>/', ApplicationDetail, name='application-detail'),
 ]
 
 if not settings.DEBUG:

@@ -49,6 +49,20 @@ def Applications(request):
     }
     return render(request, 'users/applications.html', context)
 
+def AcceptedApplications(request):
+    context = {
+        'accepted_applications': Application.objects.filter(application_state=Application.ApplicationState.ACCEPTED),
+        'totals': get_totals(),
+    }
+    return render(request, 'users/accepted_applications.html', context)
+
+def RejectedApplications(request):
+    context = {
+        'rejected_applications': Application.objects.filter(application_state=Application.ApplicationState.REJECTED),
+        'totals': get_totals(),
+    }
+    return render(request, 'users/rejected_applications.html', context)
+
 def ApplicationDetail(request, pk):
     application = Application.objects.get(id=pk)
     documents = Document.objects.filter(application=application)
