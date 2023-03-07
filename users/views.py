@@ -37,7 +37,8 @@ def LogoutUser(request):
     return redirect('login')
 
 from mbasubmission.utils import get_totals
-from mbasubmission.models import Application
+from mbasubmission.models import Application, Document
+
 def Dashboard(request):
     return render(request, 'users/dashboard.html', {'totals': get_totals()})
 
@@ -48,6 +49,12 @@ def Applications(request):
     }
     return render(request, 'users/applications.html', context)
 
-def ApplicationDetail(request):
-    context = {}
+def ApplicationDetail(request, pk):
+    application = Application.objects.get(id=pk)
+    documents = Document.objects.filter(application=application)
+    context = {
+        'application': application,
+        'documents': documents,
+        'totals': get_totals(),
+    }
     return render(request, 'users/application_detail.html', context)

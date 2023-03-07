@@ -15,7 +15,7 @@
     </div>
 
     {% for application in pending_applications %}
-    <a href= "{% url 'application-detail' %}" class="panel-block columns is-paddingless is-marginless">
+    <a href= "{% url 'application-detail' application.id %}" class="panel-block columns is-paddingless is-marginless">
         <span class="panel-icon column is-paddingless" >
             <i class="fas fa-book mr-2" aria-hidden="true"></i>
                 <span>{{application.id}}</span> 

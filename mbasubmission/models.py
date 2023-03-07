@@ -58,6 +58,7 @@ class Document(models.Model):
                           primary_key=True, editable=False)   
     
     def __str__(self):
-        return self.id
+        filename = self.file.name.split('/')[-1]
+        return filename
 
     

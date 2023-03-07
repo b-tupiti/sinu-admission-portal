@@ -3,33 +3,33 @@
 {% block dashboard %}
 <div class="p-5">
     <div class="columns">
-        <div class="column"><span>Application ID:</span> <span>134243</span></div>
-        <div class="column"><span>Submmited:</span> <span>23-03-2023</span></div>
+        <div class="column"><span>Application ID:</span> <span>{{application.id}}</span></div>
+        <div class="column"><span>Submmited:</span> <span>{{application.created}}</span></div>
     </div>
     <hr>
     <p class="has-text-weight-bold mb-5">Personal Details</p>
     <div class="columns">
         <div class="column">
-            <span class="has-text-weight-semibold">Given Names </span> <br> Brandon
+            <span class="has-text-weight-semibold">Given Names </span> <br> {{application.first_name}}
         </div>
 
         <div class="column">
-            <span class="has-text-weight-semibold"> Surname </span> <br> Tupiti
+            <span class="has-text-weight-semibold"> Surname </span> <br> {{application.last_name}}
         </div>
 
         <div class="column">
-            <span class="has-text-weight-semibold"> Email </span> <br> bryant.6295@yahoo.com
+            <span class="has-text-weight-semibold"> Email </span> <br> {{application.email}}
         </div>
 
         <div class="column">
-            <span class="has-text-weight-semibold"> Phone Number </span> <br> 7118246
+            <span class="has-text-weight-semibold"> Phone Number </span> <br> {{application.email}}
         </div>
 
         <div class="column">
             <div class="card">
                 <div class="card-image">
-                  <figure class="image is-4by3">
-                    <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+                  <figure class="image is-2by2">
+                    <img src="{{application.photo.url}}" alt="photo">
                   </figure>
                 </div>
               </div>
@@ -43,15 +43,7 @@
     <div class="columns">
         <div class="column">
             <p class="has-background-white p-4">
-                I am writing to express my interest in pursuing a Master of Business Administration (MBA) at Solomon Islands National University. With my previous academic and professional experience, I believe that this program will enable me to develop my skills and knowledge in business administration, which will help me advance in my career.
-
-I have a Bachelor's degree in Business Administration and have worked in various industries, including finance and marketing. However, I recognize that there is much more to learn, particularly in the areas of strategic planning, financial management, and leadership. I believe that an MBA program at Solomon Islands National University will provide me with the theoretical foundation and practical experience needed to excel in these areas.
-
-The MBA program at Solomon Islands National University is particularly appealing to me due to its focus on leadership, ethics, and sustainability. I strongly believe that businesses have a responsibility to be ethical and environmentally responsible, and I am excited to learn more about how to integrate these values into business practices.
-
-Furthermore, Solomon Islands National University has a diverse student body, which I believe will provide me with an opportunity to learn from individuals from different backgrounds and cultures. I am particularly interested in learning more about business practices in the Pacific region and how businesses can be successful while also supporting sustainable development.
-
-In conclusion
+              {{application.proposal}}
             </p>
         </div>
     </div>
@@ -60,9 +52,16 @@ In conclusion
 
     <p class="has-text-weight-bold mb-5">Documents</p>
     <div>
-        <a>transcript.pdf <i class="ml-2 fa-solid fa-file-pdf"></i></a>
-        <a>grades.pdf <i class="ml-2 fa-solid fa-file-pdf"></i></a>
-        <a>certificate.pdf <i class="ml-2 fa-solid fa-file-pdf"></i></a>
+
+        {% if documents %}
+          {% for document in documents %}
+          <a href="{{document.file.url}}" target="_blank" >{{document}}<i class="ml-2 fa-solid fa-file-pdf"></i></a>
+          {% endfor %}
+        {% else %}
+          <span>no documents uploaded</span>
+        {%endif%}
+       
+        
     </div>
     <hr>
 

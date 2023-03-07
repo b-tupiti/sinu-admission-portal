@@ -13,7 +13,7 @@ urlpatterns = [
     path('logout/', LogoutUser, name='logout'),
     path('dashboard/', Dashboard, name='dashboard'),
     path('dashboard/applications/', Applications, name='applications'),
-    path('dashboard/applications/235532/', ApplicationDetail, name='application-detail'),
+    path('dashboard/applications/<str:pk>/', ApplicationDetail, name='application-detail'),
 ]
 
 if not settings.DEBUG:
