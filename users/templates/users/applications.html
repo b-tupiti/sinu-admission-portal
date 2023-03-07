@@ -13,72 +13,22 @@
         <span class="column has-text-weight-bold">Phone Number</span>
         <span class="column has-text-weight-bold">Submmited </span>
     </div>
-    
+
+    {% for application in pending_applications %}
     <a href= "{% url 'application-detail' %}" class="panel-block columns is-paddingless is-marginless">
         <span class="panel-icon column is-paddingless" >
             <i class="fas fa-book mr-2" aria-hidden="true"></i>
-                <span>24552323</span> 
+                <span>{{application.id}}</span> 
             </span>
-        <span class="column">Patrick Loloma</span>
-        <span class="column">patrick.loloma@sinu.edu.sb</span>
-        <span class="column">7933329</span>
-        <span class="column">20-03-2023 10:45pm </span>
+        <span class="column">{{application.first_name}}</span>
+        <span class="column">{{application.email}}</span>
+        <span class="column">{{application.phone_number}}</span>
+        <span class="column">{{application.created}} </span>
     </a>
+    {% endfor %}
+    
 
-    <a class="panel-block columns is-paddingless is-marginless">
-        <span class="panel-icon column is-paddingless" >
-            <i class="fas fa-book mr-2" aria-hidden="true"></i>
-                <span>24552323</span> 
-            </span>
-        <span class="column">Patrick Loloma</span>
-        <span class="column">patrick.loloma@sinu.edu.sb</span>
-        <span class="column">7933329</span>
-        <span class="column">20-03-2023 10:45pm </span>
-    </a>
-
-    <a class="panel-block columns is-paddingless is-marginless">
-        <span class="panel-icon column is-paddingless" >
-            <i class="fas fa-book mr-2" aria-hidden="true"></i>
-                <span>24552323</span> 
-            </span>
-        <span class="column">Patrick Loloma</span>
-        <span class="column">patrick.loloma@sinu.edu.sb</span>
-        <span class="column">7933329</span>
-        <span class="column">20-03-2023 10:45pm </span>
-    </a>
-
-    <a class="panel-block columns is-paddingless is-marginless">
-        <span class="panel-icon column is-paddingless" >
-            <i class="fas fa-book mr-2" aria-hidden="true"></i>
-                <span>24552323</span> 
-            </span>
-        <span class="column">Patrick Loloma</span>
-        <span class="column">patrick.loloma@sinu.edu.sb</span>
-        <span class="column">7933329</span>
-        <span class="column">20-03-2023 10:45pm </span>
-    </a>
-
-    <a class="panel-block columns is-paddingless is-marginless">
-        <span class="panel-icon column is-paddingless" >
-            <i class="fas fa-book mr-2" aria-hidden="true"></i>
-                <span>24552323</span> 
-            </span>
-        <span class="column">Patrick Loloma</span>
-        <span class="column">patrick.loloma@sinu.edu.sb</span>
-        <span class="column">7933329</span>
-        <span class="column">20-03-2023 10:45pm </span>
-    </a>
-
-    <a class="panel-block columns is-paddingless is-marginless">
-        <span class="panel-icon column is-paddingless" >
-            <i class="fas fa-book mr-2" aria-hidden="true"></i>
-                <span>24552323</span> 
-            </span>
-        <span class="column">Patrick Loloma</span>
-        <span class="column">patrick.loloma@sinu.edu.sb</span>
-        <span class="column">7933329</span>
-        <span class="column">20-03-2023 10:45pm </span>
-    </a>
+  
 
 </div>
 

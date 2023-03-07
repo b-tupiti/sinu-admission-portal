@@ -37,12 +37,14 @@ def LogoutUser(request):
     return redirect('login')
 
 from mbasubmission.utils import get_totals
-
+from mbasubmission.models import Application
 def Dashboard(request):
     return render(request, 'users/dashboard.html', {'totals': get_totals()})
 
 def Applications(request):
     context = {
+        'pending_applications': Application.objects.filter(application_state=Application.ApplicationState.PENDING),
+        'totals': get_totals(),
     }
     return render(request, 'users/applications.html', context)
 
