@@ -9,8 +9,10 @@ class Application(models.Model):
     """
     class ApplicationState(models.TextChoices):
         PENDING = "PENDING", "PENDING"
-        ACCEPTED = "ACCEPTED", "ACCEPTED"
-        REJECTED = "REJECTED", "REJECTED"
+        UNDER_ASSESSMENT = "UNDER_ASSESSMENT", "UNDER_ASSESSMENT"
+        OFFER_LETTER_ISSUED = "OFFER_LETTER_ISSUED", "OFFER_LETTER_ISSUED"
+        CLEARED_FOR_ENROLLMENT = "CLEARED_FOR_ENROLLMENT", "CLEARED_FOR_ENROLLMENT"
+        ENROLLMENT_COMPLETE = "ENROLLMENT_COMPLETE", "ENROLLMENT_COMPLETE"
     
     class Title(models.TextChoices):
         MR = "MR","MR"
@@ -34,7 +36,7 @@ class Application(models.Model):
     employer = models.CharField(max_length=254)
     photo = models.ImageField(upload_to='photos/')
     proposal = models.TextField()
-    application_state = models.CharField(max_length=8, choices=ApplicationState.choices, default=ApplicationState.PENDING)
+    application_state = models.CharField(max_length=40, choices=ApplicationState.choices, default=ApplicationState.PENDING)
     
     created = models.DateTimeField(auto_now_add=True)
     
