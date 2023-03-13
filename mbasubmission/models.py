@@ -42,7 +42,12 @@ class Application(models.Model):
     
     @property
     def full_name(self):
-        return self.first_name + self.middle_name + self.last_name
+        if self.middle_name:
+            full_name = '{} {} {}'.format(self.first_name,self.middle_name,self.last_name)
+            return full_name
+        else:
+            full_name = '{} {}'.format(self.first_name,self.last_name)
+            return full_name
     
     def __str__(self):
         return str(self.id)
