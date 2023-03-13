@@ -20,19 +20,20 @@
     <title>MBA Submission - SINU</title>
   </head>
   <body>
+
+    
+    
     <div
-    style=" background: #1b647e4d;"
+    style=" background: #1b647e4d;background: rgba(22, 74, 95, 0.702);height:100vh"
     class="wrapper is-align-items-center"
     >
-      <main
-        class="p-5"
-      >
-        {% block dashboardcontent %}
-        {% endblock %}
-      </main>
-    </div>
 
-    {% include 'footer.html' %}
+      {% include 'user_navbar.html' %}
+      {% block dashboardcontent %}
+      {% endblock %}
+      {% include 'footer.html' %}
+
+    </div>
 
     <!-- Scripts -->
     <script

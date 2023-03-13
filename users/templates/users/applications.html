@@ -1,31 +1,44 @@
 {% extends 'users/dashboard_template.html' %}
 
 {% block dashboard %}
-<div class="p-5 ">
 
-    {% if pending_applications %}
+<div class="is-size-5 p-6">
+    <h4 class="is-size-3 is-flex is-justify-content-space-between is-align-items-center"  style="color:#28798b">
+        <span>Applications</span>
+        <span class="is-size-7 " style="color:#28798b"><i class="fas fa-circle-info"></i></span>
+    </h4>
+    
+     <hr>
 
-        <div class="panel-block columns is-paddingless is-marginless">
-            <span class="panel-icon column is-paddingless is-size-6 has-text-weight-bold" style="color:#3c3b3b">
+<div class="p-5 is-size-6">
+
+   <div class="columns">
+    <div class="column is-four-fifths">
+        {% if pending_applications %}
+
+  
+
+        <div class="panel-block columns is-paddingless is-marginless has-background-light">
+            <span class="panel-icon column is-paddingless is-size-6 has-text-weight-semibold" style="color:#112a4c">
             
                 <span>Application ID</span> 
             </span>
-            <span class="column has-text-weight-bold">Name</span>
-            <span class="column has-text-weight-bold">Email</span>
-            <span class="column has-text-weight-bold">Phone Number</span>
-            <span class="column has-text-weight-bold">Submmited </span>
+            <span class="column has-text-weight-semibold" style="color:#112a4c">Name</span>
+            <span class="column has-text-weight-semibold" style="color:#112a4c">Email</span>
+            <span class="column has-text-weight-semibold" style="color:#112a4c">Submmited </span>
+            <span class="column has-text-weight-semibold" style="color:#112a4c">Status </span>
         </div>
 
         {% for application in pending_applications %}
-        <a href= "{% url 'application-detail' application.id %}" class="panel-block columns is-paddingless is-marginless">
+        <a href= "{% url 'application-detail' application.id %}" class="panel-block columns is-paddingless is-marginless ">
             <span class="panel-icon column is-paddingless" >
                 <i class="fas fa-book mr-2" aria-hidden="true"></i>
                     <span>{{application.id}}</span> 
                 </span>
-            <span class="column">{{application.first_name}}</span>
+            <span class="column">{{application.full_name}}</span>
             <span class="column">{{application.email}}</span>
-            <span class="column">{{application.phone_number}}</span>
             <span class="column">{{application.created}} </span>
+            <span class="column is-size-7  has-text-info-dark has-text-weight-semibold">{{application.application_state}} </span>
         </a>
         {% endfor %}
 
@@ -34,6 +47,16 @@
         <p class="is-size-5  " style="margin-left:10px">There are no submissions</p>
 
     {% endif %}
+    </div>
+    <div class="column">
+        {% include 'users/stage_filters.html' %}
+    </div>
+   </div>
+
+   
+
+   
+</div>
 
 </div>
 

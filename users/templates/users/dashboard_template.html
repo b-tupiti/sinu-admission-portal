@@ -3,53 +3,33 @@
 {% block dashboardcontent %}
 
 
-    <nav class="panel"  >
-      <div class="panel-heading is-flex is-justify-content-space-between">
-        <div>MBA Submission </div>
-        <div>
-          <span class="is-size-6 has-text-weight-semibold mr-4">Hi, {{user.email}}</span>
-          <a href="{% url 'logout' %}" class="button is-small">sign out</a>
+    
+
+      <div class="container mt-4 mb-3">
+        <div class=" mb-1  is-flex is-justify-content-space-between" style="background:#fff">
+            <div class="tabs " style="margin-bottom: 0;">
+                <ul> 
+                  <li><a class="is-size-5" href="{% url 'dashboard' %}">Dashboard</a></li>
+                  <li><a href="{% url 'applications' %}">Applications</a></li>
+                </ul>
+              </div>
         </div>
-       
+
+        {% include 'breadcrumbs.html' %}
+
       </div>
-       
-        
-        <div class="container">
-            <div class=" mb-2 mt-3 is-flex is-justify-content-space-between" style="background:#fff">
-                
-                
-                <div class="tabs " style="margin-bottom: 0;">
-                    <ul>
-                      
-                      <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
-                      <li><a href="{% url 'applications' %}">Applications</a></li>
-                      <li><a href="{% url 'accepted-applications' %}">Accepted</a></li>
-                      <li><a href="{% url 'rejected-applications' %}">Rejected</a></li>
-                    </ul>
-                  </div>
 
-                <div class="is-size-6 has-background-white p-2 pr-5 " style="font-weight:lighter">
-                    <span class="mr-4 has-text-info">Total Applications: <span class="has-text-weight-bold">{{totals.total}}</span>  </span>
-                    <span class="mr-4 has-text-info">Accepted: <span class="has-text-weight-bold">{{totals.accepted}}</span> </span>
-                    <span class="mr-4 has-text-info">Rejected: <span class="has-text-weight-bold">{{totals.rejected}}</span> </span>
-                </div>
-                
+      
 
-            </div>
-
-           
-           
-              
+      
+        <div class=" is-four-fifths has-background-white container" style="min-height:600px; margin-bottom:50px">
+              {% block dashboard %}
+              {% endblock %}
         </div>
+       
       
-      </nav>
-
-      <div class="has-background-white container" style="min-height:600px; margin-bottom:50px">
-                
-        {% block dashboard %}
-        {% endblock %}
+   
       
-    </div>
 
 
 {% endblock %}

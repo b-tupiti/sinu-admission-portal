@@ -1,7 +1,101 @@
 {% extends 'users/dashboard_template.html' %}
 {%block dashboard %}
 <div class="is-size-5 p-6">
-    <h4 class="is-size-3">MBA Applications Dashboard</h4>
+    <h4 class="is-size-3 is-flex is-justify-content-space-between is-align-items-center"  style="color:#28798b">
+        <span>Dashboard</span>
+        <span class="is-size-7 " style="color:#28798b"><i class="fas fa-circle-info"></i></span>
+    </h4>
+    
      <hr>
+
+     <div class="columns">
+        <div class="column">
+            <div class="card" style="background: rgb(8, 67, 94)">
+                <div class="card-content">
+                  <div class="media">
+                    <div class="media-content">
+                      <p class="title has-text-white is-6 has-text-weight-normal">Submission Pending: <hr style="background:#fff"><span class="has-text-white has-text-weight-normal is-6 ml-4">{{totals.pending}}</span></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+        
+        <div class="column">
+            <div class="card"  style="background: rgb(226, 229, 231)">
+                <div class="card-content">
+                  <div class="media">
+                    <div class="media-content">
+                        <p class="title is-6 has-text-weight-normal " style="color:rgb(151, 157, 160)">Under Assesment: <hr style="background: rgb(173, 176, 177)"> <span class=" has-text-weight-normal is-6 ml-4" style="color:rgb(151, 157, 160)">{{totals.under_assessment}}</span></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+        <div class="column">
+            <div class="card"  style="background: rgb(226, 229, 231)">
+                <div class="card-content">
+                  <div class="media">
+                    <div class="media-content">
+                        <p class="title is-6 has-text-weight-normal " style="color:rgb(151, 157, 160)">Offer Letter Issued: <hr style="background: rgb(173, 176, 177)"> <span class=" has-text-weight-normal is-6 ml-4" style="color:rgb(151, 157, 160)">{{totals.offer_letter_issued}}</span></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+        <div class="column">
+            <div class="card" style="background: rgb(8, 67, 94)">
+                <div class="card-content">
+                  <div class="media">
+                    <div class="media-content">
+                      <p class="title has-text-white is-6 has-text-weight-normal">Cleared for Enrolment: <hr style="background:#fff"><span class="has-text-white has-text-weight-normal is-6 ml-4">{{totals.cleared_for_enrolment}}</span></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+        <div class="column">
+            <div class="card">
+                <div class="card-content">
+                  <div class="media">
+                    <div class="media-content">
+                        <p class="title is-5" style="color:rgb(8, 67, 94)">Enrolment Complete: <hr><span class="has-text-primary has-text-weight-normal is-5 ml-4">{{totals.enrolment_complete}}</span></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+     </div>
+     
+
+     
+  
+
+    
+
+    
+      <hr style="background: #646464; padding:0px">
+
+      <div class="card">
+        <div class="card-content">
+          <div class="media">
+            <div class="media-content">
+                <p class="title is-6 has-text-weight-light is-flex is-flex-direction-row-reverse" style="color:#989696">
+                   <span class="mr-5"> <span>Total Submissions:</span>   <span class="has-text-weight-normal  ">{{totals.total}}</span></span>
+                   <span class="mr-5"> <span>Enrollment Complete:</span>   <span class="has-text-weight-normal  ">{{totals.enrolment_complete}}</span></span>
+                   <span class="mr-5"> <span>In Process:</span>   <span class=" has-text-weight-normal ">{{totals.in_process}}</span></span>
+                </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+     
+
+      
+    
+              
+
 </div>
 {% endblock %}
