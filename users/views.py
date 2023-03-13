@@ -51,34 +51,19 @@ def Dashboard(request):
     }
     return render(request, 'users/dashboard.html',context)
 
-
+from django.db.models import Q
 @login_required(login_url="login")
 def Applications(request):
     page = 'applications'
     context = {
         'page': page,
-        'pending_applications': Application.objects.filter(application_state=Application.ApplicationState.PENDING),
+        'pending_applications': Application.objects.filter(Q(application_state=Application.ApplicationState.PENDING) |  Q(application_state=Application.ApplicationState.CLEARED_FOR_ENROLLMENT)),
         'totals': get_totals(),
     }
     return render(request, 'users/applications.html', context)
 
 
-@login_required(login_url="login")
-def AcceptedApplications(request):
-    context = {
-        'accepted_applications': Application.objects.filter(application_state=Application.ApplicationState.OFFER_LETTER_ISSUED),
-        'totals': get_totals(),
-    }
-    return render(request, 'users/accepted_applications.html', context)
 
-
-@login_required(login_url="login")
-def RejectedApplications(request):
-    context = {
-        'rejected_applications': Application.objects.filter(application_state=Application.ApplicationState.ENROLLMENT_COMPLETE),
-        'totals': get_totals(),
-    }
-    return render(request, 'users/rejected_applications.html', context)
 
 
 @login_required(login_url="login")
