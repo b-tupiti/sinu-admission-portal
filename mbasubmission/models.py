@@ -40,6 +40,10 @@ class Application(models.Model):
     
     created = models.DateTimeField(auto_now_add=True)
     
+    @property
+    def full_name(self):
+        return self.first_name + self.middle_name + self.last_name
+    
     def __str__(self):
         return str(self.id)
     
