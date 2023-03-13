@@ -1,0 +1,19 @@
+<nav class="breadcrumb p-3 has-arrow-separator" aria-label="breadcrumbs">
+    <ul id="breadcrumb-list">
+
+      {% if page == 'dashboard' %}
+      <li><a class="has-text-white" href="{% url 'dashboard' %}">
+         Dashboard
+        </a></li>
+      {% elif page == 'applications' %}
+      <li><a class="has-text-white"  href="{% url 'dashboard' %}">Dashboard</a></li>
+      <li><a  class="has-text-white"  href="{% url 'applications' %}">Applications</a></li>
+      {% elif page == 'application-detail' %}
+      <li><a class="has-text-white"  href="{% url 'dashboard' %}">Dashboard</a></li>
+      <li><a  class="has-text-white"  href="{% url 'applications' %}">Applications</a></li>
+      <li><a class="has-text-white is-active"  href="{% url 'application-detail' application.id %}">Application ID: {{application.id}}</a></li> 
+      {% endif %}
+    </ul>
+  </nav>
+
+ 
