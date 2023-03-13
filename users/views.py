@@ -44,13 +44,19 @@ def LogoutUser(request):
 
 @login_required(login_url="login")
 def Dashboard(request):
-    user = request.user
-    return render(request, 'users/dashboard.html', {'totals': get_totals(),'user':user})
+    page = 'dashboard'
+    context = {
+        'page': page,
+        'totals': get_totals(),
+    }
+    return render(request, 'users/dashboard.html',context)
 
 
 @login_required(login_url="login")
 def Applications(request):
+    page = 'applications'
     context = {
+        'page': page,
         'pending_applications': Application.objects.filter(application_state=Application.ApplicationState.PENDING),
         'totals': get_totals(),
     }
@@ -60,7 +66,7 @@ def Applications(request):
 @login_required(login_url="login")
 def AcceptedApplications(request):
     context = {
-        'accepted_applications': Application.objects.filter(application_state=Application.ApplicationState.ACCEPTED),
+        'accepted_applications': Application.objects.filter(application_state=Application.ApplicationState.OFFER_LETTER_ISSUED),
         'totals': get_totals(),
     }
     return render(request, 'users/accepted_applications.html', context)
@@ -69,7 +75,7 @@ def AcceptedApplications(request):
 @login_required(login_url="login")
 def RejectedApplications(request):
     context = {
-        'rejected_applications': Application.objects.filter(application_state=Application.ApplicationState.REJECTED),
+        'rejected_applications': Application.objects.filter(application_state=Application.ApplicationState.ENROLLMENT_COMPLETE),
         'totals': get_totals(),
     }
     return render(request, 'users/rejected_applications.html', context)
@@ -77,9 +83,11 @@ def RejectedApplications(request):
 
 @login_required(login_url="login")
 def ApplicationDetail(request, pk):
+    page = 'application-detail'
     application = Application.objects.get(id=pk)
     documents = Document.objects.filter(application=application)
     context = {
+        'page': page,
         'application': application,
         'documents': documents,
         'totals': get_totals(),
