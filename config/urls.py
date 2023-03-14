@@ -13,6 +13,7 @@ urlpatterns = [
     path('logout/', LogoutUser, name='logout'),
     path('dashboard/', Dashboard, name='dashboard'),
     path('dashboard/applications/', Applications, name='applications'),
+    path('dashboard/applications/<str:filter>/', Applications, name='applications'),
     path('dashboard/application/<str:pk>/', ApplicationDetail, name='application-detail'),
 ]
 
