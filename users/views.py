@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from mbasubmission.utils import get_totals
 from mbasubmission.models import Application, Document
+from django.db.models import Q
 
 def LoginUser(request):
     
@@ -51,13 +52,17 @@ def Dashboard(request):
     }
     return render(request, 'users/dashboard.html',context)
 
-from django.db.models import Q
+from .utils import filter_applications
 @login_required(login_url="login")
-def Applications(request):
+def Applications(request, filter=None):
+    
     page = 'applications'
+    
+    applications = filter_applications(request, filter)
+    
     context = {
         'page': page,
-        'pending_applications': Application.objects.filter(Q(application_state=Application.ApplicationState.PENDING) |  Q(application_state=Application.ApplicationState.CLEARED_FOR_ENROLLMENT)),
+        'pending_applications': applications,
         'totals': get_totals(),
     }
     return render(request, 'users/applications.html', context)
