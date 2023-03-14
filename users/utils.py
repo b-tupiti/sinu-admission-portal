@@ -5,7 +5,7 @@ from django.contrib.auth.models import Group
 def filter_applications(request, filter):
     
     applications = Application.objects.all()
-    
+    group = None
     #check if get request contains filter
     if filter is None:
         
