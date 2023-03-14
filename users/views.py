@@ -58,11 +58,12 @@ def Applications(request, filter=None):
     
     page = 'applications'
     
-    applications = filter_applications(request, filter)
+    applications, group = filter_applications(request, filter)
     
     context = {
         'page': page,
         'pending_applications': applications,
+        'group': group,
         'totals': get_totals(),
     }
     return render(request, 'users/applications.html', context)

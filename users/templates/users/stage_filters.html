@@ -1,21 +1,82 @@
-   <!-- STAGE FILTERS -->
-   <aside class=" is-inline-block menu has-background-light" >
-    <p class="menu-label   pb-2 pt-2 pl-2  ">
-      Primary Filters
+<aside class=" is-inline-block menu has-background-light" >
+
+  {% if group == 'Finance Department' %}
+
+  <p class="menu-label   pb-2 pt-2 pl-2  ">
+    Primary Filters
+  </p>
+  <ul class="menu-list " >
+    <li><a class="is-size-6" href="{% url 'applications' filter='offer_issued' %}">Offer Letter Issued</a></li>
+  </ul>
+  <p class="menu-label has-background-light pb-2 pt-2 pl-2 ">
+      Other filters
     </p>
-    <ul class="menu-list " >
-      <li><a class="is-size-6 " href="{% url 'applications'  %}">All</a></li>
+    <ul class="menu-list has-background-light mb-2">
+      <li><a class="is-size-6" href="{% url 'applications' filter='all_verbose' %}" >All </a></li>
       <li><a class="is-size-6 " href="{% url 'applications' filter='pending' %}">Pending</a></li>
       <li><a class="is-size-6" href="{% url 'applications' filter='cleared_for_enrolment' %}">Cleared For Enrolment</a></li>
+      <li><a class="is-size-6" href="{% url 'applications' filter='under_assesment' %}">Under Assesment</a></li>
+      <li><a class="is-size-6" href="{% url 'applications' filter='enrolment_complete' %}">Enrolment Complete</a></li>
     </ul>
-    <p class="menu-label has-background-light pb-2 pt-2 pl-2 ">
-        Other filters
-      </p>
-      <ul class="menu-list has-background-light mb-2">
-        <li ><a class="is-size-6" href="{% url 'applications' filter='all_verbose' %}" >All <span class="has-text-dark is-size-7">(verbose)</span></a></li>
-        <li><a class="is-size-6" href="{% url 'applications' filter='under_assesment' %}">Under Assesment</a></li>
-        <li><a class="is-size-6" href="{% url 'applications' filter='offer_issued' %}">Offer Letter Issued</a></li>
-        <li><a class="is-size-6" href="{% url 'applications' filter='enrolment_complete' %}">Enrolment Complete</a></li>
-      </ul>
-  </aside>
+
+{% elif group == 'Student Administration Services (SAS) Department' %}
+
+  <p class="menu-label   pb-2 pt-2 pl-2  ">
+    Primary Filters
+  </p>
+  <ul class="menu-list " >
+    <li><a class="is-size-6 " href="{% url 'applications'  %}">All</a></li>
+    <li><a class="is-size-6 " href="{% url 'applications' filter='pending' %}">Pending</a></li>
+    <li><a class="is-size-6" href="{% url 'applications' filter='cleared_for_enrolment' %}">Cleared For Enrolment</a></li>
+  </ul>
+  <p class="menu-label has-background-light pb-2 pt-2 pl-2 ">
+      Other filters
+    </p>
+    <ul class="menu-list has-background-light mb-2">
+      <li ><a class="is-size-6" href="{% url 'applications' filter='all_verbose' %}" >All <span class="has-text-dark is-size-7">(verbose)</span></a></li>
+      <li><a class="is-size-6" href="{% url 'applications' filter='under_assesment' %}">Under Assesment</a></li>
+      <li><a class="is-size-6" href="{% url 'applications' filter='offer_issued' %}">Offer Letter Issued</a></li>
+      <li><a class="is-size-6" href="{% url 'applications' filter='enrolment_complete' %}">Enrolment Complete</a></li>
+    </ul>
+
+{% elif group == 'Assesors' %}
+
+
+<p class="menu-label   pb-2 pt-2 pl-2  ">
+  Primary Filters
+</p>
+<ul class="menu-list " >
+  <li><a class="is-size-6" href="{% url 'applications' filter='under_assesment' %}">Under Assesment</a></li>
+  
+</ul>
+<p class="menu-label has-background-light pb-2 pt-2 pl-2 ">
+    Other filters
+  </p>
+  <ul class="menu-list has-background-light mb-2">
+    <li><a class="is-size-6" href="{% url 'applications' filter='all_verbose' %}" >All </a></li>
+    <li><a class="is-size-6 " href="{% url 'applications' filter='pending' %}">Pending</a></li>
+    <li><a class="is-size-6" href="{% url 'applications' filter='offer_issued' %}">Offer Letter Issued</a></li>
+    <li><a class="is-size-6" href="{% url 'applications' filter='cleared_for_enrolment' %}">Cleared For Enrolment</a></li>
+    <li><a class="is-size-6" href="{% url 'applications' filter='enrolment_complete' %}">Enrolment Complete</a></li>
+  </ul>
+
+{% else %}
+
+
+<p class="menu-label has-background-light pb-2 pt-2 pl-2 ">
+     filters
+  </p>
+  <ul class="menu-list has-background-light mb-2">
+    <li ><a class="is-size-6" href="{% url 'applications' %}" >All </a></li>
+    <li><a class="is-size-6 " href="{% url 'applications' filter='pending' %}">Pending</a></li>
+    <li><a class="is-size-6" href="{% url 'applications' filter='cleared_for_enrolment' %}">Cleared For Enrolment</a></li>
+    <li><a class="is-size-6" href="{% url 'applications' filter='under_assesment' %}">Under Assesment</a></li>
+    <li><a class="is-size-6" href="{% url 'applications' filter='offer_issued' %}">Offer Letter Issued</a></li>
+    <li><a class="is-size-6" href="{% url 'applications' filter='enrolment_complete' %}">Enrolment Complete</a></li>
+  </ul>
+
+{% endif %}
+</aside> 
+    
+
   <!-- STAGE FILTERS -->
