@@ -84,10 +84,13 @@ def Applications(request, filter=None):
 @login_required(login_url="login")
 def ApplicationDetail(request, pk):
     page = 'application-detail'
+    group = get_group(request)
+
     application = Application.objects.get(id=pk)
     documents = Document.objects.filter(application=application)
     context = {
         'page': page,
+        'group': group,
         'application': application,
         'documents': documents,
         'totals': get_totals(),

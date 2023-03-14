@@ -67,27 +67,11 @@
 
     
     <div class="field is-flex is-flex-direction-row-reverse pb-5" style="border-bottom: 3px solid rgb(200, 200, 200)">
-    {% if perms.mbasubmission.change_application %}
     
-        <form>
-          <p class="control m-3" >
-            <button class="button is-success">
-              ACCEPT
-            </button>
-          </p>
-          
-          <p class="control m-3">
-            <button class="button is-danger">
-              REJECT
-            </button>
-          </p>
-        </form>
-     
-    {% else %}
 
      {% include 'users/application_status.html' %}
     
-    {% endif %}
+    
     </div>
 
     

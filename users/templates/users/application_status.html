@@ -1,6 +1,102 @@
-{% if application.status == PENDING %}
-<p class="control m-3">
-    <span class="has-textweight-semibold mr-3">STATUS: </span><span> Pending Entry</span>
+
+
+{% if application.application_state == 'PENDING' %}
+
+  {% if group == "Student Administration Services (SAS) Department" %}
+      
+    <form class="is-flex">
+      <p class="control m-3" >
+        <button class="button is-success">
+          Proceed To Assessment
+        </button>
+      </p>
+
+    </form>
+      
+  {% else %}
+
+    <p class="control m-3">
+      <span class="has-textweight-semibold mr-3">STATUS: </span><span> Pending Entry into TechOne SMS</span>
+    </p>
+
+  {% endif %}
+
+
+{% elif application.application_state == 'UNDER_ASSESSMENT' %}
+
+{% if group == "Assesors" %}
+      
+    <form class="is-flex">
+      <p class="control m-3" >
+        <button class="button is-success">
+         Accept
+        </button>
+        <button class="button is-success">
+          Decline
+         </button>
+      </p>
+
+    </form>
+      
+  {% else %}
+
+    <p class="control m-3">
+      <span class="has-textweight-semibold mr-3">STATUS: </span><span> Under Assessment</span>
+    </p>
+
+  {% endif %}
+
+{% elif application.application_state == 'OFFER_LETTER_ISSUED' %}
+
+{% if group == "Finance Department" %}
+      
+    <form class="is-flex">
+      <p class="control m-3" >
+        <button class="button is-success">
+         Clear For Enrolment
+        </button>
+      </p>
+
+    </form>
+      
+  {% else %}
+
+    <p class="control m-3">
+      <span class="has-textweight-semibold mr-3">STATUS: </span><span> Pending Clearance from Finance Department</span>
+    </p>
+
+  {% endif %}
+
+{% elif application.application_state == 'CLEARED_FOR_ENROLLMENT' %}
+
+{% if group == 'Student Administration Services (SAS) Department' %}
+    
+  <form class="is-flex">
+    <p class="control m-3" >
+      <button class="button is-success">
+        Confirm Enrolment
+      </button>
+    </p>
+
+  </form>
+     
+{% else %}
+
+  <p class="control m-3">
+    <span class="has-textweight-semibold mr-3">STATUS: </span><span> Pending Enrolment</span>
   </p>
+
 {% endif %}
+
+{% elif application.application_state == 'ENROLLMENT_COMPLETE' %}
+
+<p class="control m-3 is-size-6">
+  <span class="has-textweight-bold mr-3 has-text-link">STATUS: </span><span class="has-text-link"> COMPLETE</span>
+</p>
+
+{% else %}
+<p>Theres a problem</p>
+{% endif %}
+
+
 
