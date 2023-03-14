@@ -12,6 +12,7 @@
 
      <div class="columns">
         <div class="column">
+          <a href="{% url 'applications' filter='pending' %}">
             <div class="card {% if group == 'Student Administration Services (SAS) Department' %} authorized {% else %} unauthorized {% endif %} ">
                 <div class="card-content">
                   <div class="media">
@@ -21,9 +22,11 @@
                   </div>
                 </div>
               </div>
+            </a>
         </div>
         
         <div class="column">
+          <a href="{% url 'applications' filter='under_assesment' %}">
             <div class="card {% if group == 'Assesors' %} authorized {% else %} unauthorized {% endif %}"  >
                 <div class="card-content">
                   <div class="media">
@@ -33,8 +36,10 @@
                   </div>
                 </div>
               </div>
+            </a>
         </div>
         <div class="column">
+          <a href="{% url 'applications' filter='offer_issued' %}">
             <div class="card {% if group == 'Finance Department' %} authorized {% else %} unauthorized {% endif %}"  >
                 <div class="card-content">
                   <div class="media">
@@ -44,8 +49,10 @@
                   </div>
                 </div>
               </div>
+            </a>
         </div>
         <div class="column">
+          <a href="{% url 'applications' filter='cleared_for_enrolment' %}">
             <div class="card {% if group == 'Student Administration Services (SAS) Department' %} authorized {% else %} unauthorized {% endif %}" >
                 <div class="card-content">
                   <div class="media">
@@ -55,8 +62,10 @@
                   </div>
                 </div>
               </div>
+            </a>
         </div>
         <div class="column">
+          <a href="{% url 'applications' filter='enrolment_complete' %}">
             <div class="card">
                 <div class="card-content">
                   <div class="media">
@@ -66,6 +75,7 @@
                   </div>
                 </div>
               </div>
+            </a>
         </div>
      </div>
      

@@ -2,6 +2,10 @@
     background:  rgb(8, 67, 94);
 }
 
+.authorized:hover {
+    background:  rgb(18, 102, 142);
+}
+
 .authorized p {
     color: white;
 }
@@ -18,6 +22,9 @@
 
 .unauthorized {
     background: rgb(226, 229, 231);
+}
+.unauthorized:hover {
+    background: rgb(206, 209, 211);
 }
 
 .unauthorized p, span {
