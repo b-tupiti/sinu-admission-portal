@@ -1,4 +1,6 @@
 {% extends 'users/dashboard_template.html' %}
+
+
 {%block dashboard %}
 <div class="is-size-5 p-6">
     <h4 class="is-size-3 is-flex is-justify-content-space-between is-align-items-center"  style="color:#28798b">
@@ -10,11 +12,11 @@
 
      <div class="columns">
         <div class="column">
-            <div class="card" style="background: rgb(8, 67, 94)">
+            <div class="card {% if group == 'Student Administration Services (SAS) Department' %} authorized {% else %} unauthorized {% endif %} ">
                 <div class="card-content">
                   <div class="media">
                     <div class="media-content">
-                      <p class="title has-text-white is-6 has-text-weight-normal">Submission Pending: <hr style="background:#fff"><span class="has-text-white has-text-weight-normal is-6 ml-4">{{totals.pending}}</span></p>
+                      <p class="title is-6 has-text-weight-normal">Submission Pending: <hr ><span class=" has-text-weight-normal is-6 ml-4">{{totals.pending}}</span></p>
                     </div>
                   </div>
                 </div>
@@ -22,33 +24,33 @@
         </div>
         
         <div class="column">
-            <div class="card"  style="background: rgb(226, 229, 231)">
+            <div class="card {% if group == 'Assesors' %} authorized {% else %} unauthorized {% endif %}"  >
                 <div class="card-content">
                   <div class="media">
                     <div class="media-content">
-                        <p class="title is-6 has-text-weight-normal " style="color:rgb(151, 157, 160)">Under Assesment: <hr style="background: rgb(173, 176, 177)"> <span class=" has-text-weight-normal is-6 ml-4" style="color:rgb(151, 157, 160)">{{totals.under_assessment}}</span></p>
+                        <p class="title is-6 has-text-weight-normal " >Under Assesment: <hr > <span class=" has-text-weight-normal is-6 ml-4" style="color:rgb(151, 157, 160)">{{totals.under_assessment}}</span></p>
                     </div>
                   </div>
                 </div>
               </div>
         </div>
         <div class="column">
-            <div class="card"  style="background: rgb(226, 229, 231)">
+            <div class="card {% if group == 'Finance Department' %} authorized {% else %} unauthorized {% endif %}"  >
                 <div class="card-content">
                   <div class="media">
                     <div class="media-content">
-                        <p class="title is-6 has-text-weight-normal " style="color:rgb(151, 157, 160)">Offer Letter Issued: <hr style="background: rgb(173, 176, 177)"> <span class=" has-text-weight-normal is-6 ml-4" style="color:rgb(151, 157, 160)">{{totals.offer_letter_issued}}</span></p>
+                        <p class="title is-6 has-text-weight-normal " >Offer Letter Issued: <hr > <span class=" has-text-weight-normal is-6 ml-4" >{{totals.offer_letter_issued}}</span></p>
                     </div>
                   </div>
                 </div>
               </div>
         </div>
         <div class="column">
-            <div class="card" style="background: rgb(8, 67, 94)">
+            <div class="card {% if group == 'Student Administration Services (SAS) Department' %} authorized {% else %} unauthorized {% endif %}" >
                 <div class="card-content">
                   <div class="media">
                     <div class="media-content">
-                      <p class="title has-text-white is-6 has-text-weight-normal">Cleared for Enrolment: <hr style="background:#fff"><span class="has-text-white has-text-weight-normal is-6 ml-4">{{totals.cleared_for_enrolment}}</span></p>
+                      <p class="title  is-6 has-text-weight-normal">Cleared for Enrolment: <hr><span class=" has-text-weight-normal is-6 ml-4">{{totals.cleared_for_enrolment}}</span></p>
                     </div>
                   </div>
                 </div>

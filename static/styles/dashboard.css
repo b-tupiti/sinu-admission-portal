@@ -1,0 +1,31 @@
+.authorized {
+    background:  rgb(8, 67, 94);
+}
+
+.authorized p {
+    color: white;
+}
+
+.authorized span {
+    color: white;
+}
+
+.authorized hr {
+    background: white;
+}
+
+
+
+.unauthorized {
+    background: rgb(226, 229, 231);
+}
+
+.unauthorized p, span {
+    color:rgb(151, 157, 160);
+}
+
+.unauthorized hr {
+    background: rgb(173, 176, 177);
+}
+
+

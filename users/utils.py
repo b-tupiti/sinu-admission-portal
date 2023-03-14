@@ -46,3 +46,17 @@ def filter_applications(request, filter):
    
     
     return applications, group
+
+
+def get_group(request):
+    
+    group = None
+    
+    if request.user.groups.filter(pk=Group.objects.get(name="Assesors").pk).exists():
+        group = 'Assesors'
+    elif request.user.groups.filter(pk=Group.objects.get(name="Finance Department").pk).exists():
+        group = 'Finance Department'
+    elif request.user.groups.filter(pk=Group.objects.get(name="Student Administration Services (SAS) Department").pk).exists():
+        group = 'Student Administration Services (SAS) Department'
+    
+    return group

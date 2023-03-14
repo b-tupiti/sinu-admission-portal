@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from mbasubmission.utils import get_totals
 from mbasubmission.models import Application, Document
+from .utils import filter_applications, get_group
 from django.db.models import Q
 
 def LoginUser(request):
@@ -46,13 +47,22 @@ def LogoutUser(request):
 @login_required(login_url="login")
 def Dashboard(request):
     page = 'dashboard'
+    group = get_group(request)
+
     context = {
         'page': page,
+        'group': group,
         'totals': get_totals(),
     }
     return render(request, 'users/dashboard.html',context)
 
-from .utils import filter_applications
+
+
+
+
+
+
+
 @login_required(login_url="login")
 def Applications(request, filter=None):
     
