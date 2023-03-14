@@ -6,7 +6,8 @@ def filter_applications(request, filter):
     
     applications = Application.objects.all()
     group = None
-    #check if get request contains filter
+    
+    
     if filter is None:
         
         try:
@@ -31,8 +32,10 @@ def filter_applications(request, filter):
         except:
             group = None
     else:
+        group = get_group(request)
         if filter == 'all_verbose':
             applications = Application.objects.all()
+           
         elif filter == 'pending':
             applications = Application.objects.filter(application_state=Application.ApplicationState.PENDING)
         elif filter == 'under_assesment':

@@ -67,7 +67,6 @@ def Dashboard(request):
 def Applications(request, filter=None):
     
     page = 'applications'
-    
     applications, group = filter_applications(request, filter)
     
     context = {
