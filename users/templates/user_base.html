@@ -27,8 +27,10 @@
     style=" background: #1b647e4d;background: rgba(22, 74, 95, 0.702);height:100vh"
     class="wrapper is-align-items-center"
     >
-
+      {% if user.is_authenticated %}
       {% include 'user_navbar.html' %}
+      {% endif %}
+      
       {% block dashboardcontent %}
       {% endblock %}
       {% include 'footer.html' %}
