@@ -4,9 +4,11 @@
 
   {% if group == "Student Administration Services (SAS) Department" %}
       
-    <form class="is-flex">
+    <form class="is-flex" method="post">
+      {% csrf_token %}
       <p class="control m-3" >
-        <button class="button is-success">
+        <input hidden name="action" value="proceed_to_assessment"  />
+        <button type="submit" class="button is-success">
           Proceed To Assessment
         </button>
       </p>
@@ -26,12 +28,13 @@
 
 {% if group == "Assesors" %}
       
-    <form class="is-flex">
+    <form class="is-flex" method="post">
+      {% csrf_token %}
       <p class="control m-3" >
-        <button class="button is-success">
+        <button name="action" value="accept_application" class="button  is-small is-success has-text-weight-semibold">
          Accept
         </button>
-        <button class="button is-success">
+        <button class="button is-small is-danger has-text-weight-semibold">
           Decline
          </button>
       </p>
@@ -49,20 +52,21 @@
 {% elif application.application_state == 'OFFER_LETTER_ISSUED' %}
 
 {% if group == "Finance Department" %}
-      
-    <form class="is-flex">
+    
+    <form class="is-flex" method="post">
+      {% csrf_token %}
       <p class="control m-3" >
-        <button class="button is-success">
-         Clear For Enrolment
+        <input hidden name="action" value="clear_for_enrolment"  />
+        <button type="submit" class="button is-success">
+          Clear For Enrolment
         </button>
       </p>
 
     </form>
-      
   {% else %}
 
     <p class="control m-3">
-      <span class="has-textweight-semibold mr-3">STATUS: </span><span> Pending Clearance from Finance Department</span>
+      <span class="has-textweight-semibold mr-3 is-italic">STATUS: </span><span>Provisional Offer Letter and Invoice sent to Applicant, pending clearance from Finance Department</span>
     </p>
 
   {% endif %}
@@ -71,19 +75,21 @@
 
 {% if group == 'Student Administration Services (SAS) Department' %}
     
-  <form class="is-flex">
-    <p class="control m-3" >
-      <button class="button is-success">
-        Confirm Enrolment
-      </button>
-    </p>
+<form class="is-flex" method="post">
+  {% csrf_token %}
+  <p class="control m-3" >
+    <input hidden name="action" value="confirm_enrolment"  />
+    <button type="submit" class="button is-success">
+      Confirm Enrolment
+    </button>
+  </p>
 
-  </form>
+</form>
      
 {% else %}
 
   <p class="control m-3">
-    <span class="has-textweight-semibold mr-3">STATUS: </span><span> Pending Enrolment</span>
+    <span class="has-textweight-semibold mr-3">STATUS: </span><span> Pending Enrolment Confirmation</span>
   </p>
 
 {% endif %}
