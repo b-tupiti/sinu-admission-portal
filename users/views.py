@@ -79,10 +79,32 @@ def Applications(request, filter=None):
 
 
 
+def process_application(request, pk):
+    
+    application = Application.objects.get(id=pk)
+    print(request.POST['action'])
+    if request.POST['action'] == 'proceed_to_assessment':
+        application.application_state = Application.ApplicationState.UNDER_ASSESSMENT
+        application.save()
+    elif request.POST['action'] == 'confirm_enrolment':
+        application.application_state = Application.ApplicationState.ENROLLMENT_COMPLETE
+        application.save()
+    elif request.POST['action'] == 'clear_for_enrolment':
+        application.application_state = Application.ApplicationState.CLEARED_FOR_ENROLLMENT
+        application.save()
+    elif request.POST['action'] == 'accept_application':
+        application.application_state = Application.ApplicationState.OFFER_LETTER_ISSUED
+        application.save()
+
+
 
 
 @login_required(login_url="login")
 def ApplicationDetail(request, pk):
+    
+    if request.method == 'POST':
+        process_application(request, pk)
+    
     page = 'application-detail'
     group = get_group(request)
 
@@ -96,3 +118,9 @@ def ApplicationDetail(request, pk):
         'totals': get_totals(),
     }
     return render(request, 'users/application_detail.html', context)
+
+
+@login_required(login_url="login")
+def proceed_to_assessment(request):
+    if request.method == 'POST':
+        print('hello')
