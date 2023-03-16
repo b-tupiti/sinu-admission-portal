@@ -41,7 +41,7 @@ def send_confirmation_email(sender, instance, created, **kwargs):
                     subject, 
                     f'This email should include an Offer Letter, the proforma (invoice) for the MBA program, and SINU bank details so that the applicant can deposit.\nPlease click this link to upload your reciept: {upload_url}', 
                     settings.EMAIL_HOST, 
-                    ['tupitibrandon@gmail.com'], 
+                    [application.email], 
                     html_message=html_message,
                     fail_silently=True,
                 )
