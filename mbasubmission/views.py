@@ -37,3 +37,20 @@ def submission_form(request):
     }
     
     return render(request, 'mbasubmission/right-section/template.html',context)
+
+
+def upload_receipt(request):
+    token = request.GET.get('token')
+    id = request.GET.get('id')
+    application = Application.objects.get(id=id)
+    page = 'upload_receipt'
+    context = {
+        'application': application,
+    }
+    # try:
+    #     application = Application.objects.get(token=token)
+    # except Application.DoesNotExist:
+    #     return render(request, 'upload_error.html', {'message': 'Invalid token'})
+    
+    # render the upload template if the token is valid
+    return render(request, 'receipt/upload_receipt.html', context)
