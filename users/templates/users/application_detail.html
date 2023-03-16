@@ -1,78 +1,161 @@
 {% extends 'users/dashboard_template.html' %}
 
 {% block dashboard %}
-<div class="p-5">
-    <div class="columns">
-        <div class="column"><span>Application ID:</span> <span>{{application.id}}</span></div>
-        <div class="column"><span>Submmited:</span> <span>{{application.created}}</span></div>
-    </div>
-    <hr>
-    <p class="has-text-weight-bold mb-5">Personal Details</p>
-    <div class="columns">
-        <div class="column">
-            <span class="has-text-weight-semibold">Given Names </span> <br> {{application.first_name}}
-        </div>
+<div class="p-5 has-background-white" >
+    
 
-        <div class="column">
-            <span class="has-text-weight-semibold"> Surname </span> <br> {{application.last_name}}
-        </div>
-
-        <div class="column">
-            <span class="has-text-weight-semibold"> Email </span> <br> {{application.email}}
-        </div>
-
-        <div class="column">
-            <span class="has-text-weight-semibold"> Phone Number </span> <br> {{application.email}}
-        </div>
-
-        <div class="column">
-            <div class="card">
-                <div class="card-image">
-                  <figure class="image is-2by2">
-                    <img src="{{application.photo.url}}" alt="photo">
-                  </figure>
-                </div>
-              </div>
+    <div class=" p-4 mt-4 has-background-white panel is-flex is-justify-content-space-between" >
+        
+      <div>
+        <div class=" is-size-3 " >
+          <span  style=" color: rgba(27, 100, 126);">Application ID:</span > 
+            <span   style=" color: rgba(27, 100, 126);">{{application.id}}</span>
         </div>
         
-    </div>
-
-    <hr>
-
-    <p class="has-text-weight-bold mb-5">Proposal</p>
-    <div class="columns">
-        <div class="column">
-            <p class="has-background-white p-4">
-              {{application.proposal}}
-            </p>
+        <div class=" pl-1 pr-1 ">
+          <span style=" color: rgba(27, 100, 126);">Submmited:</span> 
+          <span style=" color: rgba(27, 100, 126);">{{application.created}}</span>
         </div>
+      </div>
+     
+
+        {% include 'users/application_status.html' %}
+
     </div>
 
-    <hr>
+    <hr style="background: rgba(27, 100, 126);">
 
-    <p class="has-text-weight-bold mb-5">Documents</p>
-    <div>
+    <div  class="">
+      
+      <!-- This block should be in a separate html like application_status.html -->
+
+      {% include 'users/application_id.html' %}
+      
+        
+        
+      
+     </div>
+
+     <hr style="background: rgba(27, 100, 126);">
+    
+     
+    <!-- Personal Details SECTION START -->
+     <section class="has-background-light pb-4 " style="border-radius:5px">
+      <p class="has-text-weight-bold mb-5  p-3" style="background:#1b647e; color: rgb(255, 255, 255);">Personal Details</p>
+    
+      
+      <section class="is-flex ">
+        
+        
+        <div class="card has-background-white p-1 ml-4" >
+          <span class="is-size-7 p-1">uploaded photo</span>
+            <div class="card-image mt-1"  style=" border-radius:0px">
+              <figure class=" image is-128x128"  >
+                <img src="{{application.photo.url}}" style="height:100%" alt="photo">
+              </figure>
+            </div>
+          </div>
+
+          <div class="ml-4 p-0 pb-5 pr-5 pl-5 is-flex-grow-1" >
+
+              <div class="is-flex is-justify-content-space-between pt-4">
+                
+                <div class="p-4 has-background-white" style="border-radius:5px">
+                  <span class="has-text-weight-normal is-size-6 mr-4" style="color: rgb(67, 78, 82);"> Name </span>  
+                  <span class="has-text-weight-normal is-size-5 mr-4" style="color: rgba(27, 100, 126);">   {{application.full_name}}  </span>  
+                </div>
+
+              <div class="p-4 has-background-white" style="border-radius:5px">
+                <span class="has-text-weight-normal is-size-6 mr-4" style="color: rgb(67, 78, 82);"> Email </span>  
+                <span class="has-text-weight-normal is-size-5 mr-4" style="color: rgba(27, 100, 126);">   {{application.email}}  </span>  
+              </div>
+              
+              
+
+              <div class="p-4 has-background-white" style="border-radius:5px">
+                <span class="has-text-weight-normal is-size-6 mr-4" style="color: rgb(67, 78, 82);"> Gender </span>  
+                <span class="has-text-weight-normal is-size-5 mr-4" style="color: rgba(27, 100, 126);">   {{application.gender}}  </span>  
+              </div>
+              
+                <div class="p-4 has-background-white" style="border-radius:5px">
+                  <span class="has-text-weight-normal is-size-6 mr-4" style="color: rgb(67, 78, 82);"> Phone Number </span>  
+                  <span class="has-text-weight-normal is-size-5 mr-4" style="color: rgba(27, 100, 126);">   {{application.phone_number}} </span>  
+                
+                </div>
+                
+              
+            </div>
+
+        </div>
+
+      </section>
+       
+      
+
+     
+     </section>
+     <!-- Personal Details SECTION END -->
+    
+
+     <hr style="background: rgba(27, 100, 126);">
+
+
+
+     <!-- Proposal  SECTION START -->
+     <section class="has-background-light pb-4 " style="border-radius:5px">
+      <p class="has-text-weight-bold mb-5  p-3" style="background:#1b647e; color: rgb(255, 255, 255);">Proposal</p>
+    
+      
+      <p class="m-4 p-4 has-background-white">
+        {{application.proposal}}
+      </p>
+       
+      
+
+     
+     </section>
+     <!-- Proposal Section END -->
+
+
+    
+
+     <hr style="background: rgba(27, 100, 126);">
+
+     <!-- documents  SECTION START -->
+     <section class="has-background-light pb-4 " style="border-radius:5px">
+      <p class="has-text-weight-bold mb-5  p-3" style="background:#1b647e; color: rgb(255, 255, 255);">Documents</p>
+    
+      
+      <section class="m-4 p-4 ">
+        
+      
+       
+      <div class="is-flex is-justify-content-space-between pt-4">
 
         {% if documents %}
-          {% for document in documents %}
-          <a href="{{document.file.url}}" target="_blank" >{{document}}<i class="ml-2 fa-solid fa-file-pdf"></i></a>
-          {% endfor %}
-        {% else %}
-          <span>no documents uploaded</span>
-        {%endif%}
-       
+        {% for document in documents %}
+        <div class="p-4 has-background-white" style="border-radius:5px">
+          <a href="{{document.file.url}}" target="_blank" class="has-text-weight-normal is-size-6 mr-4" style="color: rgb(67, 78, 82);"> {{document}} <i class="ml-2 fa-solid fa-file-pdf"></i></a>  
+          
+        </div>
+        {% endfor %}
+      {% else %}
+      <div class="p-4 " style="border-radius:5px">No documents uploaded</div>
+      {%endif%}
+              
         
-    </div>
-    <hr>
 
-    
-    <div class="field is-flex is-flex-direction-row-reverse pb-5" style="border-bottom: 3px solid rgb(200, 200, 200)">
-    
-
-     {% include 'users/application_status.html' %}
-    
-    
+     
+        
+      
     </div>
+  </section>
+
+     
+     </section>
+     <!-- documents Section END -->
+
+     <hr style="background: rgba(27, 100, 126);">
 
     
 </div>

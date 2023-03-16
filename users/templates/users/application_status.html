@@ -3,23 +3,38 @@
 {% if application.application_state == 'PENDING' %}
 
   {% if group == "Student Administration Services (SAS) Department" %}
-      
-    <form class="is-flex" method="post">
-      {% csrf_token %}
-      <p class="control m-3" >
-        <input hidden name="action" value="proceed_to_assessment"  />
-        <button type="submit" class="button is-success">
-          Proceed To Assessment
-        </button>
-      </p>
 
-    </form>
+    {% if application.student_id %}
+      <form class="is-flex" method="post">
+        {% csrf_token %}
+        <p class="control m-3" >
+          <input hidden name="action" value="proceed_to_assessment"  />
+          <button id="#proceed-assessment-button"  type="submit" class="button is-success">
+            Proceed To Assessment
+          </button>
+        </p>
+      </form>
+    {% else %}
+      <p class="control m-3">
+        <span class="has-textweight-semibold mr-3 has-text-white has-background-primary p-1 ">Generate Student ID</span>
+      </p>
+        
+    {% endif %}
+      
+ 
       
   {% else %}
 
-    <p class="control m-3">
-      <span class="has-textweight-semibold mr-3">STATUS: </span><span> Pending Entry into TechOne SMS</span>
-    </p>
+  {% if application.student_id %}
+  <p class="control m-3">
+    <span class="has-textweight-semibold mr-3">STATUS: </span><span> Ready for Assessment</span>
+  </p>
+  {% else %}
+  <p class="control m-3">
+    <span class="has-textweight-semibold mr-3">STATUS: </span><span> Pending Entry into TechOne SMS</span>
+  </p>
+  {%endif %}
+    
 
   {% endif %}
 

@@ -7,6 +7,7 @@ from mbasubmission.utils import get_totals
 from mbasubmission.models import Application, Document
 from .utils import filter_applications, get_group
 from django.db.models import Q
+from django.urls import reverse      
 
 def LoginUser(request):
     
@@ -119,8 +120,13 @@ def ApplicationDetail(request, pk):
     }
     return render(request, 'users/application_detail.html', context)
 
-
+ 
 @login_required(login_url="login")
-def proceed_to_assessment(request):
-    if request.method == 'POST':
-        print('hello')
+def SaveId(request, pk):
+    application = Application.objects.get(id=pk)
+    if request.method == "POST":
+       student_id = request.POST.get('student_id')
+       application.student_id = student_id
+       application.save()
+    
+    return redirect(reverse('application-detail', args=[pk]))

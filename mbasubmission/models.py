@@ -23,7 +23,7 @@ class Application(models.Model):
     class Gender(models.TextChoices):
         MALE = "Male", "Male"
         FEMALE = "Female", "Female"
-        
+    
     email = models.EmailField(max_length=254)
     phone_number = models.IntegerField()
     title = models.CharField(max_length=3, choices=Title.choices)
@@ -37,6 +37,8 @@ class Application(models.Model):
     photo = models.ImageField(upload_to='photos/')
     proposal = models.TextField()
     application_state = models.CharField(max_length=40, choices=ApplicationState.choices, default=ApplicationState.PENDING)
+    
+    student_id = models.IntegerField(unique=True, blank=True, null=True)
     
     created = models.DateTimeField(auto_now_add=True)
     

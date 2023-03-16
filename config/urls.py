@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from users.views import LoginUser, LogoutUser, Dashboard, Applications, ApplicationDetail
+from users.views import LoginUser, LogoutUser, Dashboard, Applications, ApplicationDetail, SaveId
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -15,6 +15,7 @@ urlpatterns = [
     path('dashboard/applications/', Applications, name='applications'),
     path('dashboard/applications/<str:filter>/', Applications, name='applications'),
     path('dashboard/application/<str:pk>/', ApplicationDetail, name='application-detail'),
+    path('dashboard/application/<str:pk>/save-id/', SaveId, name='save-id'),
 ]
 
 if not settings.DEBUG:

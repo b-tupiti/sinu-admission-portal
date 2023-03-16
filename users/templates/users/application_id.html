@@ -1,0 +1,93 @@
+{% load static %}
+
+{%if application.student_id %}
+
+<div >
+    
+  
+    <div class="field is-horizontal">
+      
+      <div class="field-label is-normal mr-0">
+        <label class="label p-2 m-0" style="background: rgba(27, 100, 126);text-align:center">
+          <span class="has-text-weight-semibold has-text-white ">Student ID </span>
+        </label>
+      </div>
+      
+      <div class="field-body p-2 m-0">
+        <div class="field" style="max-width:400px;">
+          <p class="control"  style="max-width:400px;">
+            <input disabled class="input  has-text-dark has-text-weight-bold" style="max-width:400px;background: rgba(27, 100, 126,.1); outline:0" type="text" placeholder="{{application.student_id}}">
+          </p>
+        </div>
+       
+      </div>
+
+    </div>
+</div>
+
+{% else %}
+
+
+{% if group == "Student Administration Services (SAS) Department" %}
+<!-- ID FORM -->
+<form method="post" action="{% url 'save-id' application.id %}">
+    {% csrf_token %}
+  
+    <div class="field is-horizontal">
+      
+      <div class="field-label is-normal mr-0">
+        <label class="label p-2 m-0" style="background: rgba(27, 100, 126);text-align:center">
+          <span class="has-text-weight-semibold has-text-white ">Student ID </span>
+        </label>
+      </div>
+      
+      <div class="field-body p-2 m-0">
+        <div class="field" style="max-width:400px;">
+          <p class="control"  style="max-width:400px;">
+            <input id="id-input" name="student_id" class="input is-success has-text-dark has-text-weight-bold" style="max-width:400px;background: rgba(27, 100, 126,.1); outline:0" type="text" placeholder="Enter generated Student ID from TechOne">
+          </p>
+        </div>
+        <div class="field">
+          <p class="control">
+            <button class="input button has-text-weight-bold is-size-5 " type="submit" style="max-width:50px; outline:0; border:1px solid #1b647e"  >
+              <i class="fa-regular fa-floppy-disk " style="color: #1b647e;"></i>
+            </button>
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </form>
+    <!-- ID FORM -->
+{%else%}
+
+<div >
+    
+  
+    <div class="field is-horizontal">
+      
+      <div class="field-label is-normal mr-0">
+        <label class="label p-2 m-0" style="background: rgba(27, 100, 126);text-align:center">
+          <span class="has-text-weight-semibold has-text-white ">Student ID </span>
+        </label>
+      </div>
+      
+      <div class="field-body p-2 m-0">
+        <div class="field" style="max-width:400px;">
+          <p class="control"  style="max-width:400px;">
+            <input disabled class="input has-text-dark has-text-weight-bold" style="max-width:400px;background: rgba(27, 100, 126,.1); outline:0" type="text" placeholder="Pending Entry">
+          </p>
+        </div>
+       
+      </div>
+
+    </div>
+</div>
+
+{%endif%}
+
+
+{%endif%}
+
+
+<script src="{% static 'users/js/on-change-id-input.js' %}"></script>
