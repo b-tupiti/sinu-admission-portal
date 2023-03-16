@@ -156,3 +156,4 @@ AUTH_USER_MODEL = 'users.User'
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
+BASE_URL = env('BASE_URL')
