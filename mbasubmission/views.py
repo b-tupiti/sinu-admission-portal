@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .forms import ApplicationForm, DocumentForm
 from django.forms import formset_factory
-from .models import Application, Document
+from .models import Application, Document, ApplicationToken
 
 
 def submission_form(request):
@@ -40,17 +40,16 @@ def submission_form(request):
 
 
 def upload_receipt(request):
-    token = request.GET.get('token')
-    id = request.GET.get('id')
-    application = Application.objects.get(id=id)
-    page = 'upload_receipt'
-    context = {
-        'application': application,
-    }
-    # try:
-    #     application = Application.objects.get(token=token)
-    # except Application.DoesNotExist:
-    #     return render(request, 'upload_error.html', {'message': 'Invalid token'})
     
-    # render the upload template if the token is valid
+    token = request.GET.get('token')
+    context = {}
+    
+    try:
+        token = ApplicationToken.objects.get(id=token)
+        application = Application.objects.get(id=token.application.id)
+        context['application'] = application
+    except ApplicationToken.DoesNotExist:
+        pass
+    
     return render(request, 'receipt/upload_receipt.html', context)
+    
