@@ -1,5 +1,5 @@
 from django.db.models.signals import post_save
-from mbasubmission.models import Application
+from mbasubmission.models import Application, ApplicationToken
 from django.core.mail import send_mail
 from config import settings
 from django.dispatch import receiver
@@ -8,6 +8,12 @@ import threading
 from django.template.loader import render_to_string
 import uuid
 from django.urls import reverse
+
+
+@receiver(post_save,sender=Application)
+def create_token_for_application(sender, instance, created, **kwargs):
+    if created:
+        ApplicationToken.objects.create(application=instance)
 
 @receiver(post_save, sender=Application)
 def send_confirmation_email(sender, instance, created, **kwargs):
