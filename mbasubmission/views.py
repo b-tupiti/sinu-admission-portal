@@ -39,7 +39,7 @@ def submission_form(request):
     return render(request, 'mbasubmission/right-section/template.html',context)
 
 
-def upload_receipt(request):
+def upload_deposit_slip(request):
     
     token = request.GET.get('token')
     context = {}
@@ -51,5 +51,5 @@ def upload_receipt(request):
     except ApplicationToken.DoesNotExist:
         pass
     
-    return render(request, 'receipt/upload_receipt.html', context)
+    return render(request, 'deposit/upload_deposit.html', context)
     

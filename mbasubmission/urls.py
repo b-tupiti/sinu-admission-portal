@@ -5,5 +5,5 @@ from . import views
 
 urlpatterns = [
     path('', views.submission_form, name="submission-form"),
-    path('upload_receipt/', views.upload_receipt, name='upload_receipt'),
+    path('upload-my-deposit-slip/', views.upload_deposit_slip, name='upload-my-deposit-slip'),
 ]

@@ -38,7 +38,7 @@ def send_confirmation_email(sender, instance, created, **kwargs):
             
             
             token = ApplicationToken.objects.get(application=application)
-            upload_url = f"{settings.BASE_URL}{reverse('upload_receipt')}?token={token}"
+            upload_url = f"{settings.BASE_URL}{reverse('upload-my-deposit-slip')}?token={token}"
         
             subject = "Congratulations! You have a provisional Offer Letter"
             context = {'application': application, 'upload_url':upload_url}
