@@ -36,7 +36,8 @@ def send_confirmation_email(sender, instance, created, **kwargs):
     else:
         if application.application_state == Application.ApplicationState.OFFER_LETTER_ISSUED:
             
-            token = str(uuid.uuid4())
+            
+            token = ApplicationToken.objects.get(application=application)
             upload_url = f"{settings.BASE_URL}{reverse('upload_receipt')}?token={token}&id={application.id}"
         
             subject = "Congratulations! You have a provisional Offer Letter"
