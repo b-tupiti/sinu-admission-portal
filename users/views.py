@@ -118,7 +118,7 @@ def ApplicationDetail(request, pk):
         'documents': documents,
         'totals': get_totals(),
     }
-    return render(request, 'users/application_detail.html', context)
+    return render(request, 'users/application/application_template.html', context)
 
  
 @login_required(login_url="login")
