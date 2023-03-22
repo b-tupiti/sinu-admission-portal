@@ -33,7 +33,7 @@ def LoginUser(request):
         else:
             messages.error(request,'your email or password is invalid')
     
-    return render(request, 'users/login.html')
+    return render(request, 'users/authentication/login.html')
 
 
 def LogoutUser(request):
@@ -55,7 +55,7 @@ def Dashboard(request):
         'group': group,
         'totals': get_totals(),
     }
-    return render(request, 'users/dashboard.html',context)
+    return render(request, 'users/dashboard/dashboard.html',context)
 
 
 
@@ -76,7 +76,7 @@ def Applications(request, filter=None):
         'group': group,
         'totals': get_totals(),
     }
-    return render(request, 'users/applications.html', context)
+    return render(request, 'users/applications_list.html', context)
 
 
 
