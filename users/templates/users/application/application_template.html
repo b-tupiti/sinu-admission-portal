@@ -1,0 +1,62 @@
+{% extends 'users/dashboard/dashboard_template.html' %}
+
+{% block dashboard %}
+<div class="p-5 has-background-white" >
+    
+  
+
+
+    <div class=" p-4 mt-4 has-background-white panel is-flex is-justify-content-space-between" >
+        
+      <div>
+        <div class=" is-size-3 " >
+          <span  style=" color: rgba(27, 100, 126);">Application ID:</span > 
+            <span   style=" color: rgba(27, 100, 126);">{{application.id}}</span>
+        </div>
+        
+        <div class=" pl-1 pr-1 ">
+          <span style=" color: rgba(27, 100, 126);">Submmited:</span> 
+          <span style=" color: rgba(27, 100, 126);">{{application.created}}</span>
+        </div>
+      </div>
+     
+
+        {% include 'users/application/application_status.html' %}
+
+    </div>
+
+    
+
+    <hr style="background: rgba(27, 100, 126);">
+
+    <div  class="">
+      
+      <!-- This block should be in a separate html like application_status.html -->
+
+      {% include 'users/application/application_id.html' %}
+      
+        
+        
+      
+     </div>
+
+     
+    
+     <div class="tabs is-medium pt-4">
+      <ul>
+        <li class=""><a>Application Details</a></li>
+        <li class="is-active"><a>Payments</a></li>
+      </ul>
+    </div>
+     
+    {% comment %} {% include 'users/application/detail.html' %} {% endcomment %}
+
+
+     {% include 'users/application/payments.html' %}
+    
+</div>
+
+
+
+
+{% endblock %}
