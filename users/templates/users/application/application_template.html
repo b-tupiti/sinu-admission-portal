@@ -1,4 +1,6 @@
+
 {% extends 'users/dashboard/dashboard_template.html' %}
+{% load static %}
 
 {% block dashboard %}
 <div class="p-5 has-background-white" >
@@ -43,20 +45,29 @@
      
     
      <div class="tabs is-medium pt-4">
-      <ul>
-        <li class=""><a>Application Details</a></li>
-        <li class="is-active"><a>Payments</a></li>
+      <ul id="tabs">
+        <li id="details_tab" class="is-active" onclick="change_application_tab(id)"><a>Application Details</a></li>
+        <li id="payments_tab" class="" onclick="change_application_tab(id)"><a>Payments</a></li>
       </ul>
     </div>
+
+    <section id="details-content"  style="border-radius:5px">
+       {% include 'users/application/detail.html' %} 
+    </section>
+
+    <section id="payments-content" style="display:none;border-radius:5px">
+       {% include 'users/application/payments.html' %} 
+    </section>
      
-    {% comment %} {% include 'users/application/detail.html' %} {% endcomment %}
+    
 
 
-     {% include 'users/application/payments.html' %}
+    
     
 </div>
 
 
 
-
+<script src="{% static 'users/js/toggle-application-tab.js' %}"></script>
 {% endblock %}
+
