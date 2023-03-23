@@ -23,3 +23,6 @@ function change_application_tab(id){
         document.getElementById('payments-content').style.display = 'none';
     }
 }
+
+
+
