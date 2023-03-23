@@ -1,94 +1,136 @@
-<!-- Personal Details SECTION START -->
-<section class="has-background-light pb-4 " style="border-radius:5px">
-    <p class="has-text-weight-bold mb-5  p-3" style="background:#1b647e; color: rgb(255, 255, 255);">Personal Details</p>
-  
+
+ <main class="p-3 pl-5 pr-5">
+
     
-    <section class="is-flex ">
-      
-      
-      <div class="card has-background-white p-1 ml-4" >
-        <span class="is-size-7 p-1">uploaded photo</span>
-          <div class="card-image mt-1"  style=" border-radius:0px">
-            <figure class=" image is-128x128"  >
-              <img src="{{application.photo.url}}" style="height:100%" alt="photo">
-            </figure>
-          </div>
-        </div>
-
-        <div class="ml-4 p-0 pb-5 pr-5 pl-5 is-flex-grow-1" >
-
-            <div class="is-flex is-justify-content-space-between pt-4">
-              
-              <div class="p-4 has-background-white" style="border-radius:5px">
-                <span class="has-text-weight-normal is-size-6 mr-4" style="color: rgb(67, 78, 82);"> Name </span>  
-                <span class="has-text-weight-normal is-size-5 mr-4" style="color: rgba(27, 100, 126);">   {{application.full_name}}  </span>  
-              </div>
-
-            <div class="p-4 has-background-white" style="border-radius:5px">
-              <span class="has-text-weight-normal is-size-6 mr-4" style="color: rgb(67, 78, 82);"> Email </span>  
-              <span class="has-text-weight-normal is-size-5 mr-4" style="color: rgba(27, 100, 126);">   {{application.email}}  </span>  
-            </div>
-            
-            
-
-            <div class="p-4 has-background-white" style="border-radius:5px">
-              <span class="has-text-weight-normal is-size-6 mr-4" style="color: rgb(67, 78, 82);"> Gender </span>  
-              <span class="has-text-weight-normal is-size-5 mr-4" style="color: rgba(27, 100, 126);">   {{application.gender}}  </span>  
-            </div>
-            
-              <div class="p-4 has-background-white" style="border-radius:5px">
-                <span class="has-text-weight-normal is-size-6 mr-4" style="color: rgb(67, 78, 82);"> Phone Number </span>  
-                <span class="has-text-weight-normal is-size-5 mr-4" style="color: rgba(27, 100, 126);">   {{application.phone_number}} </span>  
-              
-              </div>
-              
-            
-          </div>
-
+  <!-- Personal Details Component START -->
+ <section  class="has-background-light mb-2 " >
+        
+  <!-- Dropdown Toggle -->
+  <div class="has-text-weight-bold    is-flex is-justify-content-space-between p-3 " style="border-bottom:1px solid #c0bcbc;width:100%;background:#1b647e; color: rgb(255, 255, 255);">
+      <p class="" >Personal Details</p>
+      <div class="">
+          <button id="personal-details-toggle" onclick="toggle_expansion(id)"  class="button mr-2 is-small is-rounded" style="background: #1f7392;border:none;" aria-haspopup="true" aria-controls="dropdown-menu">
+              <span class="icon is-small ">
+                  <i class="fa-solid fa-plus" style="color:white" aria-hidden="true"></i>
+              </span>
+          </button>
       </div>
+  </div>
+  <!-- Dropdown Toggle -->
 
-    </section>
-     
-    
+  <!-- Dropdown Menu -->
+  <section class=" has-background-light is-hidden" >
+      <div class="ml-4 p-0 pb-5 pr-5 pl-5 is-flex-grow-1" >
+          <div class="is-flex is-justify-content-space-between pt-4">
 
-   
-   </section>
-   <!-- Personal Details SECTION END -->
+              <div class="card has-background-white p-1 ml-4" >
+                  <span class="is-size-7 p-1">uploaded photo</span>
+                  <div class="card-image mt-1"  style=" border-radius:0px">
+                      <figure class=" image is-128x128"  >
+                        <img src="{{application.photo.url}}" style="height:100%" alt="photo">
+                      </figure>
+                  </div>
+              </div>
+
+              <div class="p-4 has-background-white" style="border-radius:5px">
+                  <span class="has-text-weight-normal is-size-6 mr-4" style="color: rgb(67, 78, 82);"> Name </span>  
+                  <span class="has-text-weight-normal is-size-5 mr-4" style="color: rgba(27, 100, 126);">   Brandon Tupiti  </span>  
+              </div>
+
+              <div class="p-4 has-background-white" style="border-radius:5px">
+                  <span class="has-text-weight-normal is-size-6 mr-4" style="color: rgb(67, 78, 82);"> Email </span>  
+                  <span class="has-text-weight-normal is-size-5 mr-4" style="color: rgba(27, 100, 126);">   bryant.6295@yahoo.com </span>  
+              </div>
+
+              <div class="p-4 has-background-white" style="border-radius:5px">
+                  <span class="has-text-weight-normal is-size-6 mr-4" style="color: rgb(67, 78, 82);"> Gender </span>  
+                  <span class="has-text-weight-normal is-size-5 mr-4" style="color: rgba(27, 100, 126);">   Male  </span>  
+              </div>
+
+              <div class="p-4 has-background-white" style="border-radius:5px">
+                  <span class="has-text-weight-normal is-size-6 mr-4" style="color: rgb(67, 78, 82);"> Phone Number </span>  
+                  <span class="has-text-weight-normal is-size-5 mr-4" style="color: rgba(27, 100, 126);">   (+677) 711 8246 </span>  
+              </div>
+
+          </div>
+      </div>
+  </section>
+  <!-- Dropdown menu -->
+
+
+</section>
+ <!-- Personal Details Component END -->
+
+
+
+
+
+
+
+
   
 
-   <hr style="background: rgba(27, 100, 126);">
 
 
+   <!-- Proposal Component START -->
+ <section  class="has-background-light mb-2" style="border-radius:5px;width:100%">
+        
+  <!-- Dropdown Toggle -->
+  <div class="has-text-weight-bold    is-flex is-justify-content-space-between p-3" style="width:100%;background:#1b647e; color: rgb(255, 255, 255);">
+      <p class="">Proposal</p>
+      <div class="">
+          <button id="proposal-toggle" onclick="toggle_expansion(id)"  class="button mr-2 is-small is-rounded" style="background: #1f7392;border:none;" aria-haspopup="true" aria-controls="dropdown-menu">
+              <span class="icon is-small ">
+                  <i class="fa-solid fa-plus" style="color:white" aria-hidden="true"></i>
+              </span>
+          </button>
+      </div>
+  </div>
+  <!-- Dropdown Toggle -->
 
-   <!-- Proposal  SECTION START -->
-   <section class="has-background-light pb-4 " style="border-radius:5px">
-    <p class="has-text-weight-bold mb-5  p-3" style="background:#1b647e; color: rgb(255, 255, 255);">Proposal</p>
-  
-    
+  <!-- Dropdown Menu -->
+  <section class=" has-background-light is-hidden p-4" >
     <p class="m-4 p-4 has-background-white">
       {{application.proposal}}
     </p>
-     
-    
+  </section>
+  <!-- Dropdown menu -->
+
+
+</section>
+ <!-- Proposal Component END -->
+
 
    
-   </section>
-   <!-- Proposal Section END -->
 
 
   
 
-   <hr style="background: rgba(27, 100, 126);">
 
-   <!-- documents  SECTION START -->
-   <section class="has-background-light pb-4 " style="border-radius:5px">
-    <p class="has-text-weight-bold mb-5  p-3" style="background:#1b647e; color: rgb(255, 255, 255);">Documents</p>
-  
-    
-    <section class="m-4 p-4 ">
-      
-    
-     
+
+
+
+
+
+
+ <!-- Documents Component START -->
+ <section  class="has-background-light " style="border-radius:5px;width:100%">
+        
+  <!-- Dropdown Toggle -->
+  <div class="has-text-weight-bold    is-flex is-justify-content-space-between p-3" style="width:100%;background:#1b647e; color: rgb(255, 255, 255);">
+      <p class="">Documents</p>
+      <div class="">
+          <button id="documents-toggle" onclick="toggle_expansion(id)"  class="button mr-2 is-small is-rounded" style="background: #1f7392;border:none;" aria-haspopup="true" aria-controls="dropdown-menu">
+              <span class="icon is-small ">
+                  <i class="fa-solid fa-plus" style="color:white" aria-hidden="true"></i>
+              </span>
+          </button>
+      </div>
+  </div>
+  <!-- Dropdown Toggle -->
+
+  <!-- Dropdown Menu -->
+  <section class=" has-background-light is-hidden p-4" >
     <div class="is-flex is-justify-content-space-between pt-4">
 
       {% if documents %}
@@ -108,10 +150,27 @@
       
     
   </div>
+  </section>
+  <!-- Dropdown menu -->
+
+
 </section>
+ <!-- Documents Component END -->
+
+
+ </main>
+
+
+
+
+
+
 
    
-   </section>
-   <!-- documents Section END -->
 
    <hr style="background: rgba(27, 100, 126);">
+
+
+
+
+   
