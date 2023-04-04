@@ -3,7 +3,9 @@ from django.db.models import Q
 from django.contrib.auth.models import Group
 
 def filter_applications(request, filter):
-    
+    """
+    filter for applications
+    """
     applications = Application.objects.all()
     group = None
     
