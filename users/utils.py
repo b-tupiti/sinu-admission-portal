@@ -1,4 +1,4 @@
-from mbasubmission.models import Application
+from admission.models import Application
 from django.db.models import Q
 from django.contrib.auth.models import Group
 

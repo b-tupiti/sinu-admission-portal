@@ -8,7 +8,7 @@ import uuid
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('mbasubmission', '0007_application_student_id'),
+        ('admission', '0007_application_student_id'),
     ]
 
     operations = [
@@ -17,7 +17,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('created', models.DateTimeField(auto_now_add=True)),
                 ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False, unique=True)),
-                ('application', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='mbasubmission.application')),
+                ('application', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='admission.application')),
             ],
         ),
     ]

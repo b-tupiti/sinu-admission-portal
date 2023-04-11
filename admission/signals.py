@@ -1,5 +1,5 @@
 from django.db.models.signals import post_save
-from mbasubmission.models import Application, ApplicationToken
+from admission.models import Application, ApplicationToken
 from django.core.mail import send_mail
 from config import settings
 from django.dispatch import receiver

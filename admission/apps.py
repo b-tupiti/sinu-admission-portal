@@ -1,10 +1,10 @@
 from django.apps import AppConfig
 
 
-class MbasubmissionConfig(AppConfig):
+class AdmissionConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'mbasubmission'
+    name = 'admission'
     
     
     def ready(self):
-        import mbasubmission.signals
+        import admission.signals

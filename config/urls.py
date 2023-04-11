@@ -7,7 +7,7 @@ from users.views import LoginUser, LogoutUser, Dashboard, Applications, Applicat
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('mbasubmission.urls')),
+    path('', include('admission.urls')),
     
     path('login/', LoginUser, name='login'),
     path('logout/', LogoutUser, name='logout'),

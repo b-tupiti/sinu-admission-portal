@@ -35,7 +35,7 @@ class Migration(migrations.Migration):
                 ('file', models.FileField(upload_to='documents/')),
                 ('created', models.DateTimeField(auto_now_add=True)),
                 ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False, unique=True)),
-                ('application', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='mbasubmission.application')),
+                ('application', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='admission.application')),
             ],
         ),
     ]

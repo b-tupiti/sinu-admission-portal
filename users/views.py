@@ -3,8 +3,8 @@ from .models import User
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from mbasubmission.utils import get_totals
-from mbasubmission.models import Application, Document
+from admission.utils import get_totals
+from admission.models import Application, Document
 from .utils import filter_applications, get_group
 from django.db.models import Q
 from django.urls import reverse      

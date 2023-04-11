@@ -7,7 +7,7 @@ import django.utils.timezone
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('mbasubmission', '0004_alter_application_phone_number'),
+        ('admission', '0004_alter_application_phone_number'),
     ]
 
     operations = [
