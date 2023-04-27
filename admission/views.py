@@ -4,6 +4,32 @@ from django.forms import formset_factory
 from .models import Application, Document, ApplicationToken
 
 
+def create_new_admission(request):
+    return render(request, 'application/create-new-admission.html')
+
+def application_saved(request):
+    return render(request, 'application/application-saved.html')
+
+def personal_details(request):
+    return render(request, 'application/personal-details.html')
+
+def sponsor_details(request):
+    return render(request, 'application/sponsor-details.html')
+
+def education_background(request):
+    return render(request, 'application/education-background.html')
+
+def employment_history(request):
+    return render(request, 'application/employment-history.html')
+
+def declaration(request):
+    return render(request, 'application/declaration.html')
+
+def my_admissions(request):
+    return render(request, 'application/my-admissions.html')
+
+
+
 def submission_form(request):
     """
     displays a form for the user to submit an application
