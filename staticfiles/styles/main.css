@@ -1,16 +1,33 @@
-@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;800;900&display=swap");
-
 body {
-  background: #1b647e;
   font-family: "Outfit", sans-serif;
+  background: transparent;
+}
+
+main {
+  position: relative;
+}
+
+.background {
+  background-color: #ffffff;
   background-image: url('/static/images/bg.jpg');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  
-  
+  min-height: 100vh;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: -2;
 }
 
+.inner-background {
+  z-index: -1;
+  background:#e4e4e4;
+  background-color: rgba(28, 99, 125,.7);
+  width: 100%;
+  min-height: 100vh;
+  height: 100%;
+}
 
 
 hr {
