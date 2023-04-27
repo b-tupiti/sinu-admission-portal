@@ -15,7 +15,9 @@ class School(models.Model):
     faculty = models.ForeignKey(Faculty, on_delete=models.SET_NULL, null=True)
     
     def __str__(self):
-        return ' - '.join([self.name, self.abbr])
+        if self.abbr:
+            return ' - '.join([self.name, self.abbr])
+        return self.name
 
 
 class Department(models.Model):
