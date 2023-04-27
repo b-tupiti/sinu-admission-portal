@@ -2,6 +2,8 @@
 
 {% block content %}
 
+
+
 <div class=" " style="padding:3em;padding-bottom:1em;background:rgba(0, 0, 0, 0.5)">
     <div class="container">
         <div class="  columns is-marginless is-align-items-center  " style="padding:2rem; border-radius:5px;background:#0e5165">
@@ -32,8 +34,8 @@
 
         {% if courses %}
         <div class="mb-4 is-size-6 has-text-white is-flex is-justify-content-end is-align-items-center">
-            <h4 class="mr-2" style="font-weight:bold">Results </h4>
-            <p> 1 - 100 of {{courses.count}} results</p>
+            <h4 class="mr-2" style="font-weight:bold">Results: </h4>
+            <p> {{first_index}} - {{last_index}} of {{courses_total}} results for <span class="ml-2 has-text-weight-bold has-text-white">'{{search}}'</span></p>
         </div>
         {% endif %}
       
@@ -65,22 +67,10 @@
         </div>
 
         {% if courses %}
-        <nav class="pagination is-right " style="margin-top:2.5rem" role="navigation" aria-label="pagination">
-          
-            <ul class="pagination-list ">
-                <a class="pagination-previous has-text-white"><</a>
-                
-              <li><a class="pagination-link is-current" aria-label="Goto page 1">1</a></li>
-    
-              <li><a class="pagination-link has-text-white" aria-label="Goto page 45">2</a></li>
-              <li><a class="pagination-link has-text-white" aria-label="Page 46" aria-current="page">2</a></li>
-              <li><a class="pagination-link has-text-white" aria-label="Goto page 47">3</a></li>
-    
-              <li><a class="pagination-link has-text-white" aria-label="Goto page 86">4</a></li>
-              <a class="pagination-next has-text-white">></a>
-            </ul>
-        </nav>
+        {% include 'courses/pagination.html' with queryset=courses custom_range=custom_range %}
         {% endif %}
+
+       
 
     </div>
     {% else %}
