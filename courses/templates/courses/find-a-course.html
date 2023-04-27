@@ -1,0 +1,97 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+
+<div class=" " style="padding:3em;padding-bottom:1em;background:rgba(0, 0, 0, 0.5)">
+    <div class="container">
+        <div class="  columns is-marginless is-align-items-center  " style="padding:2rem; border-radius:5px;background:#0e5165">
+        
+            <h1 class="column is-narrow is-size-5 has-text-white mr-5 has-text-weight-bold" >Course Finder
+                <span class="is-size-1" style="color:#127594">.</span>
+            </h1>
+    
+            <div class="column" >
+                <h5 class=" mb-2 is-italic " style="font-size:.9em;color:#dedede">Search for a Course</h5>
+                <div  style="width:100%">
+                    <form class="   is-flex "  method="get">
+                        <input class="input" name="search" value="{{search}}" type="text" placeholder="" style="border:none;border-top-right-radius:0px;border-bottom-right-radius:0px;">
+                        <input class="button has-text-weight-semibold  has-text-white" type="submit" value="search" style="background:#127594;border:none">
+                    </form>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+
+<div  style="padding:3em;padding-top:1em;background:rgba(0, 0, 0, 0.5)">
+    
+    {% if search %}
+    <div class="container">
+
+        {% if courses %}
+        <div class="mb-4 is-size-6 has-text-white is-flex is-justify-content-end is-align-items-center">
+            <h4 class="mr-2" style="font-weight:bold">Results </h4>
+            <p> 1 - 100 of {{courses.count}} results</p>
+        </div>
+        {% endif %}
+      
+
+        <div class="is-marginless  " style="margin-bottom:3rem;padding:2rem; border-radius:5px;background:rgba(33, 33, 33,.5)">
+
+            {% if courses %}
+
+            {% for course in courses %}
+            <a href="{{course.get_absolute_url}}">
+                <div class="mb-5" style="position:relative;">  
+                    <div style="width:10px;height:100%;background:#0e5165;position:absolute"></div>
+
+                    <div style="border-radius:5px;padding:1.5rem;background:rgb(243, 243, 243);">
+                        <h2 class="is-size-5 mb-4 p-1 pb-3 " style="border-bottom: 1px solid #127594;color:#127594;margin-bottom:10px;">{{course.title}} - {{course.code}}</h2>
+                        <p style="margin-bottom:.3em;font-size:small;"><span style="font-weight:bold;margin-right:15px;color:#212121">Time to complete</span><span  style="color:#212121" >{{course.duration_length}} {{course.duration_type}}s full time.</span></p>
+                        <p style="margin-bottom:.3em;font-size:small;"><span style="font-weight:bold;margin-right:15px;color:#212121">Credits</span><span style="color:#212121" >360</span></p>
+                        <p style="font-size:small;"><span style="font-weight:bold;margin-right:15px;color:#212121">Location</span><span style="color:#212121" >{{course.campus}} Campus</span></p>
+                    </div>
+                    
+                </div>
+            </a>
+            {% endfor %}
+            
+            {% else %}
+            <p class="has-text-white">No Results Found</p>
+            {% endif %}
+
+        </div>
+
+        {% if courses %}
+        <nav class="pagination is-right " style="margin-top:2.5rem" role="navigation" aria-label="pagination">
+          
+            <ul class="pagination-list ">
+                <a class="pagination-previous has-text-white"><</a>
+                
+              <li><a class="pagination-link is-current" aria-label="Goto page 1">1</a></li>
+    
+              <li><a class="pagination-link has-text-white" aria-label="Goto page 45">2</a></li>
+              <li><a class="pagination-link has-text-white" aria-label="Page 46" aria-current="page">2</a></li>
+              <li><a class="pagination-link has-text-white" aria-label="Goto page 47">3</a></li>
+    
+              <li><a class="pagination-link has-text-white" aria-label="Goto page 86">4</a></li>
+              <a class="pagination-next has-text-white">></a>
+            </ul>
+        </nav>
+        {% endif %}
+
+    </div>
+    {% else %}
+    <div class="container has-text-light">
+        <p class="is-size-6">You have not searched for anything yet.</p>
+    </div>
+    {% endif %}
+    
+</div>
+
+
+
+
+{% endblock %}

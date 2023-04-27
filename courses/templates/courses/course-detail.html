@@ -1,0 +1,23 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+
+<div class="container p-4 mt-5" style="background:#0e5165;border-radius:5px" >
+    <h2 class="is-size-3 has-text-white">{{course.title}} - {{course.code}} </h2>
+    <button class="button  mt-4 mb-4 " style="padding: 6rem auto">Apply</button>
+    <div class="has-background-light  mt-4 mb-4"  style="border-radius:5px;">
+        <div class="tabs is-boxed "  style="border-radius:5px">
+            <ul >
+              <li class="is-active"><a>Overview</a></li>
+              <li><a>Entry Requirements</a></li>
+              <li><a>Qualifications & Structure</a></li>
+              <li><a>Fees</a></li>
+            </ul>
+          </div>
+    </div>
+    <div class=" p-4" style="background:#fff;min-height:200px;border-radius:5px">
+        lorem ipsum
+    </div>
+</div>
+
+{% endblock %}
