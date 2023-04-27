@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base_generic.html' %}
 {% load static %}
 
 {% block content %}
@@ -16,7 +16,25 @@
       
   {% else %}
 
-    {% include 'mbasubmission/right-section/form.html'%}
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="columns" style="min-height: 671px;">
+        <!-- Left Section START -->
+        <section class="column p-0" style="background: rgba(62, 36, 36, 0.5);background: rgba(27, 100, 126, .95);">
+          {% include 'mbasubmission/leftsection/left.html' %}
+        </section>
+        <!-- Left Section END -->
+        <!-- Right Section START -->
+        <section class="column" style="background: rgba(62, 36, 36, 0.5);background: #1b647ecc;">
+          {% include 'mbasubmission/right-section/form.html'%}
+        </section>
+        <!-- Right Section END -->
+      </div>
+    </div>
+  </section>
+
+   
 
   {% endif %}
 
