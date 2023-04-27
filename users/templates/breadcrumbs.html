@@ -1,17 +1,17 @@
-<nav class="breadcrumb p-3 has-arrow-separator" aria-label="breadcrumbs">
+<nav class="breadcrumb  has-arrow-separator container has-text-dark is-size-7" style="margin:1rem auto; padding:1rem; background:rgba(245, 245, 245,.8);" aria-label="breadcrumbs">
     <ul id="breadcrumb-list">
 
       {% if page == 'dashboard' %}
-      <li><a class="has-text-white" href="{% url 'dashboard' %}">
+      <li><a class="" href="{% url 'dashboard' %}">
          Dashboard
         </a></li>
       {% elif page == 'applications' %}
-      <li><a class="has-text-white"  href="{% url 'dashboard' %}">Dashboard</a></li>
-      <li><a  class="has-text-white"  href="{% url 'applications' %}">Applications</a></li>
+      <li><a class=""  href="{% url 'dashboard' %}">Dashboard</a></li>
+      <li><a  class=""  href="{% url 'applications' %}">Admissions</a></li>
       {% elif page == 'application-detail' %}
-      <li><a class="has-text-white"  href="{% url 'dashboard' %}">Dashboard</a></li>
-      <li><a  class="has-text-white"  href="{% url 'applications' %}">Applications</a></li>
-      <li><a class="has-text-white is-active"  href="{% url 'application-detail' application.id %}">Application ID: {{application.id}}</a></li> 
+      <li><a class=""  href="{% url 'dashboard' %}">Dashboard</a></li>
+      <li><a  class=""  href="{% url 'applications' %}">Admissions</a></li>
+      <li><a class=" is-active"  href="{% url 'application-detail' application.id %}">Application ID: {{application.id}}</a></li> 
       {% endif %}
     </ul>
   </nav>

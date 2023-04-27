@@ -1,41 +1,54 @@
-{% extends 'user_base.html' %}
+{% extends 'base_generic.html' %}
 
-{%block dashboardcontent %}
-<section class="hero">
-    <div class="hero-body">
-      <div class="is-flex is-align-items-center  is-justify-content-center" style="min-height: 671px;">
-        <!-- Left Section START -->
-        <section class=" is-two-fifths p-5" style="background: rgba(62, 36, 36, 0.5);background: rgba(27, 100, 126, .95);">
-          
-          <form method="POST">
-            {% csrf_token %} 
-              <p class="is-size-4 has-text-white mb-4">MBA Applications Admin</p>
-              <hr class="mb-4">
-              <div class="field">
-                  <p class="control has-icons-left has-icons-right">
-                    <input class="input" type="email" placeholder="Email" name="email" required>
-                    <span class="icon is-small is-left">
-                      <i class="fas fa-envelope"></i>
-                    </span>
-                  </p>
-                </div>
-                <div class="field">
-                  <p class="control has-icons-left">
-                    <input class="input" type="password" placeholder="Password" name="password" required>
-                    <span class="icon is-small is-left">
-                      <i class="fas fa-lock"></i>
-                    </span>
-                  </p>
-                </div>
-                <hr class="mb-4">
-                <button type="submit" class="button  is-rounded is-fullwidth  has-text-weight-semibold">Login</button>
-            </form>
+{%block content %}
 
-        </section>
-        <!-- Left Section END -->
+<div class="is-flex is-justify-content-space-between is-align-items-center mt-5" style="margin:1rem auto;margin-bottom:1.5rem;width:80%; background:white; padding:1rem; border-radius:5px">
+  <h2 class="is-size-5">Sign into the Portal</h2>
+  <button class="button is-size-6 has-text-weight-semibold" style="background:#6da11f;color:#ffffff;border-radius:5px;border:none">Help</button>
+</div>
+
+<form method="POST" style="margin:1rem auto;border:none; border-radius:5px; background:white; padding-bottom:1rem;width:50%">
+  {% csrf_token %} 
+    <h2 class="  mb-4 has-text-white p-3" style=" background:#127594; border-top-left-radius:5px; border-top-right-radius:5px">Portal Login</h2>
+    <div style="margin:1rem">
+      <p  style="font-size: .9em;color:hwb(0 49% 51%);line-height:1.9em" >
+        Students, please log in using your student ID and password. <br>
+        New applicants, if you have not yet received an ID number, log in using your email and password. <br>
+        Agents, please log in using your email and password.
+      </p>
+      <hr class="mb-4" style="background:#e5e5e5">
+      <div class="field">
+          <p class="control has-icons-left has-icons-right" >
+            <input class="input" type="email" placeholder="Email \ Username" name="email" required>
+            <span class="icon is-small is-left">
+              <i class="fas fa-envelope"></i>
+            </span>
+          </p>
+        </div>
+        <div class="field">
+          <p class="control has-icons-left">
+            <input class="input" type="password" placeholder="Password" name="password" required>
+            <span class="icon is-small is-left">
+              <i class="fas fa-lock"></i>
+            </span>
+          </p>
+        </div>
+        <hr class="mb-4" style="background:#e5e5e5">
+
+        <div class="columns">
+          <div class="column">
+            <button style="background:#fafafa" class="button  is-fullwidth  has-text-weight-semibold">Forgot Password?</button>
+          </div>
+          <div class="column">
+            <button type="submit" style="background:#127594" class="button has-text-white   is-fullwidth  has-text-weight-semibold">Login</button>
+          </div>
+         
+        </div>
         
-      </div>
+        
     </div>
-  </section>
+    
+  </form>
+
 
   {%endblock %}

@@ -1,23 +1,25 @@
-{% extends 'user_base.html' %}
+{% extends 'base_generic.html' %}
 
-{% block dashboardcontent %}
+{% block content %}
 
 
     
 
-      <div class="container mb-3" style="padding-top:80px" >
-        <div class=" mb-1  is-flex is-justify-content-space-between" style="background:#fff;" >
-            <div class="tabs " style="margin-bottom: 0;">
+      <div class=" " style="background:#fff;">
+        <div style="padding:1rem" class="container  is-flex is-justify-content-space-between"  >
+            <div class="tabs " >
                 <ul> 
-                  <li><a class="is-size-5" href="{% url 'dashboard' %}">Dashboard</a></li>
-                  <li><a href="{% url 'applications' %}">Applications</a></li>
+                  <li><a class="" href="{% url 'dashboard' %}">Dashboard</a></li>
+                  <li><a href="{% url 'applications' %}">Admissions</a></li>
                 </ul>
               </div>
         </div>
 
-        {% include 'breadcrumbs.html' %}
+       
 
       </div>
+
+      {% include 'breadcrumbs.html' %}
 
       
 
