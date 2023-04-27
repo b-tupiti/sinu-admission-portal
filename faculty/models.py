@@ -6,7 +6,7 @@ class Faculty(models.Model):
     abbr = models.CharField(max_length=10, verbose_name='Faculty Abbreviation')
     
     def __str__(self):
-        return ' - '.join[self.name, self.abbr]
+        return ' - '.join([self.name, self.abbr])
     
     
 class School(models.Model):
@@ -15,7 +15,7 @@ class School(models.Model):
     faculty = models.ForeignKey(Faculty, on_delete=models.SET_NULL, null=True)
     
     def __str__(self):
-        return ' - '.join[self.name, self.abbr]
+        return ' - '.join([self.name, self.abbr])
 
 
 class Department(models.Model):
@@ -24,6 +24,6 @@ class Department(models.Model):
     school = models.ForeignKey(School, on_delete=models.SET_NULL, null=True)
     
     def __str__(self):
-        return ' - '.join[self.name, self.abbr]
+        return ' - '.join([self.name, self.abbr])
     
 
