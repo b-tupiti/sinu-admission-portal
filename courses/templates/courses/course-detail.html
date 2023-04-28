@@ -2,22 +2,64 @@
 
 {% block content %}
 
-<div class="container p-4 mt-5" style="background:#0e5165;border-radius:5px" >
-    <h2 class="is-size-3 has-text-white">{{course.title}} - {{course.code}} </h2>
-    <button class="button  mt-4 mb-4 " style="padding: 6rem auto">Apply</button>
-    <div class="has-background-light  mt-4 mb-4"  style="border-radius:5px;">
-        <div class="tabs is-boxed "  style="border-radius:5px">
-            <ul >
-              <li class="is-active"><a>Overview</a></li>
-              <li><a>Entry Requirements</a></li>
-              <li><a>Qualifications & Structure</a></li>
-              <li><a>Fees</a></li>
-            </ul>
-          </div>
+<div class="p-4" style="background:rgba(0, 0, 0, 0.7)" >
+  
+  <div class="container" >
+    <h2 class="is-size-3 has-text-white " style="margin:1em auto;margin-bottom: .5em;">{{course.title}} - {{course.code}} </h2>
+    <a href="{% url 'create-new-admission' %}" class="button is-dark has-text-weight-bold" style="margin:1em auto;margin-bottom:1.5em">Apply</a>
+  </div>
+
+  
+  
+  
+
+</div>
+
+
+<div class=" has-background-light ">
+  <div class="container">
+    <div class=" "  style="border-radius:5px;">
+      <div class="tabs is-boxed "  style="border-radius:5px">
+          <ul >
+            <li class="is-active"><a>Admission Requirements</a></li>
+            <li><a>Program Structure</a></li>
+          </ul>
+      </div>
     </div>
-    <div class=" p-4" style="background:#fff;min-height:200px;border-radius:5px">
-        {{course.description}}
-    </div>
+  </div>
+</div>
+
+
+
+<div class="pt-5" style="background:#fff;min-height:200px;min-height:68vh">
+  <div class="container">
+    <section class="p-4 border is-bordered " style="margin-bottom:1em;border:1px solid rgb(234, 234, 234);background:#ffffff;border-radius:5px" >
+      <h2 class="is-size-4" style="margin:1rem auto;margin-top:.5rem">Admission Requirements</h2>
+      <p style="margin:1rem auto">
+        
+    1. Completed Year 13/Form 7 Arts or Science or equivalent with a minimum GPA of 2.50 and above and a minimum grade of B and above in English, Math and Accounting or <br>
+    2. Completed Certificate in Business Studies – Finance and Diploma of Business Studies – Finance or any other Certificate and Diploma in the respective field of Finance and Accounting from any other recognized institution or <br>
+    3. Work experience of 3 years and above in respective subject area. <br>
+    4. Completed Year 12/Form 6 Arts or Science or equivalent with minimum aggregate of 15 and less. <br>
+
+      </p>
+    </section>
+
+    <section class="p-4 border is-bordered " style="margin-bottom:1em;border:1px solid rgb(234, 234, 234);background:#ffffff;border-radius:5px" >
+      <h2 class="is-size-4" style="margin:1rem auto;margin-top:.5rem">Program Structure</h2>
+      <p style="margin:1rem auto">
+        Code: FBAC <br>
+Title: Bachelor of Accounting <br>
+Duration: 4 years <br>
+Core Units: 32 Units <br>
+Total Credit Points: 480 <br>
+Campus: Kukum <br>
+      </p>
+    </section>
+
+   
+
+  </div>
 </div>
 
 {% endblock %}
