@@ -6,9 +6,9 @@ class FacultyAdmin(admin.ModelAdmin):
 admin.site.register(Faculty, FacultyAdmin)
 
 class SchoolAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('name', 'abbr', 'faculty')
 admin.site.register(School,SchoolAdmin)
 
 class DepartmentAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('name', 'abbr', 'school')
 admin.site.register(Department, DepartmentAdmin)
