@@ -6,20 +6,24 @@ class Course(models.Model):
     Represents the singlemost Course/Program offered by a School.
     """
     class QLevel(models.TextChoices):
-        DEGR = "Degree", "Degree",
-        CERT = "Certificate", "Certificate"
-        DIPL = "Diploma", "Diploma"
-        POSD = "Postgraduate Diploma", "Postgraduate Diploma"
-        MAST = "Masters", "Masters"
+        DEGREE = "degree", "degree",
+        PRE_DEGREE = "pre-degree","pre-degree"
+        CERTIFICATE = "certificate", "certificate"
+        ADVANCED_CERTIFICATE = "advanced certificate", "advanced certificate"
+        DIPLOMA = "diploma", "diploma"
+        PRE_DIPLOMA = "pre-diploma", "pre-diploma"
+        POSTGRADUATE_DIPLOMA = "postgraduate diploma", "postgraduate diploma"
+        MASTER_DEGREE = "master degree", "master degree"
     
     class Campus(models.TextChoices):
-        KUK = "Kukum", "Kukum",
-        MAR = "Marine", "Marine",
-        PAN = "Panatina", "Panatina",
+        KUKUM = "kukum", "kukum",
+        MARINE = "marine", "marine",
+        PANATINA = "panatina", "panatina",
         
     class DurationType(models.TextChoices):
-        YEAR = "Year", "Year"
-        MONTH = "Month", "Month"
+        YEAR = "year", "year"
+        MONTH = "month", "month"
+        WEEK = "week", "week"
         
     code = models.CharField(
         max_length=20, 
@@ -27,32 +31,40 @@ class Course(models.Model):
         )
     title = models.CharField(
         max_length=200,
-        verbose_name='Course Title'
+        verbose_name='Course Title',
     ) 
     qualification_level = models.CharField(
         max_length=50,
         choices=QLevel.choices,
-        default=QLevel.CERT,
+        null=True,
+        blank=True,
     )
     description = models.TextField(
-        verbose_name='Course Description'
+        verbose_name='Course Description',
+        null=True,
+        blank=True,
     )
  
     campus = models.CharField(
         verbose_name='Campus',
         max_length=10,
         choices=Campus.choices,
-        default=Campus.KUK,
+        null=True,
+        blank=True,
     )  
   
     duration_type = models.CharField(
         verbose_name='Duration Type',
         max_length=5, 
-        choices=DurationType.choices
+        choices=DurationType.choices,
+        null=True,
+        blank=True,
     )
     
     duration_length = models.FloatField(
-        verbose_name='Duration'
+        verbose_name='Duration',
+        null=True,
+        blank=True,
     )
 
     def __str__(self):
