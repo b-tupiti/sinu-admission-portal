@@ -27,7 +27,8 @@ class Course(models.Model):
         
     code = models.CharField(
         max_length=20, 
-        verbose_name='Course Code'
+        verbose_name='Course Code',
+        unique=True,
         )
     title = models.CharField(
         max_length=200,
