@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Course, Unit
+from .models.course import Course
+from .models.unit import Unit
 
 class CourseAdmin(admin.ModelAdmin):
     pass

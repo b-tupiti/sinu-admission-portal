@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Course
+from .models.course import Course
 from .utils import searchCourses, paginateCourses
 
 

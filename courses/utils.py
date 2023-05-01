@@ -1,4 +1,4 @@
-from .models import Course
+from .models.course import Course
 from django.db.models import Q
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
