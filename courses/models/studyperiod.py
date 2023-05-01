@@ -6,4 +6,6 @@ class StudyPeriod(models.Model):
         max_length=20,
     )
     
+    def __str__(self):
+        return self.study_period
     

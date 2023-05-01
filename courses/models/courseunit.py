@@ -1,11 +1,14 @@
-# prerequisite (CourseUnit) *any courseunit except self, can be null
-
+from django.urls import reverse
 from django.db import models
 from .course import Course
 from .unit import Unit
 from .studyperiod import StudyPeriod
 
 class CourseUnit(models.Model):
+    
+    class Meta:
+        unique_together = ('unit', 'course')
+        
     unit = models.ForeignKey(Unit, verbose_name='Select Unit', on_delete=models.CASCADE)
     course = models.ForeignKey(Course, verbose_name='Select Course', on_delete=models.CASCADE)
     unit_type = models.CharField(
@@ -37,6 +40,9 @@ class CourseUnit(models.Model):
         blank=True,
         null=True,
     )
+
+        
+    def __str__(self):
+        return self.unit.title
     
-    class Meta:
-        unique_together = ('unit', 'course')
+    
