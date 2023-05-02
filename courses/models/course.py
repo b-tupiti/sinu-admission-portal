@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 
+
 class Course(models.Model):
     """
     Represents the singlemost Course/Program offered by a School.
@@ -68,6 +69,27 @@ class Course(models.Model):
         blank=True,
     )
 
+    credit_points = models.IntegerField(
+        verbose_name='Credit Points',
+        default=0,
+        null=True,
+        blank=True,
+    )
+    
+    total_core_units = models.IntegerField(
+        verbose_name='Total Core Units',
+        default=0,
+        null=True,
+        blank=True,
+    )
+    
+    total_elective_units = models.IntegerField(
+        verbose_name='Total Elective Units',
+        default=0,
+        null=True,
+        blank=True,
+    )
+    
     def __str__(self):
         return self.title
     

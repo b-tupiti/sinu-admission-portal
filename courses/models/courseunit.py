@@ -25,7 +25,6 @@ class CourseUnit(models.Model):
     )
     study_period = models.ManyToManyField(
         StudyPeriod, 
-        verbose_name='Study Period',
         blank=True,
     )
     offer_year = models.CharField(
