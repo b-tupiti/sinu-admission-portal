@@ -10,3 +10,5 @@ class CoursesConfig(AppConfig):
         from .models.unit import Unit
         from .models.courseunit import CourseUnit
         from .models.studyperiod import StudyPeriod
+        from .models.prerequisite import Prerequisite
+        from .models.prerequisite_group import PrerequisiteGroup
