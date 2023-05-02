@@ -73,7 +73,18 @@ Campus: {{course.campus}} <br>
           {{unit.offer_year}}
         {% endif %} 
         <br/><br/>
+
+        {% for pgroup in unit.prerequisite_groups.all %}
+          {% for prereq in pgroup.prerequisites.all %}
+            {{prereq}} or
+          {%endfor%}
+          AND
+          <br/>
+        {% endfor %} 
+        <br/><br/>
+
         {% endfor %}
+       
       </p>
     </section>
 
