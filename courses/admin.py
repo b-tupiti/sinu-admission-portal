@@ -5,6 +5,8 @@ from .models.course import Course
 from .models.unit import Unit
 from .models.courseunit import CourseUnit
 from .models.studyperiod import StudyPeriod
+from .models.prerequisite import Prerequisite
+from .models.prerequisite_group import PrerequisiteGroup
 
     
 class CourseUnitAdmin(admin.ModelAdmin):
@@ -16,6 +18,16 @@ class CourseUnitAdmin(admin.ModelAdmin):
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
     
 admin.site.register(CourseUnit, CourseUnitAdmin)
+
+
+class PrerequisiteAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(Prerequisite, PrerequisiteAdmin)
+
+class PrerequisiteGroupAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(PrerequisiteGroup, PrerequisiteGroupAdmin)
+
 
 class CourseAdmin(admin.ModelAdmin):
     pass
