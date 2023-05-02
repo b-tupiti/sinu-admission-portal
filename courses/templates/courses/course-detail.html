@@ -75,7 +75,7 @@ Campus: {{course.campus}} <br>
         <br/><br/>
 
         {% for pgroup in unit.prerequisite_groups.all %}
-          {% for prereq in pgroup.prerequisites.all %}
+          {% for prereq in pgroup.grouped_prerequisites.all %}
             {{prereq}} or
           {%endfor%}
           AND
