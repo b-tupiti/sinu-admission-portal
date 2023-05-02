@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models.course import Course
+from .models.courseunit import CourseUnit
 from .utils import searchCourses, paginateCourses
 
 
@@ -24,7 +25,8 @@ def findcourse(request):
 
 def course(request, code):
     course = Course.objects.get(code=code)
-    context = {'course':course}
+    units = CourseUnit.objects.filter(course=course)
+    context = {'course':course,'units':units}
     return render(request, 'courses/course-detail.html',context)
 
 
