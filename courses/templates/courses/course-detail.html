@@ -48,12 +48,32 @@
     <section class="p-4 border is-bordered " style="margin-bottom:1em;border:1px solid rgb(234, 234, 234);background:#ffffff;border-radius:5px" >
       <h2 class="is-size-4" style="margin:1rem auto;margin-top:.5rem">Program Structure</h2>
       <p style="margin:1rem auto">
-        Code: FBAC <br>
-Title: Bachelor of Accounting <br>
-Duration: 4 years <br>
-Core Units: 32 Units <br>
-Total Credit Points: 480 <br>
-Campus: Kukum <br>
+        Code: {{course.code}} <br>
+Title: {{course.title}} <br>
+Duration: {{course.duration_length}} {{course.duration_type}}s <br>
+Core Units: {{course.total_core_units}} <br>
+Total Credit Points: {{course.credit_points}} <br>
+Campus: {{course.campus}} <br>
+      </p>
+    </section>
+
+
+    <section class="p-4 border is-bordered " style="margin-bottom:1em;border:1px solid rgb(234, 234, 234);background:#ffffff;border-radius:5px" >
+      <h2 class="is-size-4" style="margin:1rem auto;margin-top:.5rem">Units</h2>
+      <p style="margin:1rem auto">
+        {% for unit in units %}
+        <span style="font-weight:bold;color:#484848"> {{unit.unit.title}} - {{unit.unit.code}} </span><br>
+        unit type: {{unit.unit_type}} <br/>
+        credit points: {{unit.credit_points}} <br/>
+        Study period: 
+        {% for study in unit.study_period.all %}
+          {{study}},
+        {% endfor %}
+        {% if unit.offer_year %}
+          {{unit.offer_year}}
+        {% endif %} 
+        <br/><br/>
+        {% endfor %}
       </p>
     </section>
 
