@@ -4,7 +4,7 @@ from django.urls import path, include
 from . import views
 
 urlpatterns = [
-    path('', views.submission_form, name="submission-form"), # old 
+    # path('', views.submission_form, name="submission-form"), # old 
     path('upload-my-deposit-slip/', views.upload_deposit_slip, name='upload-my-deposit-slip'), # old
     path('application/create-new-admission/', views.create_new_admission, name="create-new-admission"),
     path('application/saved/', views.application_saved, name="application-saved"),
