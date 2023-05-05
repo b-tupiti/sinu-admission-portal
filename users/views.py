@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from .models import User
+from .models.user import User
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required

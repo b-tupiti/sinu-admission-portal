@@ -1,7 +1,7 @@
 from django.db import models
 from django.urls import reverse
 import uuid
-from users.models import User
+from users.models.user import User
 from courses.models.course import Course
 
 class ApplicationState(models.TextChoices):
