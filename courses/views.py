@@ -25,8 +25,9 @@ def findcourse(request):
 
 def course(request, code):
     course = Course.objects.get(code=code)
-    units = CourseUnit.objects.filter(course=course)
-    context = {'course':course,'units':units}
+    core_units = CourseUnit.objects.filter(course=course,unit_type='core')
+    electives = CourseUnit.objects.filter(course=course,unit_type='elective')
+    context = {'course':course,'core_units':core_units,'electives':electives}
     return render(request, 'courses/course-detail.html',context)
 
 
