@@ -9,6 +9,11 @@ class ApplicationAdmin(admin.ModelAdmin):
                 'applicant',
             )
         }),
+         ('Course Applying For', {
+            'fields': (
+                'selected_course',
+            )
+        }),
         ('Student ID (inserted by applicant if he/she is a former student)', {
             'fields': (
                 'student_id',

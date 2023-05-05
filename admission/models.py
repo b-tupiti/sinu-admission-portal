@@ -2,6 +2,7 @@ from django.db import models
 from django.urls import reverse
 import uuid
 from users.models import User
+from courses.models.course import Course
 
 class ApplicationState(models.TextChoices):
         DRAFT = "draft", "Draft"
@@ -15,6 +16,16 @@ class Application(models.Model):
     applicant = models.ForeignKey(
         User,
         to_field='email',
+        on_delete=models.CASCADE,
+        related_name='applications'
+    )
+    
+    """Course"""
+    
+    selected_course = models.ForeignKey(
+        Course,
+        verbose_name='Selected Course',
+        to_field='code',
         on_delete=models.CASCADE,
         related_name='applications'
     )
