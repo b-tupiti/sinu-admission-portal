@@ -2,10 +2,20 @@ from django.shortcuts import render
 from .forms import ApplicationForm, DocumentForm
 from django.forms import formset_factory
 from .models import Application, Document, ApplicationToken
-
+from courses.models.course import Course
 
 def create_new_admission(request):
-    return render(request, 'application/create-new-admission.html')
+    
+    course_code = request.GET.get('course_code')
+    course = Course.objects.get(code=course_code)
+    
+    context = {
+        'course': course,
+    }
+    
+    return render(request, 'application/create-new-admission.html', context)
+
+
 
 def application_saved(request):
     return render(request, 'application/application-saved.html')
