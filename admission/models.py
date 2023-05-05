@@ -1,46 +1,274 @@
 from django.db import models
 from django.urls import reverse
 import uuid
+from users.models import User
 
-
+class ApplicationState(models.TextChoices):
+        DRAFT = "draft", "Draft"
+        SUBMITTED = "Submitted", "Submitted"
+    
+    
 class Application(models.Model):
-    """
-    Application model
-    """
-    class ApplicationState(models.TextChoices):
-        PENDING = "PENDING", "PENDING"
-        UNDER_ASSESSMENT = "UNDER_ASSESSMENT", "UNDER_ASSESSMENT"
-        OFFER_LETTER_ISSUED = "OFFER_LETTER_ISSUED", "OFFER_LETTER_ISSUED"
-        CLEARED_FOR_ENROLLMENT = "CLEARED_FOR_ENROLLMENT", "CLEARED_FOR_ENROLLMENT"
-        ENROLLMENT_COMPLETE = "ENROLLMENT_COMPLETE", "ENROLLMENT_COMPLETE"
     
-    class Title(models.TextChoices):
-        MR = "MR","MR"
-        MRS = "MRS","MRS"
-        MS = "MS","MS"
-        DR = "DR","DR"
+    """Owner"""
     
-    class Gender(models.TextChoices):
-        MALE = "Male", "Male"
-        FEMALE = "Female", "Female"
+    applicant = models.ForeignKey(
+        User,
+        to_field='email',
+        on_delete=models.CASCADE,
+        related_name='applications'
+    )
     
-    email = models.EmailField(max_length=254)
-    phone_number = models.IntegerField()
-    title = models.CharField(max_length=3, choices=Title.choices)
-    first_name = models.CharField(max_length=254)
-    middle_name = models.CharField(max_length=254, null=True, blank=True)
-    last_name = models.CharField(max_length=254)
-    date_of_birth = models.DateField()
-    gender = models.CharField(max_length=6,choices=Gender.choices)
-    job_title = models.CharField(max_length=254)
-    employer = models.CharField(max_length=254)
-    photo = models.ImageField(upload_to='photos/')
-    proposal = models.TextField()
-    application_state = models.CharField(max_length=40, choices=ApplicationState.choices, default=ApplicationState.PENDING)
+    """PERSONAL Details"""
     
-    student_id = models.IntegerField(unique=True, blank=True, null=True)
+    photo = models.ImageField(
+        verbose_name='Photo of Applicant',
+        upload_to='photos/',
+        null=True,
+        blank=True,
+    )
+    
+    student_id = models.IntegerField(
+        verbose_name='Student ID',
+        unique=True, 
+        blank=True, 
+        null=True
+    )
+    
+    title = models.CharField(
+        verbose_name='Title',
+        max_length=3, 
+        choices=(('mr', 'Mr'), ('mrs', 'Mrs'),('ms', 'Ms'), ('dr', 'Dr')),
+        blank=True,
+        null=True,
+    )
+    
+    first_name = models.CharField(
+        verbose_name='First Name',
+        max_length=254,
+        null=True,
+        blank=True,
+    )
+    
+    middle_name = models.CharField(
+        verbose_name='Middle Name',
+        max_length=254, 
+        null=True, 
+        blank=True
+    )
+    
+    last_name = models.CharField(
+        verbose_name='Surname',
+        max_length=254,
+        null=True,
+        blank=True,
+    )
+    
+    date_of_birth = models.DateField(
+        verbose_name='Date of Birth',
+        null=True,
+        blank=True,
+    )
+    
+    gender = models.CharField(
+        verbose_name='Gender',
+        max_length=1,
+        choices=(('m', 'Male'), ('f', 'Female')),
+        blank=True,
+        null=True,
+    )
+    
+    marital_status = models.CharField(
+        max_length=8,
+        choices = (('single', 'Single'), ('married', 'Married'),('divorced', 'Divorced'), ('widow', 'Widow')),
+        blank=True,
+        null=True,
+    )
+    
+    phone_number = models.CharField(
+        max_length=100,
+        blank=True,
+        null=True,
+    )
+    
+    email = models.EmailField(
+        max_length=254,
+        null=True,
+        blank=True,
+    )
+    
+    has_special_needs =  models.BooleanField(
+        verbose_name='Special Needs / Disability',
+        default=False,
+    )
+    
+    """SPONSOR Details"""
+    
+    sponsor_type = models.CharField(
+        max_length=25,
+        choices = (
+            ('private', 'Private'), 
+            ('sponsored', 'Sponsored'),
+            ('private_with_concession', 'Private with Concession (staff)'), 
+        ),
+        blank=True,
+        null=True,
+    )
+    
+    sponsor_name = models.CharField(
+        verbose_name='Name of Sponsor',
+        max_length=255,
+        blank=True,
+        null=True, 
+    )
+    
+    sponsor_email = models.EmailField(
+        verbose_name='Sponsor Email',
+        null=True,
+        blank=True,
+    )
+    
+    sponsor_phone_number = models.CharField(
+        verbose_name='Sponsor Phone Number',
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+    
+    sponsor_address = models.CharField(
+        verbose_name='Sponsor Address',
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+    
+    """EDUCATION Background"""
+    
+    third_form_school = models.CharField(
+        verbose_name='Third Form School',
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+    
+    third_form_year = models.IntegerField(
+        verbose_name='Year in Third Form',
+        null=True,
+        blank=True,
+    )
+    
+    fifth_form_school = models.CharField(
+        verbose_name='Fifth Form School',
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+    
+    fifth_form_year = models.IntegerField(
+        verbose_name='Year in Fifth Form',
+        null=True,
+        blank=True,
+    )
+    
+    sixth_form_school = models.CharField(
+        verbose_name='Sixth Form School',
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+    
+    sixth_form_year = models.IntegerField(
+        verbose_name='Year in Sixth Form',
+        null=True,
+        blank=True,
+    )
+    
+    foundation_school = models.CharField(
+        verbose_name='Foundation School',
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+    
+    foundation_year = models.IntegerField(
+        verbose_name='Year in Foundation',
+        null=True,
+        blank=True,
+    )
+    
+    institution = models.CharField(
+        max_length=255,
+        verbose_name='Instition',
+        null=True,
+        blank=True,
+    )
+    
+    course = models.CharField(
+        max_length=255,
+        verbose_name='Course / Qualification',
+        null=True,
+        blank=True,
+    )
+    
+    year_start = models.IntegerField(
+        verbose_name='Year Start',
+        null=True,
+        blank=True,
+    )
+    
+    year_end = models.IntegerField(
+        verbose_name='Year Start',
+        null=True,
+        blank=True,
+    )
+    
+    major = models.CharField(
+        max_length=255,
+        verbose_name='Major Field of Study',
+        null=True,
+        blank=True,
+    )
+    
+    """EMPLOYMENT History"""
+    
+    current_organization = models.CharField(
+        max_length=255,
+        verbose_name='Current Organization',
+        null=True,
+        blank=True,
+    )
+    
+    job_title = models.CharField(
+        max_length=255,
+        verbose_name='Job Title',
+        null=True,
+        blank=True,
+    )
+    
+    month_year_started = models.DateField(
+        verbose_name='Month/Year Started',
+        null=True,
+        blank=True,
+    )
+    
+    """DECLARATION"""
+    
+    is_declared = models.BooleanField(
+        verbose_name='Has been Declared',
+        default=False,
+    )
+    
+    """ Application Meta Data """
+    
+    application_state = models.CharField(
+        verbose_name='State of Application',
+        max_length=40, 
+        choices=ApplicationState.choices, 
+        default=ApplicationState.DRAFT
+    )
     
     created = models.DateTimeField(auto_now_add=True)
+    last_saved = models.DateTimeField(auto_now=True)
     
     @property
     def full_name(self):
