@@ -11,6 +11,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     middle_name = models.CharField(max_length=254, null=True, blank=True)
     last_name = models.CharField(max_length=254, null=True, blank=True)
     gender = models.CharField(max_length=1,choices=(('m', 'Male'), ('f', 'Female')),null=True, blank=True)
+    date_of_birth = models.DateField(verbose_name='Date of Birth', null=True, blank=True)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
