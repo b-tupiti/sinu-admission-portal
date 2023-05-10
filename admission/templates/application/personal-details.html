@@ -236,14 +236,18 @@
         <div class="field is-grouped ">
 
             <p class="control">
-                <button class="button">
-                  Exit
-                </button>
+                <form action="{% url 'application-saved' %}" method="post">
+                  {% csrf_token %}
+                <input type="submit" class="button" value="Save and Exit">
+              </form>
               </p>
             <p class="control">
-              <a href="{% url 'sponsor-details' %}" class="button is-link">
-                Next
-              </a>
+              <form method="post">
+                {% csrf_token %}
+                <input value="Next" type="submit" class="button is-link">
+                  
+              </form>
+              
             </p>
            
             
