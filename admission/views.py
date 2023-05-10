@@ -1,14 +1,35 @@
 from django.shortcuts import render
-# from .forms import ApplicationForm, DocumentForm
+from django.contrib.auth.decorators import login_required
 from django.forms import formset_factory
 from .models import Application, Document, ApplicationToken
 from courses.models.course import Course
+from django.shortcuts import redirect
+from users.models.user import User
+from django.contrib.auth import authenticate,login
+from django.contrib import messages
+from users.utils import create_applicant_account
+from admission.utils import create_new_admission_application_for_user
 
+    
 def create_new_admission(request):
     
     course_code = request.GET.get('course_code')
     course = Course.objects.get(code=course_code)
     
+    if request.method == 'POST':     
+        
+        email, password = create_applicant_account(request)
+        user = authenticate(request, email=email, password=password)
+        
+        if user is not None:
+            login(request, user)
+            application = create_new_admission_application_for_user(user, course)
+            
+            request.session['application_id'] = application.id
+            return redirect('personal-details')
+        else:
+            messages.error(request,'cannot create new admission application')
+
     context = {
         'course': course,
     }
@@ -17,11 +38,41 @@ def create_new_admission(request):
 
 
 
+@login_required(login_url='login')
+def personal_details(request):
+    """
+    Takes in two arguments. The authenticated applicant, and the application Id.
+    """
+    
+    # get the authenticated user from the request
+    # get the application id from the request, 
+    application = Application.objects.get(id=request.session.get('application_id'))
+    # get the fields and values required for the personal-details page,
+    # populate personal details page
+    
+    context = {
+        'application': application
+    }
+    
+    return render(request, 'application/personal-details.html', context)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 def application_saved(request):
     return render(request, 'application/application-saved.html')
 
-def personal_details(request):
-    return render(request, 'application/personal-details.html')
+
 
 def sponsor_details(request):
     return render(request, 'application/sponsor-details.html')
