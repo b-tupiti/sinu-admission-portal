@@ -2,6 +2,37 @@ from admission.models import Application
 from django.db.models import Q
 from django.contrib.auth.models import Group
 
+from .models.user import User
+from datetime import datetime
+
+def create_applicant_account(request):
+    first_name = request.POST.get('first_name').lower()
+    middle_name = request.POST.get('middle_name').lower()
+    last_name = request.POST.get('last_name').lower()
+    gender = request.POST.get('gender').lower()
+    date_of_birth = request.POST.get('date_of_birth')
+    if date_of_birth:
+        date_object = datetime.strptime(date_of_birth, '%d-%m-%Y')
+        formatted_dob = date_object.strftime('%Y-%m-%d')
+    email = request.POST.get('email')
+    password = request.POST.get('password')
+    User.objects.create_user(email, password, first_name,middle_name,last_name,gender, formatted_dob)
+    return email, password
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 def filter_applications(request, filter):
     """
     filter for applications
