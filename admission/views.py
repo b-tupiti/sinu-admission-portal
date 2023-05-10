@@ -13,9 +13,16 @@ from admission.utils import create_new_admission_application_for_user
     
 def create_new_admission(request):
     
+    context = {}
+    
+    if request.GET.get('course_code') is None:
+        return redirect('find-course')
+    
     course_code = request.GET.get('course_code')
     course = Course.objects.get(code=course_code)
+    context['course'] = course
     
+
     if request.method == 'POST':     
         
         email, password = create_applicant_account(request)
@@ -24,31 +31,27 @@ def create_new_admission(request):
         if user is not None:
             login(request, user)
             application = create_new_admission_application_for_user(user, course)
-            
             request.session['application_id'] = application.id
             return redirect('personal-details')
         else:
             messages.error(request,'cannot create new admission application')
 
-    context = {
-        'course': course,
-    }
-    
     return render(request, 'application/create-new-admission.html', context)
 
 
 
 @login_required(login_url='login')
 def personal_details(request):
-    """
-    Takes in two arguments. The authenticated applicant, and the application Id.
-    """
-    
-    # get the authenticated user from the request
-    # get the application id from the request, 
+
+
     application = Application.objects.get(id=request.session.get('application_id'))
-    # get the fields and values required for the personal-details page,
-    # populate personal details page
+ 
+    
+    if request.method == 'POST':
+        application.first_name = request.POST.get('first_name')
+        application.save()
+        return redirect('sponsor-details')
+   
     
     context = {
         'application': application
