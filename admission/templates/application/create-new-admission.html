@@ -41,179 +41,183 @@
         If you have previously applied to study with us, you will have login details and do not need to complete this form. Please log into your SINU Portal. <br> If you need help with your login details, please contact us.
         <br><br> Please enter your details below. Items marked with * are compulsory. 
     </p>
-    <div class="mt-3 mr-3 ml-3 p-3 mb-0" style="background:#fff;border:1px solid rgba(0, 0, 0,.2); border-top-left-radius:5px;border-top-right-radius:5px">
-        
-        <div class="columns">
-            <div class="column is-three-fifths">
-                
-                <div class="field is-horizontal  ">
-                    <div class="field-label is-normal">
-                      <label class="label">First name</label>
-                    </div>
-                    <div class="field-body">
-                      <div class="field">
-                        <div class="control">
-                          <input class="input" type="text" placeholder="">
-                        </div>
-                      </div>
-                    </div>
-                </div>
 
-                <div class="field is-horizontal  ">
-                    <div class="field-label is-normal">
-                      <label class="label">Middle name(s)</label>
-                    </div>
-                    <div class="field-body">
-                      <div class="field">
-                        <div class="control">
-                          <input class="input" type="text" placeholder="">
-                        </div>
-                      </div>
-                    </div>
-                </div>
+    <form  method="post">
 
-                <div class="field is-horizontal  ">
-                    <div class="field-label is-normal">
-                      <label class="label">Surname</label>
-                    </div>
-                    <div class="field-body">
-                      <div class="field">
-                        <div class="control">
-                          <input class="input" type="text" placeholder="">
-                        </div>
-                      </div>
-                    </div>
-                </div>
+      <input type="text" hidden name="course_code" value="{{course.code}}">
+      {% csrf_token %}
 
-                
-                <div class="field is-horizontal ">
-                    <div class="field-label is-normal">
-                        <label class="label">Gender</label>
-                    </div>
-                    <div class="field-body">
+      <div class="mt-3 mr-3 ml-3 p-3 mb-0" style="background:#fff;border:1px solid rgba(0, 0, 0,.2); border-top-left-radius:5px;border-top-right-radius:5px">
+          
+          <div class="columns">
+              <div class="column is-three-fifths">
+                  
+                  <div class="field is-horizontal  ">
+                      <div class="field-label is-normal">
+                        <label class="label">First name</label>
+                      </div>
+                      <div class="field-body">
                         <div class="field">
-                        <div class="control">
-                            <div class="select is-fullwidth">
-                            <select>
-                                <option selected>Please select</option>
-                                <option>Male</option>
-                                <option>Female</option>
-                            </select>
-                            </div>
+                          <div class="control">
+                            <input name="first_name" class="input" type="text" placeholder="" required>
+                          </div>
                         </div>
+                      </div>
+                  </div>
+
+                  <div class="field is-horizontal  ">
+                      <div class="field-label is-normal">
+                        <label class="label">Middle name(s)</label>
+                      </div>
+                      <div class="field-body">
+                        <div class="field">
+                          <div class="control">
+                            <input name="middle_name" class="input" type="text" placeholder="" >
+                          </div>
                         </div>
-                    </div>
-                </div>
-                 
-               
-                <div class="columns">
-                    <div class="column">
-                      <div class="field is-horizontal">
-                        <div class="field-label is-normal">
-                          <label class="label">Date of Birth</label>
+                      </div>
+                  </div>
+
+                  <div class="field is-horizontal  ">
+                      <div class="field-label is-normal">
+                        <label class="label">Surname</label>
+                      </div>
+                      <div class="field-body">
+                        <div class="field">
+                          <div class="control">
+                            <input name="last_name" class="input" type="text" placeholder="" required>
+                          </div>
                         </div>
-                        <div class="field-body">
+                      </div>
+                  </div>
+
+                  
+                  <div class="field is-horizontal ">
+                      <div class="field-label is-normal">
+                          <label class="label">Gender</label>
+                      </div>
+                      <div class="field-body">
                           <div class="field">
-                            <p class="control">
-                              <input id="datepicker" class="input" type="text" placeholder="YYYY-MM-DD">
-                            </p>
+                          <div class="control">
+                              <div class="select is-fullwidth">
+                              <select name="gender">
+                                  <option selected>Please select</option>
+                                  <option>Male</option>
+                                  <option>Female</option>
+                              </select>
+                              </div>
+                          </div>
+                          </div>
+                      </div>
+                  </div>
+                  
+                
+                  <div class="columns">
+                      <div class="column">
+                        <div class="field is-horizontal">
+                          <div class="field-label is-normal">
+                            <label class="label">Date of Birth</label>
+                          </div>
+                          <div class="field-body">
+                            <div class="field">
+                              <p class="control">
+                                <input id="datepicker" name="date_of_birth" class="input" type="text" placeholder="YYYY-MM-DD">
+                              </p>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                  
+                    
 
-            </div>
-        </div>
-       
+              </div>
+          </div>
         
-        <div style="background:#fff;border:1px solid rgba(0, 0, 0,.2)">
-            <div class=" p-3 " style="background: #f0f0f0;"> Login Details</div>
+          
+          <div style="background:#fff;border:1px solid rgba(0, 0, 0,.2)">
+              <div class=" p-3 " style="background: #f0f0f0;"> Login Details</div>
+              
+                
+          <div class="columns m-1">
+              <div class="column is-three-fifths">
+                  
+                  <div class="field is-horizontal  ">
+                      <div class="field-label is-normal">
+                        <label class="label">Email</label>
+                      </div>
+                      <div class="field-body">
+                        <div class="field">
+                          <div class="control">
+                            <input class="input" name="email" type="email" placeholder="">
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+
+                  <div class="field is-horizontal  ">
+                      <div class="field-label is-normal">
+                        <label class="label">Confirm Email</label>
+                      </div>
+                      <div class="field-body">
+                        <div class="field">
+                          <div class="control">
+                            <input class="input" name="confirm_email" type="email" placeholder="">
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+
+                  <div class="field is-horizontal  ">
+                      <div class="field-label is-normal">
+                        <label class="label">Password</label>
+                      </div>
+                      <div class="field-body">
+                        <div class="field">
+                          <div class="control">
+                            <input class="input" name="password" type="password" placeholder="">
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+
+                  <div class="field is-horizontal  ">
+                      <div class="field-label is-normal">
+                        <label class="label">Confirm Password</label>
+                      </div>
+                      <div class="field-body">
+                        <div class="field">
+                          <div class="control">
+                            <input class="input" name="confirm_password" type="password" placeholder="">
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+
+              </div>
+          </div>
+
+          </div>
+
+      </div>
+
+
+      <div class="has-background-light mb-3 mr-3 ml-3 mt-0 p-3 is-flex is-justify-content-center " style="border:1px solid rgba(0, 0, 0,.2);border-top:none">
+          <div class="field is-grouped ">
+
+              <p class="control">
+                  <button class="button">
+                    Cancel
+                  </button>
+                </p>
+              <p class="control">         
+                  <input type="submit" class="button is-link" value="Save and Continue">
+              </p>
             
               
-        <div class="columns m-1">
-            <div class="column is-three-fifths">
-                
-                <div class="field is-horizontal  ">
-                    <div class="field-label is-normal">
-                      <label class="label">Email</label>
-                    </div>
-                    <div class="field-body">
-                      <div class="field">
-                        <div class="control">
-                          <input class="input" type="email" placeholder="">
-                        </div>
-                      </div>
-                    </div>
-                </div>
-
-                <div class="field is-horizontal  ">
-                    <div class="field-label is-normal">
-                      <label class="label">Confirm Email</label>
-                    </div>
-                    <div class="field-body">
-                      <div class="field">
-                        <div class="control">
-                          <input class="input" type="email" placeholder="">
-                        </div>
-                      </div>
-                    </div>
-                </div>
-
-                <div class="field is-horizontal  ">
-                    <div class="field-label is-normal">
-                      <label class="label">Password</label>
-                    </div>
-                    <div class="field-body">
-                      <div class="field">
-                        <div class="control">
-                          <input class="input" type="password" placeholder="">
-                        </div>
-                      </div>
-                    </div>
-                </div>
-
-                <div class="field is-horizontal  ">
-                    <div class="field-label is-normal">
-                      <label class="label">Confirm Password</label>
-                    </div>
-                    <div class="field-body">
-                      <div class="field">
-                        <div class="control">
-                          <input class="input" type="password" placeholder="">
-                        </div>
-                      </div>
-                    </div>
-                </div>
-
             </div>
-        </div>
+      </div>
 
-        </div>
-
-    </div>
-
-
-    <div class="has-background-light mb-3 mr-3 ml-3 mt-0 p-3 is-flex is-justify-content-center " style="border:1px solid rgba(0, 0, 0,.2);border-top:none">
-        <div class="field is-grouped ">
-
-            <p class="control">
-                <button class="button">
-                  Cancel
-                </button>
-              </p>
-            <p class="control">
-              <a href="{% url 'personal-details' %}" class="button is-link">
-                Save and Continue
-              </a>
-            </p>
-           
-            
-          </div>
-    </div>
-
-
+  </form>
 </div>
 
 <!-- Include Flatpickr JS -->
