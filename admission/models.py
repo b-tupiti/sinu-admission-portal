@@ -83,8 +83,8 @@ class Application(models.Model):
     
     gender = models.CharField(
         verbose_name='Gender',
-        max_length=1,
-        choices=(('m', 'Male'), ('f', 'Female')),
+        max_length=6,
+        choices=(('male', 'Male'), ('female', 'Female')),
         blank=True,
         null=True,
     )
