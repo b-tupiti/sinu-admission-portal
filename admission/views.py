@@ -8,7 +8,7 @@ from users.models.user import User
 from django.contrib.auth import authenticate,login
 from django.contrib import messages
 from users.utils import create_applicant_account
-from admission.utils import create_new_admission_application_for_user
+from admission.utils import create_new_admission_application_for_user, save_personal_details
 
     
 def create_new_admission(request):
@@ -43,16 +43,17 @@ def create_new_admission(request):
 @login_required(login_url='login')
 def personal_details(request):
 
-
-    application = Application.objects.get(id=request.session.get('application_id'))
- 
+    id = request.session.get('application_id')
+    application = Application.objects.get(id=id)
     
     if request.method == 'POST':
-        application.first_name = request.POST.get('first_name')
-        application.save()
-        return redirect('sponsor-details')
+        save_personal_details(request, application)
+        
+        if 'save_and_exit' in request.POST:
+            return redirect('application-saved')
+        else:
+            return redirect('sponsor-details')
    
-    
     context = {
         'application': application
     }
