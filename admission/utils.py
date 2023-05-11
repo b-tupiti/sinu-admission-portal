@@ -13,6 +13,18 @@ def create_new_admission_application_for_user(user, course):
             )
     return application
 
+def save_personal_details(request, application):
+    application.first_name = request.POST.get('first_name')
+    application.middle_name = request.POST.get('middle_name')
+    application.last_name = request.POST.get('last_name')
+    application.gender = request.POST.get('gender')
+    application.date_of_birth = request.POST.get('date_of_birth')
+    application.save()
+
+
+
+
+
 
 
 
