@@ -20,6 +20,14 @@ def save_personal_details(request, application):
     application.gender = request.POST.get('gender')
     application.date_of_birth = request.POST.get('date_of_birth')
     application.save()
+    
+def save_sponsor_details(request, application):
+    application.sponsor_type = request.POST.get('sponsor_type')
+    application.sponsor_name = request.POST.get('sponsor_name')
+    application.sponsor_email = request.POST.get('sponsor_email')
+    application.sponsor_phone_number = request.POST.get('sponsor_phone_number')
+    application.sponsor_address = request.POST.get('sponsor_address')
+    application.save()
 
 
 
