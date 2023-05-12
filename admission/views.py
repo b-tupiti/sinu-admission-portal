@@ -1,50 +1,52 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.forms import formset_factory
-from .models import Application, Document, ApplicationToken
+from .models import Application, Document, ApplicationToken, ApplicationState
 from courses.models.course import Course
 from django.shortcuts import redirect
+from django.urls import reverse
 from users.models.user import User
 from django.contrib.auth import authenticate,login
 from django.contrib import messages
 from users.utils import create_applicant_account
-from admission.utils import create_new_admission_application_for_user, save_personal_details, save_sponsor_details
+from admission.utils import create_new_admission_application_for_user, save_personal_details, save_sponsor_details, get_course_from_code
 
     
 def create_new_admission(request):
     
-    context = {}
+    if request.method == 'GET':
+        
+        if request.GET.get('course_code') is None:
+            return redirect('find-course')
+        
+        course = get_course_from_code(request)
+        context = {'course':course}
+        
+        return render(request, 'application/create-new-admission.html', context)
     
-    if request.GET.get('course_code') is None:
-        return redirect('find-course')
     
-    course_code = request.GET.get('course_code')
-    course = Course.objects.get(code=course_code)
-    context['course'] = course
-    
-
-    if request.method == 'POST':     
+    elif request.method == 'POST':     
         
         email, password = create_applicant_account(request)
         user = authenticate(request, email=email, password=password)
         
-        if user is not None:
-            login(request, user)
-            application = create_new_admission_application_for_user(user, course)
-            request.session['application_id'] = application.id
-            return redirect('personal-details')
-        else:
-            messages.error(request,'cannot create new admission application')
+        course_code = request.POST.get('course_code')
+        course = Course.objects.get(code=course_code)
+        
+        login(request, user)
+        application = create_new_admission_application_for_user(user, course)
+        
+        return redirect(reverse('personal-details',args=[application.id]))
+  
 
-    return render(request, 'application/create-new-admission.html', context)
+    
 
 
 
 @login_required(login_url='login')
-def personal_details(request):
+def personal_details(request,pk):
 
-    id = request.session.get('application_id')
-    application = Application.objects.get(id=id)
+    application = Application.objects.get(id=pk)
     
     if request.method == 'POST':
         save_personal_details(request, application)
@@ -52,7 +54,7 @@ def personal_details(request):
         if 'save_and_exit' in request.POST:
             return redirect('application-saved')
         else:
-            return redirect('sponsor-details')
+            return redirect(reverse('sponsor-details',args=[application.id]))
    
     context = {
         'application': application
@@ -64,10 +66,9 @@ def personal_details(request):
 
 
 
-def sponsor_details(request):
+def sponsor_details(request, pk):
     
-    id = request.session.get('application_id')
-    application = Application.objects.get(id=id)
+    application = Application.objects.get(id=pk)
     
     if request.method == 'POST':
         save_sponsor_details(request, application)
@@ -75,7 +76,7 @@ def sponsor_details(request):
         if 'save_and_exit' in request.POST:
             return redirect('application-saved')
         else:
-            return redirect('education-background')
+            return redirect(reverse('education-background',args=[application.id]))
         
     context = {
         'application': application
@@ -84,10 +85,43 @@ def sponsor_details(request):
     return render(request, 'application/sponsor-details.html', context)
 
 
+def education_background(request, pk):
+    application = Application.objects.get(id=pk)
+    
+    if request.method == 'POST':
+        if 'save_and_exit' in request.POST:
+            return redirect('application-saved')
+        else:
+            return redirect(reverse('employment-history',args=[application.id]))
+    
+    context = {'application':application}
+    return render(request, 'application/education-background.html',context)
+
+
+def employment_history(request, pk):
+    application = Application.objects.get(id=pk)
+    if request.method == 'POST':
+        if 'save_and_exit' in request.POST:
+            return redirect('application-saved')
+        else:
+            return redirect(reverse('declaration',args=[application.id]))
+    
+    context = {'application':application}
+    return render(request, 'application/employment-history.html', context)
 
 
 
-
+def declaration(request, pk):
+    application = Application.objects.get(id=pk)
+    if request.method == 'POST':
+        if 'save_and_exit' in request.POST:
+            return redirect('application-saved')
+        else:
+            application.application_state = ApplicationState.SUBMITTED
+            application.is_declared = True
+            application.save()
+            return redirect('dashboard')
+    return render(request, 'application/declaration.html')
 
 
 def application_saved(request):
@@ -97,14 +131,11 @@ def application_saved(request):
 
 
 
-def education_background(request):
-    return render(request, 'application/education-background.html')
 
-def employment_history(request):
-    return render(request, 'application/employment-history.html')
 
-def declaration(request):
-    return render(request, 'application/declaration.html')
+
+
+
 
 def my_admissions(request):
     return render(request, 'application/my-admissions.html')

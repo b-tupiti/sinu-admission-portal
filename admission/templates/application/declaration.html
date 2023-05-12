@@ -151,52 +151,53 @@
    
     <div class="p-3  has-text-white mb-4" style="background:#0e5165">Declaration </div>
     
-    <div class="mt-3 mr-3 ml-3 p-3 mb-0 " style="background:#fff;border:1px solid rgba(0, 0, 0,.2); border-top-left-radius:5px;border-top-right-radius:5px">
-        
-      <section>
 
-        <div class="p-3 " style="background:#ffffff;">
+    <form  method="post">
+        {% csrf_token %}
+
+        <div class="mt-3 mr-3 ml-3 p-3 mb-0 " style="background:#fff;border:1px solid rgba(0, 0, 0,.2); border-top-left-radius:5px;border-top-right-radius:5px">
+            
+        <section>
+
+            <div class="p-3 " style="background:#ffffff;">
 
 
-          <label class="checkbox is-flex">
-            <input type="checkbox">
-            <div class="ml-5" >
-                I Declare that the information given in this application is complete and accurate to the best of my knowledge. <br> 
-                I acknowledge that the University reserves the right to deny my admission or cancel my registration if the above information
-                is incomplete and/or false.
+            <label class="checkbox is-flex">
+                <input type="checkbox">
+                <div class="ml-5" >
+                    I Declare that the information given in this application is complete and accurate to the best of my knowledge. <br> 
+                    I acknowledge that the University reserves the right to deny my admission or cancel my registration if the above information
+                    is incomplete and/or false.
+                </div>
+            </label>
+
             </div>
-          </label>
+            
+
+
+        </section>
+
+
+
 
         </div>
-          
 
 
-      </section>
+        <div class="has-background-light mb-3 mr-3 ml-3 mt-0 p-3 is-flex is-justify-content-center " style="border:1px solid rgba(0, 0, 0,.2);border-top:none;border-top-left-radius:5px;">
+            <div class="field is-grouped ">
 
-
-
-
-    </div>
-
-
-    <div class="has-background-light mb-3 mr-3 ml-3 mt-0 p-3 is-flex is-justify-content-center " style="border:1px solid rgba(0, 0, 0,.2);border-top:none;border-top-left-radius:5px;">
-        <div class="field is-grouped ">
-
-            <p class="control">
-                <button class="button">
-                  Save and Exit
-                </button>
-              </p>
-            <p class="control">
-              <button class="button is-link">
-                Submit Application
-              </button>
-            </p>
-           
+                <p class="control">
+                    <input type="submit" class="button" name="save_and_exit" value="Save and Exit">
+                </p>
+                <p class="control">
+                    <input type="submit" class="button is-link" name="submit_application" value="Submit Application">
+                </p>
             
-          </div>
-    </div>
+                
+            </div>
+        </div>
 
+    </form>
 
 </div>
 
