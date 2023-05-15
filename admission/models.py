@@ -294,7 +294,7 @@ class Application(models.Model):
         return str(self.id)
     
     def get_absolute_url(self):
-        return reverse("application-detail", kwargs={"pk": self.pk})
+        return reverse("personal-details", kwargs={"pk": self.pk})
  
  
     
