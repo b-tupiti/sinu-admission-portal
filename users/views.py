@@ -4,15 +4,32 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from admission.utils import get_totals
-from admission.models import Application, Document
+from admission.models import Application, Document, ApplicationState
 from .utils import filter_applications, get_group
 from django.db.models import Q
 from django.urls import reverse      
 
-def LoginUser(request):
+### 
+
+from django.contrib.auth.decorators import user_passes_test
+from django.contrib.auth.models import Group
+
+def group_required(group_name):
+    """Check if a user is a member of the specified group"""
     
-    if request.user.is_authenticated:
-        return redirect('dashboard')
+    def check_group(user):
+        try:
+            group = Group.objects.get(name=group_name)
+        except Group.DoesNotExist:
+            return False
+        return group in user.groups.all()
+    
+    return user_passes_test(check_group)
+
+###
+
+def LoginUser(request):
+    """Logs in a user"""
     
     if request.method == 'POST':
         
@@ -28,8 +45,7 @@ def LoginUser(request):
 
         if user is not None:
             login(request, user)
-            return redirect(request.GET['next'] if 'next' in request.GET else 'dashboard')
-
+            return redirect('dashboard')
         else:
             messages.error(request,'your email or password is invalid')
     
@@ -44,9 +60,23 @@ def LogoutUser(request):
 
 
 
-
-@login_required(login_url="login")
+@login_required
 def Dashboard(request):
+    if request.user.is_staff:
+        return staff_dashboard(request)
+    else:
+        return student_dashboard(request)
+
+
+def student_dashboard(request):
+    applications = Application.objects.filter(applicant=request.user, application_state=ApplicationState.DRAFT)
+    context = {'applications':applications}
+    return render(request, 'users/dashboard/student_dashboard.html',context)
+
+
+
+
+def staff_dashboard(request):
     page = 'dashboard'
     group = get_group(request)
 
@@ -55,10 +85,7 @@ def Dashboard(request):
         'group': group,
         'totals': get_totals(),
     }
-    return render(request, 'users/dashboard/dashboard.html',context)
-
-
-
+    return render(request, 'users/dashboard/staff_dashboard.html',context)
 
 
 
