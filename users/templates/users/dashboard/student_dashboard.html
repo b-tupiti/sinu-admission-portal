@@ -1,0 +1,57 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+
+
+    
+
+
+
+
+      
+
+      
+        <div style="background:#f7f7f7;" >
+             
+            <div class="container">
+
+                <div class="is-flex is-justify-content-space-between is-align-items-center " style="margin-bottom:1.5rem;width:80%; background:white; padding:1rem; border-radius:5px">
+                    <h2 class="is-size-4">Admissions</h2>
+                    <button class="button is-size-6 has-text-weight-semibold" style="background:#6da11f;color:#ffffff;border-radius:5px;border:none">Help</button>
+                </div>
+
+                <div style="border:1px solid rgb(207, 207, 207)">
+                    <div style="background:#004b8d;padding:1em"><h2 class="has-text-white">My applications</h2></div>
+                    <div style="background:#ffffff;padding:1em">
+                        <div style="background:#d6e3eb;padding:1em">
+                            
+                            {% if applications %}
+                                {% for application in applications %}
+                                <div class="is-flex is-justify-content-space-between">
+                                    <div>
+                                        <h1 >{{application.selected_course.title}}</h1>
+                                    </div>
+                                    <a href="{{application.get_absolute_url}} " class="button">
+                                        Click to expand/collapse
+                                    </a>
+                                </div>
+                                {% endfor %}
+                            {% else %}
+                            <span class="has-text-dark">You have no active applications</span>
+                            {% endif %}
+
+                        </div>
+                        
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+       
+      
+   
+      
+
+
+{% endblock %}
