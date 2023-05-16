@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.forms import formset_factory
 from .models import Application, Document, ApplicationToken, ApplicationState
@@ -10,7 +10,7 @@ from django.contrib.auth import authenticate,login
 from django.contrib import messages
 from users.utils import create_applicant_account
 from admission.utils import create_new_admission_application_for_user, save_personal_details, save_sponsor_details, get_course_from_code
-
+from django.http import Http404
     
 def create_new_admission(request):
     
@@ -45,9 +45,12 @@ def create_new_admission(request):
 
 @login_required(login_url='login')
 def personal_details(request,pk):
-
-    application = Application.objects.get(id=pk)
     
+    try:
+        application = get_object_or_404(Application, id=pk)
+    except Http404:
+        return render(request,'admission/application_404.html')
+        
     if request.method == 'POST':
         save_personal_details(request, application)
         
@@ -68,7 +71,10 @@ def personal_details(request,pk):
 
 def sponsor_details(request, pk):
     
-    application = Application.objects.get(id=pk)
+    try:
+        application = get_object_or_404(Application, id=pk)
+    except Http404:
+        return render(request,'admission/application_404.html')
     
     if request.method == 'POST':
         save_sponsor_details(request, application)
@@ -86,7 +92,11 @@ def sponsor_details(request, pk):
 
 
 def education_background(request, pk):
-    application = Application.objects.get(id=pk)
+    
+    try:
+        application = get_object_or_404(Application, id=pk)
+    except Http404:
+        return render(request,'admission/application_404.html')
     
     if request.method == 'POST':
         if 'save_and_exit' in request.POST:
@@ -99,7 +109,12 @@ def education_background(request, pk):
 
 
 def employment_history(request, pk):
-    application = Application.objects.get(id=pk)
+    
+    try:
+        application = get_object_or_404(Application, id=pk)
+    except Http404:
+        return render(request,'admission/application_404.html')
+    
     if request.method == 'POST':
         if 'save_and_exit' in request.POST:
             return redirect('application-saved')
@@ -112,7 +127,12 @@ def employment_history(request, pk):
 
 
 def declaration(request, pk):
-    application = Application.objects.get(id=pk)
+    
+    try:
+        application = get_object_or_404(Application, id=pk)
+    except Http404:
+        return render(request,'admission/application_404.html')
+    
     if request.method == 'POST':
         if 'save_and_exit' in request.POST:
             return redirect('application-saved')
