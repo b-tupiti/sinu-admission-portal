@@ -5,7 +5,7 @@ from . import views
 
 urlpatterns = [
     # path('', views.submission_form, name="submission-form"), # old 
-    path('upload-my-deposit-slip/', views.upload_deposit_slip, name='upload-my-deposit-slip'), # old
+    # path('upload-my-deposit-slip/', views.upload_deposit_slip, name='upload-my-deposit-slip'), # old
     path('new-applicant/', views.create_new_admission, name="create-new-admission"),
     path('application/saved/', views.application_saved, name="application-saved"),
     path('application/<str:pk>/personal-details/', views.personal_details, name="personal-details"),
