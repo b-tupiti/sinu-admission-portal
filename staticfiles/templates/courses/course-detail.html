@@ -1,0 +1,184 @@
+{% extends 'base_course_finder.html' %}
+
+{% block content %}
+
+<div class="p-4" style="background:rgba(0, 0, 0, 0.7)" >
+  
+  <div class="container" >
+    <h2 class="is-size-1 has-text-white " style="margin:1em auto;margin-bottom: .5em;">{{course.title}}  </h2>
+    <a href="{% url 'create-new-admission' %}?course_code={{course.code}}" class="button is-dark has-text-weight-bold" style="margin:1em auto;margin-bottom:1.5em">Apply</a>
+  </div>
+
+  
+  
+  
+
+</div>
+
+
+<div class="  " style="background:#033f6c">
+  <div class="container">
+    <div class=" pt-5 pb-5"  style="border-radius:5px;">
+          <ul class="is-flex">
+            <li class="mr-5"><a class="has-text-white has-text-weight-bold" >Admission Requirements</a></li>
+            <li><a class="has-text-white has-text-weight-bold">Program Structure</a></li>
+          </ul>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="pt-5" style="background:#fff;min-height:200px;min-height:68vh">
+  <div class="container">
+
+    <section class="border is-bordered " style="margin-bottom:1em;border:1px solid rgb(234, 234, 234);background:#f5fbff;border-radius:5px" >
+      <div style="background:#0090e9;height:10px"></div>
+      <div class="columns " style="padding:2em">
+        <div class="column border is-bordered">
+          <h2 class="is-size-5 has-text-weight-bold" style="color:#004b8d">Course Code</h2>
+          <p class="mt-2">{{course.code}}</p>
+        </div>
+        <div class="column border is-bordered">
+          <h2 class="is-size-5 has-text-weight-bold" style="color:#004b8d">Level of Study</h2>
+          <p class="mt-2">
+            {%if course.qualification_level %}
+            {{course.qualification_level}}
+            {% else %}
+            <span>Unspecified</span>
+            {% endif %}
+           
+          </p>
+        </div>
+        <div class="column border is-bordered">
+          <h2 class="is-size-5 has-text-weight-bold" style="color:#004b8d">Time to Complete</h2>
+          <p class="mt-2">
+            {{course.duration_length}} {{course.duration_type}}
+          </p>
+        </div>
+      </div>
+      <div class="columns" style="padding:2em;padding-top:0">
+        <div class="column">
+          <h2  class="is-size-5 has-text-weight-bold" >
+            <span style="color:#004b8d">Campus <i class="ml-1 fa-solid fa-location-dot"></i></span>
+            <span class="has-text-weight-normal has-text-dark is-size-6 ml-4" >{{course.campus}}</span>
+          </h2>
+        </div>
+
+      </div>
+
+      <div style="background:#ebf6ff;">
+        <p style="padding:1em">
+          <span class="has-text-dark mr-3">Not what you're looking for?</span>
+          <a href="{% url 'find-course' %}" style="text-decoration:underline">Find a different qualification</a>
+        </p>
+      </div>
+    </section>
+
+    <section class="pt-4 pb-4 mb-5" style="margin-bottom:4em;background:#ffffff;border-radius:5px" >
+      
+      <h1 class="pb-4 pl-4  pr-4  is-size-3 has-textweight-bold" style="color:#004b8d">Core Units</h1>
+
+      <div class="table-container ">
+        <table class="table is-striped  is-fullwidth ">
+          
+          <thead style="background: #004b8d;">
+            <tr >
+              <th class=" has-text-white p-4" >Code</th>      
+              <th class="has-text-white p-4" >Unit</th>
+              <th class="has-text-white p-4" >Credits</th>
+              <th class="has-text-white p-4" >Study Period Available</th>
+              <th class="has-text-white p-4" >Prerequisites</th>
+            </tr>
+          </thead>
+
+          {% for unit in core_units %}
+          <tr>
+            <td>{{unit.unit.code}}</td>
+            <td>{{unit.unit.title}}</td>
+            <td>{{unit.credit_points}}</td>
+            <td>
+             
+              {% for period in unit.study_period.all %}
+                <span>{{period}} </span>
+              {% endfor %}
+            </td>
+
+            <td>
+
+              {% for pgroup in unit.prerequisite_groups.all %}
+              {% for prereq in pgroup.grouped_prerequisites.all %}
+                {{prereq}} or
+              {%endfor%}
+              AND
+              <br/>
+            {% endfor %} 
+
+            </td>
+
+          </tr>
+          {% endfor %}
+
+       
+
+        </table>
+      </div>
+    </section>
+
+
+    
+    <section class="pt-4 pb-4 mb-5" style="margin-bottom:4em;background:#ffffff;border-radius:5px" >
+      
+      <h1 class="pb-4 pl-4  pr-4  is-size-3 has-textweight-bold" style="color:#004b8d">Electives</h1>
+
+      <div class="table-container ">
+        <table class="table is-striped  is-fullwidth ">
+          
+          <thead style="background: #004b8d;">
+            <tr >
+              <th class=" has-text-white p-4" >Code</th>      
+              <th class="has-text-white p-4" >Unit</th>
+              <th class="has-text-white p-4" >Credits</th>
+              <th class="has-text-white p-4" >Study Period Available</th>
+              <th class="has-text-white p-4" >Prerequisites</th>
+            </tr>
+          </thead>
+
+          {% for unit in electives %}
+          <tr>
+            <td>{{unit.unit.code}}</td>
+            <td>{{unit.unit.title}}</td>
+            <td>{{unit.credit_points}}</td>
+            <td>
+             
+              {% for period in unit.study_period.all %}
+                <span>{{period}} </span>
+              {% endfor %}
+            </td>
+
+            <td>
+
+              {% for pgroup in unit.prerequisite_groups.all %}
+              {% for prereq in pgroup.grouped_prerequisites.all %}
+                {{prereq}} or
+              {%endfor%}
+              AND
+              <br/>
+            {% endfor %} 
+
+            </td>
+
+          </tr>
+          {% endfor %}
+
+       
+
+        </table>
+      </div>
+    </section>
+   
+
+  </div>
+</div>
+
+{% endblock %}
