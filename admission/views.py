@@ -11,7 +11,7 @@ from django.contrib import messages
 from users.utils import create_applicant_account
 from admission.utils import create_new_admission_application_for_user, save_personal_details, save_sponsor_details, get_course_from_code
 from django.http import Http404
-    
+
 def create_new_admission(request):
     
     if request.method == 'GET':
@@ -50,7 +50,13 @@ def personal_details(request,pk):
         application = get_object_or_404(Application, id=pk)
     except Http404:
         return render(request,'admission/application_404.html')
-        
+    
+    if not application.owner == request.user:
+        return render(request,'admission/application_403.html')
+    
+    if application.application_state == ApplicationState.SUBMITTED:
+        return redirect('dashboard')
+    
     if request.method == 'POST':
         save_personal_details(request, application)
         
