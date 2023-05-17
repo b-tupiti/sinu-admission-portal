@@ -281,6 +281,12 @@ class Application(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     last_saved = models.DateTimeField(auto_now=True)
     
+    
+    @property
+    def owner(self):
+        return self.applicant
+        
+    
     @property
     def full_name(self):
         if self.middle_name:
