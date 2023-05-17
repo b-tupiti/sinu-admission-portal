@@ -69,7 +69,7 @@ def Dashboard(request):
 
 
 def student_dashboard(request):
-    applications = Application.objects.filter(applicant=request.user, application_state=ApplicationState.DRAFT)
+    applications = Application.objects.filter(applicant=request.user)
     context = {'applications':applications}
     return render(request, 'users/dashboard/student_dashboard.html',context)
 
