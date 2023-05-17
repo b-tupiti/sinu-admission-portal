@@ -1,5 +1,6 @@
 {% extends 'base_generic.html' %}
 
+{% load static %}
 {% block content %}
 
 
@@ -22,25 +23,78 @@
 
                 <div style="border:1px solid rgb(207, 207, 207)">
                     <div style="background:#004b8d;padding:1em"><h2 class="has-text-white">My applications</h2></div>
-                    <div style="background:#ffffff;padding:1em">
-                        <div style="background:#d6e3eb;padding:1em">
+                    <div style="background:#ffffff;">
+                        
                             
-                            {% if applications %}
-                                {% for application in applications %}
-                                <div class="is-flex is-justify-content-space-between">
+                        {% if applications %}
+                            
+                            {% for application in applications %}
+
+                            <section class="m-5">
+
+                            
+                            <div style="background:#d6e3eb;padding:1em">
+                                <div class="is-flex is-justify-content-space-between ">
                                     <div>
                                         <h1 >{{application.selected_course.title}}</h1>
                                     </div>
-                                    <a href="{{application.get_absolute_url}} " class="button">
-                                        Click to expand/collapse
-                                    </a>
+                                    <button id="app-toggle-{{application.id}}" onclick="toggle_expansion(id)" class="button">
+                                        <span class="mr-2 has-text-dark">Click to expand/collapse</span> 
+                                        <i class=" fa-solid fa-plus"></i>
+                                    </button>
                                 </div>
-                                {% endfor %}
-                            {% else %}
+                            </div>
+
+                            <div class="is-hidden"  style="background:#ffffff;padding:1em;border:1px solid gray">
+                                <div class=" ">
+                                    
+
+                                    <table class="table is-fullwidth">
+                                        <thead>
+                                          <tr>
+                                            <th>Year</th>
+                                            <th>Location</th>
+                                            <th>Period</th>
+                                            <th>Application Status</th>
+                                            <th></th>
+                                          </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <tr>
+                                           
+                                            <td>2024</td>
+                                            <td>{{application.campus}}</td>
+                                            <td>Semester 1</td>
+                                            
+                                            <td>{{application.application_state}}</td>
+                                            <td>
+                                                {% if application.application_state == 'draft' %}
+                                                <div class="is-flex is-justify-content-center ">
+                                                    <a href="{{application.get_absolute_url}}" class="button is-link mr-2">Go Back to Application</a>
+                                                    <button class="button is-link">Cancel Application</button>
+                                                </div>
+                                                {%endif%}
+                                            </td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+
+
+                                </div>
+                            </div>
+
+                            </section>
+
+                            {% endfor %}
+
+                        {% else %}
+
                             <span class="has-text-dark">You have no active applications</span>
+
                             {% endif %}
 
-                        </div>
+                        
                         
                     </div>
                 </div>
@@ -51,7 +105,6 @@
        
       
    
-      
-
+      <script src="{% static 'users/js/toggle-expansion.js' %}"></script>
 
 {% endblock %}
