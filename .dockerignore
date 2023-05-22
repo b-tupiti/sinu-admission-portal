@@ -1,0 +1,6 @@
+staticfiles/
+*static/
+env/
+dev_requirements/
+temp/
+media/
