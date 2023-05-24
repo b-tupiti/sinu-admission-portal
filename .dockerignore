@@ -4,3 +4,7 @@ env/
 dev_requirements/
 temp/
 media/
+
+.dockerignore
+Dockerfile
+docker-compose.yml
