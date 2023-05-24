@@ -8,8 +8,9 @@ from dj_static import Cling
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Retrieve environment variables from this env object
+env_file_path = BASE_DIR / '.env'
 env = environ.Env()
-environ.Env.read_env()
+env.read_env(env_file_path)
 
 
 SECRET_KEY = env('SECRET_KEY')
