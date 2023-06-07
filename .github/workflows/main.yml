@@ -9,14 +9,15 @@ jobs:
     runs-on: ubuntu-latest
   
     steps:
-      - name: SSH into Host Server
+      - name: SSH into Host Server, Pull, Build, and Deploy
         uses: appleboy/ssh-action@master
         with:
           host: 202.1.168.144
           username: oeadmin
-          password: kc03@4dm1n
+          password: kc03@4dm1n # replace password with line below later
+          #key: ${{secrets.PRIVATE_KEY}}
           port: 2220
-          scripts: |
+          script: |
             cd /app
             git pull origin main
             docker-compose build
