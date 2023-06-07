@@ -9,10 +9,19 @@ jobs:
     runs-on: ubuntu-latest
   
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
-    
-      - name: Build and Deploy
-        run: |
-          docker-compose up -d
+      - name: SSH into Host Server
+        uses: appleboy/ssh-action@master
+        with:
+          host: 202.1.168.144
+          username: oeadmin
+          password: kc03@4dm1n
+          port: 2220
+          scripts: |
+            cd /app
+            git pull origin main
+            docker-compose build
+            docker-compose up -d
+
+
+
 
