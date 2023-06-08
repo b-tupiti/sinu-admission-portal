@@ -41,6 +41,15 @@
       {% endblock %} 
 
 
+      {% if messages %}
+        {% for message in messages %}
+        <div class=" container notification is-danger is-light">
+          
+          {{message}}
+        </div>
+        {% endfor %}
+      {% endif %}
+
       {% include 'footer.html' %}
 
     </div>
