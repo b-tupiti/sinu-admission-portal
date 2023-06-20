@@ -220,7 +220,7 @@
                           <div class="field-body">
                             <div class="field">
                               <p class="control">
-                                <input id="datepicker" name="date_of_birth" class="input" type="text" placeholder="YYYY-MM-DD" value="{{application.date_of_birth}}">
+                                <input id="datepicker" name="date_of_birth" class="input" type="text" placeholder="YYYY-MM-DD" value="{{application.date_of_birth|date:"d-m-Y"}}">
                               </p>
                             </div>
                           </div>
