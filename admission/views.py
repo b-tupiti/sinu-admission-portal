@@ -74,13 +74,16 @@ def personal_details(request,pk):
 
 
 
-
+@login_required(login_url='login')
 def sponsor_details(request, pk):
     
     try:
         application = get_object_or_404(Application, id=pk)
     except Http404:
         return render(request,'admission/application_404.html')
+    
+    if not application.owner == request.user:
+        return render(request,'admission/application_403.html')
     
     if request.method == 'POST':
         save_sponsor_details(request, application)
@@ -96,13 +99,16 @@ def sponsor_details(request, pk):
         
     return render(request, 'application/sponsor-details.html', context)
 
-
+@login_required(login_url='login')
 def education_background(request, pk):
     
     try:
         application = get_object_or_404(Application, id=pk)
     except Http404:
         return render(request,'admission/application_404.html')
+    
+    if not application.owner == request.user:
+        return render(request,'admission/application_403.html')
     
     if request.method == 'POST':
         if 'save_and_exit' in request.POST:
@@ -114,12 +120,17 @@ def education_background(request, pk):
     return render(request, 'application/education-background.html',context)
 
 
+
+@login_required(login_url='login')
 def employment_history(request, pk):
     
     try:
         application = get_object_or_404(Application, id=pk)
     except Http404:
         return render(request,'admission/application_404.html')
+    
+    if not application.owner == request.user:
+        return render(request,'admission/application_403.html')
     
     if request.method == 'POST':
         if 'save_and_exit' in request.POST:
@@ -132,12 +143,17 @@ def employment_history(request, pk):
 
 
 
+
+@login_required(login_url='login')
 def declaration(request, pk):
     
     try:
         application = get_object_or_404(Application, id=pk)
     except Http404:
         return render(request,'admission/application_404.html')
+    
+    if not application.owner == request.user:
+        return render(request,'admission/application_403.html')
     
     if request.method == 'POST':
         if 'save_and_exit' in request.POST:
@@ -150,6 +166,8 @@ def declaration(request, pk):
     return render(request, 'application/declaration.html')
 
 
+
+@login_required(login_url='login')
 def application_saved(request):
     return render(request, 'application/application-saved.html')
 
