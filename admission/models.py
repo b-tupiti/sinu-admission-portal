@@ -12,7 +12,7 @@ class ApplicationState(models.TextChoices):
 class CurrentSection(models.TextChoices):
     PERSONAL_DETAILS = "personal_details", "Personal Details"
     SPONSOR_DETAILS = "sponsor_details", "Sponsor Details"
-    EDUCATIONAL_BACKGROUND = "educational_background", "Educational Details"
+    EDUCATION_BACKGROUND = "education_background", "Education Background"
     EMPLOYMENT_HISTORY = "employment_history", "Employment History"
     DECLARATION = "declaration", "Declaration"
     
@@ -319,8 +319,8 @@ class Application(models.Model):
             return reverse("personal-details", kwargs={"pk": self.pk})
         elif self.current_section == 'sponsor_details':
             return reverse('sponsor-details',kwargs={'pk' : self.pk})
-        elif self.current_section == 'educational_background':
-            return reverse('educational-background',kwargs={'pk' : self.pk})
+        elif self.current_section == 'education_background':
+            return reverse('education-background',kwargs={'pk' : self.pk})
         elif self.current_section == 'employment_history':
             return reverse('employment-history',kwargs={'pk' : self.pk})
         elif self.current_section == 'declaration':
