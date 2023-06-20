@@ -1,5 +1,6 @@
 from .models import ApplicationState, Application
 from courses.models.course import Course
+from utils.convert_date import convert_date_format
 
 
 def get_course_from_code(request):
@@ -22,12 +23,13 @@ def create_new_admission_application_for_user(user, course):
 
 
 
+
 def save_personal_details(request, application):
     application.first_name = request.POST.get('first_name')
     application.middle_name = request.POST.get('middle_name')
     application.last_name = request.POST.get('last_name')
     application.gender = request.POST.get('gender')
-    application.date_of_birth = request.POST.get('date_of_birth')
+    application.date_of_birth = convert_date_format(request.POST.get('date_of_birth'))
     application.save()
     
 def save_sponsor_details(request, application):
