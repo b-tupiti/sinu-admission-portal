@@ -315,7 +315,16 @@ class Application(models.Model):
         return str(self.id)
     
     def get_absolute_url(self):
-        return reverse("personal-details", kwargs={"pk": self.pk})
+        if self.current_section == 'personal_details':
+            return reverse("personal-details", kwargs={"pk": self.pk})
+        elif self.current_section == 'sponsor_details':
+            return reverse('sponsor-details',kwargs={'pk' : self.pk})
+        elif self.current_section == 'educational_background':
+            return reverse('educational-background',kwargs={'pk' : self.pk})
+        elif self.current_section == 'employment_history':
+            return reverse('employment-history',kwargs={'pk' : self.pk})
+        elif self.current_section == 'declaration':
+            return reverse('declaration',kwargs={'pk' : self.pk})
  
  
     
