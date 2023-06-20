@@ -3,23 +3,33 @@ from django.db.models import Q
 from django.contrib.auth.models import Group
 
 from .models.user import User
-from datetime import datetime
+from utils.convert_date import convert_date_format
 
 def create_applicant_account(request):
+    
     first_name = request.POST.get('first_name').lower()
     middle_name = request.POST.get('middle_name').lower()
     last_name = request.POST.get('last_name').lower()
     gender = request.POST.get('gender').lower()
-    date_of_birth = request.POST.get('date_of_birth')
-    if date_of_birth:
-        date_object = datetime.strptime(date_of_birth, '%d-%m-%Y')
-        formatted_dob = date_object.strftime('%Y-%m-%d')
+    date_of_birth = convert_date_format(request.POST.get('date_of_birth'))
     email = request.POST.get('email')
     password = request.POST.get('password')
-    User.objects.create_user(email, password, first_name,middle_name,last_name,gender, formatted_dob)
+    
+    User.objects.create_user(
+        email, 
+        password, 
+        first_name,
+        middle_name,
+        last_name,
+        gender, 
+        date_of_birth
+    )
+    
     return email, password
 
 
+    
+    
 
 
 
