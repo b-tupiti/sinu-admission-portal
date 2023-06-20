@@ -7,6 +7,14 @@ from courses.models.course import Course
 class ApplicationState(models.TextChoices):
         DRAFT = "draft", "Draft"
         SUBMITTED = "Submitted", "Submitted"
+        
+
+class CurrentSection(models.TextChoices):
+    PERSONAL_DETAILS = "personal_details", "Personal Details"
+    SPONSOR_DETAILS = "sponsor_details", "Sponsor Details"
+    EDUCATIONAL_BACKGROUND = "educational_background", "Educational Details"
+    EMPLOYMENT_HISTORY = "employment_history", "Employment History"
+    DECLARATION = "declaration", "Declaration"
     
     
 class Application(models.Model):
@@ -270,6 +278,13 @@ class Application(models.Model):
     )
     
     """ Application Meta Data """
+    
+    current_section = models.CharField(
+        verbose_name="Current Section (keeps track of the section currently on edit)",
+        max_length=40,
+        choices=CurrentSection.choices,
+        default=CurrentSection.PERSONAL_DETAILS,
+    )
     
     application_state = models.CharField(
         verbose_name='State of Application',
