@@ -32,13 +32,21 @@ def save_personal_details(request, application):
     application.date_of_birth = convert_date_format(request.POST.get('date_of_birth'))
     application.save()
     
-def save_sponsor_details(request, application):
-    application.sponsor_type = request.POST.get('sponsor_type')
+def save_sponsor_details(request, application): 
+    application.sponsor_type = _sponsor_type(request.POST.get('sponsor_type'))
     application.sponsor_name = request.POST.get('sponsor_name')
     application.sponsor_email = request.POST.get('sponsor_email')
     application.sponsor_phone_number = request.POST.get('sponsor_phone_number')
     application.sponsor_address = request.POST.get('sponsor_address')
     application.save()
+    
+def _sponsor_type(sponsor_type):
+    if sponsor_type == 'Private':
+        return 'private'
+    elif sponsor_type == 'Private with concession (staff)':
+        return 'private_with_concession'
+    elif sponsor_type == 'Sponsored':
+        return 'sponsored'
 
 
 
