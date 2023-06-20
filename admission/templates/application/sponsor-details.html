@@ -161,7 +161,7 @@
                           <div class="field">
                           <div class="control">
                               <div class="select is-fullwidth">
-                              <select>
+                              <select name="sponsor_type">
                                   <option>Please select</option>
                                   <option {% if application.sponsor_type == 'private' %} selected {%endif%}>Private</option>
                                   <option {% if application.sponsor_type == 'sponsored' %} selected {%endif%}>Sponsored</option>
@@ -221,7 +221,7 @@
                             <input 
                               class="input" 
                               type="text" 
-                              placeholder="" 
+                              name="sponsor_name"
                               value="{% if application.sponsor_name %}{{application.sponsor_name}}{%endif%}"
                               >
                           </div>
@@ -237,6 +237,7 @@
                         <div class="field">
                           <div class="control">
                             <input 
+                              name="sponsor_email"
                               class="input" 
                               type="email" 
                               placeholder=""
@@ -255,6 +256,7 @@
                         <div class="field">
                           <div class="control">
                             <input 
+                              name="sponsor_phone_number"
                               class="input" 
                               type="text" 
                               placeholder=""
@@ -274,6 +276,7 @@
                         <div class="field">
                           <div class="control">
                             <input 
+                              name="sponsor_address"
                               class="input" 
                               type="text" 
                               placeholder=""
