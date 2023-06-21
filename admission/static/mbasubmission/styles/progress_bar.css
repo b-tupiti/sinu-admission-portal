@@ -1,0 +1,104 @@
+.progress-bar-container {
+    background-color: #ffffff;
+    padding: 70px 40px;
+    padding-bottom: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.progress-bar-container .progress-bar-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.progress-bar-container .item-complete {
+    background:#127594;
+    transition: background 400ms;
+}
+
+.progress-bar-container .progress-bar-item:hover .item-complete {
+    background:rgb(97, 184, 211);
+}
+
+.progress-bar-container .item-wrapper {
+    position: relative;
+}
+
+.progress-bar-container .item-wrapper p {
+    position: absolute;
+    min-width: 200px;
+    text-align: center;
+    color: #313131;
+    padding-top: 25px;
+    transform: translateX(-50%);
+    left: 50%;
+    font-size: small;
+}
+
+.progress-bar-container .progress-bar-item .progress-icon-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:50px;
+    height:50px;
+    border-radius:50%;
+    
+}
+
+
+
+.progress-bar-container .line-complete {
+    background:#127594;
+}
+
+.progress-bar-container .item-current {
+    background-color: #73be17;
+}
+.progress-bar-container .item-pending {
+    background-color: #9fd8ea;
+}
+
+.progress-bar-container .progress-bar-item div .icon-complete {
+    color: white;
+}
+
+.progress-bar-container .progress-bar-item div .icon-current {
+    color: rgb(40, 41, 39);
+}
+
+.progress-bar-container .progress-line {
+    width:400px;
+    height:5px;
+}
+
+@media screen and (max-width:992px){
+    .progress-bar-container .progress-bar-container {
+        flex-direction: column;
+        gap: 50px;
+        padding: 60px 40px;
+    }
+
+    .progress-bar-container .progress-line {
+        display: none;
+    }
+
+    .progress-bar-container .item-wrapper  {
+        display: flex;
+        position:unset;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .progress-bar-container .item-wrapper p {
+        text-align: left;
+        padding: 0;
+        margin: 0;
+        margin-left: 60px;
+        position: relative;
+        height: fit-content;
+        transform: unset;
+        left: unset;
+    }
+}
