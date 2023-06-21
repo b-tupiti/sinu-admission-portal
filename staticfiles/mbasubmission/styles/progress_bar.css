@@ -5,6 +5,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .progress-bar-container .progress-bar-item {
@@ -74,7 +75,7 @@
 }
 
 @media screen and (max-width:992px){
-    .progress-bar-container .progress-bar-container {
+    .progress-bar-container {
         flex-direction: column;
         gap: 50px;
         padding: 60px 40px;
