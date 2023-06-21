@@ -1,0 +1,23 @@
+
+
+.selected-qualification-box {
+
+    padding: 40px 0;
+}
+
+.selected-qualification-header {
+    background:#0e5165;
+    border-top-left-radius:5px;
+    border-top-right-radius:5px;
+    font-size: large;
+}
+
+.selected-qualification-content {
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.selected-qualification-box .title {
+    font-size: large;
+    border-bottom:1px solid rgb(174, 174, 174);
+    padding: 15px 0;
+}
