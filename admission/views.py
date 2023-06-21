@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.forms import formset_factory
-from .models import Application, Document, ApplicationToken, ApplicationState
+from .models import Application, Document, ApplicationToken, ApplicationState, CurrentSection
 from courses.models.course import Course
 from django.shortcuts import redirect
 from django.urls import reverse
@@ -48,6 +48,8 @@ def personal_details(request,pk):
     
     try:
         application = get_object_or_404(Application, id=pk)
+        application.current_section = CurrentSection.PERSONAL_DETAILS
+        application.save()
     except Http404:
         return render(request,'admission/application_404.html')
     
@@ -79,6 +81,8 @@ def sponsor_details(request, pk):
     
     try:
         application = get_object_or_404(Application, id=pk)
+        application.current_section = CurrentSection.SPONSOR_DETAILS
+        application.save()
     except Http404:
         return render(request,'admission/application_404.html')
     
@@ -104,6 +108,8 @@ def education_background(request, pk):
     
     try:
         application = get_object_or_404(Application, id=pk)
+        application.current_section = CurrentSection.EDUCATION_BACKGROUND
+        application.save()
     except Http404:
         return render(request,'admission/application_404.html')
     
@@ -126,6 +132,8 @@ def employment_history(request, pk):
     
     try:
         application = get_object_or_404(Application, id=pk)
+        application.current_section = CurrentSection.EMPLOYMENT_HISTORY
+        application.save()
     except Http404:
         return render(request,'admission/application_404.html')
     
@@ -149,6 +157,8 @@ def declaration(request, pk):
     
     try:
         application = get_object_or_404(Application, id=pk)
+        application.current_section = CurrentSection.DECLARATION
+        application.save()
     except Http404:
         return render(request,'admission/application_404.html')
     
