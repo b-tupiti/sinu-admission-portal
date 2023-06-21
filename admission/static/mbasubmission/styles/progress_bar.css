@@ -74,7 +74,7 @@
 }
 
 @media screen and (max-width:992px){
-    .progress-bar-container .progress-bar-container {
+    .progress-bar-container {
         flex-direction: column;
         gap: 50px;
         padding: 60px 40px;
