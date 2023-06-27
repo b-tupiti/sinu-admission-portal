@@ -173,7 +173,9 @@ def declaration(request, pk):
             application.is_declared = True
             application.save()
             return redirect('dashboard')
-    return render(request, 'application/declaration.html')
+        
+    context = {'application':application}
+    return render(request, 'application/declaration.html', context)
 
 
 
