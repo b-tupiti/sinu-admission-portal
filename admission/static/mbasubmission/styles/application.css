@@ -1,6 +1,7 @@
 #application-section {
     background: #ffffff;
     padding: 50px 0;
+    margin-top: -40px;
 }
 
 .application-container {
@@ -23,7 +24,7 @@
 }
 
 .application-section-header {
-    background:#0e5165;
+    background:#12657e;
     color: white;
 }
 
@@ -43,4 +44,36 @@
     justify-content: center;
     border: 1px solid rgba(0,0,0,.2);
     padding: 20px;
+}
+
+
+
+.changeable-content {
+    /* display: block; */
+    position: relative;
+    /* border: 1px solid rgb(13, 29, 57); */
+    z-index: 0;
+    /* opacity: .2; set this when next is clicked */
+}
+
+
+#application-form {
+    position: relative;
+}
+
+#save-spinner { 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    justify-content: center;
+    position: absolute;
+    z-index: 2;
+} 
+
+.display-save-spinner {
+    display: block;
+}
+
+.hide-save-spinner {
+    display: none;
 }
