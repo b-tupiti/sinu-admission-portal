@@ -1,20 +1,22 @@
 {% load static %}
+
 <link
       rel="stylesheet"
       href="{% static 'mbasubmission\styles\progress_bar.css' %}"
 />
 
+<input id="current-section" hidden type="text" value="{{application.current_section}}">
+
+
 
 <div class="progress-bar-container ">
     
-    {% if application.current_section == 'personal_details' %}
-    
-    <a href="{% url 'personal-details' application.id %}" class="progress-bar-item">
+    <a id="pd-link" href="{% url 'application' application.id %}" class="progress-bar-item">
         <div class="item-wrapper">
-   
+
             <div 
                 id="pd-icon-wrapper" 
-                class="progress-icon-wrapper item-current"
+                class="progress-icon-wrapper "
                 >
                 <i class="fa-solid fa-pen-to-square icon-color"></i>
             </div>
@@ -25,9 +27,9 @@
 
     <progress id="pdsd-progress" class="progress is-marginless progress-line custom-progress " value="0" max="100"></progress>
 
-    <a href="{% url 'sponsor-details' application.id %}" class="progress-bar-item">
+    <a id="sd-link" href="{% url 'application' application.id %}" class="progress-bar-item">
         <div class="item-wrapper">
-            <div id="sd-icon-wrapper" class="progress-icon-wrapper item-pending">
+            <div id="sd-icon-wrapper" class="progress-icon-wrapper ">
                 <i class="fa-solid fa-ban  icon-color "></i>
             </div>
             <p>Sponsor Details</p>
@@ -36,9 +38,9 @@
     
     <progress id="sdeb-progress" class="progress is-marginless progress-line custom-progress " value="0" max="100"></progress>
 
-    <a href="{% url 'education-background' application.id %}" class="progress-bar-item">
+    <a id="eb-link" href="{% url 'application' application.id %}" class="progress-bar-item">
         <div class="item-wrapper">
-            <div id="eb-icon-wrapper" class="progress-icon-wrapper item-pending">
+            <div id="eb-icon-wrapper" class="progress-icon-wrapper">
                 <i class="fa-solid fa-ban  icon-color " ></i>
             </div>
             <p>Education Background</p>
@@ -47,9 +49,9 @@
 
     <progress id="ebeh-progress" class="progress is-marginless progress-line custom-progress " value="0" max="100"></progress>
 
-    <a href="{% url 'employment-history' application.id %}" class="progress-bar-item">
+    <a id="eh-link" href="{% url 'application' application.id %}" class="progress-bar-item">
         <div class="item-wrapper">
-            <div id="eh-icon-wrapper" class="progress-icon-wrapper item-pending">
+            <div id="eh-icon-wrapper" class="progress-icon-wrapper ">
                 <i class="fa-solid fa-ban  icon-color"></i>
             </div>
             <p>Employment History</p>
@@ -58,258 +60,16 @@
 
     <progress id="ehd-progress" class="progress is-marginless progress-line custom-progress " value="0" max="100"></progress>
 
-    <a href="{% url 'declaration' application.id %}" class="progress-bar-item">
+    <a id="d-link" href="{% url 'application' application.id %}" class="progress-bar-item">
         <div class="item-wrapper">
-            <div id="d-icon-wrapper" class="progress-icon-wrapper item-pending">
+            <div id="d-icon-wrapper" class="progress-icon-wrapper ">
                 <i class="fa-solid fa-ban  icon-color"></i>
             </div>
             <p>Declaration</p>
         </div>
     </a>
-
-    {% elif application.current_section == 'sponsor_details' %}
-
-    <a href="{% url 'personal-details' application.id %}" class="progress-bar-item">
-        <div class="item-wrapper">
-   
-            <div 
-                id="pd-icon-wrapper" 
-                class="progress-icon-wrapper item-complete"
-                >
-                <i class="fa-solid fa-check icon-color"></i>
-            </div>
-            
-            <p>Personal Details</p>
-        </div>
-    </a>
-
-    <progress id="pdsd-progress" class="progress is-marginless progress-line custom-progress " value="100" max="100"></progress>
-
-    <a href="{% url 'sponsor-details' application.id %}" class="progress-bar-item">
-        <div class="item-wrapper">
-            <div id="sd-icon-wrapper" class="progress-icon-wrapper item-current">
-                <i class="fa-solid fa-pen-to-square  icon-color "></i>
-            </div>
-            <p>Sponsor Details</p>
-        </div>
-    </a>
-    
-    <progress id="sdeb-progress" class="progress is-marginless progress-line custom-progress " value="0" max="100"></progress>
-
-    <a href="{% url 'education-background' application.id %}" class="progress-bar-item">
-        <div class="item-wrapper">
-            <div id="eb-icon-wrapper" class="progress-icon-wrapper item-pending">
-                <i class="fa-solid fa-ban  icon-color " ></i>
-            </div>
-            <p>Education Background</p>
-        </div>
-    </a>
-
-    <progress id="ebeh-progress" class="progress is-marginless progress-line custom-progress " value="0" max="100"></progress>
-
-    <a href="{% url 'employment-history' application.id %}" class="progress-bar-item">
-        <div class="item-wrapper">
-            <div id="eh-icon-wrapper" class="progress-icon-wrapper item-pending">
-                <i class="fa-solid fa-ban  icon-color"></i>
-            </div>
-            <p>Employment History</p>
-        </div>
-    </a>
-
-    <progress id="ehd-progress" class="progress is-marginless progress-line custom-progress " value="0" max="100"></progress>
-
-    <a href="{% url 'declaration' application.id %}" class="progress-bar-item">
-        <div class="item-wrapper">
-            <div id="d-icon-wrapper" class="progress-icon-wrapper item-pending">
-                <i class="fa-solid fa-ban  icon-color"></i>
-            </div>
-            <p>Declaration</p>
-        </div>
-    </a>
-
-    {% elif application.current_section == 'education_background' %}
-
-    <a href="{% url 'personal-details' application.id %}" class="progress-bar-item">
-        <div class="item-wrapper">
-   
-            <div 
-                id="pd-icon-wrapper" 
-                class="progress-icon-wrapper item-complete"
-                >
-                <i class="fa-solid fa-check icon-color"></i>
-            </div>
-            
-            <p>Personal Details</p>
-        </div>
-    </a>
-
-    <progress id="pdsd-progress" class="progress is-marginless progress-line custom-progress " value="100" max="100"></progress>
-
-    <a href="{% url 'sponsor-details' application.id %}" class="progress-bar-item">
-        <div class="item-wrapper">
-            <div id="sd-icon-wrapper" class="progress-icon-wrapper item-complete">
-                <i class="fa-solid fa-check icon-color "></i>
-            </div>
-            <p>Sponsor Details</p>
-        </div>
-    </a>
-    
-    <progress id="sdeb-progress" class="progress is-marginless progress-line custom-progress " value="100" max="100"></progress>
-
-    <a href="{% url 'education-background' application.id %}" class="progress-bar-item">
-        <div class="item-wrapper">
-            <div id="eb-icon-wrapper" class="progress-icon-wrapper item-current">
-                <i class="fa-solid fa-pen-to-square  icon-color " ></i>
-            </div>
-            <p>Education Background</p>
-        </div>
-    </a>
-
-    <progress id="ebeh-progress" class="progress is-marginless progress-line custom-progress " value="0" max="100"></progress>
-
-    <a href="{% url 'employment-history' application.id %}" class="progress-bar-item">
-        <div class="item-wrapper">
-            <div id="eh-icon-wrapper" class="progress-icon-wrapper item-pending">
-                <i class="fa-solid fa-ban  icon-color"></i>
-            </div>
-            <p>Employment History</p>
-        </div>
-    </a>
-
-    <progress id="ehd-progress" class="progress is-marginless progress-line custom-progress " value="0" max="100"></progress>
-
-    <a href="{% url 'declaration' application.id %}" class="progress-bar-item">
-        <div class="item-wrapper">
-            <div id="d-icon-wrapper" class="progress-icon-wrapper item-pending">
-                <i class="fa-solid fa-ban  icon-color"></i>
-            </div>
-            <p>Declaration</p>
-        </div>
-    </a>
-
-    {% elif application.current_section == 'employment_history' %}
-
-    <a href="{% url 'personal-details' application.id %}" class="progress-bar-item">
-        <div class="item-wrapper">
-   
-            <div 
-                id="pd-icon-wrapper" 
-                class="progress-icon-wrapper item-complete"
-                >
-                <i class="fa-solid fa-check icon-color"></i>
-            </div>
-            
-            <p>Personal Details</p>
-        </div>
-    </a>
-
-    <progress id="pdsd-progress" class="progress is-marginless progress-line custom-progress " value="100" max="100"></progress>
-
-    <a href="{% url 'sponsor-details' application.id %}" class="progress-bar-item">
-        <div class="item-wrapper">
-            <div id="sd-icon-wrapper" class="progress-icon-wrapper item-complete">
-                <i class="fa-solid fa-check icon-color "></i>
-            </div>
-            <p>Sponsor Details</p>
-        </div>
-    </a>
-    
-    <progress id="sdeb-progress" class="progress is-marginless progress-line custom-progress " value="100" max="100"></progress>
-
-    <a href="{% url 'education-background' application.id %}" class="progress-bar-item">
-        <div class="item-wrapper">
-            <div id="eb-icon-wrapper" class="progress-icon-wrapper item-complete">
-                <i class="fa-solid fa-check  icon-color " ></i>
-            </div>
-            <p>Education Background</p>
-        </div>
-    </a>
-
-    <progress id="ebeh-progress" class="progress is-marginless progress-line custom-progress " value="100" max="100"></progress>
-
-    <a href="{% url 'employment-history' application.id %}" class="progress-bar-item">
-        <div class="item-wrapper">
-            <div id="eh-icon-wrapper" class="progress-icon-wrapper item-current">
-                <i class="fa-solid fa-pen-to-square  icon-color"></i>
-            </div>
-            <p>Employment History</p>
-        </div>
-    </a>
-
-    <progress id="ehd-progress" class="progress is-marginless progress-line custom-progress " value="0" max="100"></progress>
-
-    <a href="{% url 'declaration' application.id %}" class="progress-bar-item">
-        <div class="item-wrapper">
-            <div id="d-icon-wrapper" class="progress-icon-wrapper item-pending">
-                <i class="fa-solid fa-ban  icon-color"></i>
-            </div>
-            <p>Declaration</p>
-        </div>
-    </a>
-
-    {% elif application.current_section == 'declaration' %}
-
-    <a href="{% url 'personal-details' application.id %}" class="progress-bar-item">
-        <div class="item-wrapper">
-   
-            <div 
-                id="pd-icon-wrapper" 
-                class="progress-icon-wrapper item-complete"
-                >
-                <i class="fa-solid fa-check icon-color"></i>
-            </div>
-            
-            <p>Personal Details</p>
-        </div>
-    </a>
-
-    <progress id="pdsd-progress" class="progress is-marginless progress-line custom-progress " value="100" max="100"></progress>
-
-    <a href="{% url 'sponsor-details' application.id %}" class="progress-bar-item">
-        <div class="item-wrapper">
-            <div id="sd-icon-wrapper" class="progress-icon-wrapper item-complete">
-                <i class="fa-solid fa-check icon-color "></i>
-            </div>
-            <p>Sponsor Details</p>
-        </div>
-    </a>
-    
-    <progress id="sdeb-progress" class="progress is-marginless progress-line custom-progress " value="100" max="100"></progress>
-
-    <a href="{% url 'education-background' application.id %}" class="progress-bar-item">
-        <div class="item-wrapper">
-            <div id="eb-icon-wrapper" class="progress-icon-wrapper item-complete">
-                <i class="fa-solid fa-check  icon-color " ></i>
-            </div>
-            <p>Education Background</p>
-        </div>
-    </a>
-
-    <progress id="ebeh-progress" class="progress is-marginless progress-line custom-progress " value="100" max="100"></progress>
-
-    <a href="{% url 'employment-history' application.id %}" class="progress-bar-item">
-        <div class="item-wrapper">
-            <div id="eh-icon-wrapper" class="progress-icon-wrapper item-complete">
-                <i class="fa-solid fa-check  icon-color"></i>
-            </div>
-            <p>Employment History</p>
-        </div>
-    </a>
-
-    <progress id="ehd-progress" class="progress is-marginless progress-line custom-progress " value="100" max="100"></progress>
-
-    <a href="{% url 'declaration' application.id %}" class="progress-bar-item">
-        <div class="item-wrapper">
-            <div id="d-icon-wrapper" class="progress-icon-wrapper item-current">
-                <i class="fa-solid fa-pen-to-square  icon-color"></i>
-            </div>
-            <p>Declaration</p>
-        </div>
-    </a>
-
-    
-    {% endif %}
-    
 
 </div>
 
+
+<script src="{% static 'mbasubmission\js\render-progress-bar.js' %}"></script>
