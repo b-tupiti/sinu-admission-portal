@@ -8,10 +8,11 @@ body {
 
 main {
   position: relative;
+  background-color: #202e34;
 }
 
 .background {
-  background-color: #ffffff;
+  /* background-color: #542424; */
   /* background-image: url('/static/images/bg.jpg'); */
   background-size: cover;
   background-position: center;
