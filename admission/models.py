@@ -322,16 +322,28 @@ class Application(models.Model):
         return str(self.id)
     
     def get_absolute_url(self):
-        if self.current_section == 'personal_details':
-            return reverse("personal-details", kwargs={"pk": self.pk})
-        elif self.current_section == 'sponsor_details':
-            return reverse('sponsor-details',kwargs={'pk' : self.pk})
-        elif self.current_section == 'education_background':
-            return reverse('education-background',kwargs={'pk' : self.pk})
-        elif self.current_section == 'employment_history':
-            return reverse('employment-history',kwargs={'pk' : self.pk})
-        elif self.current_section == 'declaration':
-            return reverse('declaration',kwargs={'pk' : self.pk})
+        """_summary_
+        goes to the section that the user last reached.
+        Returns:
+            _type_: _description_
+        """
+        if self.current_section == Section.PERSONAL_DETAILS:
+            self.edit_section = Section.PERSONAL_DETAILS  
+            
+        elif self.current_section == Section.SPONSOR_DETAILS:
+            self.edit_section = Section.SPONSOR_DETAILS
+            
+        elif self.current_section == Section.EDUCATION_BACKGROUND:
+            self.edit_section = Section.EDUCATION_BACKGROUND
+            
+        elif self.current_section == Section.EMPLOYMENT_HISTORY:
+            self.edit_section = Section.EMPLOYMENT_HISTORY
+            
+        elif self.current_section == Section.DECLARATION:
+            self.edit_section = Section.DECLARATION
+        
+        self.save()
+        return reverse('application', kwargs={'pk': self.pk})
  
  
     
