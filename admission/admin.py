@@ -62,6 +62,7 @@ class ApplicationAdmin(admin.ModelAdmin):
         }),
         ('Meta', {
             'fields': (
+                'edit_section',
                 'current_section',
                 'application_state', 
             ),
