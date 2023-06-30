@@ -1,18 +1,16 @@
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.forms import formset_factory
-from .models import Application, Document, ApplicationToken, ApplicationState, CurrentSection
+from .models import Application, ApplicationToken, ApplicationState
 from courses.models.course import Course
 from django.shortcuts import redirect
 from django.urls import reverse
-from users.models.user import User
 from django.contrib.auth import authenticate,login
-from django.contrib import messages
 from users.utils import create_applicant_account
-from admission.utils import create_new_admission_application_for_user, save_personal_details, save_sponsor_details, get_course_from_code
+from admission.utils import create_new_admission_application_for_user, get_course_from_code, update_current_section, change_edit_section, section_icon_clicked
 from django.http import Http404
 
-def create_new_admission(request):
+
+def create_new_application(request):
     
     if request.method == 'GET':
         
@@ -22,7 +20,7 @@ def create_new_admission(request):
         course = get_course_from_code(request)
         context = {'course':course}
         
-        return render(request, 'application/create-new-admission.html', context)
+        return render(request, 'application/create-new-application.html', context)
     
     
     elif request.method == 'POST':     
