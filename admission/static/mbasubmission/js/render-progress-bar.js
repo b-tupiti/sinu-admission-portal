@@ -3,13 +3,17 @@
 // the determinig factor of how the progress bar is rendered.
 
 const currentSection = document.getElementById('current-section').value;
-console.log('current section: ', currentSection);
+console.log('furthest section reached by user (current): ', currentSection);
+
+const editSection = document.getElementById('edit-section').value;
+console.log('section showing on screen (on edit): ', editSection);
 
 init();
 
 function init(){
 
     let iconWrapperId = null;
+    let editIconWrapperId = null;
     let completeIconIds = [];
     let pendingIconIds = [];
     let fullProgressBars = [];
@@ -61,7 +65,34 @@ function init(){
             break;
     }
 
+    switch(editSection){
+        case 'personal_details':
+            editIconWrapperId = 'pd-icon-wrapper';
+            break;
+
+        case 'sponsor_details':
+            editIconWrapperId = 'sd-icon-wrapper';
+            break;
+
+        case 'education_background':
+            editIconWrapperId = 'eb-icon-wrapper';
+            break;
+
+        case 'employment_history':
+            editIconWrapperId = 'eh-icon-wrapper';
+            break;
+
+        case 'declaration':
+            editIconWrapperId = 'd-icon-wrapper';
+            break;
+
+        default:
+            break;
+    }
+
+    
     renderCurrentIcon(iconWrapperId);
+    renderOnEditIcon(editIconWrapperId);
     renderOtherIcons(completeIconIds, 'complete');
     renderOtherIcons(pendingIconIds, 'pending');
     renderFullProgressBars(fullProgressBars);
@@ -97,11 +128,17 @@ function renderOtherIcons(elementIds, status){
     }
 }
 
-// renders the icon of the current section accordingly
+// renders the icon of the current section accordingly (furthest section reached by user)
 function renderCurrentIcon(elementId){
     let iconWrapper = document.getElementById(elementId)
     iconWrapper.classList.add('item-current');
     iconWrapper.innerHTML = '<i class="fa-solid fa-pen-to-square icon-color"></i>';
+}
+
+// renders the icon of the section that is on screen
+function renderOnEditIcon(elementId){
+    let iconWrapper = document.getElementById(elementId)
+    iconWrapper.classList.add('on-edit');
 }
 
 // disable icon links of sections that are not yet completed

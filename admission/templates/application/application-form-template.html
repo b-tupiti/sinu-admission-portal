@@ -33,23 +33,23 @@
             <div id="changeable-content" class="changeable-content">
                 
                 <!-- SECTION start-->
-                {% if application.current_section == 'personal_details' %}
+                {% if application.edit_section == 'personal_details' %}
                 
                     {% include 'application/sections/personal-details.html' %}
                 
-                {% elif application.current_section == 'sponsor_details' %}
+                {% elif application.edit_section == 'sponsor_details' %}
 
                     {% include 'application/sections/sponsor-details.html' %}
 
-                {% elif application.current_section == 'education_background' %}
+                {% elif application.edit_section == 'education_background' %}
 
                     {% include 'application/sections/education-background.html' %}
 
-                {% elif application.current_section == 'employment_history' %}
+                {% elif application.edit_section == 'employment_history' %}
 
                     {% include 'application/sections/employment-history.html' %}
 
-                {% elif application.current_section == 'declaration' %}
+                {% elif application.edit_section == 'declaration' %}
 
                     {% include 'application/sections/declaration.html' %}
 

@@ -6,12 +6,13 @@
 />
 
 <input id="current-section" hidden type="text" value="{{application.current_section}}">
+<input id="edit-section" hidden type="text" value="{{application.edit_section}}">
 
 
 
-<div class="progress-bar-container ">
+<!-- <div class="progress-bar-container ">
     
-    <a id="pd-link" href="{% url 'application' application.id %}" class="progress-bar-item">
+    <a id="pd-link" href="{% url 'application' application.id  %}?section=personal_details" class="progress-bar-item">
         <div class="item-wrapper">
 
             <div 
@@ -69,7 +70,76 @@
         </div>
     </a>
 
-</div>
+</div>  -->
 
+
+<form method="post">
+    {% csrf_token %}
+
+    <input type="hidden" name="_method" value="put">
+
+    <div class="progress-bar-container ">
+    
+        <button name="personal_details" type="submit" id="pd-link" class="progress-bar-item" >
+            <div class="item-wrapper">
+
+                <div 
+                    id="pd-icon-wrapper" 
+                    class="progress-icon-wrapper "
+                    >
+                    <i class="fa-solid fa-pen-to-square icon-color"></i>
+                </div>
+                
+                <p>Personal Details</p>
+            </div>
+        </button>
+    
+
+    <progress id="pdsd-progress" class="progress is-marginless progress-line custom-progress " value="0" max="100"></progress>
+
+    <button name="sponsor_details" type="submit" id="sd-link" class="progress-bar-item">
+        <div class="item-wrapper">
+            <div id="sd-icon-wrapper" class="progress-icon-wrapper ">
+                <i class="fa-solid fa-ban  icon-color "></i>
+            </div>
+            <p>Sponsor Details</p>
+        </div>
+    </button>
+    
+    <progress id="sdeb-progress" class="progress is-marginless progress-line custom-progress " value="0" max="100"></progress>
+
+    <button name="education_background" type="submit" id="eb-link" class="progress-bar-item">
+        <div class="item-wrapper">
+            <div id="eb-icon-wrapper" class="progress-icon-wrapper">
+                <i class="fa-solid fa-ban  icon-color " ></i>
+            </div>
+            <p>Education Background</p>
+        </div>
+    </button>
+
+    <progress id="ebeh-progress" class="progress is-marginless progress-line custom-progress " value="0" max="100"></progress>
+
+    <button name="employment_history" type="submit" id="eh-link" class="progress-bar-item">
+        <div class="item-wrapper">
+            <div id="eh-icon-wrapper" class="progress-icon-wrapper ">
+                <i class="fa-solid fa-ban  icon-color"></i>
+            </div>
+            <p>Employment History</p>
+        </div>
+    </button>
+
+    <progress id="ehd-progress" class="progress is-marginless progress-line custom-progress " value="0" max="100"></progress>
+
+    <button name="declaration" type="submit" id="d-link" class="progress-bar-item">
+        <div class="item-wrapper">
+            <div id="d-icon-wrapper" class="progress-icon-wrapper ">
+                <i class="fa-solid fa-ban  icon-color"></i>
+            </div>
+            <p>Declaration</p>
+        </div>
+    </button>
+
+</div>  
+</form>
 
 <script src="{% static 'mbasubmission\js\render-progress-bar.js' %}"></script>
