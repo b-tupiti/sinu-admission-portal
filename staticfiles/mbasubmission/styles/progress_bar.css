@@ -12,20 +12,40 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
 }
 
-a.disabled-icon-link {
+
+
+.progress-bar-container button {
+    background-color: unset;
+    border: unset;
+    padding: 0;
+    cursor: pointer;
+}
+
+.progress-bar-container .progress-bar-item input[type="submit"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+.disabled-icon-link {
     cursor: not-allowed;
     pointer-events: none;
 }
 
 .progress-bar-container .item-complete {
     background:#127594;
-    transition: background 400ms;
+    transition: border 100ms;
 }
 
 .progress-bar-container .progress-bar-item:hover .item-complete {
-    background:rgb(97, 184, 211);
+    border: 4px solid #73be17;
 }
 
 .progress-bar-container .item-wrapper {
@@ -52,7 +72,9 @@ a.disabled-icon-link {
     border-radius:50%;
 }
 
-
+.on-edit {
+    border: 4px solid #73be17;
+}
 
 .progress-bar-container .line-complete {
     background:#127594;
