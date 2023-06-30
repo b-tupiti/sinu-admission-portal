@@ -280,10 +280,17 @@ class Application(models.Model):
     """ Application Meta Data """
     
     current_section = models.CharField(
-        verbose_name="Current Section (keeps track of the section currently on edit)",
+        verbose_name="The furthest section that the user has reached before submitting",
         max_length=40,
-        choices=CurrentSection.choices,
-        default=CurrentSection.PERSONAL_DETAILS,
+        choices=Section.choices,
+        default=Section.PERSONAL_DETAILS,
+    )
+    
+    edit_section = models.CharField(
+        verbose_name="The section that is on edit by user",
+        max_length=40,
+        choices=Section.choices,
+        default=Section.PERSONAL_DETAILS,
     )
     
     application_state = models.CharField(
