@@ -1,6 +1,7 @@
-from .models import ApplicationState, Application
+from .models import ApplicationState, Application, Section
 from courses.models.course import Course
 from utils.convert_date import convert_date_format
+from django.shortcuts import redirect
 
 
 def get_course_from_code(request):
@@ -75,3 +76,67 @@ def get_totals():
     }
     
     return totals
+
+
+def section_icon_clicked(request):
+    return request.POST.get('_method') == 'put'
+
+def update_current_section(request, application):
+    
+    if 'to_personal_details' in request.POST:
+                
+        application.current_section = Section.PERSONAL_DETAILS
+        application.edit_section = Section.PERSONAL_DETAILS
+            
+    elif 'to_sponsor_details' in request.POST:
+        
+        if application.current_section not in [
+            Section.EDUCATION_BACKGROUND, 
+            Section.EMPLOYMENT_HISTORY, 
+            Section.DECLARATION]:
+                application.current_section = Section.SPONSOR_DETAILS
+            
+        application.edit_section = Section.SPONSOR_DETAILS
+        
+    elif 'to_education_background' in request.POST:
+        
+        if application.current_section not in [
+            Section.EMPLOYMENT_HISTORY, 
+            Section.DECLARATION]:
+                application.current_section = Section.EDUCATION_BACKGROUND
+                
+        application.edit_section = Section.EDUCATION_BACKGROUND
+        
+    elif 'to_employment_history' in request.POST:
+        
+        if application.current_section not in [
+            Section.DECLARATION]:
+                application.current_section = Section.EMPLOYMENT_HISTORY
+        
+        application.edit_section = Section.EMPLOYMENT_HISTORY
+        
+    elif 'to_declaration' in request.POST:
+        application.current_section = Section.DECLARATION
+        application.edit_section = Section.DECLARATION
+    
+    
+        
+    return application
+
+def change_edit_section(request, application):
+    if 'personal_details' in request.POST:    
+        application.edit_section = Section.PERSONAL_DETAILS
+                     
+    elif 'sponsor_details' in request.POST:
+        application.edit_section = Section.SPONSOR_DETAILS
+    
+    elif 'education_background' in request.POST:
+        application.edit_section = Section.EDUCATION_BACKGROUND
+        
+    elif 'employment_history' in request.POST:
+        application.edit_section = Section.EMPLOYMENT_HISTORY
+    
+    elif 'declaration' in request.POST:
+        application.edit_section = Section.DECLARATION
+            
+    return application
