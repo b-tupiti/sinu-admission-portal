@@ -36,212 +36,69 @@ def create_new_application(request):
         
         return redirect(reverse('personal-details',args=[application.id]))
   
-
-    
-
-
-
 @login_required(login_url='login')
-def personal_details(request,pk):
+def application(request, pk):
     
+    # checks if application exist, else render 404
     try:
         application = get_object_or_404(Application, id=pk)
-        application.current_section = CurrentSection.PERSONAL_DETAILS
-        application.save()
     except Http404:
-        return render(request,'admission/application_404.html')
+        return render(request, 'admission/application_404.html')
     
+    # check if client does not own application, else render 403
     if not application.owner == request.user:
-        return render(request,'admission/application_403.html')
+        return render(request, 'admission/application_403.html')
     
+    # check if application is submitted, if it is, redirect to dashboard 
     if application.application_state == ApplicationState.SUBMITTED:
         return redirect('dashboard')
     
+    # handles POST request from the progress bar icons, mext button, and submit button
     if request.method == 'POST':
-        save_personal_details(request, application)
         
-        if 'save_and_exit' in request.POST:
-            return redirect('application-saved')
-        else:
-            return redirect(reverse('sponsor-details',args=[application.id]))
-   
-    context = {
-        'application': application
-    }
-    
-    return render(request, 'application/personal-details.html', context)
-
-
-
-
-@login_required(login_url='login')
-def sponsor_details(request, pk):
-    
-    try:
-        application = get_object_or_404(Application, id=pk)
-        application.current_section = CurrentSection.SPONSOR_DETAILS
-        application.save()
-    except Http404:
-        return render(request,'admission/application_404.html')
-    
-    if not application.owner == request.user:
-        return render(request,'admission/application_403.html')
-    
-    if request.method == 'POST':
-        save_sponsor_details(request, application)
+        if section_icon_clicked(request):
+            application = change_edit_section(request, application)
         
-        if 'save_and_exit' in request.POST:
-            return redirect('application-saved')
-        else:
-            return redirect(reverse('education-background',args=[application.id]))
+        elif 'save_and_exit' in request.POST:
+            application.save()
+            return redirect('application-saved', pk=application.id)
         
-    context = {
-        'application': application
-    }
-        
-    return render(request, 'application/sponsor-details.html', context)
-
-@login_required(login_url='login')
-def education_background(request, pk):
-    
-    try:
-        application = get_object_or_404(Application, id=pk)
-        application.current_section = CurrentSection.EDUCATION_BACKGROUND
-        application.save()
-    except Http404:
-        return render(request,'admission/application_404.html')
-    
-    if not application.owner == request.user:
-        return render(request,'admission/application_403.html')
-    
-    if request.method == 'POST':
-        if 'save_and_exit' in request.POST:
-            return redirect('application-saved')
-        else:
-            return redirect(reverse('employment-history',args=[application.id]))
-    
-    context = {'application':application}
-    return render(request, 'application/education-background.html',context)
-
-
-
-@login_required(login_url='login')
-def employment_history(request, pk):
-    
-    try:
-        application = get_object_or_404(Application, id=pk)
-        application.current_section = CurrentSection.EMPLOYMENT_HISTORY
-        application.save()
-    except Http404:
-        return render(request,'admission/application_404.html')
-    
-    if not application.owner == request.user:
-        return render(request,'admission/application_403.html')
-    
-    if request.method == 'POST':
-        if 'save_and_exit' in request.POST:
-            return redirect('application-saved')
-        else:
-            return redirect(reverse('declaration',args=[application.id]))
-    
-    context = {'application':application}
-    return render(request, 'application/employment-history.html', context)
-
-
-
-
-@login_required(login_url='login')
-def declaration(request, pk):
-    
-    try:
-        application = get_object_or_404(Application, id=pk)
-        application.current_section = CurrentSection.DECLARATION
-        application.save()
-    except Http404:
-        return render(request,'admission/application_404.html')
-    
-    if not application.owner == request.user:
-        return render(request,'admission/application_403.html')
-    
-    if request.method == 'POST':
-        if 'save_and_exit' in request.POST:
-            return redirect('application-saved')
-        else:
+        elif 'submit_application' in request.POST:
             application.application_state = ApplicationState.SUBMITTED
             application.is_declared = True
             application.save()
             return redirect('dashboard')
+
+        else:
+            application = update_current_section(request, application)
         
-    context = {'application':application}
-    return render(request, 'application/declaration.html', context)
-
-
+        application.save()
+            
+    context = {
+        'application': application
+    }
+    
+    return render(request, 'application/application-form-template.html', context)
 
 @login_required(login_url='login')
-def application_saved(request):
-    return render(request, 'application/application-saved.html')
-
-
-
-
-
-
-
-
-
-
+def application_saved(request, pk):
+    
+    try:
+        application = get_object_or_404(Application, id=pk)
+    except Http404:
+        return render(request, 'admission/application_404.html')
+    
+    if not application.owner == request.user:
+        return render(request, 'admission/application_403.html')
+    
+    if application.application_state == ApplicationState.SUBMITTED:
+        return redirect('dashboard')
+    
+    context = {
+        'application': application,
+    }
+    
+    return render(request, 'application/application-saved.html', context)
 
 def my_admissions(request):
     return render(request, 'application/my-admissions.html')
-
-
-
-# def submission_form(request):
-#     """
-#     displays a form for the user to submit an application
-#     """
-#     is_submitted = False
-    
-#     DocumentFormSet = formset_factory(DocumentForm, extra=1)
-#     document_formset = DocumentFormSet(prefix='document')
-#     application_form = ApplicationForm()
-    
-#     if request.method == 'POST':
-        
-#         # get photos and all documents
-#         photo = request.FILES['photo']
-#         doc_keys = [key for key in request.FILES if key != 'photo']
-#         documents = [request.FILES[key] for key in doc_keys]
-        
-#         application_form = ApplicationForm(request.POST, {'photo': photo})
-        
-#         if application_form.is_valid():
-#             application = application_form.save()
-#             for document in documents:
-#                 Document.objects.create(file=document,application=application)
-
-#         is_submitted = True
-    
-#     context = {
-#         'application_form':application_form, 
-#         'document_formset': document_formset,
-#         'is_submitted': is_submitted,
-#     }
-    
-#     return render(request, 'mbasubmission/right-section/template.html',context)
-
-
-def upload_deposit_slip(request):
-    
-    token = request.GET.get('token')
-    context = {}
-    
-    try:
-        token = ApplicationToken.objects.get(id=token)
-        application = Application.objects.get(id=token.application.id)
-        context['application'] = application
-    except ApplicationToken.DoesNotExist:
-        pass
-    
-    return render(request, 'deposit/upload_deposit.html', context)
-    
