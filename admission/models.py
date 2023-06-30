@@ -9,7 +9,7 @@ class ApplicationState(models.TextChoices):
         SUBMITTED = "Submitted", "Submitted"
         
 
-class CurrentSection(models.TextChoices):
+class Section(models.TextChoices):
     PERSONAL_DETAILS = "personal_details", "Personal Details"
     SPONSOR_DETAILS = "sponsor_details", "Sponsor Details"
     EDUCATION_BACKGROUND = "education_background", "Education Background"
