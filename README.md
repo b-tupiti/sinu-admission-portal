@@ -1,3 +1,20 @@
+
+# SINU Admissions Portal
+
+This is an application purposely for students to submit their interest to undertake a program at Solomon Islands National University (SINU).
+
+
+## Features
+
+- Course Search & Selection
+- Application creation based on selected course
+- User Authentication
+- Student/Staff Dashboard (work on application at own pace)
+- Application Status Monitoring
+- Advanced Filtering of submitted applications by Staff (e.g. by faculty/school)
+- Report/Analysis of all submissions
+
+
 ## URL Reference
 
 #### Search for course(s)
@@ -62,3 +79,11 @@ GET admissions/application/<id>
 | `id`      | `string` | **Required**. id of application in draft |
 
 Returns application if it is in DRAFT and belongs to authenticated user.
+
+## Roadmap
+
+- Separate Frontend with React and Next.js
+
+- Convert current App to Django Rest APIs that works
+  with the Frontend
+
