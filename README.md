@@ -20,7 +20,7 @@ This is an application purposely for students to submit their interest to undert
 #### Search for course(s)
 
 ```http
-  GET /?search=[input]
+GET /?search=[input]
 ```
 
 | Parameter | Type     | Description                |
@@ -32,7 +32,7 @@ returns a list of courses from filtered parameter.
 #### Fetch course by course code
 
 ```http
-  GET /course-detail/<code>
+GET /course-detail/<code>
 ```
 
 | Parameter | Type     | Description                       |
@@ -45,7 +45,7 @@ returns course and corresponding details.
 #### Get admission Application Form based on course
 
 ```http
-GET admission/new-application/?course_code=[code]
+GET /admissions/new-application/?course_code=[code]
 ```
 
 | Parameter | Type     | Description                       |
@@ -58,7 +58,7 @@ returns new application form.
 #### Submit Application Form
 
 ```http
-POST admission/new-application/?course_code=[code]
+POST /admissions/new-application/?course_code=[code]
 ```
 
 | Parameter | Type     | Description                       |
@@ -71,7 +71,7 @@ POST admission/new-application/?course_code=[code]
 #### Get admission application draft (User Authentication Required)
 
 ```http
-GET admissions/application/<id>
+GET /admissions/application/<id>
 ```
 
 | Parameter | Type     | Description                       |
@@ -80,7 +80,23 @@ GET admissions/application/<id>
 
 Returns application if it is in DRAFT and belongs to authenticated user.
 
-## Roadmap
+
+#### Get User Dashboard (User Authentication Required)
+
+```http
+GET /dashboard
+```
+
+Returns user dashboard depending on user type (e.g. staff, student).
+
+## Link to the Application (CICD)
+
+The app can be accessed here:
+
+http://enrollonline.sinu.edu.sb
+
+
+## Future Roadmap
 
 - Separate Frontend with React and Next.js
 
