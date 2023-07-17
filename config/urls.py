@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from users.views import LoginUser, LogoutUser, Dashboard, Applications, ApplicationDetail, SaveId
+from users.views import login_user, logout_user, dashboard, applications, application_detail, save_application
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -11,13 +11,13 @@ urlpatterns = [
     path('', include('courses.urls')), # path: find-a-course 
     path('admission/', include('admission.urls')),
     
-    path('login/', LoginUser, name='login'),
-    path('logout/', LogoutUser, name='logout'),
-    path('dashboard/', Dashboard, name='dashboard'),
-    path('dashboard/applications/', Applications, name='applications'),
-    path('dashboard/applications/<str:filter>/', Applications, name='applications'),
-    path('dashboard/application/<str:pk>/', ApplicationDetail, name='application-detail'),
-    path('dashboard/application/<str:pk>/save-id/', SaveId, name='save-id'),
+    path('login/', login_user, name='login'),
+    path('logout/', logout_user, name='logout'),
+    path('dashboard/', dashboard, name='dashboard'),
+    path('dashboard/applications/', applications, name='applications'),
+    path('dashboard/applications/<str:filter>/', applications, name='applications'),
+    path('dashboard/application/<str:pk>/', application_detail, name='application-detail'),
+    path('dashboard/application/<str:pk>/save-id/', save_application, name='save-id'),
 ]
 
 if not settings.DEBUG:

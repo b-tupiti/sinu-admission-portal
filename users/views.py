@@ -28,7 +28,7 @@ def group_required(group_name):
 
 ###
 
-def LoginUser(request):
+def login_user(request):
     """Logs in a user"""
     
     if request.method == 'POST':
@@ -52,7 +52,7 @@ def LoginUser(request):
     return render(request, 'users/authentication/login.html')
 
 
-def LogoutUser(request):
+def logout_user(request):
     if request.user.is_authenticated:
         logout(request)
         messages.info(request, 'you signed out!')
@@ -61,7 +61,7 @@ def LogoutUser(request):
 
 
 @login_required
-def Dashboard(request):
+def dashboard(request):
     if request.user.is_staff:
         return staff_dashboard(request)
     else:
@@ -92,7 +92,7 @@ def staff_dashboard(request):
 
 
 @login_required(login_url="login")
-def Applications(request, filter=None):
+def applications(request, filter=None):
     
     page = 'applications'
     applications, group = filter_applications(request, filter)
@@ -128,7 +128,7 @@ def process_application(request, pk):
 
 
 @login_required(login_url="login")
-def ApplicationDetail(request, pk):
+def application_detail(request, pk):
     
     if request.method == 'POST':
         process_application(request, pk)
@@ -149,7 +149,7 @@ def ApplicationDetail(request, pk):
 
  
 @login_required(login_url="login")
-def SaveId(request, pk):
+def save_application(request, pk):
     application = Application.objects.get(id=pk)
     if request.method == "POST":
        student_id = request.POST.get('student_id')
