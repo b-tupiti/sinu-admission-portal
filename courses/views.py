@@ -1,12 +1,12 @@
 from django.shortcuts import render
 from .models.course import Course
 from .models.courseunit import CourseUnit
-from .utils import searchCourses, paginateCourses
+from .utils import filter_courses, paginateCourses
 
 
 def findcourse(request):
     
-    courses, search = searchCourses(request)
+    courses, search = filter_courses(request)
     courses_total = courses.count()
     custom_range, courses, first_index, last_index = paginateCourses(request, courses, 5, courses_total)
     

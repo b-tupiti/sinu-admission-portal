@@ -3,7 +3,7 @@ from django.db.models import Q
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 
-def searchCourses(request):
+def filter_courses(request):
     
     search = ''
     
