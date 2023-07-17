@@ -4,7 +4,7 @@ from .models.courseunit import CourseUnit
 from .utils import filter_courses, paginate_courses
 
 
-def findcourse(request):
+def search_courses(request):
     
     courses, search = filter_courses(request)
     courses_total = courses.count()
