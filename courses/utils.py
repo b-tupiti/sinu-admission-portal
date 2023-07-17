@@ -18,7 +18,7 @@ def filter_courses(request):
     return courses, search
 
 
-def paginateCourses(request, courses, results, courses_total):
+def paginate_courses(request, courses, results, courses_total):
 
     page = request.GET.get('page')
     paginator = Paginator(courses, results)
