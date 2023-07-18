@@ -93,9 +93,7 @@ class ESection(Enum):
 
 
 def update_current_section(request, application):
-    
-   
-            
+       
     if ESection.PERSONAL_DETAILS.value in request.POST:
         
         if application.current_section not in [
@@ -134,8 +132,6 @@ def update_current_section(request, application):
     
         
     return application
-
-
 
 
 def change_edit_section(request, application):
