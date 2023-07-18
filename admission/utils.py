@@ -81,7 +81,21 @@ def get_totals():
 def section_icon_clicked(request):
     return request.POST.get('_method') == 'put'
 
+
+from enum import Enum
+
+class Section(Enum):
+    PERSONAL_DETAILS = 'personal_details'
+    SPONSOR_DETAILS = 'sponsor_details'
+    EDUCATION_BACKGROUND = 'education_background'
+    EMPLOYMENT_HISTORY = 'employment_history'
+    DECLARATION = 'declaration'
+
+
 def update_current_section(request, application):
+    
+    print(request.POST)
+    print(application.edit_section)
     
     if 'to_personal_details' in request.POST:
                 
@@ -123,20 +137,23 @@ def update_current_section(request, application):
         
     return application
 
+
+
+
 def change_edit_section(request, application):
-    if 'personal_details' in request.POST:    
-        application.edit_section = Section.PERSONAL_DETAILS
+    if Section.PERSONAL_DETAILS.value in request.POST:    
+        application.edit_section = Section.PERSONAL_DETAILS.value
                      
-    elif 'sponsor_details' in request.POST:
-        application.edit_section = Section.SPONSOR_DETAILS
+    elif Section.SPONSOR_DETAILS.value in request.POST:
+        application.edit_section = Section.SPONSOR_DETAILS.value
     
-    elif 'education_background' in request.POST:
-        application.edit_section = Section.EDUCATION_BACKGROUND
+    elif Section.EDUCATION_BACKGROUND.value in request.POST:
+        application.edit_section = Section.EDUCATION_BACKGROUND.value
         
-    elif 'employment_history' in request.POST:
-        application.edit_section = Section.EMPLOYMENT_HISTORY
+    elif Section.EMPLOYMENT_HISTORY.value in request.POST:
+        application.edit_section = Section.EMPLOYMENT_HISTORY.value
     
-    elif 'declaration' in request.POST:
-        application.edit_section = Section.DECLARATION
+    elif Section.DECLARATION.value in request.POST:
+        application.edit_section = Section.DECLARATION.value
             
     return application
