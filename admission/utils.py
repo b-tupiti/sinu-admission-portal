@@ -84,7 +84,7 @@ def section_icon_clicked(request):
 
 from enum import Enum
 
-class Section(Enum):
+class ESection(Enum):
     PERSONAL_DETAILS = 'personal_details'
     SPONSOR_DETAILS = 'sponsor_details'
     EDUCATION_BACKGROUND = 'education_background'
@@ -94,15 +94,9 @@ class Section(Enum):
 
 def update_current_section(request, application):
     
-    print(request.POST)
-    print(application.edit_section)
-    
-    if 'to_personal_details' in request.POST:
-                
-        application.current_section = Section.PERSONAL_DETAILS
-        application.edit_section = Section.PERSONAL_DETAILS
+   
             
-    elif 'to_sponsor_details' in request.POST:
+    if ESection.PERSONAL_DETAILS.value in request.POST:
         
         if application.current_section not in [
             Section.EDUCATION_BACKGROUND, 
@@ -112,7 +106,7 @@ def update_current_section(request, application):
             
         application.edit_section = Section.SPONSOR_DETAILS
         
-    elif 'to_education_background' in request.POST:
+    elif ESection.SPONSOR_DETAILS.value in request.POST:
         
         if application.current_section not in [
             Section.EMPLOYMENT_HISTORY, 
@@ -121,7 +115,7 @@ def update_current_section(request, application):
                 
         application.edit_section = Section.EDUCATION_BACKGROUND
         
-    elif 'to_employment_history' in request.POST:
+    elif ESection.EDUCATION_BACKGROUND.value in request.POST:
         
         if application.current_section not in [
             Section.DECLARATION]:
@@ -129,9 +123,13 @@ def update_current_section(request, application):
         
         application.edit_section = Section.EMPLOYMENT_HISTORY
         
-    elif 'to_declaration' in request.POST:
+    elif ESection.EMPLOYMENT_HISTORY.value in request.POST:
         application.current_section = Section.DECLARATION
         application.edit_section = Section.DECLARATION
+        
+    else:      
+        application.current_section = Section.PERSONAL_DETAILS
+        application.edit_section = Section.PERSONAL_DETAILS
     
     
         
@@ -141,19 +139,19 @@ def update_current_section(request, application):
 
 
 def change_edit_section(request, application):
-    if Section.PERSONAL_DETAILS.value in request.POST:    
-        application.edit_section = Section.PERSONAL_DETAILS.value
+    if ESection.PERSONAL_DETAILS.value in request.POST:    
+        application.edit_section = Section.PERSONAL_DETAILS
                      
-    elif Section.SPONSOR_DETAILS.value in request.POST:
-        application.edit_section = Section.SPONSOR_DETAILS.value
+    elif ESection.SPONSOR_DETAILS.value in request.POST:
+        application.edit_section = Section.SPONSOR_DETAILS
     
-    elif Section.EDUCATION_BACKGROUND.value in request.POST:
-        application.edit_section = Section.EDUCATION_BACKGROUND.value
+    elif ESection.EDUCATION_BACKGROUND.value in request.POST:
+        application.edit_section = Section.EDUCATION_BACKGROUND
         
-    elif Section.EMPLOYMENT_HISTORY.value in request.POST:
-        application.edit_section = Section.EMPLOYMENT_HISTORY.value
+    elif ESection.EMPLOYMENT_HISTORY.value in request.POST:
+        application.edit_section = Section.EMPLOYMENT_HISTORY
     
-    elif Section.DECLARATION.value in request.POST:
-        application.edit_section = Section.DECLARATION.value
+    elif ESection.DECLARATION.value in request.POST:
+        application.edit_section = Section.DECLARATION
             
     return application
