@@ -34,7 +34,8 @@ def create_new_application(request):
         login(request, user)
         application = create_new_admission_application_for_user(user, course)
         
-        return redirect(reverse('personal-details',args=[application.id]))
+        return redirect(reverse('application',args=[application.id]))
+  
   
 @login_required(login_url='login')
 def application(request, pk):
