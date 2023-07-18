@@ -100,6 +100,5 @@ http://enrollonline.sinu.edu.sb
 
 - Separate Frontend with React and Next.js
 
-- Convert current App to Django Rest APIs that works
-  with the Frontend
+- Convert current App to Django Rest APIs that recieves requests from the Frontend
 
