@@ -54,7 +54,7 @@ def application(request, pk):
     if application.application_state == ApplicationState.SUBMITTED:
         return redirect('dashboard')
     
-    # handles POST request from the progress bar icons, mext button, and submit button
+    # handles POST request from the progress bar icons, next button, and submit button
     if request.method == 'POST':
         
         if section_icon_clicked(request):
