@@ -1,5 +1,13 @@
 from django.contrib import admin
-from .models import Application
+from .models import Application, SponsorshipLetter
+
+
+
+class SponsorshipLetterAdmin(admin.ModelAdmin):
+    list_display=('file','application')
+
+
+admin.site.register(SponsorshipLetter, SponsorshipLetterAdmin)
 
 
 class ApplicationAdmin(admin.ModelAdmin):
