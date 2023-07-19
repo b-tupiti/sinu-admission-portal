@@ -1,4 +1,5 @@
-from .models import ApplicationState, Application, Section
+from django.db import IntegrityError
+from .models import ApplicationState, Application, Section, SponsorshipLetter
 from courses.models.course import Course
 from utils.convert_date import convert_date_format
 from enum import Enum
@@ -40,14 +41,38 @@ def save_personal_details(request, application):
     application.save()
     
     
-def save_sponsor_details(request, application): 
+def save_sponsor_details(request, application):
+    
+    if request.FILES.get('sponsorship_letter'):          
+       _save_or_replace_sponsorship_letter(request, application)
+            
     application.sponsor_type = _sponsor_type(request.POST.get('sponsor_type'))
     application.sponsor_name = request.POST.get('sponsor_name')
     application.sponsor_email = request.POST.get('sponsor_email')
     application.sponsor_phone_number = request.POST.get('sponsor_phone_number')
     application.sponsor_address = request.POST.get('sponsor_address')
     application.save()
-    
+
+  
+def _save_or_replace_sponsorship_letter(request, application):
+    try:
+            
+            letter = SponsorshipLetter(
+                file=request.FILES.get('sponsorship_letter'),
+                application=application,
+            )
+            letter.save()
+            
+    except IntegrityError as e:
+        
+        SponsorshipLetter.objects.filter(application=application).delete()
+        letter = SponsorshipLetter(
+            file=request.FILES.get('sponsorship_letter'),
+            application=application,
+        )
+        
+        letter.save() 
+        
     
 def _sponsor_type(sponsor_type):
     if sponsor_type == 'Private':
