@@ -351,17 +351,24 @@ class Document(models.Model):
     """
     Document model
     """
-    file = models.FileField(upload_to='documents/')
-    application = models.ForeignKey(Application, on_delete=models.CASCADE)
     
+    file = models.FileField(upload_to='documents/')
     created = models.DateTimeField(auto_now_add=True)
     id = models.UUIDField(default=uuid.uuid4, unique=True,
                           primary_key=True, editable=False)   
     
+    class Meta:
+        abstract = True
+        
     def __str__(self):
-        filename = self.file.name.split('/')[-1]
-        return filename
+        return self.file.name.split('/')[-1]
+        
    
+   
+class SponsorshipLetter(Document):
+    application = models.OneToOneField(Application, related_name="sponsor_letter", on_delete=models.CASCADE)
+    
+
     
 class ApplicationToken(models.Model):
     """
