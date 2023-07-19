@@ -44,7 +44,7 @@
                             
                                 <div class="file has-name is-small">
                                     <label class="file-label">
-                                      <input class="file-input" type="file" name="resume">
+                                      <input class="file-input" type="file" name="sponsorship_letter">
                                       <span class="file-cta">
                                         <span class="file-icon">
                                           <i class="fas fa-upload"></i>
@@ -54,7 +54,11 @@
                                         </span>
                                       </span>
                                       <span class="file-name">
-                                        upload a sponsorship letter
+                                        {% if application.sponsor_letter %}
+                                        {{application.sponsor_letter}}
+                                        {% else %}
+                                        upload a sponsorship letter 
+                                        {% endif %}
                                       </span>
                                     </label>
                                   </div>
