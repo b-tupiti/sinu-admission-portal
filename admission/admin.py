@@ -1,11 +1,15 @@
 from django.contrib import admin
-from .models import Application, SponsorshipLetter
+from .models import Application, SponsorshipLetter, HSDocument
 
+
+class HSDocumentAdmin(admin.ModelAdmin):
+    list_display=('file','application', 'form_level', 'document_type')
+
+admin.site.register(HSDocument, HSDocumentAdmin)
 
 
 class SponsorshipLetterAdmin(admin.ModelAdmin):
     list_display=('file','application')
-
 
 admin.site.register(SponsorshipLetter, SponsorshipLetterAdmin)
 
