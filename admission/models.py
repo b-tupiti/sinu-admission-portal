@@ -382,7 +382,7 @@ class DocumentType(models.TextChoices):
 class HSDocument(Document):
     application = models.ForeignKey(
         Application,
-        related_name="high_school_document", 
+        related_name="high_school_documents", 
         on_delete=models.CASCADE
     )
     form_level = models.CharField(
