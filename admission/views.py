@@ -1,12 +1,12 @@
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .models import Application, ApplicationState
+from .models import Application, ApplicationState, Section, HSFormLevel, DocumentType
 from courses.models.course import Course
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.contrib.auth import authenticate,login
 from users.utils import create_applicant_account
-from admission.utils import create_new_admission_application_for_user, get_course_from_code, update_current_section, change_edit_section, section_icon_clicked
+from admission.utils import create_new_admission_application_for_user, get_course_from_code, update_current_section, change_edit_section, section_icon_clicked, add_documents_to_context
 from django.http import Http404
 
 
@@ -75,11 +75,20 @@ def application(request, pk):
             application = update_current_section(request, application)
         
         application.save()
-            
+    
     context = {
         'application': application
     }
     
+    # before returning the application to templates, check which section (edit_section)   
+    # will be rendered in the template so that the appropriate document names (if there are any)    
+    # for that section will be made available to be rendered.
+    # filtering documents to be returned inside the context
+    
+    if application.edit_section == Section.EDUCATION_BACKGROUND: 
+        documents = application.high_school_documents.all()
+        context = add_documents_to_context(documents, application, context)
+        
     return render(request, 'application/application-form-template.html', context)
 
 

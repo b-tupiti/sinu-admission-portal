@@ -1,5 +1,5 @@
 from django.db import IntegrityError
-from .models import ApplicationState, Application, Section, SponsorshipLetter
+from .models import ApplicationState, Application, Section, SponsorshipLetter, HSDocument, HSFormLevel, DocumentType
 from courses.models.course import Course
 from utils.convert_date import convert_date_format
 from enum import Enum
@@ -83,7 +83,67 @@ def _sponsor_type(sponsor_type):
         return 'sponsored'
 
 
+def _save_or_replace_document(file, application, document_type, form_level):
+        
+    document = HSDocument.objects.filter(
+            application=application,
+            form_level=form_level, 
+            document_type=document_type
+            )
+    
+    if document.exists():
+        document.delete()
+        print('document exists already, deleting it, ready for replacement.')
+    
+    document = HSDocument(
+        file=file,
+        application=application,
+        form_level=form_level, 
+        document_type=document_type
+    )
+    
+    document.save()
+            
+    
+    
 def save_education_background(request, application):
+    
+    # form 3 documents
+    if request.FILES.get('form_3_certificate'):
+       file = request.FILES.get('form_3_certificate')          
+       _save_or_replace_document(file, application, DocumentType.CERTIFICATE, HSFormLevel.FORM_3)
+       
+    if request.FILES.get('form_3_transcript'):
+       file = request.FILES.get('form_3_transcript')          
+       _save_or_replace_document(file, application, DocumentType.TRANSCRIPT, HSFormLevel.FORM_3)
+    
+    # form 5 documents  
+    if request.FILES.get('form_5_certificate'):
+       file = request.FILES.get('form_5_certificate')          
+       _save_or_replace_document(file, application, DocumentType.CERTIFICATE, HSFormLevel.FORM_5)
+       
+    if request.FILES.get('form_5_transcript'):
+       file = request.FILES.get('form_5_transcript')          
+       _save_or_replace_document(file, application, DocumentType.TRANSCRIPT, HSFormLevel.FORM_5)
+       
+    # form 6 documents  
+    if request.FILES.get('form_6_certificate'):
+       file = request.FILES.get('form_6_certificate')          
+       _save_or_replace_document(file, application, DocumentType.CERTIFICATE, HSFormLevel.FORM_6)
+       
+    if request.FILES.get('form_6_transcript'):
+       file = request.FILES.get('form_6_transcript')          
+       _save_or_replace_document(file, application, DocumentType.TRANSCRIPT, HSFormLevel.FORM_6)
+       
+    # foundation documents  
+    if request.FILES.get('foundation_certificate'):
+       file = request.FILES.get('foundation_certificate')          
+       _save_or_replace_document(file, application, DocumentType.CERTIFICATE, HSFormLevel.FOUNDATION)
+       
+    if request.FILES.get('foundation_transcript'):
+       file = request.FILES.get('foundation_transcript')          
+       _save_or_replace_document(file, application, DocumentType.TRANSCRIPT, HSFormLevel.FOUNDATION)
+       
     application.third_form_school = request.POST.get('third_form_school')
     application.third_form_year = request.POST.get('third_form_year')
     application.fifth_form_school = request.POST.get('fifth_form_school')
@@ -99,6 +159,8 @@ def section_icon_clicked(request):
     return request.POST.get('_method') == 'put'
 
 
+# This function fires when the next button is clicked, it checks where the current section is
+# and sets the new current section to the one on its right. It always goes left --> right
 def update_current_section(request, application):
        
     if ESection.PERSONAL_DETAILS.value in request.POST:
@@ -160,6 +222,65 @@ def change_edit_section(request, application):
             
     return application
 
+
+def add_documents_to_context(documents, application, context):
+    form_3_certificate = documents.filter(
+        application=application,
+        form_level=HSFormLevel.FORM_3,
+        document_type=DocumentType.CERTIFICATE
+        ).first()
+    context['form_3_certificate'] = form_3_certificate
+        
+    form_3_transcript = documents.filter(
+        application=application,
+        form_level=HSFormLevel.FORM_3,
+        document_type=DocumentType.TRANSCRIPT
+        ).first()
+    context['form_3_transcript'] = form_3_transcript
+        
+    form_5_certificate = documents.filter(
+        application=application,
+        form_level=HSFormLevel.FORM_5,
+        document_type=DocumentType.CERTIFICATE
+        ).first()
+    context['form_5_certificate'] = form_5_certificate
+    
+    form_5_transcript = documents.filter(
+        application=application,
+        form_level=HSFormLevel.FORM_5,
+        document_type=DocumentType.TRANSCRIPT
+        ).first()
+    context['form_5_transcript'] = form_5_transcript
+        
+    form_6_certificate = documents.filter(
+        application=application,
+        form_level=HSFormLevel.FORM_6,
+        document_type=DocumentType.CERTIFICATE
+        ).first()
+    context['form_6_certificate'] = form_6_certificate
+    
+    form_6_transcript = documents.filter(
+        application=application,
+        form_level=HSFormLevel.FORM_6,
+        document_type=DocumentType.TRANSCRIPT
+        ).first()
+    context['form_6_transcript'] = form_6_transcript
+    
+    foundation_certificate = documents.filter(
+        application=application,
+        form_level=HSFormLevel.FOUNDATION,
+        document_type=DocumentType.CERTIFICATE
+        ).first()
+    context['foundation_certificate'] = foundation_certificate
+    
+    foundation_transcript = documents.filter(
+        application=application,
+        form_level=HSFormLevel.FOUNDATION,
+        document_type=DocumentType.TRANSCRIPT
+        ).first()
+    context['foundation_transcript'] = foundation_transcript
+    
+    return context
 
 
 def get_totals():
