@@ -6,8 +6,16 @@ from django.shortcuts import redirect
 from django.urls import reverse
 from django.contrib.auth import authenticate,login
 from users.utils import create_applicant_account
-from admission.utils import create_new_admission_application_for_user, get_course_from_code, update_current_section, change_edit_section, section_icon_clicked, add_documents_to_context
 from django.http import Http404
+from admission.utils import ( 
+    create_new_admission_application_for_user, 
+    get_course_from_code, 
+    update_current_section, 
+    change_edit_section, 
+    section_icon_clicked, 
+    add_documents_to_context
+)
+
 
 
 
