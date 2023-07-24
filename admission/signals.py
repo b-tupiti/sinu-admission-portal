@@ -1,13 +1,13 @@
-from django.db.models.signals import post_save
-from admission.models import Application, ApplicationToken
-from django.core.mail import send_mail
-from config import settings
-from django.dispatch import receiver
-import time
-import threading
-from django.template.loader import render_to_string
-import uuid
-from django.urls import reverse
+# from django.db.models.signals import post_save
+# from admission.models import Application, ApplicationToken
+# from django.core.mail import send_mail
+# from config import settings
+# from django.dispatch import receiver
+# import time
+# import threading
+# from django.template.loader import render_to_string
+# import uuid
+# from django.urls import reverse
 
 
 # @receiver(post_save,sender=Application)
