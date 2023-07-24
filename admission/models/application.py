@@ -215,39 +215,6 @@ class Application(models.Model):
         blank=True,
     )
     
-    institution = models.CharField(
-        max_length=255,
-        verbose_name='Instition',
-        null=True,
-        blank=True,
-    )
-    
-    course = models.CharField(
-        max_length=255,
-        verbose_name='Course / Qualification',
-        null=True,
-        blank=True,
-    )
-    
-    year_start = models.IntegerField(
-        verbose_name='Year Start',
-        null=True,
-        blank=True,
-    )
-    
-    year_end = models.IntegerField(
-        verbose_name='Year Start',
-        null=True,
-        blank=True,
-    )
-    
-    major = models.CharField(
-        max_length=255,
-        verbose_name='Major Field of Study',
-        null=True,
-        blank=True,
-    )
-    
     """EMPLOYMENT History"""
     
     current_organization = models.CharField(
