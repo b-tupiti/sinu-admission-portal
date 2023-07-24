@@ -397,14 +397,3 @@ class HSDocument(Document):
     )
 
     
-class ApplicationToken(models.Model):
-    """
-    Unique Token for each application. Used for generating URL link to upload receipt.
-    """
-    application = models.OneToOneField(Application,on_delete=models.CASCADE)
-    created = models.DateTimeField(auto_now_add=True)
-    id = models.UUIDField(default=uuid.uuid4, unique=True,
-                          primary_key=True, editable=False) 
-    
-    def __str__(self):
-        return str(self.id)
