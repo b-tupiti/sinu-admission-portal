@@ -1,5 +1,6 @@
 from django.db import IntegrityError
-from .models import ApplicationState, Application, Section, SponsorshipLetter, HSDocument, HSFormLevel, DocumentType
+from .models.application import ApplicationState, Application, Section
+from .models.document import SponsorshipLetter, HSDocument, HSFormLevel, DocumentType
 from courses.models.course import Course
 from utils.convert_date import convert_date_format
 from enum import Enum

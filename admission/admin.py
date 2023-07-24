@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Application, SponsorshipLetter, HSDocument
+from .models.application import Application
+from .models.document import SponsorshipLetter, HSDocument
 
 
 class HSDocumentAdmin(admin.ModelAdmin):

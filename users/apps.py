@@ -6,4 +6,5 @@ class UsersConfig(AppConfig):
     name = 'users'
 
     def ready(self):
+        # pass
         from .models.user import User

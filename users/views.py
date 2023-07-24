@@ -4,7 +4,8 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from admission.utils import get_totals
-from admission.models import Application, Document
+from admission.models.application import Application
+from admission.models.document import Document
 from .utils import filter_applications, get_group
 from django.db.models import Q
 from django.urls import reverse      
