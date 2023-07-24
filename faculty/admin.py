@@ -1,5 +1,8 @@
 from django.contrib import admin
-from .models import Faculty, School, Department
+from .models.faculty import Faculty
+from .models.school import School
+from .models.department import Department
+
 
 class FacultyAdmin(admin.ModelAdmin):
     pass
