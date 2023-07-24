@@ -1,6 +1,6 @@
-from django.forms import ModelForm, ClearableFileInput, TextInput, EmailInput, NumberInput, DateInput, Select, FileInput, Textarea
-from .models import Application, Document
-from django.core.exceptions import ValidationError
+# from django.forms import ModelForm, ClearableFileInput, TextInput, EmailInput, NumberInput, DateInput, Select, FileInput, Textarea
+# from .models import Application, Document
+# from django.core.exceptions import ValidationError
 
 # class ApplicationForm(ModelForm):
 #     class Meta:
