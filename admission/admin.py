@@ -6,18 +6,18 @@ from .models.institution import Institution
 
 class InstitutionAdmin(admin.ModelAdmin):
     list_display = ('application', 'name', 'course', 'year_start', 'year_end', 'major')
-
+    
 admin.site.register(Institution, InstitutionAdmin)
 
 
 class HSDocumentAdmin(admin.ModelAdmin):
-    list_display=('file','application', 'form_level', 'document_type')
+    list_display = ('file', 'application', 'form_level', 'document_type')
 
 admin.site.register(HSDocument, HSDocumentAdmin)
 
 
 class SponsorshipLetterAdmin(admin.ModelAdmin):
-    list_display=('file','application')
+    list_display = ('file', 'application')
 
 admin.site.register(SponsorshipLetter, SponsorshipLetterAdmin)
 
