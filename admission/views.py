@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .models import Application, ApplicationState, Section, HSFormLevel, DocumentType
+from .models import Application, ApplicationState, Section
 from courses.models.course import Course
 from django.shortcuts import redirect
 from django.urls import reverse
