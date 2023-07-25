@@ -1,0 +1,533 @@
+<div class="application-section-header p-3">
+    Education Background
+</div> 
+                
+<div class="application-content-wrapper" >
+
+    
+    
+    <div class="application-content">
+        
+
+        <section>
+
+            <div class="p-3 mb-3" style="border-bottom:1px solid rgba(0, 0, 0, 0.1);background:#f5f5f5;border-top-left-radius:5px;border-top-right-radius:5px;">
+              <h2 style="font-weight:bold;"> Secondary and Pre-certificate</h2>
+              <p class="mt-1 is-size-7" style="color:rgba(0, 0, 0,.6)">
+                NOTE: You must attach Certified Academic Transcript and Certificates for highest Form reached. Current form 5, 6 and 7
+                students need to get reference letter from your School's Careers Master and/or Principal. School based semester 1 results
+                must be attached.
+              </p>
+            </div>
+  
+  
+            
+              
+              <div class="columns mt-3 ml-1 mr-1 is-align-items-center pl-2 pr-2" style="border:1px solid rgba(0, 0, 0,.1);border-radius:5px">
+                
+                <div class="column is-full " style="min-width:120px; max-width:fit-content;">
+                  <div class="has-text-weight-bold is-size-6" style="text-align: right;">Third Form</div>
+                </div>
+                
+                <div class="column is-one-third">
+                  <div class="field is-horizontal  ">
+                    <div class="field-label is-normal">
+                      <label class="label has-text-weight-normal">School</label>
+                    </div>
+                    <div class="field-body">
+                      <div class="field">
+                        <div class="control">
+                          <input 
+                          name="third_form_school"
+                          class="input" 
+                          type="text"
+                          value="{% if application.third_form_school %}{{application.third_form_school }}{%endif%}"
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+      
+                <div class="column ">
+                  <div class="field is-horizontal  ">
+                    <div class="field-label is-normal">
+                      <label class="label has-text-weight-normal">Year</label>
+                    </div>
+                    <div class="field-body">
+                      <div class="field">
+                        <div class="control">
+                          <input 
+                            name="third_form_year"
+                            class="input" 
+                            type="text" 
+                            placeholder=""
+                            value="{% if application.third_form_year %}{{application.third_form_year }}{%endif%}"
+                            >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+      
+      
+                <div class="column">
+                  <div class="field is-horizontal ">
+                    <div class="field-label is-normal">
+                      <label class="label has-text-weight-normal is-size-7 " style="color:#8d8d8d">Certificate </label>
+                    </div>
+                    <div class="field-body">
+                      <div class="field">
+                        <div class="control">
+                          <div class="file has-name is-small">
+                              <label class="file-label">
+                                <input class="file-input" type="file" name="form_3_certificate">
+                                <span class="file-cta">
+                                  <span class="file-icon">
+                                    <i class="fas fa-upload"></i>
+                                  </span>
+                                  <span class="file-label">
+                                  browse 
+                                  </span>
+                                </span>
+                                <span class="file-name">
+                                  {% if form_3_certificate %}
+                                  {{ form_3_certificate }}
+                                  {% else %}
+                                  ... 
+                                  {% endif %}
+                                </span>
+                              </label>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+      
+                <div class="column">
+                  <div class="field is-horizontal ">
+                    <div class="field-label is-normal">
+                      <label class="label has-text-weight-normal is-size-7 " style="color:#8d8d8d">Transcript </label>
+                    </div>
+                    <div class="field-body">
+                      <div class="field">
+                        <div class="control">
+                          <div class="file has-name is-small">
+                              <label class="file-label">
+                                <input class="file-input" type="file" name="form_3_transcript">
+                                <span class="file-cta">
+                                  <span class="file-icon">
+                                    <i class="fas fa-upload"></i>
+                                  </span>
+                                  <span class="file-label">
+                                  browse 
+                                  </span>
+                                </span>
+                                <span class="file-name">
+                                  {% if form_3_transcript %}
+                                  {{ form_3_transcript }}
+                                  {% else %}
+                                  ... 
+                                  {% endif %}
+                                </span>
+                              </label>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+      
+              </div>
+      
+      
+              <div class="columns mt-3 ml-1 mr-1 is-align-items-center pl-2 pr-2" style="border:1px solid rgba(0, 0, 0,.1);border-radius:5px">
+                
+                <div class="column is-full " style="min-width:120px; max-width:fit-content; ">
+                  <div class="has-text-weight-bold is-size-6" style="text-align: right;">Fifth Form</div>
+                </div>
+                
+                <div class="column is-one-third">
+                  <div class="field is-horizontal  ">
+                    <div class="field-label is-normal">
+                      <label class="label has-text-weight-normal">School</label>
+                    </div>
+                    <div class="field-body">
+                      <div class="field">
+                        <div class="control">
+                          <input 
+                            name="fifth_form_school"
+                            class="input" 
+                            type="text" 
+                            value="{% if application.fifth_form_school %}{{application.fifth_form_school }}{%endif%}"
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+      
+                <div class="column ">
+                  <div class="field is-horizontal  ">
+                    <div class="field-label is-normal">
+                      <label class="label has-text-weight-normal">Year</label>
+                    </div>
+                    <div class="field-body">
+                      <div class="field">
+                        <div class="control">
+                          <input 
+                            name="fifth_form_year"
+                            class="input" 
+                            type="text" 
+                            value="{% if application.fifth_form_year %}{{application.fifth_form_year }}{%endif%}"
+                            >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+      
+      
+                <div class="column">
+                  <div class="field is-horizontal ">
+                    <div class="field-label is-normal">
+                      <label class="label has-text-weight-normal is-size-7 " style="color:#8d8d8d">Certificate </label>
+                    </div>
+                    <div class="field-body">
+                      <div class="field">
+                        <div class="control">
+                          <div class="file has-name is-small">
+                              <label class="file-label">
+                                <input class="file-input" type="file" name="form_5_certificate">
+                                <span class="file-cta">
+                                  <span class="file-icon">
+                                    <i class="fas fa-upload"></i>
+                                  </span>
+                                  <span class="file-label">
+                                  browse 
+                                  </span>
+                                </span>
+                                <span class="file-name">
+                                  {% if form_5_certificate %}
+                                  {{ form_5_certificate }}
+                                  {% else %}
+                                  ... 
+                                  {% endif %}
+                                </span>
+                              </label>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+      
+                <div class="column">
+                  <div class="field is-horizontal ">
+                    <div class="field-label is-normal">
+                      <label class="label has-text-weight-normal is-size-7 " style="color:#8d8d8d">Transcript </label>
+                    </div>
+                    <div class="field-body">
+                      <div class="field">
+                        <div class="control">
+                          <div class="file has-name is-small">
+                              <label class="file-label">
+                                <input class="file-input" type="file" name="form_5_transcript">
+                                <span class="file-cta">
+                                  <span class="file-icon">
+                                    <i class="fas fa-upload"></i>
+                                  </span>
+                                  <span class="file-label">
+                                  browse 
+                                  </span>
+                                </span>
+                                <span class="file-name">
+                                  {% if form_5_transcript %}
+                                  {{ form_5_transcript }}
+                                  {% else %}
+                                  ... 
+                                  {% endif %}
+                                </span>
+                              </label>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+      
+              </div>
+      
+              <div class="columns mt-3 ml-1 mr-1 is-align-items-center pl-2 pr-2" style="border:1px solid rgba(0, 0, 0,.1);border-radius:5px">
+                
+                <div class="column is-full " style="min-width:120px; max-width:fit-content; ">
+                  <div class="has-text-weight-bold is-size-6" style="text-align: right;">Sixth Form</div>
+                </div>
+                
+                <div class="column is-one-third">
+                  <div class="field is-horizontal  ">
+                    <div class="field-label is-normal">
+                      <label class="label has-text-weight-normal">School</label>
+                    </div>
+                    <div class="field-body">
+                      <div class="field">
+                        <div class="control">
+                          <input 
+                            name="sixth_form_school"
+                            class="input" 
+                            type="text" 
+                            value="{% if application.sixth_form_school %}{{application.sixth_form_school }}{%endif%}"
+                            >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+      
+                <div class="column ">
+                  <div class="field is-horizontal  ">
+                    <div class="field-label is-normal">
+                      <label class="label has-text-weight-normal">Year</label>
+                    </div>
+                    <div class="field-body">
+                      <div class="field">
+                        <div class="control">
+                          <input 
+                            name="sixth_form_year"
+                            class="input" 
+                            type="text" 
+                            value="{% if application.sixth_form_year %}{{application.sixth_form_year }}{%endif%}"
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+      
+      
+                <div class="column">
+                  <div class="field is-horizontal ">
+                    <div class="field-label is-normal">
+                      <label class="label has-text-weight-normal is-size-7 " style="color:#8d8d8d">Certificate </label>
+                    </div>
+                    <div class="field-body">
+                      <div class="field">
+                        <div class="control">
+                          <div class="file has-name is-small">
+                              <label class="file-label">
+                                <input class="file-input" type="file" name="form_6_certificate">
+                                <span class="file-cta">
+                                  <span class="file-icon">
+                                    <i class="fas fa-upload"></i>
+                                  </span>
+                                  <span class="file-label">
+                                  browse 
+                                  </span>
+                                </span>
+                                <span class="file-name">
+                                  {% if form_6_certificate %}
+                                  {{ form_6_certificate }}
+                                  {% else %}
+                                  ... 
+                                  {% endif %}
+                                </span>
+                              </label>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+      
+                <div class="column">
+                  <div class="field is-horizontal ">
+                    <div class="field-label is-normal">
+                      <label class="label has-text-weight-normal is-size-7 " style="color:#8d8d8d">Transcript </label>
+                    </div>
+                    <div class="field-body">
+                      <div class="field">
+                        <div class="control">
+                          <div class="file has-name is-small">
+                              <label class="file-label">
+                                <input class="file-input" type="file" name="form_6_transcript">
+                                <span class="file-cta">
+                                  <span class="file-icon">
+                                    <i class="fas fa-upload"></i>
+                                  </span>
+                                  <span class="file-label">
+                                  browse 
+                                  </span>
+                                </span>
+                                <span class="file-name">
+                                  {% if form_6_transcript %}
+                                  {{ form_6_transcript }}
+                                  {% else %}
+                                  ... 
+                                  {% endif %}
+                                </span>
+                              </label>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+      
+              </div>
+      
+              <div class="columns mt-3 ml-1 mr-1 is-align-items-center pl-2 pr-2" style="border:1px solid rgba(0, 0, 0,.1);border-radius:5px">
+                
+                <div class="column is-full " style="min-width:120px; max-width:fit-content;">
+                  <div class="has-text-weight-bold is-size-6 " style="text-align: right;">Foundation</div>
+                </div>
+                
+                <div class="column is-one-third">
+                  <div class="field is-horizontal  ">
+                    <div class="field-label is-normal">
+                      <label class="label has-text-weight-normal">School</label>
+                    </div>
+                    <div class="field-body">
+                      <div class="field">
+                        <div class="control">
+                          <input 
+                            name="foundation_school"
+                            class="input" 
+                            type="text" 
+                            value="{% if application.foundation_school %}{{ application.foundation_school }}{%endif%}"
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+      
+                <div class="column ">
+                  <div class="field is-horizontal  ">
+                    <div class="field-label is-normal">
+                      <label class="label has-text-weight-normal">Year</label>
+                    </div>
+                    <div class="field-body">
+                      <div class="field">
+                        <div class="control">
+                          <input 
+                            name="foundation_year"
+                            class="input" 
+                            type="text" 
+                            value="{% if application.foundation_year %}{{application.foundation_year }}{%endif%}"
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+      
+      
+                <div class="column">
+                  <div class="field is-horizontal ">
+                    <div class="field-label is-normal">
+                      <label class="label has-text-weight-normal is-size-7 " style="color:#8d8d8d">Certificate </label>
+                    </div>
+                    <div class="field-body">
+                      <div class="field">
+                        <div class="control">
+                          <div class="file has-name is-small">
+                              <label class="file-label">
+                                <input class="file-input" type="file" name="foundation_certificate">
+                                <span class="file-cta">
+                                  <span class="file-icon">
+                                    <i class="fas fa-upload"></i>
+                                  </span>
+                                  <span class="file-label">
+                                  browse 
+                                  </span>
+                                </span>
+                                <span class="file-name">
+                                  {% if foundation_certificate %}
+                                  {{ foundation_certificate }}
+                                  {% else %}
+                                  ... 
+                                  {% endif %}
+                                </span>
+                              </label>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+      
+                <div class="column">
+                  <div class="field is-horizontal ">
+                    <div class="field-label is-normal">
+                      <label class="label has-text-weight-normal is-size-7 " style="color:#8d8d8d">Transcript </label>
+                    </div>
+                    <div class="field-body">
+                      <div class="field">
+                        <div class="control">
+                          <div class="file has-name is-small">
+                              <label class="file-label">
+                                <input class="file-input" type="file" name="foundation_transcript">
+                                <span class="file-cta">
+                                  <span class="file-icon">
+                                    <i class="fas fa-upload"></i>
+                                  </span>
+                                  <span class="file-label">
+                                  browse 
+                                  </span>
+                                </span>
+                                <span class="file-name">
+                                  {% if foundation_transcript %}
+                                  {{ foundation_transcript }}
+                                  {% else %}
+                                  ... 
+                                  {% endif %}
+                                </span>
+                              </label>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+      
+              </div>
+  
+            
+  
+          </section>
+  
+          <section>
+  
+            <div class="p-3 mb-3 mt-5" style="border-bottom:1px solid rgba(0, 0, 0, 0.1);background:#f5f5f5;border-top-left-radius:5px;border-top-right-radius:5px;">
+              <h2 style="font-weight:bold;"> Tertiary Studies Qualifications</h2>
+              <p class="mt-1 is-size-7" style="color:rgba(0, 0, 0,.6)">
+                NOTE: You must attach all Certified Academic Transcript and Certificates for the Tertiary Qualification you attained.
+              </p>
+            </div>
+              
+            {% include 'application/sections/education_background/institution-inputs.html' %}
+  
+
+              <button class=" ml-3 button is-light mt-3" style="color:rgba(68, 68, 68,.8);border:1px solid rgba(68, 68, 68,.1)">
+                <span style="color:rgba(68, 68, 68,.8)">Add Qualification</span> 
+                <i class="ml-3 fa-solid fa-plus"></i>
+              </button>
+              
+  
+          </section>
+
+    </div>
+
+    <div class="button-group">
+        <div class="field is-grouped ">
+
+            {% include 'application/save-and-exit-button.html' %}
+            
+            {% include 'application/next-button.html' %}
+        </div>
+    </div>
+
+    
+        
+</div>
