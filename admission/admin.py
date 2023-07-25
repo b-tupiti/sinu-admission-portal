@@ -1,13 +1,13 @@
 from django.contrib import admin
 from .models.application import Application
 from .models.document import SponsorshipLetter, HSDocument
-from .models.institution import Institution
+from .models.tertiary_qualification import TertiaryQualification
 
 
-class InstitutionAdmin(admin.ModelAdmin):
+class TertiaryQualificationAdmin(admin.ModelAdmin):
     list_display = ('application', 'name', 'course', 'year_start', 'year_end', 'major')
     
-admin.site.register(Institution, InstitutionAdmin)
+admin.site.register(TertiaryQualification, TertiaryQualificationAdmin)
 
 
 class HSDocumentAdmin(admin.ModelAdmin):

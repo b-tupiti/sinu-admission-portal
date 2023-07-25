@@ -2,7 +2,7 @@ from django.db import models
 from .application import Application
 
 
-class Institution(models.Model):
+class TertiaryQualification(models.Model):
     application = models.ForeignKey(
         Application,
         related_name='institutions',
