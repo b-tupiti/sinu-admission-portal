@@ -9,9 +9,9 @@
 />
 
 
-  {% include 'application/progress_bar.html' %}
+  {% include 'admission/application/progress_bar.html' %}
 
-  {% include 'application/selected_qualification.html' %}
+  {% include 'admission/application/selected_qualification.html' %}
 
 
   <section id="application-section">
@@ -35,23 +35,23 @@
                 <!-- SECTION start-->
                 {% if application.edit_section == 'personal_details' %}
                 
-                    {% include 'application/sections/personal-details.html' %}
+                    {% include 'admission/application/sections/personal-details.html' %}
                 
                 {% elif application.edit_section == 'sponsor_details' %}
 
-                    {% include 'application/sections/sponsor-details.html' %}
+                    {% include 'admission/application/sections/sponsor-details.html' %}
 
                 {% elif application.edit_section == 'education_background' %}
 
-                    {% include 'application/sections/education_background/education-background.html' %}
+                    {% include 'admission/application/sections/education_background/education-background.html' %}
 
                 {% elif application.edit_section == 'employment_history' %}
 
-                    {% include 'application/sections/employment-history.html' %}
+                    {% include 'admission/application/sections/employment-history.html' %}
 
                 {% elif application.edit_section == 'declaration' %}
 
-                    {% include 'application/sections/declaration.html' %}
+                    {% include 'admission/application/sections/declaration.html' %}
 
                 {% endif %}
                 <!-- SECTION end-->
