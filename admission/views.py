@@ -29,7 +29,7 @@ def create_new_application(request):
         course = get_course_from_code(request)
         context = {'course':course}
         
-        return render(request, 'application/create-new-application.html', context)
+        return render(request, 'admission/application/create-new-application.html', context)
     
     
     elif request.method == 'POST':     
@@ -53,11 +53,11 @@ def application(request, pk):
     try:
         application = get_object_or_404(Application, id=pk)
     except Http404:
-        return render(request, 'admission/application_404.html')
+        return render(request, 'admission/errors/application_404.html')
     
     # check if client does not own application, else render 403
     if not application.owner == request.user:
-        return render(request, 'admission/application_403.html')
+        return render(request, 'admission/errors/application_403.html')
     
     # check if application is submitted, if it is, redirect to dashboard 
     if application.application_state == ApplicationState.SUBMITTED:
@@ -97,7 +97,7 @@ def application(request, pk):
         documents = application.high_school_documents.all()
         context = add_documents_to_context(documents, application, context)
         
-    return render(request, 'application/application-form-template.html', context)
+    return render(request, 'admission/application/application-form-template.html', context)
 
 
 @login_required(login_url='login')
@@ -106,10 +106,10 @@ def application_saved(request, pk):
     try:
         application = get_object_or_404(Application, id=pk)
     except Http404:
-        return render(request, 'admission/application_404.html')
+        return render(request, 'admission/errors/application_404.html')
     
     if not application.owner == request.user:
-        return render(request, 'admission/application_403.html')
+        return render(request, 'admission/errors/application_403.html')
     
     if application.application_state == ApplicationState.SUBMITTED:
         return redirect('dashboard')
@@ -118,7 +118,7 @@ def application_saved(request, pk):
         'application': application,
     }
     
-    return render(request, 'application/application-saved.html', context)
+    return render(request, 'admission/application/application-saved.html', context)
 
 def my_admissions(request):
     return render(request, 'application/my-admissions.html')
