@@ -5,7 +5,7 @@ from .models.tertiary_qualification import TertiaryQualification
 
 
 class TertiaryQualificationAdmin(admin.ModelAdmin):
-    list_display = ('application', 'name', 'course', 'year_start', 'year_end', 'major')
+    list_display = ('application', 'institution_name', 'course', 'year_start', 'year_end', 'major')
     
 admin.site.register(TertiaryQualification, TertiaryQualificationAdmin)
 
