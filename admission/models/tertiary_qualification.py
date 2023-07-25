@@ -5,13 +5,13 @@ from .application import Application
 class TertiaryQualification(models.Model):
     application = models.ForeignKey(
         Application,
-        related_name='institutions',
+        related_name='tertiary_qualifications',
         on_delete=models.CASCADE,
     )
     
-    name = models.CharField(
+    institution_name = models.CharField(
         max_length=255,
-        verbose_name='Instition',
+        verbose_name='Name of Institution',
         null=True,
         blank=True,
     )
