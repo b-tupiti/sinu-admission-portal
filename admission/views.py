@@ -13,7 +13,7 @@ from admission.utils import (
     update_current_section, 
     change_edit_section, 
     section_icon_clicked, 
-    add_documents_to_context
+    add_documents_to_context,
 )
 
 
@@ -96,6 +96,8 @@ def application(request, pk):
     if application.edit_section == Section.EDUCATION_BACKGROUND: 
         documents = application.high_school_documents.all()
         context = add_documents_to_context(documents, application, context)
+        tertiary_qualifications = application.tertiary_qualifications.all()
+        context['tertiary_qualifications'] = tertiary_qualifications
         
     return render(request, 'admission/application/application-form-template.html', context)
 
