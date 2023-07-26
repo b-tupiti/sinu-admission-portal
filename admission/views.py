@@ -7,15 +7,11 @@ from django.urls import reverse
 from django.contrib.auth import authenticate,login
 from users.utils import create_applicant_account
 from django.http import Http404
-from admission.utils import ( 
-    create_new_admission_application_for_user, 
-    get_course_from_code, 
-    update_current_section, 
-    update_edit_section, 
-    is_put_request, 
-    add_documents_to_context,
-)
-
+from .utils.new_application import create_new_admission_application_for_user
+from .utils.request_helpers import is_put_request
+from .utils.retrieve_course import get_course_from_code
+from .utils.application_updates import update_current_section, update_edit_section
+from .utils.context_adders import add_documents_to_context
 
 
 def create_new_application(request):
