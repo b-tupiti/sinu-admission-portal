@@ -209,7 +209,7 @@ def update_current_section(request, application):
     return application
 
 
-def change_edit_section(request, application):
+def update_edit_section(request, application):
     if ESection.PERSONAL_DETAILS.value in request.POST:    
         application.edit_section = Section.PERSONAL_DETAILS
                      
