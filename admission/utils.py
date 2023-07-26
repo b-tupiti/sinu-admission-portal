@@ -282,22 +282,3 @@ def add_documents_to_context(documents, application, context):
     context['foundation_transcript'] = foundation_transcript
     
     return context
-
-
-def get_totals():
-    
-    total = Application.objects.all().count()
-    pending = Application.objects.filter(application_state=ApplicationState.SUBMITTED).count()
-    under_assessment = Application.objects.filter(application_state=ApplicationState.DRAFT).count()
-
-    totals = {
-        'total': total,
-        # 'in_process': total - enrolment_complete,
-        # 'pending':pending,
-        # 'under_assessment': under_assessment,
-        # 'offer_letter_issued': offer_letter_issued,
-        # 'cleared_for_enrolment': cleared_for_enrolment,
-        # 'enrolment_complete': enrolment_complete,
-    }
-    
-    return totals

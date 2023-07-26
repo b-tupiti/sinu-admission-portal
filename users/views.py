@@ -3,15 +3,10 @@ from .models.user import User
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from admission.utils import get_totals
 from admission.models.application import Application
 from admission.models.document import Document
 from .utils import filter_applications, get_group
-from django.db.models import Q
 from django.urls import reverse      
-
-### 
-
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.models import Group
 
@@ -84,7 +79,6 @@ def staff_dashboard(request):
     context = {
         'page': page,
         'group': group,
-        'totals': get_totals(),
     }
     return render(request, 'users/dashboard/staff_dashboard.html',context)
 
@@ -102,7 +96,6 @@ def applications(request, filter=None):
         'page': page,
         'pending_applications': applications,
         'group': group,
-        'totals': get_totals(),
     }
     return render(request, 'users/applications_list.html', context)
 
@@ -144,7 +137,6 @@ def application_detail(request, pk):
         'group': group,
         'application': application,
         'documents': documents,
-        'totals': get_totals(),
     }
     return render(request, 'users/application/application_template.html', context)
 
