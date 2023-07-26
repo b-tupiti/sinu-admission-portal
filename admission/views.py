@@ -121,6 +121,3 @@ def application_saved(request, pk):
     }
     
     return render(request, 'admission/application/application-saved.html', context)
-
-def my_admissions(request):
-    return render(request, 'application/my-admissions.html')
