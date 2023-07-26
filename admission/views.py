@@ -11,11 +11,10 @@ from admission.utils import (
     create_new_admission_application_for_user, 
     get_course_from_code, 
     update_current_section, 
-    change_edit_section, 
-    section_icon_clicked, 
+    update_edit_section, 
+    is_put_request, 
     add_documents_to_context,
 )
-
 
 
 
@@ -63,24 +62,28 @@ def application(request, pk):
     if application.application_state == ApplicationState.SUBMITTED:
         return redirect('dashboard')
     
+    
+    
     # handles POST request from the progress bar icons, next button, and submit button
     if request.method == 'POST':
         
-        if section_icon_clicked(request):
-            application = change_edit_section(request, application)
+        if is_put_request(request):
+            application = update_edit_section(request, application)
         
-        elif 'save_and_exit' in request.POST:
-            application.save()
-            return redirect('application-saved', pk=application.id)
-        
-        elif 'submit_application' in request.POST:
-            application.application_state = ApplicationState.SUBMITTED
-            application.is_declared = True
-            application.save()
-            return redirect('dashboard')
+        else:
+            
+            if 'save_and_exit' in request.POST:
+                application.save()
+                return redirect('application-saved', pk=application.id)
+            
+            elif 'submit_application' in request.POST:
+                application.application_state = ApplicationState.SUBMITTED
+                application.is_declared = True
+                application.save()
+                return redirect('dashboard')
 
-        else:   
-            application = update_current_section(request, application)
+            else:   
+                application = update_current_section(request, application)
         
         application.save()
     
