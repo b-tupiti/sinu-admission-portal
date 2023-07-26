@@ -156,8 +156,12 @@ def save_education_background(request, application):
     application.save()
 
 
-def section_icon_clicked(request):
-    return request.POST.get('_method') == 'put'
+def is_put_request(request):
+    """
+    checks if the request object actually simulates a PUT request.
+    """
+    return request.method == 'POST' and request.POST.get('_method') == 'put'
+     
 
 
 # This function fires when the next button is clicked, it checks where the current section is
