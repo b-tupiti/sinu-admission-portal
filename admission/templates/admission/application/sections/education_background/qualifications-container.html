@@ -1,5 +1,6 @@
+{% load static %}
 
-<div id="qualifications-content">
+<div id="qualifications-container">
 
   {% if tertiary_qualifications %}
   
@@ -373,9 +374,13 @@
 <!-- ADD NEW QUALIFICATION -->
 
 <button 
+  id="add-qualification-btn"
+  type="button"
   class=" ml-3 button is-light mt-3" 
   style="color:rgba(68, 68, 68,.8);border:1px solid rgba(68, 68, 68,.1)"
   >
   <span style="color:rgba(68, 68, 68,.8)">Add Qualification</span> 
   <i class="ml-3 fa-solid fa-plus"></i>
 </button>
+
+<script src="{% static 'admission/js/add-qualification.js' %}"></script>
