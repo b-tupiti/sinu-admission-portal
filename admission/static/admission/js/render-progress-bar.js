@@ -1,116 +1,174 @@
+/**
+ * render-progress-bar.js
+ * 
+ * This script renders the progress bar according to two values:
+ * 1. application.edit_section
+ * 2. application.current_section
+ * 
+ * Both values are recieved from an Application instance from the
+ * backend, and wrapped inside hidden input elements, which this
+ * script retrieves.
+ */
 
-// this is the variable holding the application.current_section value and is 
-// the determinig factor of how the progress bar is rendered.
 
+// grabbing instance (Application) values - application.current_section, application.edit_section.
 const currentSection = document.getElementById('current-section').value;
-console.log('furthest section reached by user (current): ', currentSection);
-
 const editSection = document.getElementById('edit-section').value;
-console.log('section showing on screen (on edit): ', editSection);
 
 init();
 
-function init(){
+function init() {
 
-    let iconWrapperId = null;
-    let editIconWrapperId = null;
+    // determining and rendering progress bar elements based on currentSection i.e. application.current_section
+
+    let currentIconId = null;
     let completeIconIds = [];
     let pendingIconIds = [];
-    let fullProgressBars = [];
-    let disabledIconLinks = [];
+    let filledDividersIds = [];
 
     switch(currentSection){
         
         case 'personal_details':
-            iconWrapperId = 'pd-icon-wrapper';
+            currentIconId = 'pd-icon-wrapper';
             completeIconIds = [];
             pendingIconIds = ['sd-icon-wrapper','eb-icon-wrapper','eh-icon-wrapper','d-icon-wrapper'];
-            fullProgressBars = [];
-            disabledIconLinks = ['sd-link', 'eb-link', 'eh-link', 'd-link'];
+            filledDividersIds = [];
             break;
 
         case 'sponsor_details':
-            iconWrapperId = 'sd-icon-wrapper';
+            currentIconId = 'sd-icon-wrapper';
             completeIconIds = ['pd-icon-wrapper'];
             pendingIconIds = ['eb-icon-wrapper','eh-icon-wrapper','d-icon-wrapper'];
-            fullProgressBars = ['pdsd-progress'];
-            disabledIconLinks = ['eb-link', 'eh-link', 'd-link'];
+            filledDividersIds = ['pdsd-progress'];
             break;
 
         case 'education_background':
-            iconWrapperId = 'eb-icon-wrapper';
+            currentIconId = 'eb-icon-wrapper';
             completeIconIds = ['pd-icon-wrapper','sd-icon-wrapper'];
             pendingIconIds = ['eh-icon-wrapper','d-icon-wrapper'];
-            fullProgressBars = ['pdsd-progress', 'sdeb-progress'];
-            disabledIconLinks = ['eh-link', 'd-link'];
+            filledDividersIds = ['pdsd-progress', 'sdeb-progress'];
             break;
 
         case 'employment_history':
-            iconWrapperId = 'eh-icon-wrapper';
+            currentIconId = 'eh-icon-wrapper';
             completeIconIds = ['pd-icon-wrapper','sd-icon-wrapper', 'eb-icon-wrapper'];
             pendingIconIds = ['d-icon-wrapper'];
-            fullProgressBars = ['pdsd-progress', 'sdeb-progress', 'ebeh-progress'];
-            disabledIconLinks = ['d-link'];
+            filledDividersIds = ['pdsd-progress', 'sdeb-progress', 'ebeh-progress'];
             break;
 
         case 'declaration':
-            iconWrapperId = 'd-icon-wrapper';
+            currentIconId = 'd-icon-wrapper';
             completeIconIds = ['pd-icon-wrapper','sd-icon-wrapper', 'eb-icon-wrapper','eh-icon-wrapper'];
             pendingIconIds = [];
-            fullProgressBars = ['pdsd-progress', 'sdeb-progress', 'ebeh-progress','ehd-progress'];
-            disabledIconLinks = [];
+            filledDividersIds = ['pdsd-progress', 'sdeb-progress', 'ebeh-progress','ehd-progress'];
             break;
 
         default:
             break;
     }
+
+    renderCurrentIcon(document.getElementById(currentIconId));
+    renderCompletedSectionIcons(getElementsByIDs(completeIconIds));
+    renderPendingSectionIcons(getElementsByIDs(pendingIconIds));
+    renderFilledDividers(getElementsByIDs(filledDividersIds));
+
+    // determining and rendering edit icon based on editSection i.e. application.edit_section
+
+    let editIconId = null;
 
     switch(editSection){
         case 'personal_details':
-            editIconWrapperId = 'pd-icon-wrapper';
+            editIconId = 'pd-icon-wrapper';
             break;
 
         case 'sponsor_details':
-            editIconWrapperId = 'sd-icon-wrapper';
+            editIconId = 'sd-icon-wrapper';
             break;
 
         case 'education_background':
-            editIconWrapperId = 'eb-icon-wrapper';
+            editIconId = 'eb-icon-wrapper';
             break;
 
         case 'employment_history':
-            editIconWrapperId = 'eh-icon-wrapper';
+            editIconId = 'eh-icon-wrapper';
             break;
 
         case 'declaration':
-            editIconWrapperId = 'd-icon-wrapper';
+            editIconId = 'd-icon-wrapper';
             break;
 
         default:
             break;
     }
-
     
-    renderCurrentIcon(iconWrapperId);
-    renderOnEditIcon(editIconWrapperId);
-    renderOtherIcons(completeIconIds, 'complete');
-    renderOtherIcons(pendingIconIds, 'pending');
-    renderFullProgressBars(fullProgressBars);
-    disableIconLinks(disabledIconLinks);
+    renderEditIcon(document.getElementById(editIconId));
 }
 
-// renders full progress bars, by default value of progress element is set to 0 (empty).
-// All progress bars left of the current section will be full as the sections progress left to right.
-function renderFullProgressBars(barIds){
-    barIds.forEach(barId => {
-        let progressBar = document.getElementById(barId);
-        progressBar.setAttribute('value', 100);
+
+/**
+ * This function takes an array of Ids and returns an array
+ * of their corresponding HTMLElement objects.
+ * @param {[]} Ids 
+ * @returns {[HTMLElement]}
+ */
+function getElementsByIDs(Ids){
+    const elements = [];
+    Ids.forEach(id => {
+        elements.push(document.getElementById(id));
+    });
+    return elements;
+}
+
+
+/**
+ * This function takes an array of dividers (HTMLProgressElement) and
+ * renders them as filled, indicating that the step is complete.
+ * @param {[HTMLProgressElement]} dividers 
+ */
+function renderFilledDividers(dividers) {
+    dividers.forEach(divider => {
+        divider.setAttribute('value', 100);
     });
 }
 
-// takes in a list of Icon Wrapper Ids, and a status string, and renders the icons
+
+/**
+ * This function takes an array of icon links (HTMLProgressElement) and
+ * disables them.
+ * @param {[HTMLAnchorElement]} dividers 
+ */
+function renderDisabledSectionIcons(icons) {
+    icons.forEach(icon => {
+        icon.removeAttribute('href');
+        icon.classList.add('disabled-icon-link');
+    })
+}
+
+
+/**
+ * This function takes a section icon and renders it as the current icon.
+ * i.e. The furthest section the application is currently at.
+ * @param {HTMLAnchorElement} icon 
+ */
+function renderCurrentIcon(icon) {
+    icon.classList.add('item-current');
+    icon.innerHTML = '<i class="fa-solid fa-pen-to-square icon-color"></i>';
+}
+
+
+/**
+ * This function takes a section icon and renders it as the edit icon.
+ * i.e. The section that is on display to the user, currently available for editing.
+ * @param {HTMLAnchorElement} icon 
+ */
+function renderEditIcon(icon) {
+    icon.classList.add('on-edit');
+}
+
+
+// This function takes in a list of Icon Wrapper Ids, and a status string, and renders the icons
 // according to the status i.e. 'complete', 'pending'
-function renderOtherIcons(elementIds, status){
+function renderOtherIcons(elementIds, status) {
 
     if (status == 'complete'){
         elementIds.forEach(elementId => {
@@ -128,27 +186,38 @@ function renderOtherIcons(elementIds, status){
     }
 }
 
-// renders the icon of the current section accordingly (furthest section reached by user)
-function renderCurrentIcon(elementId){
-    let iconWrapper = document.getElementById(elementId)
-    iconWrapper.classList.add('item-current');
-    iconWrapper.innerHTML = '<i class="fa-solid fa-pen-to-square icon-color"></i>';
-}
 
-// renders the icon of the section that is on screen
-function renderOnEditIcon(elementId){
-    let iconWrapper = document.getElementById(elementId)
-    iconWrapper.classList.add('on-edit');
-}
-
-// disable icon links of sections that are not yet completed
-function disableIconLinks(linkIds){
-    linkIds.forEach(linkId => {
-        let link = document.getElementById(linkId);
-        link.removeAttribute('href');
-        link.classList.add('disabled-icon-link');
-    })
+/**
+ * This function renders the sections that are complete.
+ * @param {*} icons 
+ */
+function renderCompletedSectionIcons(icons){
+    icons.forEach(icon => {
+        icon.classList.add('item-complete');
+        icon.innerHTML = '<i class="fa-solid fa-check icon-color"></i>';
+    });
 }
 
 
+/**
+ * This function renders the sections that are pending.
+ * @param {*} icons 
+ */
+function renderPendingSectionIcons(icons){
+    icons.forEach(icon => {
+        icon.classList.add('item-pending');
+        icon.innerHTML = '<i class="fa-solid fa-ban icon-color"></i>';
+        disableIconLink(icon);
+    });
+}
 
+
+/**
+ * Disables icon link
+ * @param {*} icon 
+ */
+function disableIconLink(icon){
+    const link = icon.closest('button');
+    link.removeAttribute('href');
+    link.classList.add('disabled-icon-link');
+}
