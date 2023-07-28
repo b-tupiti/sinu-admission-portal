@@ -1,5 +1,10 @@
+/**
+ * This script grabs the serialized data (serializedQualifications), loops through
+ * each qualification, wraps them in a component, and appends them into the container.
+ */
 
 const container = document.getElementById('qualifications-container');
+
 
 serializedQualifications.forEach(qualification => {
     const qualificationData = extractQualificationData(qualification);
