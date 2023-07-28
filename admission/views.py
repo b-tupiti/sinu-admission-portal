@@ -16,6 +16,13 @@ from django.core import serializers
 
 
 def create_new_application(request):
+    """
+    This view always expects a course_code parameter on a GET request object, which will be used
+    when a subsequent POST request is made to create a new admission application. If this parameter
+    is not present, has an empty value, or the value does not match a Course instance, the user
+    will be redirected to the 'search-course' url. The assumption is that we are creating a new application
+    for a course, hence it must have existed beforehand.
+    """
     
     if request.method == 'GET':
         
