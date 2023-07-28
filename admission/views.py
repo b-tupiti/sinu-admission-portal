@@ -12,6 +12,7 @@ from .utils.request_helpers import is_put_request
 from .utils.retrieve_course import get_course_from_code
 from .utils.application_updates import update_current_section, update_edit_section
 from .utils.context_adders import add_documents_to_context
+from django.core import serializers
 
 
 def create_new_application(request):
@@ -93,10 +94,14 @@ def application(request, pk):
     # filtering documents to be returned inside the context
     
     if application.edit_section == Section.EDUCATION_BACKGROUND: 
+        
         documents = application.high_school_documents.all()
         context = add_documents_to_context(documents, application, context)
-        tertiary_qualifications = application.tertiary_qualifications.all()
-        context['tertiary_qualifications'] = tertiary_qualifications
+        
+        context['serialized_data'] = serializers.serialize(
+            "json", 
+            application.tertiary_qualifications.all()
+            ) 
         
     return render(request, 'admission/application/application-form-template.html', context)
 
