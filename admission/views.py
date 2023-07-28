@@ -20,7 +20,7 @@ def create_new_application(request):
     if request.method == 'GET':
         
         if request.GET.get('course_code') is None:
-            return redirect('find-course')
+            return redirect('course-search')
         
         course = get_course_from_code(request)
         context = {'course':course}
