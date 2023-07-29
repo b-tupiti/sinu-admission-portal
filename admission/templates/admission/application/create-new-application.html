@@ -16,12 +16,12 @@
     </div>
     <div class="columns m-0 has-background-light">
         <div class="column is-three-fifths ">
-            <div>{{course.title}} </div>
+            <div>{{course_details.title}} </div>
         </div>
-        <div class="column">{{course.code}}</div>
+        <div class="column">{{course_details.code}}</div>
         <div class="column">
-          {% if course.campus %}
-          {{course.campus}}
+          {% if course_details.campus %}
+          {{course_details.campus}}
           {%else%}
           unspecified
           {%endif%}
@@ -44,7 +44,7 @@
 
     <form  method="post">
 
-      <input type="text" hidden name="course_code" value="{{course.code}}">
+      <input type="text" hidden name="course_code" value="{{course_detail.code}}">
       {% csrf_token %}
 
       <div class="mt-3 mr-3 ml-3 p-3 mb-0" style="background:#fff;border:1px solid rgba(0, 0, 0,.2); border-top-left-radius:5px;border-top-right-radius:5px">
@@ -201,7 +201,7 @@
       </div>
 
 
-      <input name="course_code" type="text" value="{{course.code}}" hidden>
+      <input name="course_code" type="text" value="{{course_details.code}}" hidden>
 
 
       <div class="has-background-light mb-3 mr-3 ml-3 mt-0 p-3 is-flex is-justify-content-center " style="border:1px solid rgba(0, 0, 0,.2);border-top:none">
@@ -227,7 +227,6 @@
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
 <script>
-    console.log('hello')
         flatpickr('#datepicker', {
           dateFormat: 'd-m-Y' // Specify the desired date format
         });
