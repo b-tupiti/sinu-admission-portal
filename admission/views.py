@@ -8,13 +8,13 @@ from django.contrib.auth import authenticate,login
 from users.utils import create_applicant_account
 from django.http import Http404
 from .utils.new_application import create_new_admission_application_for_user
-from .utils.request_helpers import is_put_request
-from .utils.retrieve_course import get_course_from_code
+from .utils.request_helpers import is_put_request, param_not_found_or_empty
 from .utils.application_updates import update_current_section, update_edit_section
 from .utils.context_adders import add_documents_to_context
 from django.core import serializers
+from courses.utils import course_does_not_exist
 
-
+    
 def create_new_application(request):
     """
     This view always expects a course_code parameter on a GET request object, which will be used
@@ -25,18 +25,17 @@ def create_new_application(request):
     """
     
     if request.method == 'GET':
+        course_code = request.GET.get('course_code')
         
-        if request.GET.get('course_code') is None:
+        if param_not_found_or_empty(course_code) or course_does_not_exist(course_code):
             return redirect('course-search')
         
-        course = get_course_from_code(request)
-        context = {'course':course}
+        course_details = Course.objects.values('code', 'title', 'campus').get(code=course_code)
+        context = {'course_details': course_details}
         
         return render(request, 'admission/application/create-new-application.html', context)
     
-    
     elif request.method == 'POST':     
-        
         email, password = create_applicant_account(request)
         user = authenticate(request, email=email, password=password)
         
