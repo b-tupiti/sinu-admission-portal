@@ -3,6 +3,14 @@ from django.db.models import Q
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 
+def course_does_not_exist(code):
+    """
+    checks if course does not exist based on code argument. Helpful in cases where you want
+    to redirect a user if this resolves to True.
+    """
+    return not Course.objects.filter(code=code).exists()
+
+
 def filter_courses(request):
     
     search = ''
