@@ -49,7 +49,7 @@ def create_new_application(request):
   
   
 @login_required(login_url='login')
-def application(request, pk):
+def get_draft_application(request, pk):
     
     # checks if application exist, else render 404
     try:
