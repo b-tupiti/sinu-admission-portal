@@ -1,0 +1,78 @@
+
+
+#application-section {
+    padding: 40px 0;
+    padding-top: 20px;
+}
+
+.application-container {
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.application-container .form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #0e5165;
+}
+
+.application-container .form-header button {
+    background: #6da11f;
+    border-radius:5px;
+    border:none;
+}
+
+.application-section-header {
+    background:#12657e;
+    color: white;
+}
+
+.application-content-wrapper {
+    padding: 40px 20px;
+}
+
+.application-content {
+    border: 1px solid rgba(0, 0, 0,.2);
+    border-bottom: none;
+    padding: 20px;
+    background-color: #f6f6f6;
+}
+
+.application-content-wrapper .button-group {
+    display: flex;
+    justify-content: center;
+    border: 1px solid rgba(0,0,0,.2);
+    padding: 20px;
+}
+
+
+
+.changeable-content {
+    position: relative;
+    z-index: 0;
+    /* opacity: .2; set this when next is clicked */
+}
+
+
+#application-form {
+    position: relative;
+}
+
+#save-spinner { 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    justify-content: center;
+    position: absolute;
+    z-index: 2;
+} 
+
+.display-save-spinner {
+    display: block;
+}
+
+.hide-save-spinner {
+    display: none;
+}
