@@ -66,7 +66,9 @@ class ESection(Enum):
 # This function fires when the next button is clicked, it checks where the current section is
 # and sets the new current section to the one on its right. It always goes left --> right
 def update_current_section(request, application):
-       
+    """
+    This function handles POST data when a section is saved.
+    """
     if ESection.PERSONAL_DETAILS.value in request.POST:
         
         if application.current_section not in [
