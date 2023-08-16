@@ -33,7 +33,7 @@ function extractQualificationData(qualification){
 const addQualBtn = document.getElementById('add-qualification-btn');
 
 
-function generateUniqueString() {
+function generateNewId() {
     const timestamp = new Date().getTime().toString();
     const randomNum = Math.random().toString(36).slice(2, 7); // Adjust length as needed
     return timestamp + randomNum;
@@ -43,15 +43,28 @@ function generateUniqueString() {
 const onClickHander = () => {
 
     // give empty component a random ID
-    const id = generateUniqueString();
+    const id = generateNewId();
     const component = createEmptyComponent(id);
     addComponentToContainer(container, component);
     addDeleteEventListener(component, id);
 }
 
+
+const QUAL_IDS_TO_DELETE = [];
 function addDeleteEventListener(component, id){
+    
     document.getElementById('delete-' + id).addEventListener('click', ()=>{
-        container.removeChild(component);
+        container.removeChild(component); // remove from document
+
+        // check if component comes from backend, if it does, save to array, so that it 
+        // its id is sent back to the backend for deletion.
+        let componentId = String(component.getAttribute('id'));
+        if(componentId.startsWith('qualification')){
+            QUAL_IDS_TO_DELETE.push(componentId.split('-')[1]);
+        }
+
+        console.log('Qualifications to remove on the backend: ')
+        console.log(QUAL_IDS_TO_DELETE);
     })
 }
 
@@ -66,8 +79,10 @@ addQualBtn.addEventListener('click', onClickHander);
  */
 const createEmptyComponent = (id) => {
     const component = document.createElement('div');
+    component.setAttribute('id',`new-qualification-${id}`);
+
     component.innerHTML = `
-    <div id="qualification-${id}" class=" mt-3 ml-1 mr-1  p-4  " style="border:1px solid rgba(0, 0, 0,.1);border-radius:5px">
+    <div id="new-qualification-${id}" class=" mt-3 ml-1 mr-1  p-4  " style="border:1px solid rgba(0, 0, 0,.1);border-radius:5px">
     
     <button 
         id="delete-${id}"
@@ -264,6 +279,8 @@ const createEmptyComponent = (id) => {
  */
 function createDataComponent(data){
     const component = document.createElement('div');
+    component.setAttribute('id',`qualification-${data.id}`);
+
     component.innerHTML = `
     <div id="qualification-${data.id}" class="mt-3 ml-1 mr-1  p-4" style="position:relative;border:1px solid rgba(0, 0, 0,.1);border-radius:5px;">
     
@@ -456,5 +473,6 @@ function createDataComponent(data){
     
     return component;
 }
+
 
 

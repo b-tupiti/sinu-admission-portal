@@ -1,9 +1,11 @@
 from enum import Enum
-
+import json
 from django.db import IntegrityError
 from admission.models.application import Section
 from admission.models.document import DocumentType, HSDocument, HSFormLevel, SponsorshipLetter
 from utils.convert_date import convert_date_format
+from .request_helpers import param_not_found_or_empty
+from admission.models.tertiary_qualification import TertiaryQualification
 
 
 def _save_or_replace_sponsorship_letter(request, application):
@@ -134,6 +136,12 @@ def save_sponsor_details(request, application):
 
 def save_education_background(request, application):
     
+    # deletes the tertiary qualifications selected by the user, if there is any.
+    if not param_not_found_or_empty(request.POST.get('delete-ids')):
+        deleteIds = json.loads(request.POST.get('delete-ids'))
+        for id in deleteIds:
+            TertiaryQualification.objects.get(id=id).delete()
+        
     # form 3 documents
     if request.FILES.get('form_3_certificate'):
        file = request.FILES.get('form_3_certificate')          
