@@ -102,7 +102,7 @@ const createEmptyComponent = (id) => {
             <div class="field">
             <div class="control">
                 <input 
-                name="institution-1"
+                name="institution-${id}"
                 class="input" 
                 type="text" 
                 placeholder=""
@@ -122,7 +122,7 @@ const createEmptyComponent = (id) => {
             <div class="field">
             <div class="control">
                 <input 
-                name="course-1"
+                name="course-${id}"
                 class="input" 
                 type="text" 
                 placeholder=""
@@ -142,7 +142,7 @@ const createEmptyComponent = (id) => {
             <div class="field">
             <div class="control">
                 <input 
-                name="year-started-1"
+                name="year-started-${id}"
                 class="input" 
                 type="text" 
                 placeholder=""
@@ -162,7 +162,7 @@ const createEmptyComponent = (id) => {
             <div class="field">
             <div class="control">
                 <input 
-                name="year-ended-1"
+                name="year-ended-${id}"
                 class="input" 
                 type="text" 
                 placeholder=""
@@ -183,7 +183,7 @@ const createEmptyComponent = (id) => {
             <div class="field">
             <div class="control">
                 <input 
-                name="major-1"
+                name="major-${id}"
                 class="input" 
                 type="text" 
                 placeholder=""
@@ -213,7 +213,7 @@ const createEmptyComponent = (id) => {
             <div class="control">
                 <div class="file has-name is-small">
                     <label class="file-label">
-                    <input class="file-input" type="file" name="tertiary-certificate-1">
+                    <input class="file-input" type="file" name="tertiary-certificate-${id}">
                     <span class="file-cta">
                         <span class="file-icon">
                         <i class="fas fa-upload"></i>
@@ -244,7 +244,7 @@ const createEmptyComponent = (id) => {
             <div class="control">
                 <div class="file has-name is-small">
                     <label class="file-label">
-                    <input class="file-input" type="file" name="tertiary-transcript-1">
+                    <input class="file-input" type="file" name="tertiary-transcript-${id}">
                     <span class="file-cta">
                         <span class="file-icon">
                         <i class="fas fa-upload"></i>
@@ -302,7 +302,7 @@ function createDataComponent(data){
             <div class="field">
             <div class="control">
                 <input 
-                name="institution-1"
+                name="institution-${data.id}"
                 class="input" 
                 type="text" 
                 value="${data.institutionName}"
@@ -322,7 +322,7 @@ function createDataComponent(data){
             <div class="field">
             <div class="control">
                 <input 
-                name="course-1"
+                name="course-${data.id}"
                 class="input" 
                 type="text" 
                 value="${data.course}"
@@ -342,7 +342,7 @@ function createDataComponent(data){
             <div class="field">
             <div class="control">
                 <input 
-                name="year-started-1"
+                name="year-started-${data.id}"
                 class="input" 
                 type="text" 
                 value="${data.yearStart}"
@@ -362,7 +362,7 @@ function createDataComponent(data){
             <div class="field">
             <div class="control">
                 <input 
-                name="year-ended-1"
+                name="year-ended-${data.id}"
                 class="input" 
                 type="text" 
                 value="${data.yearEnd}"
@@ -383,7 +383,7 @@ function createDataComponent(data){
             <div class="field">
             <div class="control">
                 <input 
-                name="major-1"
+                name="major-${data.id}"
                 class="input" 
                 type="text" 
                 value="${data.major}"
@@ -413,7 +413,7 @@ function createDataComponent(data){
             <div class="control">
                 <div class="file has-name is-small">
                     <label class="file-label">
-                    <input class="file-input" type="file" name="tertiary-certificate-1">
+                    <input class="file-input" type="file" name="tertiary-certificate-${data.id}">
                     <span class="file-cta">
                         <span class="file-icon">
                         <i class="fas fa-upload"></i>
@@ -444,7 +444,7 @@ function createDataComponent(data){
             <div class="control">
                 <div class="file has-name is-small">
                     <label class="file-label">
-                    <input class="file-input" type="file" name="tertiary-transcript-1">
+                    <input class="file-input" type="file" name="tertiary-transcript-${data.id}">
                     <span class="file-cta">
                         <span class="file-icon">
                         <i class="fas fa-upload"></i>
@@ -470,7 +470,6 @@ function createDataComponent(data){
     </div>
     `
 
-    
     return component;
 }
 
