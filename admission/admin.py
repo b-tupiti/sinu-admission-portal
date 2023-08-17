@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models.application import Application
-from .models.document import SponsorshipLetter, HSDocument
+from .models.document import SponsorshipLetter, HSDocument, TQDocument
 from .models.tertiary_qualification import TertiaryQualification
 
 
@@ -8,6 +8,12 @@ class TertiaryQualificationAdmin(admin.ModelAdmin):
     list_display = ('application', 'institution_name', 'course', 'year_start', 'year_end', 'major')
     
 admin.site.register(TertiaryQualification, TertiaryQualificationAdmin)
+
+
+class TQDocumentAdmin(admin.ModelAdmin):
+    list_display = ('file', 'qualification', 'document_type')
+    
+admin.site.register(TQDocument, TQDocumentAdmin)
 
 
 class HSDocumentAdmin(admin.ModelAdmin):
