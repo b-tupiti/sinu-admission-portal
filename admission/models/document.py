@@ -3,7 +3,18 @@ import uuid
 from .application import Application
 
 
+class HSFormLevel(models.TextChoices):
+    FORM_3 = "form_3", "Form 3"
+    FORM_5 = "form_5", "Form 5"
+    FORM_6 = "form_6", "Form 6"
+    FOUNDATION = "foundation", "Foundation or (Form 7)"
 
+
+class DocumentType(models.TextChoices):
+    TRANSCRIPT = "transcript", "Acadmic Transcript"
+    CERTIFICATE = "certificate", "Academic Certificate"
+    
+    
 class Document(models.Model):
     """
     Document model
@@ -20,22 +31,11 @@ class Document(models.Model):
     def __str__(self):
         return self.file.name.split('/')[-1]
         
-   
-   
+     
 class SponsorshipLetter(Document):
     application = models.OneToOneField(Application, related_name="sponsor_letter", on_delete=models.CASCADE)
 
-
-class HSFormLevel(models.TextChoices):
-    FORM_3 = "form_3", "Form 3"
-    FORM_5 = "form_5", "Form 5"
-    FORM_6 = "form_6", "Form 6"
-    FOUNDATION = "foundation", "Foundation or (Form 7)"
    
-class DocumentType(models.TextChoices):
-    TRANSCRIPT = "transcript", "Acadmic Transcript"
-    CERTIFICATE = "certificate", "Academic Certificate"
-     
 class HSDocument(Document):
     application = models.ForeignKey(
         Application,
