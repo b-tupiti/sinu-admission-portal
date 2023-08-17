@@ -213,7 +213,7 @@ const createEmptyComponent = (id) => {
             <div class="control">
                 <div class="file has-name is-small">
                     <label class="file-label">
-                    <input class="file-input" type="file" name="new-tertiary-certificate-${id}">
+                    <input class="file-input" type="file" name="new-tertiary_certificate-${id}">
                     <span class="file-cta">
                         <span class="file-icon">
                         <i class="fas fa-upload"></i>
@@ -244,7 +244,7 @@ const createEmptyComponent = (id) => {
             <div class="control">
                 <div class="file has-name is-small">
                     <label class="file-label">
-                    <input class="file-input" type="file" name="new-tertiary-transcript-${id}">
+                    <input class="file-input" type="file" name="new-tertiary_transcript-${id}">
                     <span class="file-cta">
                         <span class="file-icon">
                         <i class="fas fa-upload"></i>
