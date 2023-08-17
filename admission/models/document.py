@@ -1,6 +1,7 @@
 from django.db import models
 import uuid
 from .application import Application
+from .tertiary_qualification import TertiaryQualification
 
 
 class HSFormLevel(models.TextChoices):
@@ -52,3 +53,22 @@ class HSDocument(Document):
         max_length=20,
         choices=DocumentType.choices,
     )
+    
+
+class TQDocument(Document):
+    """
+    Documents related to a tertiary qualification instance.
+    """
+    
+    qualification = models.ForeignKey(
+        TertiaryQualification,
+        related_name='related_documents',
+        on_delete=models.CASCADE,
+    )
+    
+    document_type = models.CharField(
+        verbose_name="Document Type",
+        max_length=20,
+        choices=DocumentType.choices,
+    )
+    
