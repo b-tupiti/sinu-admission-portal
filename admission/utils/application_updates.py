@@ -141,7 +141,40 @@ def save_education_background(request, application):
         deleteIds = json.loads(request.POST.get('delete-ids'))
         for id in deleteIds:
             TertiaryQualification.objects.get(id=id).delete()
+            
+    
+    # adding new qualification instances
+    fields_list = [(str(key), request.POST[key]) for key in request.POST.keys() if key.startswith('new')]
+    unique_ids = []
+    grouped_fields = dict()
+
+    for field_item in fields_list:
+        id = field_item[0].split('-')[-1] 
         
+        if id not in unique_ids:
+            unique_ids.append(id)
+            grouped_fields[id] = []
+            grouped_fields[id].append(field_item)
+            
+        else:
+            grouped_fields[id].append(field_item)
+
+    for group in list(grouped_fields.values()):
+        qualification = dict()
+        
+        for field_item in group:
+            key = str(field_item[0]).split('-')[-2]
+            qualification[key] = field_item[1]
+        
+        TertiaryQualification.objects.create(
+            application=application,
+            institution_name=qualification['institution'],
+            course=qualification['course'],
+            year_start=qualification['year_started'],
+            year_end=qualification['year_ended'],
+            major=qualification['major'],
+        )
+    
     # form 3 documents
     if request.FILES.get('form_3_certificate'):
        file = request.FILES.get('form_3_certificate')          

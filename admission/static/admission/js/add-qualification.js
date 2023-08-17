@@ -142,7 +142,7 @@ const createEmptyComponent = (id) => {
             <div class="field">
             <div class="control">
                 <input 
-                name="new-year-started-${id}"
+                name="new-year_started-${id}"
                 class="input" 
                 type="text" 
                 placeholder=""
@@ -162,7 +162,7 @@ const createEmptyComponent = (id) => {
             <div class="field">
             <div class="control">
                 <input 
-                name="new-year-ended-${id}"
+                name="new-year_ended-${id}"
                 class="input" 
                 type="text" 
                 placeholder=""
