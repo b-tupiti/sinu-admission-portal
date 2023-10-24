@@ -1,51 +1,14 @@
-const container = document.getElementById('qualifications-container');
-const addQualBtn = document.getElementById('add-qualification-btn');
+{% load static %}
 
-
-/**
- * A handler for when addQualBtn is clicked.
- */
-const onClickHander = () => {
-    const id = generateNewId();
-    const component = createEmptyComponent(id);
-    addComponentToContainer(container, component);
-}
-
-addQualBtn.addEventListener('click', onClickHander);
-
-//===============================================================//
-
-/**
- * generates a random and temporary id for new qualification.
- * @returns {string}
- */
-function generateNewId() {
-    const timestamp = new Date().getTime().toString();
-    const randomNum = Math.random().toString(36).slice(2, 7); // Adjust length as needed
-    return timestamp + randomNum;
-}
-
-/**
- * This function creates an empty component and returns it.
- * @returns {HTMLDivElement} a new component
- */
-const createEmptyComponent = (id) => {
-
-    const component = document.createElement('div');
-    component.setAttribute('id',`qualification_id-${id}`);
-    component.setAttribute('class','mt-3 ml-1 mr-1 p-4');
-    component.setAttribute('style', 'border: 1px solid rgba(0, 0, 0, 0.1); border-radius: 5px;');
-
-
-    component.innerHTML = `
+<div id="qualification_id-{{item.id}}" class="mt-3 ml-1 mr-1  p-4" style="position:relative;border:1px solid rgba(0, 0, 0,.1);border-radius:5px;">
     
     <button 
-        id="delete-${id}"
+        id="delete-{{item.id}}"
         type="button"
         class="delete"
         >
     </button>
-    
+
     <div class="columns    is-align-items-center  " >
     
     <div class="column is-one-third">
@@ -57,10 +20,10 @@ const createEmptyComponent = (id) => {
             <div class="field">
             <div class="control">
                 <input 
-                name="newtq-institution_name-${id}"
+                name="tq-institution_name-{{item.id}}"
                 class="input" 
                 type="text" 
-                placeholder=""
+                value="{{item.institution_name}}"
                 required
                 >
             </div>
@@ -78,10 +41,10 @@ const createEmptyComponent = (id) => {
             <div class="field">
             <div class="control">
                 <input 
-                name="newtq-course-${id}"
+                name="tq-course-{{item.id}}"
                 class="input" 
                 type="text" 
-                placeholder=""
+                value="{{item.course}}"
                 required
                 >
             </div>
@@ -99,10 +62,10 @@ const createEmptyComponent = (id) => {
             <div class="field">
             <div class="control">
                 <input 
-                name="newtq-year_start-${id}"
+                name="tq-year_start-{{item.id}}"
                 class="input" 
                 type="text" 
-                placeholder=""
+                value="{{item.year_start}}"
                 required
                 >
             </div>
@@ -120,10 +83,10 @@ const createEmptyComponent = (id) => {
             <div class="field">
             <div class="control">
                 <input 
-                name="newtq-year_end-${id}"
+                name="tq-year_end-{{item.id}}"
                 class="input" 
                 type="text" 
-                placeholder=""
+                value="{{item.year_end}}"
                 required
                 >
             </div>
@@ -142,10 +105,10 @@ const createEmptyComponent = (id) => {
             <div class="field">
             <div class="control">
                 <input 
-                name="newtq-major-${id}"
+                name="tq-major-{{item.id}}"
                 class="input" 
                 type="text" 
-                placeholder=""
+                value="{{item.major}}"
                 required
                 >
             </div>
@@ -163,27 +126,34 @@ const createEmptyComponent = (id) => {
         Upload files
     </h2>
 
+    {% comment %} {% for document in item.documents %} {% endcomment %}
+    
     <div class="column m-1 is-one-third" style="width:fit-content">
         <div class="field is-horizontal ">
         <div class="field-label is-normal">
-            <label class="label has-text-weight-normal is-size-7 " style="color:#8d8d8d">Certificate </label>
+            <label class="label has-text-weight-normal is-size-7 " >Certificate </label>
         </div>
         <div class="field-body">
             <div class="field">
             <div class="control">
-                <div class="file has-name is-small">
+                <div class="file has-name is-small is-info">
                     <label class="file-label">
-                    <input class="file-input" type="file" name="newtqd-certificate-${id}">
+                    <input class="file-input" type="file" name="tqd-certificate-{{item.id}}">
+                    
                     <span class="file-cta">
-                        <span class="file-icon">
+                        <span class="file-icon" style="color: white">
                         <i class="fas fa-upload"></i>
                         </span>
-                        <span class="file-label">
+                        <span class="file-label" style="color: white">
                         browse 
                         </span>
                     </span>
-                    <span class="file-name">
+                    <span class="file-name" style="color:#004b8d">
+                        {% if item.certificate %}
+                            {{item.certificate}}
+                        {% else %}
                         ...
+                        {% endif %}
                     </span>
                     </label>
                 </div>
@@ -194,27 +164,33 @@ const createEmptyComponent = (id) => {
         
     </div>
 
+
     <div class="column m-1 is-one-third" style="width:fit-content">
         <div class="field is-horizontal ">
         <div class="field-label is-normal">
-            <label class="label has-text-weight-normal is-size-7 " style="color:#8d8d8d">Transcript </label>
+            <label class="label has-text-weight-normal is-size-7 " >Transcript </label>
         </div>
         <div class="field-body">
             <div class="field">
             <div class="control">
-                <div class="file has-name is-small">
+                <div class="file has-name is-small is-info">
                     <label class="file-label">
-                    <input class="file-input" type="file" name="newtqd-transcript-${id}">
+                    <input class="file-input" type="file" name="tqd-transcript-{{item.id}}">
+                    
                     <span class="file-cta">
-                        <span class="file-icon">
+                        <span class="file-icon" style="color: white">
                         <i class="fas fa-upload"></i>
                         </span>
-                        <span class="file-label">
+                        <span class="file-label" style="color: white">
                         browse 
                         </span>
                     </span>
-                    <span class="file-name">
+                    <span class="file-name" style="color:#004b8d">
+                        {% if item.transcript %}
+                            {{item.transcript}}
+                        {% else %}
                         ...
+                        {% endif %}
                     </span>
                     </label>
                 </div>
@@ -225,18 +201,12 @@ const createEmptyComponent = (id) => {
         
     </div>
 
+    {% comment %} {% endfor %} {% endcomment %}
+
+    
+
+   
+
     </div>
 
-    `
-    return component;
-}
-
-/**
- * This function takes a container and a component, and appends 
- * and appends the component to the container.
- * @param {HTMLDivElement} container 
- * @param {HTMLDivElement} component 
- */
-const addComponentToContainer = (container, component) => {
-    container.appendChild(component);
-}
+    </div>

@@ -8,18 +8,25 @@ from django.contrib.auth import authenticate,login
 from users.utils import create_applicant_account
 from django.http import Http404
 from .utils.new_application import create_new_admission_application_for_user
-from .utils.request_helpers import is_put_request, param_not_found_or_empty
-from .utils.application_updates import update_current_section, update_edit_section
-from .utils.context_adders import add_documents_to_context
-from django.core import serializers
+from .utils.request_helpers import (
+    is_put_request, 
+    param_not_found_or_empty
+)
+from .utils.application_updates import (
+    update_current_section, 
+    update_edit_section, 
+    get_tertiary_qualifications, 
+    get_hs_qualifications
+)
 from courses.utils import course_does_not_exist
 
     
 def create_new_application(request):
     """
-    This view always expects a course_code parameter on a GET request object, which will be used
-    when a subsequent POST request is made to create a new admission application. If this parameter
-    is not present, has an empty value, or the value does not match a Course instance, the user
+    This view expects a course_code parameter on a GET request, which will be used
+    when a subsequent POST request is made to create a new admission application. 
+    
+    If this parameter is not present, has an empty value, or the value does not match a Course instance, the user
     will be redirected to the 'search-course' url. The assumption is that we are creating a new application
     for a course, hence it must have existed beforehand.
     """
@@ -47,7 +54,7 @@ def create_new_application(request):
         
         return redirect(reverse('application',args=[application.id]))
   
-  
+
 @login_required(login_url='login')
 def get_draft_application(request, pk):
     
@@ -94,20 +101,13 @@ def get_draft_application(request, pk):
         'application': application
     }
     
-    # before returning the application to templates, check which section (edit_section)   
-    # will be rendered in the template so that the appropriate document names (if there are any)    
-    # for that section will be made available to be rendered.
-    # filtering documents to be returned inside the context
-    
+
     if application.edit_section == Section.EDUCATION_BACKGROUND: 
+
+        context['hs_qualifications'] = get_hs_qualifications(application)
+        context['tertiary_qualifications'] = get_tertiary_qualifications(application)
         
-        documents = application.high_school_documents.all()
-        context = add_documents_to_context(documents, application, context)
         
-        context['serialized_data'] = serializers.serialize(
-            "json", 
-            application.tertiary_qualifications.all()
-            ) 
         
     return render(request, 'admission/application/application-form-template.html', context)
 

@@ -2,6 +2,11 @@
 
 <div id="qualifications-container">
   <!-- qualifications will be rendered inside of this container -->
+  
+  {% for item in tertiary_qualifications %}
+  {% include 'admission/application/sections/education_background/tertiary-institution.html' with item=item %}
+  {% endfor %}
+
 </div>
 
 <button 
@@ -14,5 +19,7 @@
   <i class="ml-3 fa-solid fa-plus"></i>
 </button>
 
-<script> const serializedQualifications = {{ serialized_data | safe }}; </script>
+
+
+{% comment %} <script> const tertiaryQualifications = {{ tertiary_qualifications | safe }}; </script> {% endcomment %}
 <script src="{% static 'admission/js/add-qualification.js' %}"></script>

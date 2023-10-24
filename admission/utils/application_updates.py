@@ -1,7 +1,8 @@
 from enum import Enum
 from django.db import IntegrityError
+from django.forms import model_to_dict
 from admission.models.application import Section
-from admission.models.document import HSDocument, SponsorshipLetter
+from admission.models.document import DocumentType, HSDocument, HSFormLevel, SponsorshipLetter
 from admission.utils.section_save_update.education_background import save_education_background
 from utils.convert_date import convert_date_format
 
@@ -129,3 +130,109 @@ def update_edit_section(request, application):
         application.edit_section = Section.DECLARATION
             
     return application
+
+
+def filter_document(documents, form_level, doc_type):
+    
+    document = documents.filter(form_level=form_level, document_type=doc_type).first()
+    return document
+
+def get_hs_qualifications(application):
+    
+    documents = application.high_school_documents.all()
+    
+    hs_qualifications = [
+        generate_dict(HSFormLevel.FORM_3, application, documents),
+        generate_dict(HSFormLevel.FORM_5, application, documents),
+        generate_dict(HSFormLevel.FORM_6, application, documents),
+        generate_dict(HSFormLevel.FOUNDATION, application, documents),
+    ]
+
+    return hs_qualifications
+
+
+def generate_dict(level, application, documents):
+    
+    school_dict = dict()
+    
+    if level == HSFormLevel.FORM_6:
+        
+        school_dict['school'] = application.sixth_form_school
+        school_dict['year'] = application.sixth_form_year
+        school_dict['file_input_name_prefix'] = 'form_6_'
+        school_dict['input_name_prefix'] = 'sixth_form_'
+        school_dict['level_description'] = 'Sixth Form'
+        
+    elif level == HSFormLevel.FORM_3:
+        
+        school_dict['school'] = application.third_form_school
+        school_dict['year'] = application.third_form_year
+        school_dict['file_input_name_prefix'] = 'form_3_'
+        school_dict['input_name_prefix'] = 'third_form_'
+        school_dict['level_description'] = 'Third Form'
+        
+    elif level == HSFormLevel.FORM_5:
+        
+        school_dict['school'] = application.fifth_form_school
+        school_dict['year'] = application.fifth_form_year
+        school_dict['file_input_name_prefix'] = 'form_5_'
+        school_dict['input_name_prefix'] = 'fifth_form_'
+        school_dict['level_description'] = 'Fifth Form'
+        
+    elif level == HSFormLevel.FOUNDATION:
+        
+        print(application.foundation_school)
+        school_dict['school'] = application.foundation_school
+        school_dict['year'] = application.foundation_year
+        school_dict['file_input_name_prefix'] = 'foundation_'
+        school_dict['input_name_prefix'] = 'foundation_'
+        school_dict['level_description'] = 'Foundation'
+        
+    
+    school_dict['documents'] = {
+                'certificate': {
+                    'name': filter_document(documents, level, DocumentType.CERTIFICATE)
+                },
+                'transcript': {
+                    'name': filter_document(documents, level, DocumentType.TRANSCRIPT)
+                }
+            }
+    
+    return school_dict
+
+
+def get_tertiary_qualifications(application):
+    
+    # grab all tertiary qualifications
+    tq_qset = application.tertiary_qualifications.all()
+    
+    # create empty list for tertiary qualifications
+    tertiary_qualifications = []
+
+    # loop through tertiary qualifications queryset
+    for q_obj in tq_qset:
+        
+        # 1.
+        # get dict object from tertiary qualification model
+        obj_dict = model_to_dict(q_obj)
+        
+        # remove application item in dict object of qualification, for a leaner object
+        obj_dict.pop('application')
+        
+        # 2.
+        # get queryset of all tertiary documents related to qualification instance
+        q_docs_set = q_obj.related_documents.all()
+        
+        certificate = q_docs_set.filter(document_type=DocumentType.CERTIFICATE).first()
+        transcript = q_docs_set.filter(document_type=DocumentType.TRANSCRIPT).first()
+        
+        obj_dict['certificate'] = certificate
+        obj_dict['transcript'] = transcript
+        tertiary_qualifications.append(obj_dict)
+        
+        
+    
+    return tertiary_qualifications
+        
+    
+    
