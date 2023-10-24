@@ -215,28 +215,6 @@ class Application(models.Model):
         blank=True,
     )
     
-    """EMPLOYMENT History"""
-    
-    current_organization = models.CharField(
-        max_length=255,
-        verbose_name='Current Organization',
-        null=True,
-        blank=True,
-    )
-    
-    job_title = models.CharField(
-        max_length=255,
-        verbose_name='Job Title',
-        null=True,
-        blank=True,
-    )
-    
-    month_year_started = models.DateField(
-        verbose_name='Month/Year Started',
-        null=True,
-        blank=True,
-    )
-    
     """DECLARATION"""
     
     is_declared = models.BooleanField(
