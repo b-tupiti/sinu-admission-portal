@@ -47,7 +47,7 @@
 
                 {% elif application.edit_section == 'employment_history' %}
 
-                    {% include 'admission/application/sections/employment-history.html' %}
+                    {% include 'admission/application/sections/employment_history/employment-history.html' %}
 
                 {% elif application.edit_section == 'declaration' %}
 
@@ -77,7 +77,8 @@
     
 
   </section>
-    
+
+  <script src="{% static 'admission/js/add-item.js' %}"></script>
   <script src="{% static 'admission/js/delete-qualification.js' %}"></script>
 
 {% endblock %}
