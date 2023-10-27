@@ -1,0 +1,41 @@
+{% load static %}
+
+<div class="application-section-header p-3">
+    Employment History
+</div> 
+                
+<div class="application-content-wrapper" >
+
+    
+    
+    <div class="application-content">
+        
+        <section>
+          {% include 'admission/application/sections/employment_history/current-employment-block.html' %}
+        </section>
+  
+          <section>
+  
+            <div class="p-3 mb-3 mt-5" style="border-bottom:1px solid rgba(0, 0, 0, 0.1);background:#f5f5f5;border-top-left-radius:5px;border-top-right-radius:5px;">
+              <h2 style="font-weight:bold;">Previous Employment</h2>
+            </div>
+              
+            {% include 'admission/application/sections/employment_history/previous-employment-container.html' %}
+
+          </section>
+
+    </div>
+
+    <div class="button-group">
+        <div class="field is-grouped ">
+
+          {% include 'admission/application/save-and-exit-button.html' %}
+          
+          {% include 'admission/application/next-button.html' %}
+        </div>
+    </div>
+
+    
+        
+</div>
+

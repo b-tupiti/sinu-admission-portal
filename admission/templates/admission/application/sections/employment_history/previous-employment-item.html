@@ -1,0 +1,98 @@
+<div id="item_id-{{item.id}}" class=" mt-3 ml-1 mr-1  p-4  " style="border:1px solid rgba(0, 0, 0,.1);border-radius:5px">
+
+  <button 
+        id="delete-{{item.id}}"
+        type="button"
+        class="delete"
+        >
+    </button>
+                
+    <div class="columns is-align-items-center  " >
+      
+      <div class="column is-one-third">
+        <div class="field   ">
+          <div class="field-label is-normal mb-2" style="text-align:left">
+            <label class="label has-text-weight-normal">Organization</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <input
+                    name="firm-{{item.id}}" 
+                    class="input" 
+                    type="text" placeholder=""
+                    value="{{item.firm}}"
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="column ">
+        <div class="field   ">
+          <div class="field-label is-normal mb-2" style="text-align:left">
+            <label class="label has-text-weight-normal">Job Title</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <input 
+                    name="job_title-{{item.id}}"
+                    class="input" 
+                    type="text" 
+                    placeholder=""
+                    value="{{item.job_title}}"
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="column ">
+        <div class="field  ">
+          <div class="field-label is-normal mb-2" style="text-align:left">
+            <label class="label has-text-weight-normal">month/year started</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <input 
+                    name="month_year_started-{{item.id}}"
+                    class="input" 
+                    type="text" placeholder=""
+                    value="{{item.month_year_started}}"
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="column ">
+        <div class="field  ">
+          <div class="field-label is-normal mb-2" style="text-align:left">
+            <label class="label has-text-weight-normal">month/year ended</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <input 
+                    name="month_year_ended-{{item.id}}"
+                    class="input" 
+                    type="text" 
+                    placeholder=""
+                    value="{{item.month_year_ended}}"
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+</div>

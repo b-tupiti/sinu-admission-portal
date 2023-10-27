@@ -22,7 +22,7 @@
             
   
             {% for item in hs_qualifications %}
-            {% include 'admission/application/sections/education_background/secondary-school.html' with header_name=item.level_description file_input_name=item.file_input_name_prefix input_name=item.input_name_prefix school=item.school year=item.year  certificate=item.documents.certificate.name transcript=item.documents.transcript.name %}
+            {% include 'admission/application/sections/education_background/secondary-education-block.html' with header_name=item.level_description file_input_name=item.file_input_name_prefix input_name=item.input_name_prefix school=item.school year=item.year  certificate=item.documents.certificate.name transcript=item.documents.transcript.name %}
             {% endfor %}
 
           </section>
@@ -36,7 +36,7 @@
               </p>
             </div>
               
-            {% include 'admission/application/sections/education_background/qualifications-container.html' %}
+            {% include 'admission/application/sections/education_background/tertiary-education-container.html' %}
   
           </section>
 

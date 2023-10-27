@@ -1,10 +1,10 @@
 {% load static %}
 
-<div id="qualifications-container">
+<div id="items-container">
   <!-- qualifications will be rendered inside of this container -->
   
   {% for item in tertiary_qualifications %}
-  {% include 'admission/application/sections/education_background/tertiary-institution.html' with item=item %}
+  {% include 'admission/application/sections/education_background/tertiary-education-item.html' with item=item %}
   {% endfor %}
 
 </div>

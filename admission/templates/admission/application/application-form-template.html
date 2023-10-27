@@ -30,32 +30,32 @@
         <form id="application-form" method="post" enctype="multipart/form-data">
             {% csrf_token %}
 
+            <input id="application-id" type="text" value={{application.id}} hidden/>
+
             <div id="changeable-content" class="changeable-content">
                 
-                <!-- SECTION start-->
                 {% if application.edit_section == 'personal_details' %}
                 
-                    {% include 'admission/application/sections/personal-details.html' %}
+                    {% include 'admission/application/sections/personal_details/pd-base.html' %}
                 
                 {% elif application.edit_section == 'sponsor_details' %}
 
-                    {% include 'admission/application/sections/sponsor-details.html' %}
+                    {% include 'admission/application/sections/sponsor_details/sd-base.html' %}
 
                 {% elif application.edit_section == 'education_background' %}
 
-                    {% include 'admission/application/sections/education_background/education-background.html' %}
+                    {% include 'admission/application/sections/education_background/eb-base.html' %}
 
                 {% elif application.edit_section == 'employment_history' %}
 
-                    {% include 'admission/application/sections/employment_history/employment-history.html' %}
+                    {% include 'admission/application/sections/employment_history/eh-base.html' %}
 
                 {% elif application.edit_section == 'declaration' %}
 
-                    {% include 'admission/application/sections/declaration.html' %}
+                    {% include 'admission/application/sections/declaration/d-base.html' %}
 
                 {% endif %}
-                <!-- SECTION end-->
-
+               
             </div>
 
             <div id="save-spinner" class="hide-save-spinner">
@@ -78,7 +78,9 @@
 
   </section>
 
-  <script src="{% static 'admission/js/add-item.js' %}"></script>
-  <script src="{% static 'admission/js/delete-qualification.js' %}"></script>
+  
+  <script src="{% static 'admission/js/add-remove-container-item.js' %}"></script>
+  <script src="{% static 'admission/js/submit-event-listener.js' %}"></script>
+  
 
 {% endblock %}
