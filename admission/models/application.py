@@ -1,12 +1,13 @@
 from django.db import models
-from django.urls import reverse
-import uuid
 from users.models.user import User
 from courses.models.course import Course
+from django.urls import reverse
 
-class ApplicationState(models.TextChoices):
+class ApplicationStatus(models.TextChoices):
         DRAFT = "draft", "Draft"
-        SUBMITTED = "Submitted", "Submitted"
+        PENDING_DEPOSIT_VERIFICATION = "pending_deposit_verification", "Pending Deposit Verification"
+        UNDER_ASSESSMENT = "under_assessment", "Under Assessment"
+        APPROVED_AND_OFFER_GRANTED = "approved_and_offer_granted", "Approved and Offer Granted"
         
 
 class Section(models.TextChoices):
@@ -263,11 +264,11 @@ class Application(models.Model):
         default=Section.PERSONAL_DETAILS,
     )
     
-    application_state = models.CharField(
+    application_status = models.CharField(
         verbose_name='State of Application',
         max_length=40, 
-        choices=ApplicationState.choices, 
-        default=ApplicationState.DRAFT
+        choices=ApplicationStatus.choices, 
+        default=ApplicationStatus.DRAFT
     )
     
     created = models.DateTimeField(auto_now_add=True)

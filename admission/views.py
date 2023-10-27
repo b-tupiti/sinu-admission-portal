@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .models.application import Application, ApplicationState, Section
+from .models.application import Application, ApplicationStatus, Section
 from .models.employment import Employment
 from courses.models.course import Course
 from django.shortcuts import redirect
@@ -70,7 +70,7 @@ def get_draft_application(request, pk):
         return render(request, 'admission/errors/application_403.html')
     
     # check if application is submitted, if it is, redirect to dashboard 
-    if application.application_state == ApplicationState.SUBMITTED:
+    if application.application_status == ApplicationStatus.PENDING_DEPOSIT_VERIFICATION:
         return redirect('dashboard')
     
     
@@ -88,7 +88,7 @@ def get_draft_application(request, pk):
                 return redirect('application-saved', pk=application.id)
             
             elif 'submit_application' in request.POST:
-                application.application_state = ApplicationState.SUBMITTED
+                application.application_status = ApplicationStatus.PENDING_DEPOSIT_VERIFICATION
                 application.is_declared = True
                 application.save()
                 return redirect('dashboard')
@@ -128,7 +128,7 @@ def application_saved(request, pk):
     if not application.owner == request.user:
         return render(request, 'admission/errors/application_403.html')
     
-    if application.application_state == ApplicationState.SUBMITTED:
+    if application.application_status == ApplicationStatus.PENDING_DEPOSIT_VERIFICATION:
         return redirect('dashboard')
     
     context = {
