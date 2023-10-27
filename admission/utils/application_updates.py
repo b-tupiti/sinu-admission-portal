@@ -4,6 +4,7 @@ from django.forms import model_to_dict
 from admission.models.application import Section
 from admission.models.document import DocumentType, HSDocument, HSFormLevel, SponsorshipLetter
 from admission.utils.section_save_update.education_background import save_education_background
+from admission.utils.section_save_update.employment_history import save_employment_history
 from utils.convert_date import convert_date_format
 
 
@@ -80,6 +81,7 @@ def update_current_section(request, application):
         application.edit_section = Section.EMPLOYMENT_HISTORY
         
     elif ESection.EMPLOYMENT_HISTORY.value in request.POST:
+        save_employment_history(request, application)
         application.current_section = Section.DECLARATION
         application.edit_section = Section.DECLARATION
         
@@ -181,7 +183,6 @@ def generate_dict(level, application, documents):
         
     elif level == HSFormLevel.FOUNDATION:
         
-        print(application.foundation_school)
         school_dict['school'] = application.foundation_school
         school_dict['year'] = application.foundation_year
         school_dict['file_input_name_prefix'] = 'foundation_'

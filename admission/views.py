@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models.application import Application, ApplicationState, Section
+from .models.employment import Employment
 from courses.models.course import Course
 from django.shortcuts import redirect
 from django.urls import reverse
@@ -79,7 +80,7 @@ def get_draft_application(request, pk):
         
         if is_put_request(request):
             application = update_edit_section(request, application)
-        
+            
         else:
             
             if 'save_and_exit' in request.POST:
@@ -101,11 +102,15 @@ def get_draft_application(request, pk):
         'application': application
     }
     
-
     if application.edit_section == Section.EDUCATION_BACKGROUND: 
 
         context['hs_qualifications'] = get_hs_qualifications(application)
         context['tertiary_qualifications'] = get_tertiary_qualifications(application)
+        
+    if application.edit_section == Section.EMPLOYMENT_HISTORY:
+        
+        context['current_employment'] = Employment.objects.filter(is_current=True).first()
+        context['previous_employments'] = Employment.objects.filter(is_current=False)
         
         
         
