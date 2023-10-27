@@ -2,6 +2,7 @@ from django.contrib import admin
 from .models.application import Application
 from .models.document import SponsorshipLetter, HSDocument, TQDocument
 from .models.tertiary_qualification import TertiaryQualification
+from .models.employment import Employment
 
 
 class TertiaryQualificationAdmin(admin.ModelAdmin):
@@ -26,6 +27,12 @@ class SponsorshipLetterAdmin(admin.ModelAdmin):
     list_display = ('file', 'application')
 
 admin.site.register(SponsorshipLetter, SponsorshipLetterAdmin)
+
+
+class EmploymentAdmin(admin.ModelAdmin):
+    list_display = ('firm', 'job_title', 'month_year_started', 'month_year_ended', 'is_current', 'application')
+
+admin.site.register(Employment, EmploymentAdmin)
 
 
 class ApplicationAdmin(admin.ModelAdmin):
