@@ -1,3 +1,5 @@
+{% load custom_filters %}
+
 <div class="p-4" style="background:#f6f6f6">
 
     <h3 class="p-3">Please Upload a scanned copy of your deposit slip of $50, paid to SINU Bank Account: <strong> 9088870419 </strong></h3>
@@ -14,7 +16,11 @@
             </span>
           </span>
           <span class="file-name">
+            {% if application.deposit_slip %}
+            {{ application.deposit_slip.name | filename }}  
+            {% else %}
             ...
+            {% endif %}
           </span>
         </label>
       </div>
