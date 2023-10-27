@@ -24,13 +24,15 @@ class Employment(models.Model):
         blank=True,
     )
     
-    month_year_started = models.DateField(
+    month_year_started = models.CharField(
+        max_length=255,
         verbose_name='Month/Year Started',
         null=True,
         blank=True,
     )
     
-    month_year_ended = models.DateField(
+    month_year_ended = models.CharField(
+        max_length=255,
         verbose_name='Month/Year Ended',
         null=True,
         blank=True,
