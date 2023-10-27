@@ -222,6 +222,31 @@ class Application(models.Model):
         default=False,
     )
     
+    """ FINANCE GROUP """
+    
+    deposit_slip = models.FileField(
+        upload_to='slips/',
+        verbose_name='Deposit Slip',
+        null=True,
+        blank=True,
+    )
+    
+    receipt = models.FileField(
+        upload_to='receipts/',
+        verbose_name='Receipt',
+        null=True,
+        blank=True,
+    )
+    
+    """ SAS GROUP """
+    
+    letter_of_offer = models.FileField(
+        upload_to='offer_letters/',
+        verbose_name='Letter of Offer',
+        null=True,
+        blank=True,
+    )
+    
     """ Application Meta Data """
     
     current_section = models.CharField(
