@@ -47,11 +47,6 @@ class ApplicationAdmin(admin.ModelAdmin):
                 'selected_course',
             )
         }),
-        ('Student ID (inserted by applicant if he/she is a former student)', {
-            'fields': (
-                'student_id',
-            )
-        }),
         ('Personal Details', {
             'fields': (
                 'photo', 
@@ -88,9 +83,21 @@ class ApplicationAdmin(admin.ModelAdmin):
                 'foundation_year',
             ),
         }),
-        ('Declaration', {
+        ('Declaration & Deposit Slip', {
             'fields': (
                 'is_declared', 
+                'deposit_slip',
+            ),
+        }),
+        ('Finance', {
+            'fields': (
+                'receipt',
+            ),
+        }),
+        ('Student Administration Services (SAS)', {
+            'fields': (
+                'student_id',
+                'letter_of_offer',
             ),
         }),
         ('Meta', {
