@@ -1,4 +1,7 @@
+from typing import Any
 from django.contrib import admin
+from django.db.models.query import QuerySet
+from django.http.request import HttpRequest
 from .models.application import Application
 from .models.document import SponsorshipLetter, HSDocument, TQDocument
 from .models.tertiary_qualification import TertiaryQualification
@@ -36,6 +39,7 @@ admin.site.register(Employment, EmploymentAdmin)
 
 
 class ApplicationAdmin(admin.ModelAdmin):
+    list_display = ('id', 'first_name', 'last_name', 'selected_course', 'application_status')
     fieldsets = (
          ('Applicant', {
             'fields': (
@@ -104,8 +108,11 @@ class ApplicationAdmin(admin.ModelAdmin):
             'fields': (
                 'edit_section',
                 'current_section',
-                'application_state', 
+                'application_status', 
             ),
         }),
     )
+    def get_queryset(self, request: HttpRequest) -> QuerySet[Any]:
+        return super().get_queryset(request).exclude(application_status='draft')
+
 admin.site.register(Application, ApplicationAdmin)
