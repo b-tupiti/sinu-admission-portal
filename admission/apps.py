@@ -7,5 +7,4 @@ class AdmissionConfig(AppConfig):
     
     
     def ready(self):
-        pass
-        #import admission.signals
+        import admission.signals
