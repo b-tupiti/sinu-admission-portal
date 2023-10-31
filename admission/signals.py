@@ -1,61 +1,12 @@
-# from django.db.models.signals import post_save
-# from admission.models import Application, ApplicationToken
-# from django.core.mail import send_mail
-# from config import settings
-# from django.dispatch import receiver
-# import time
-# import threading
-# from django.template.loader import render_to_string
-# import uuid
-# from django.urls import reverse
+from django.dispatch import receiver
+from admission.utils.application_perms import set_permissions_based_on_application_status
+from .models.application import Application
+from django.db.models.signals import (
+    pre_save,
+)
 
-
-# @receiver(post_save,sender=Application)
-# def create_token_for_application(sender, instance, created, **kwargs):
-#     if created:
-#         ApplicationToken.objects.create(application=instance)
-
-# @receiver(post_save, sender=Application)
-# def send_confirmation_email(sender, instance, created, **kwargs):
-#     application = instance
-#     if created:
-#         subject = "Confirmation"
-#         message = "This is a confirmation email."
-#         context = {'application': application}
-#         html_message = render_to_string('mail/confirmation_email.html', context)
-#         def send_email():
-#             send_mail(
-#                 subject, 
-#                 message, 
-#                 settings.EMAIL_HOST, 
-#                 [application.email], 
-#                 html_message=html_message,
-#                 fail_silently=True,
-#             )
-#         threading.Thread(target=send_email).start()
-#     else:
-#         if application.application_state == Application.ApplicationState.OFFER_LETTER_ISSUED:
-            
-            
-#             token = ApplicationToken.objects.get(application=application)
-#             upload_url = f"{settings.BASE_URL}{reverse('upload-my-deposit-slip')}?token={token}"
-        
-#             subject = "Congratulations! You have a provisional Offer Letter"
-#             context = {'application': application, 'upload_url':upload_url}
-#             html_message = render_to_string('mail/offer_issued_email.html', context)
-#             def send_email():
-#                 send_mail(
-#                     subject, 
-#                     f'This email should include an Offer Letter, the proforma (invoice) for the MBA program, and SINU bank details so that the applicant can deposit.\nPlease click this link to upload your reciept: {upload_url}', 
-#                     settings.EMAIL_HOST, 
-#                     [application.email], 
-#                     html_message=html_message,
-#                     fail_silently=True,
-#                 )
-#             threading.Thread(target=send_email).start()
-            
-           
-        
-
-
-        
+@receiver(pre_save, sender=Application)
+def before_instance_is_saved(sender, instance, **kwargs):
+    
+    if not instance._state.adding:
+        set_permissions_based_on_application_status(instance)
