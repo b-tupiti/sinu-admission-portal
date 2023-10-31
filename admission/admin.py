@@ -1,8 +1,4 @@
-from typing import Any
 from django.contrib import admin
-from django.http.request import HttpRequest
-
-from admission.utils.application_perms import set_permissions_based_on_application_status
 from .models.application import Application, ApplicationStatus
 from .models.document import SponsorshipLetter, HSDocument, TQDocument
 from .models.tertiary_qualification import TertiaryQualification
@@ -11,6 +7,10 @@ from guardian.admin import GuardedModelAdmin
 from guardian.shortcuts import get_objects_for_user
 from django.contrib.auth.models import Group
 
+
+admin.site.site_header = 'SINU Portal'
+admin.site.site_title = 'SINU Portal'
+admin.site.index_title = 'Admissions'
 
 class TertiaryQualificationAdmin(admin.ModelAdmin):
     list_display = ('application', 'institution_name', 'course', 'year_start', 'year_end', 'major')
