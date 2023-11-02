@@ -1,0 +1,49 @@
+{% load i18n admin_urls %}
+
+{% block object-tools-items %}
+<link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+    />
+<style>
+    {% comment %} using !important because styling gets overridden by href, i.e. a[href] {% endcomment %}
+    .button { 
+        background: #ddd !important;
+        color: #264b5d !important;
+        padding: 5px 20px !important;
+        border-radius: 4px !important; 
+        font-weight: bold !important;
+        font-size: 14px !important;
+        margin-left: 20px;
+    }
+    li .button i {
+        margin-left: 8px;
+    }
+</style>
+
+{% if request.user.is_superuser %}
+
+<li>
+    {% url opts|admin_urlname:'history' original.pk|admin_urlquote as history_url %}
+    <a href="{% add_preserved_filters history_url %}" class="historylink">{% translate "History" %}</a>
+</li>
+{% if has_absolute_url %}<li><a href="{{ absolute_url }}" class="viewsitelink">{% translate "View on site" %}</a></li>{% endif %}
+{% else %}
+
+{% for group in request.user.groups.all %}
+
+{% if 'SAS (Student Administration Services)' == group.name %}
+<li>
+    <a  class="button is-light" href="{% url 'download-application' original.id %}" >
+        Download Application
+        <i class="fa-solid fa-file-zipper "></i>
+    </a>
+</li>
+{% endif %}
+
+{% endfor %}
+
+
+
+{% endif %}
+{% endblock %}
