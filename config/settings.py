@@ -180,11 +180,11 @@ else:
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
 AUTH_USER_MODEL = 'users.User'
-
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
-
 BASE_URL = env('BASE_URL')
-
 LOGIN_URL = 'login'
+
+DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
+SENDGRID_API_KEY = env('SENDGRID_API_KEY')
+
