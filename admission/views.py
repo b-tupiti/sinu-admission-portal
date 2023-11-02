@@ -7,7 +7,7 @@ from django.shortcuts import redirect
 from django.urls import reverse
 from django.contrib.auth import authenticate,login
 from users.utils import create_applicant_account
-from django.http import Http404
+from django.http import Http404, HttpResponse
 from .utils.new_application import create_new_admission_application_for_user
 from .utils.request_helpers import (
     is_put_request, 
@@ -136,3 +136,36 @@ def application_saved(request, pk):
     }
     
     return render(request, 'admission/application/application-saved.html', context)
+
+
+import io
+from django.http import FileResponse
+from admission.utils.generators import render_to_pdf
+
+
+import zipfile
+from io import BytesIO
+from django.core.files.base import ContentFile
+@login_required(login_url='login')
+def download_application(request, pk):
+    
+    application = Application.objects.get(id=pk)
+    data = {
+        'application': application
+    }
+    pdf = render_to_pdf('admission/pdf_templates/admission_application.html', data)
+    
+    zip_buffer = BytesIO()
+    
+    # Create a ZIP file and add the PDF to it
+    with zipfile.ZipFile(zip_buffer, 'w') as zipf:
+        # You can set the PDF filename within the ZIP file here
+        pdf_filename = "Invoice_%s.pdf" % ("12341231")
+        zipf.writestr(pdf_filename, pdf.getvalue())
+
+    response = HttpResponse(zip_buffer.getvalue(), content_type='application/zip')
+    zip_filename = "application_files.zip"
+    content = f"attachment; filename={zip_filename}"
+    response['Content-Disposition'] = content
+    
+    return response
