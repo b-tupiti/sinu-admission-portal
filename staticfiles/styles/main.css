@@ -3,17 +3,19 @@
 
 body {
   font-family: "Merriweather", serif;
-  background: transparent;
+  background-color: #113049;
 }
 
-main {
+
+
+
+
+/* main {
   position: relative;
   background-color: #202e34;
-}
+} */
 
-.background {
-  /* background-color: #542424; */
-  /* background-image: url('/static/images/bg.jpg'); */
+/* .background {
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -22,13 +24,20 @@ main {
   width: 100%;
   position: absolute;
   z-index: -2;
+} */
+
+
+footer {
+  position: fixed; 
+  width:100%; 
+  bottom: 0; 
+  background:#004b8d;
+  padding: 10px;
+  padding-right: 30px;
+  font-size: 11px;
 }
 
-
-
-
-hr {
-  
+/* hr {
   background-image: linear-gradient(to right, #1b647e, #6586a0, #9eabc0, #d1d3df, #ffffff);
 }
 
@@ -42,4 +51,20 @@ hr {
   color: white;
   font-weight: bold;
 
+} */
+
+.login-details {
+  background:#fff;
+  border:1px solid rgba(0, 0, 0,.2); 
+}
+
+.help-button {
+  background-color: #6da11f;
+  border-radius: 4;
+  border: unset;
+  font-weight:normal;
+}
+
+.help-button i {
+  font-weight: lighter;
 }

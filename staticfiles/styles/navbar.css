@@ -1,7 +1,12 @@
+
 .navbar {
     background:#004b8d;
     margin-bottom: 0px;
     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
 
