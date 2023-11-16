@@ -171,8 +171,9 @@ class Application(models.Model):
         blank=True,
     )
     
-    third_form_year = models.IntegerField(
+    third_form_year = models.CharField(
         verbose_name='Year in Third Form',
+        max_length=4,
         null=True,
         blank=True,
     )
@@ -184,8 +185,9 @@ class Application(models.Model):
         blank=True,
     )
     
-    fifth_form_year = models.IntegerField(
+    fifth_form_year = models.CharField(
         verbose_name='Year in Fifth Form',
+        max_length=4,
         null=True,
         blank=True,
     )
@@ -197,8 +199,9 @@ class Application(models.Model):
         blank=True,
     )
     
-    sixth_form_year = models.IntegerField(
+    sixth_form_year = models.CharField(
         verbose_name='Year in Sixth Form',
+        max_length=4,
         null=True,
         blank=True,
     )
@@ -210,8 +213,9 @@ class Application(models.Model):
         blank=True,
     )
     
-    foundation_year = models.IntegerField(
+    foundation_year = models.CharField(
         verbose_name='Year in Foundation',
+        max_length=4,
         null=True,
         blank=True,
     )
