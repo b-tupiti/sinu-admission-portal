@@ -1,10 +1,28 @@
+{% extends 'admission/application/form-template.html' %}
+{% load static %}  
 {% load custom_filters %}
 
-<div class="p-4" style="background:#f6f6f6">
+{% block progressbar %}
+{% include 'admission/application/progress_bar.html' %}
+{% endblock progressbar %}
 
-    <h3 class="p-3">Please Upload a scanned copy of your deposit slip of $50, paid to SINU Bank Account: <strong> 9088870419 </strong></h3>
 
-    <div class="file has-name p-3">
+{% block selected_qualification %}
+  {% include 'admission/application/selected_qualification.html' %}
+{% endblock selected_qualification %}
+
+{% block section %}
+
+
+<section>
+  <h3 class="p-3  has-text-white " style="background:#004b8d">Declaration</h3>
+  <div class="has-background-white p-4">
+
+    
+    <div class="p-1">
+      <h3 class="p-3">Please Upload a scanned copy of your deposit slip of $50, paid to SINU Bank Account: <strong> 9088870419 </strong></h3>
+
+      <div class="file has-name p-3">
         <label class="file-label">
           <input class="file-input" type="file" name="deposit_slip">
           <span class="file-cta">
@@ -24,41 +42,111 @@
           </span>
         </label>
       </div>
-   
+
+    </div>
+
+
+    <div class="p-1">
+
+      <h3 class="application-section-header p-3">
+        Declaration 
+      </h3>
+
+      <label class="checkbox is-flex">
+        <input type="checkbox">
+        <div class="ml-5" >
+            I Declare that the information given in this application is complete and accurate to the best of my knowledge. <br> 
+            I acknowledge that the University reserves the right to deny my admission or cancel my registration if the above information
+            is incomplete and/or false.
+        </div>
+      </label>
+
+    </div>
+
+  </div>
+</section>
+
+
+<div class="has-background-light is-flex is-justify-content-center p-3" style="border:1px solid rgba(0, 0, 0,.2);border-top:none">
+  <div class="field is-grouped ">
+    {% include 'admission/application/save-and-exit-button.html' %}
+    <p class="control">
+      <input type="submit" class="button is-link" name="submit_application" value="Submit Application">
+    </p>
+  </div>
+</div>
+
+
+{% endblock section %}
+
+{% block scripts %}
+  {{ block.super }}
+  <script src="{% static 'js/help-modal.js' %}"></script>
+  <script src="{% static 'admission/js/add-remove-container-item.js' %}"></script>
+  <script src="{% static 'js/flat-pickr-date-picker.js' %}"></script>
+{% endblock %} 
+
+
+
+<!-- <div class="p-4" style="background:#f6f6f6">
+
+  <h3 class="p-3">Please Upload a scanned copy of your deposit slip of $50, paid to SINU Bank Account: <strong> 9088870419 </strong></h3>
+
+  <div class="file has-name p-3">
+    <label class="file-label">
+      <input class="file-input" type="file" name="deposit_slip">
+      <span class="file-cta">
+        <span class="file-icon">
+          <i class="fas fa-upload"></i>
+        </span>
+        <span class="file-label">
+          Choose a file…
+        </span>
+      </span>
+      <span class="file-name">
+        {% if application.deposit_slip %}
+        {{ application.deposit_slip.name | filename }}  
+        {% else %}
+        ...
+        {% endif %}
+      </span>
+    </label>
+  </div>
+ 
 </div>
 
 
 <div class="application-section-header p-3">
-    Declaration 
+  Declaration 
 </div>
 
 <div class="application-content-wrapper" >
 
-    
-                
-                
-    <div class="application-content">
-        <label class="checkbox is-flex">
-            <input type="checkbox">
-            <div class="ml-5" >
-                I Declare that the information given in this application is complete and accurate to the best of my knowledge. <br> 
-                I acknowledge that the University reserves the right to deny my admission or cancel my registration if the above information
-                is incomplete and/or false.
-            </div>
-        </label>
-    </div>
+  
+              
+              
+  <div class="application-content">
+      <label class="checkbox is-flex">
+          <input type="checkbox">
+          <div class="ml-5" >
+              I Declare that the information given in this application is complete and accurate to the best of my knowledge. <br> 
+              I acknowledge that the University reserves the right to deny my admission or cancel my registration if the above information
+              is incomplete and/or false.
+          </div>
+      </label>
+  </div>
 
-    <div class="button-group">
-        <div class="field is-grouped ">
+  <div class="button-group">
+      <div class="field is-grouped ">
 
-            {% include 'admission/application/save-and-exit-button.html' %}
-            
-            <p class="control">
-                <input type="submit" class="button is-link" name="submit_application" value="Submit Application">
-            </p>
-        </div>
-    </div>
+          {% include 'admission/application/save-and-exit-button.html' %}
+          
+          <p class="control">
+              <input type="submit" class="button is-link" name="submit_application" value="Submit Application">
+          </p>
+      </div>
+  </div>
 
-    
-        
-</div>
+  
+      
+</div> -->

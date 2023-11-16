@@ -1,8 +1,83 @@
-<div class="application-section-header p-3">
+{% extends 'admission/application/form-template.html' %}
+{% load static %}  
+
+{% block progressbar %}
+{% include 'admission/application/progress_bar.html' %}
+{% endblock progressbar %}
+
+
+{% block selected_qualification %}
+  {% include 'admission/application/selected_qualification.html' %}
+{% endblock selected_qualification %}
+
+{% block section %}
+
+<section>
+  <h3 class="p-3  has-text-white " style="background:#004b8d"> Education Background</h3>
+  <div class="has-background-white p-4">
+
+    <!-- Start Secondary Education -->
+    <div class="p-1">
+      <h2 style="font-weight:bold;"> Secondary and Pre-certificate</h2>
+      <p class="mt-1 is-size-7" style="color:rgba(0, 0, 0,.6)">
+        NOTE: You must attach Certified Academic Transcript and Certificates for highest Form reached. Current form 5, 6 and 7
+        students need to get reference letter from your School's Careers Master and/or Principal. School based semester 1 results
+        must be attached.
+      </p>
+      
+      {% for item in hs_qualifications %}
+      {% include 'admission/application/sections/education_background/secondary-education-block.html' with header_name=item.level_description file_input_name=item.file_input_name_prefix input_name=item.input_name_prefix school=item.school year=item.year  certificate=item.documents.certificate.name transcript=item.documents.transcript.name %}
+      {% endfor %}
+    </div>
+    <!-- End Secondary Education -->
+
+    <hr/>
+
+    <!-- Start Tertiary Education -->
+    <div class=" p-1 ">
+
+      <h2 style="font-weight:bold;"> Tertiary Studies Qualifications</h2>
+      <p class="is-size-7" style="color:rgba(0, 0, 0,.6)">
+        NOTE: You must attach all Certified Academic Transcript and Certificates for the Tertiary Qualification you attained.
+      </p>
+      
+      {% include 'admission/application/sections/education_background/tertiary-education-container.html' %}
+
+    </div>
+    <!-- End Tertiary Education -->
+
+  </div>
+</section>
+
+
+<div class="has-background-light is-flex is-justify-content-center p-3" style="border:1px solid rgba(0, 0, 0,.2);border-top:none">
+  <div class="field is-grouped ">
+  
+    
+      {% include 'admission/application/save-and-exit-button.html' %}
+
+      {% include 'admission/application/next-button.html' %}
+
+  </div>
+</div>
+
+{% endblock %}
+  
+
+{% block scripts %}
+  {{ block.super }}
+  <script src="{% static 'js/help-modal.js' %}"></script>
+  <script src="{% static 'admission/js/add-remove-container-item.js' %}"></script>
+  <script src="{% static 'js/flat-pickr-date-picker.js' %}"></script>
+{% endblock %} 
+
+
+
+<!-- <div class="application-section-header p-3">
     Education Background
-</div> 
+</div>  -->
                 
-<div class="application-content-wrapper" >
+<!-- <div class="application-content-wrapper" >
 
     
     
@@ -53,4 +128,4 @@
 
     
         
-</div>
+</div> -->

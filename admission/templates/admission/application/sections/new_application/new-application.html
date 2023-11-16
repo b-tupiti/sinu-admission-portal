@@ -1,0 +1,264 @@
+
+{% extends 'admission/application/form-template.html' %}
+
+{% load static %}
+
+{% block selected_qualification %}
+  {% include 'admission/application/selected_qualification.html' %}
+{% endblock selected_qualification %}
+
+
+{% block section %}
+
+<input type="text" hidden name="course_code" value="{{course_details.code}}">
+
+ <!-- start User Details -->
+   <section>
+    <h3 class="p-3  has-text-white " style="background:#004b8d"> User Details</h3>
+    <div class="has-background-white p-4">
+      <div class="column is-three-fifths">
+          
+        <!-- start first name -->
+        <div class="field is-horizontal ">
+            <div class="field-label is-normal">
+              <label class="label">First name</label>
+            </div>
+            <div class="field-body">
+              <div class="field">
+                <div class="control">
+                  <input name="first_name" class="input" type="text" placeholder="" required>
+                </div>
+              </div>
+            </div>
+        </div>
+        <!-- end first name -->
+
+        <!-- start middle name -->
+        <div class="field is-horizontal  ">
+            <div class="field-label is-normal">
+              <label class="label">Middle name(s)</label>
+            </div>
+            <div class="field-body">
+              <div class="field">
+                <div class="control">
+                  <input name="middle_name" class="input" type="text" placeholder="" >
+                </div>
+              </div>
+            </div>
+        </div>
+        <!-- end middle name -->
+
+        <!-- start surname name -->
+        <div class="field is-horizontal  ">
+            <div class="field-label is-normal">
+              <label class="label">Surname</label>
+            </div>
+            <div class="field-body">
+              <div class="field">
+                <div class="control">
+                  <input name="last_name" class="input" type="text" placeholder="" required>
+                </div>
+              </div>
+            </div>
+        </div>
+        <!-- end middle name -->
+
+        <!-- start gender name -->
+        <div class="field is-horizontal ">
+            <div class="field-label is-normal">
+                <label class="label">Gender</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                <div class="control">
+                    <div class="select is-fullwidth">
+                    <select name="gender">
+                        <option selected>Please select</option>
+                        <option>Male</option>
+                        <option>Female</option>
+                    </select>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+        <!-- start end name -->
+
+        <!-- start dob name -->
+        
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">Date of Birth</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <p class="control">
+                <input id="datepicker" name="date_of_birth" class="input" type="text" placeholder="YYYY-MM-DD">
+              </p>
+            </div>
+          </div>
+        </div>
+          
+        <!-- end dob name -->
+      </div>
+    </div>
+  </section>
+<!-- end User Details -->
+  
+<!-- Start Login Details -->
+<section class="login-details">
+  <h1 class=" p-3 " style="background: #f0f0f0;"> 
+    Login Details
+  </h1>
+  <!-- Start Email -->
+  <div class="columns is-desktop m-1">
+      
+    <div class="column is-three-fifths">
+      
+      <!-- Email -->
+      <div class="field is-horizontal" style=" position:relative;">
+
+        <div class="field-label is-normal " >
+          <label class="label">Email</label>
+        </div>
+        <div class="field-body" >
+          <div class="field"  >
+            <div class="control is-flex" >
+              <input id="email" class="input" name="email" type="email" placeholder="">
+            </div>
+          </div>
+        </div>
+
+          <!-- email validate -->
+          <div  id="validate-email-check" class="column is-flex is-flex-direction-column-reverse" style="position: absolute;right:0; transform:translateX(120%);">
+          
+        </div>
+        <!-- email validate -->
+
+    
+
+      </div>
+      <!-- Email -->
+
+      <!-- Confirm Email Start -->
+      <div class="field is-horizontal  " style="position:relative;">
+        
+        <div class="field-label is-normal">
+          <label class="label">Confirm Email</label>
+        </div>
+
+        <div class="field-body">
+          <div class="field">
+            <div class="control is-flex">
+              <input id="confirm-email" class="input" name="confirm-email" type="email" placeholder="">
+            </div>
+          </div>
+        </div>
+
+          <!-- email confirm -->
+        <div  id="confirm-email-check" class="column is-flex is-flex-direction-column-reverse" style="position: absolute;right:0; transform:translateX(120%);">
+          
+        </div>
+        <!-- email confirm -->
+
+      </div>
+      <!-- Confirm Email End -->
+
+    </div>
+    
+
+      
+  </div>
+  <!-- End Email -->
+  <!-- Start Password -->
+  <div class="columns is-desktop m-1">
+      
+    <div class="column is-three-fifths">
+      
+      <div class="field is-horizontal  " style="position:relative;">
+        
+        <div class="field-label is-normal">
+          <label class="label">Password</label>
+        </div>
+
+        
+
+        <div class="field-body">
+          <div class="field">
+            <div class="control is-flex">
+              <input id="password" class="input" name="password" type="password" placeholder="">
+              
+            </div>
+            <span class="is-size-7">
+              Password must be at least 8 characters and include an uppercase letter, a lowercase letter, a digit, and a special character (#@$!%*?&).
+            </span>
+          </div>
+          
+        </div>
+
+          <!-- validate password -->
+        <div  id="validate-password-check" class="column is-flex is-flex-direction-column-reverse" style="position: absolute;right:0; transform:translateX(120%);">
+          
+        </div>
+          <!-- validate password -->
+        
+      </div>
+
+      <div class="field is-horizontal  " style="position:relative;">
+        <div class="field-label is-normal">
+          <label class="label">Confirm Password</label>
+        </div>
+        
+        <div class="field-body">
+          <div class="field">
+            <div class="control">
+              <input class="input" id="confirm-password" name="confirm-password" type="password" placeholder="">
+            </div>
+          </div>
+        </div>
+
+        <!-- Confirm password check -->
+      <div id="confirm-password-check" class="column is-flex is-flex-direction-column-reverse" style="position: absolute;right:0; transform:translateX(120%);">
+        
+      </div>
+    <!-- confirm password check -->
+
+      </div>
+
+    </div>
+    
+    
+    
+      
+  </div>
+  <!-- End Password -->
+</section>
+<!-- End Login Details -->
+      
+{% comment %} <input name="course_code" type="text" value="MNRM" hidden> {% endcomment %}
+
+<div class="has-background-light is-flex is-justify-content-center p-3" style="border:1px solid rgba(0, 0, 0,.2);border-top:none">
+  <div class="field is-grouped ">
+    <p class="control">
+        <button class="button">
+          Cancel
+        </button>
+      </p>
+    <p class="control">         
+        <input disabled id="save-and-continue" type="submit" class="button is-link" value="Save and Continue">
+    </p>
+  </div>
+</div>
+
+
+
+{% endblock %}
+
+
+ 
+{% block scripts %}
+  {{ block.super }}
+  <script src="{% static 'js/login-validation.js' %}"></script>
+  <script src="{% static 'js/help-modal.js' %}"></script>
+  <script src="{% static 'js/flat-pickr-date-picker.js' %}"></script>
+{% endblock %} 

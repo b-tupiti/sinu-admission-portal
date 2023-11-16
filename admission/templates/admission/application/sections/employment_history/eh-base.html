@@ -1,41 +1,92 @@
-{% load static %}
+{% extends 'admission/application/form-template.html' %}
+{% load static %}  
 
-<div class="application-section-header p-3">
-    Employment History
-</div> 
-                
-<div class="application-content-wrapper" >
+{% block progressbar %}
+{% include 'admission/application/progress_bar.html' %}
+{% endblock progressbar %}
+
+
+{% block selected_qualification %}
+  {% include 'admission/application/selected_qualification.html' %}
+{% endblock selected_qualification %}
+
+{% block section %}
+
+<section>
+  <h3 class="p-3  has-text-white " style="background:#004b8d"> Employment History</h3>
+  <div class="has-background-white p-4">
 
     
-    
-    <div class="application-content">
-        
-        <section>
-          {% include 'admission/application/sections/employment_history/current-employment-block.html' %}
-        </section>
-  
-          <section>
-  
-            <div class="p-3 mb-3 mt-5" style="border-bottom:1px solid rgba(0, 0, 0, 0.1);background:#f5f5f5;border-top-left-radius:5px;border-top-right-radius:5px;">
-              <h2 style="font-weight:bold;">Previous Employment</h2>
-            </div>
-              
-            {% include 'admission/application/sections/employment_history/previous-employment-container.html' %}
-
-          </section>
-
+    <div class="p-1">
+        <h2 style="font-weight:bold;"> Current Employment <span style="font-weight:normal;color:#636363">(if currently employed)</span> </h2>
+        {% include 'admission/application/sections/employment_history/current-employment-block.html' %}
     </div>
 
-    <div class="button-group">
-        <div class="field is-grouped ">
+    <hr>
 
-          {% include 'admission/application/save-and-exit-button.html' %}
-          
-          {% include 'admission/application/next-button.html' %}
-        </div>
+    <div class="p-1">
+      <h2 style="font-weight:bold;">Previous Employment</h2>
+      {% include 'admission/application/sections/employment_history/previous-employment-container.html' %}
     </div>
 
-    
-        
+  </div>
+</section>
+
+
+<div class="has-background-light is-flex is-justify-content-center p-3" style="border:1px solid rgba(0, 0, 0,.2);border-top:none">
+  <div class="field is-grouped ">
+    {% include 'admission/application/save-and-exit-button.html' %}
+    {% include 'admission/application/next-button.html' %}
+  </div>
 </div>
 
+
+<!-- OLD -->
+
+{% comment %} <div class="application-section-header p-3">
+  Employment History
+</div> 
+              
+<div class="application-content-wrapper" >
+
+  
+  
+  <div class="application-content">
+      
+      <section>
+        {% include 'admission/application/sections/employment_history/current-employment-block.html' %}
+      </section>
+
+        <section>
+
+          <div class="p-3 mb-3 mt-5" style="border-bottom:1px solid rgba(0, 0, 0, 0.1);background:#f5f5f5;border-top-left-radius:5px;border-top-right-radius:5px;">
+            <h2 style="font-weight:bold;">Previous Employment</h2>
+          </div>
+            
+          {% include 'admission/application/sections/employment_history/previous-employment-container.html' %}
+
+        </section>
+
+  </div>
+
+  <div class="button-group">
+      <div class="field is-grouped ">
+
+        {% include 'admission/application/save-and-exit-button.html' %}
+        
+        {% include 'admission/application/next-button.html' %}
+      </div>
+  </div>
+
+  
+      
+</div> {% endcomment %}
+
+{% endblock section %}
+
+{% block scripts %}
+  {{ block.super }}
+  <script src="{% static 'js/help-modal.js' %}"></script>
+  <script src="{% static 'admission/js/add-remove-container-item.js' %}"></script>
+  <script src="{% static 'js/flat-pickr-date-picker.js' %}"></script>
+{% endblock %} 

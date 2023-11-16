@@ -1,177 +1,179 @@
-<div class="application-section-header p-3">
-    Sponsor Details
-</div> 
-                
-<div class="application-content-wrapper" >
 
-    
-    
-    <div class="application-content">
+{% extends 'admission/application/form-template.html' %}
+{% load static %}  
+
+{% block progressbar %}
+{% include 'admission/application/progress_bar.html' %}
+{% endblock progressbar %}
+
+
+{% block selected_qualification %}
+  {% include 'admission/application/selected_qualification.html' %}
+{% endblock selected_qualification %}
+
+{% block section %}
+
+    <section>
+      <h3 class="p-3  has-text-white " style="background:#004b8d"> Sponsor Details</h3>
         
-        <div class="columns">
-            <div class="column is-three-fifths">
+        <div class="p-4 has-background-white">
+        <div class="column is-three-fifths">
 
 
-                <div class="field is-horizontal ">
-                    <div class="field-label is-normal">
-                        <label class="label">Sponsor Type</label>
+            <div class="field is-horizontal ">
+                <div class="field-label is-normal">
+                    <label class="label">Sponsor Type</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                    <div class="control">
+                        <div class="select is-fullwidth">
+                        <select name="sponsor_type">
+                            <option>Please select</option>
+                            <option {% if application.sponsor_type == 'private' %} selected {%endif%}>Private</option>
+                            <option {% if application.sponsor_type == 'sponsored' %} selected {%endif%}>Sponsored</option>
+                            <option {% if application.sponsor_type == 'private_with_concession' %} selected {%endif%}>Private with concession (staff)</option>
+                        </select>
+                        </div>
                     </div>
-                    <div class="field-body">
-                        <div class="field">
-                        <div class="control">
-                            <div class="select is-fullwidth">
-                            <select name="sponsor_type">
-                                <option>Please select</option>
-                                <option {% if application.sponsor_type == 'private' %} selected {%endif%}>Private</option>
-                                <option {% if application.sponsor_type == 'sponsored' %} selected {%endif%}>Sponsored</option>
-                                <option {% if application.sponsor_type == 'private_with_concession' %} selected {%endif%}>Private with concession (staff)</option>
-                            </select>
-                            </div>
-                        </div>
-                        </div>
                     </div>
                 </div>
-
-
-                <div class="field is-horizontal ">
-                    <div class="field-label is-normal">
-                        <label class="label has-text-weight-normal is-size-7 " style="color:#8d8d8d">Sponsorship letter </label>
-                    </div>
-                    <div class="field-body">
-                        <div class="field">
-                        <div class="control">
-                            
-                            
-                                <div class="file has-name is-small">
-                                    <label class="file-label">
-                                      <input class="file-input" type="file" name="sponsorship_letter">
-                                      <span class="file-cta">
-                                        <span class="file-icon">
-                                          <i class="fas fa-upload"></i>
-                                        </span>
-                                        <span class="file-label">
-                                        browse file
-                                        </span>
-                                      </span>
-                                      <span class="file-name">
-                                        {% if application.sponsor_letter %}
-                                        {{application.sponsor_letter}}
-                                        {% else %}
-                                        upload a sponsorship letter 
-                                        {% endif %}
-                                      </span>
-                                    </label>
-                                  </div>
-
-                            
-                        </div>
-                        </div>
-                    </div>
-                </div>
-
-
-
-                
-
-                
-                <div class="field is-horizontal  ">
-                    <div class="field-label is-normal">
-                      <label class="label">Sponsor Name</label>
-                    </div>
-                    <div class="field-body">
-                      <div class="field">
-                        <div class="control">
-                          <input 
-                            class="input" 
-                            type="text" 
-                            name="sponsor_name"
-                            value="{% if application.sponsor_name %}{{application.sponsor_name}}{%endif%}"
-                            >
-                        </div>
-                      </div>
-                    </div>
-                </div>
-
-                <div class="field is-horizontal  ">
-                    <div class="field-label is-normal">
-                      <label class="label">Email</label>
-                    </div>
-                    <div class="field-body">
-                      <div class="field">
-                        <div class="control">
-                          <input 
-                            name="sponsor_email"
-                            class="input" 
-                            type="email" 
-                            placeholder=""
-                            value="{% if application.sponsor_email %}{{application.sponsor_email}}{%endif%}"
-                          >
-                        </div>
-                      </div>
-                    </div>
-                </div>
-
-                <div class="field is-horizontal  ">
-                    <div class="field-label is-normal">
-                      <label class="label">Phone</label>
-                    </div>
-                    <div class="field-body">
-                      <div class="field">
-                        <div class="control">
-                          <input 
-                            name="sponsor_phone_number"
-                            class="input" 
-                            type="text" 
-                            placeholder=""
-                            value="{% if application.sponsor_phone_number %}{{application.sponsor_phone_number}}{%endif%}"
-                          >
-                        </div>
-                      </div>
-                    </div>
-                </div>
-
-                
-                <div class="field is-horizontal  ">
-                    <div class="field-label is-normal">
-                      <label class="label">Address</label>
-                    </div>
-                    <div class="field-body">
-                      <div class="field">
-                        <div class="control">
-                          <input 
-                            name="sponsor_address"
-                            class="input" 
-                            type="text" 
-                            placeholder=""
-                            value="{% if application.sponsor_address %}{{application.sponsor_address}}{%endif%}"
-                          >
-                        </div>
-                      </div>
-                    </div>
-                </div>
-
-                
-              
-                
-              
-                
-                  
-
             </div>
+
+
+            <div class="field is-horizontal ">
+                <div class="field-label is-normal">
+                    <label class="label has-text-weight-normal is-size-7 " style="color:#8d8d8d">Sponsorship letter </label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                    <div class="control">
+                        
+                        
+                            <div class="file has-name is-small">
+                                <label class="file-label">
+                                  <input class="file-input" type="file" name="sponsorship_letter">
+                                  <span class="file-cta">
+                                    <span class="file-icon">
+                                      <i class="fas fa-upload"></i>
+                                    </span>
+                                    <span class="file-label">
+                                    browse file
+                                    </span>
+                                  </span>
+                                  <span class="file-name">
+                                    {% if application.sponsor_letter %}
+                                    {{application.sponsor_letter}}
+                                    {% else %}
+                                    upload a sponsorship letter 
+                                    {% endif %}
+                                  </span>
+                                </label>
+                              </div>
+
+                        
+                    </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="field is-horizontal  ">
+                <div class="field-label is-normal">
+                  <label class="label">Sponsor Name</label>
+                </div>
+                <div class="field-body">
+                  <div class="field">
+                    <div class="control">
+                      <input 
+                        class="input" 
+                        type="text" 
+                        name="sponsor_name"
+                        value="{% if application.sponsor_name %}{{application.sponsor_name}}{%endif%}"
+                        >
+                    </div>
+                  </div>
+                </div>
+            </div>
+
+            <div class="field is-horizontal  ">
+                <div class="field-label is-normal">
+                  <label class="label">Email</label>
+                </div>
+                <div class="field-body">
+                  <div class="field">
+                    <div class="control">
+                      <input 
+                        name="sponsor_email"
+                        class="input" 
+                        type="email" 
+                        placeholder=""
+                        value="{% if application.sponsor_email %}{{application.sponsor_email}}{%endif%}"
+                      >
+                    </div>
+                  </div>
+                </div>
+            </div>
+
+            <div class="field is-horizontal  ">
+                <div class="field-label is-normal">
+                  <label class="label">Phone</label>
+                </div>
+                <div class="field-body">
+                  <div class="field">
+                    <div class="control">
+                      <input 
+                        name="sponsor_phone_number"
+                        class="input" 
+                        type="text" 
+                        placeholder=""
+                        value="{% if application.sponsor_phone_number %}{{application.sponsor_phone_number}}{%endif%}"
+                      >
+                    </div>
+                  </div>
+                </div>
+            </div>
+
+            <div class="field is-horizontal  ">
+                <div class="field-label is-normal">
+                  <label class="label">Address</label>
+                </div>
+                <div class="field-body">
+                  <div class="field">
+                    <div class="control">
+                      <input 
+                        name="sponsor_address"
+                        class="input" 
+                        type="text" 
+                        placeholder=""
+                        value="{% if application.sponsor_address %}{{application.sponsor_address}}{%endif%}"
+                      >
+                    </div>
+                  </div>
+                </div>
+            </div>
+
+        </div>
         </div>
         
-    </div>
+    
+      </section>
 
-    <div class="button-group">
-        <div class="field is-grouped ">
-
+    <div class="has-background-light is-flex is-justify-content-center p-3" style="border:1px solid rgba(0, 0, 0,.2);border-top:none">
+      <div class="field is-grouped ">
+      
+        
           {% include 'admission/application/save-and-exit-button.html' %}
-          
+    
           {% include 'admission/application/next-button.html' %}
-          
-        </div>
+    
+      </div>
     </div>
 
     
-        
-</div>
+{% endblock %}
+  
+
+{% block scripts %}
+  {{ block.super }}
+  <script src="{% static 'js/help-modal.js' %}"></script>
+{% endblock %} 

@@ -1,20 +1,21 @@
 {% extends 'base_generic.html' %}
 {% load static %}
 
-{% block content %}
-
+{% block styles %}
+{{block.super}}
 <link
       rel="stylesheet"
       href="{% static 'admission\styles\application.css' %}"
 />
+{% endblock %}
 
+{% block content %}
 
   {% include 'admission/application/progress_bar.html' %}
-
   {% include 'admission/application/selected_qualification.html' %}
 
 
-  <section id="application-section">
+  {% comment %} <section id="application-section">
     
     <div class="container application-container">
 
@@ -76,7 +77,7 @@
   
     
 
-  </section>
+  </section> {% endcomment %}
 
   
   <script src="{% static 'admission/js/add-remove-container-item.js' %}"></script>

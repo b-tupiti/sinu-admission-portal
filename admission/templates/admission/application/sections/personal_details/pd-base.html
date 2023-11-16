@@ -1,120 +1,135 @@
-<div class="container application-section-header p-3">
-    Personal Details
-  </div> 
+{% extends 'admission/application/form-template.html' %}
+{% load static %}  
+
+{% block progressbar %}
+{% include 'admission/application/progress_bar.html' %}
+{% endblock progressbar %}
+
+
+{% block selected_qualification %}
+  {% include 'admission/application/selected_qualification.html' %}
+{% endblock selected_qualification %}
+
+{% block section %}
+
                 
-  <div class="container application-content-wrapper" >
-  
-    
-    
-    <div class="application-content">
-  
-        <p class="m-3 is-size-7" style="color:rgba(0, 0, 0,.6)">
-            Please check the following details and make any changes as required.
-        </p>
-    
-        <div class="mt-3 mr-3 ml-3 p-3 mb-0" style="background:#fff;border:1px solid rgba(0, 0, 0,.2); border-top-left-radius:5px;border-top-right-radius:5px">
-  
-            <div class="columns">
-                <div class="column is-three-fifths">
-                    
-                    <div class="field is-horizontal  ">
-                        <div class="field-label is-normal">
-                          <label class="label">First name</label>
-                        </div>
-                        <div class="field-body">
-                          <div class="field">
-                            <div class="control">
-                              <input name="first_name" class="input" type="text" placeholder="" value="{{application.first_name}}">
-                            </div>
-                          </div>
-                        </div>
+
+
+   <!-- start Personal Details -->
+   <section>
+    <h3 class="p-3  has-text-white " style="background:#004b8d"> Personal Details</h3>
+    <div class="has-background-white p-4">
+      <p class="m-3 is-size-7" style="color:rgba(0, 0, 0,.6)">
+        Please check the following details and make any changes as required.
+      </p>
+
+      <div class="column is-three-fifths">
+          
+        <!-- start first name -->
+        <div class="field is-horizontal ">
+            <div class="field-label is-normal">
+              <label class="label">First name</label>
+            </div>
+            <div class="field-body">
+              <div class="field">
+                <div class="control">
+                  <input name="first_name" class="input" type="text" placeholder="" value="{{application.first_name}}">
+                </div>
+              </div>
+            </div>
+        </div>
+        <!-- end first name -->
+
+        <!-- start middle name -->
+        <div class="field is-horizontal  ">
+            <div class="field-label is-normal">
+              <label class="label">Middle name(s)</label>
+            </div>
+            <div class="field-body">
+              <div class="field">
+                <div class="control">
+                  <input name="middle_name" class="input" type="text" placeholder="" value="{{application.middle_name}}">
+                </div>
+              </div>
+            </div>
+        </div>
+        <!-- end middle name -->
+
+        <!-- start surname name -->
+        <div class="field is-horizontal  ">
+            <div class="field-label is-normal">
+              <label class="label">Surname</label>
+            </div>
+            <div class="field-body">
+              <div class="field">
+                <div class="control">
+                  <input name="last_name" class="input" type="text" placeholder="" value="{{application.last_name}}">
+                </div>
+              </div>
+            </div>
+        </div>
+        <!-- end middle name -->
+
+        <!-- start gender name -->
+        <div class="field is-horizontal ">
+            <div class="field-label is-normal">
+                <label class="label">Gender</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                <div class="control">
+                    <div class="select is-fullwidth">
+                      <select name="gender">
+                        <option>Please select</option>
+                        <option {% if application.gender == 'male' %} selected {%endif%}>Male</option>
+                        <option {% if application.gender == 'female' %} selected {%endif%}>Female</option>
+                    </select>
                     </div>
-  
-                    <div class="field is-horizontal  ">
-                        <div class="field-label is-normal">
-                          <label class="label">Middle name(s)</label>
-                        </div>
-                        <div class="field-body">
-                          <div class="field">
-                            <div class="control">
-                              <input name="middle_name" class="input" type="text" placeholder="" value="{{application.middle_name}}">
-                            </div>
-                          </div>
-                        </div>
-                    </div>
-  
-                    <div class="field is-horizontal  ">
-                        <div class="field-label is-normal">
-                          <label class="label">Surname</label>
-                        </div>
-                        <div class="field-body">
-                          <div class="field">
-                            <div class="control">
-                              <input name="last_name" class="input" type="text" placeholder="" value="{{application.last_name}}">
-                            </div>
-                          </div>
-                        </div>
-                    </div>
-  
-                    
-                    <div class="field is-horizontal ">
-                        <div class="field-label is-normal">
-                            <label class="label">Gender </label>
-                        </div>
-                        <div class="field-body">
-                            <div class="field">
-                            <div class="control">
-                                <div class="select is-fullwidth">
-                                <select name="gender">
-                                    <option>Please select</option>
-                                    <option {% if application.gender == 'male' %} selected {%endif%}>Male</option>
-                                    <option {% if application.gender == 'female' %} selected {%endif%}>Female</option>
-                                </select>
-                                </div>
-                            </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                  
-                    <div class="columns">
-                        <div class="column">
-                          <div class="field is-horizontal">
-                            <div class="field-label is-normal">
-                              <label class="label">Date of Birth </label>
-                            </div>
-                            <div class="field-body">
-                              <div class="field">
-                                <p class="control">
-                                  <input id="datepicker" name="date_of_birth" class="input" type="text" placeholder="YYYY-MM-DD" value="{{application.date_of_birth|date:"d-m-Y"}}">
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      
-  
+                </div>
                 </div>
             </div>
-          
-            
-            
-  
         </div>
+        <!-- start end name -->
+
+        <!-- start dob name -->
         
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">Date of Birth</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <p class="control">
+                <input id="datepicker" name="date_of_birth" class="input" type="text" placeholder="YYYY-MM-DD" value="{{application.date_of_birth|date:"d-m-Y"}}">
+              </p>
+            </div>
+          </div>
+        </div>
+          
+        <!-- end dob name -->
+      </div>
     </div>
-  
-    <div class="button-group">
-        <div class="field is-grouped ">
+  </section>
+<!-- end personal Details -->
+
+
+<div class="has-background-light is-flex is-justify-content-center p-3" style="border:1px solid rgba(0, 0, 0,.2);border-top:none">
+  <div class="field is-grouped ">
   
     
-            {% include 'admission/application/save-and-exit-button.html' %}
+      {% include 'admission/application/save-and-exit-button.html' %}
 
-            {% include 'admission/application/next-button.html' %}
-            
-        </div>
-    </div>
-  
-        
+      {% include 'admission/application/next-button.html' %}
+
   </div>
+</div>
+
+
+{% endblock %}
+  
+
+{% block scripts %}
+  {{ block.super }}
+  <script src="{% static 'js/help-modal.js' %}"></script>
+  <script src="{% static 'js/flat-pickr-date-picker.js' %}"></script>
+{% endblock %} 

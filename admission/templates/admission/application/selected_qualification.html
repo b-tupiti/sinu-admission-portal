@@ -1,34 +1,35 @@
 {% load static %}
 
-<link
-      rel="stylesheet"
-      href="{% static 'admission\styles\selected_qualification.css' %}"
-/>
+<link rel="stylesheet" href="{% static 'admission\styles\selected_qualification.css' %}"/>
 
-<section class="selected-qualification-box">
-        
-    <div class="container">
+<section class="container mt-5">
 
-        <h3 class="selected-qualification-header p-3 has-text-white " >
-            Selected Qualification
-        </h3>
-
-        <div class="selected-qualification-content columns is-gapless has-background-white p-3 pb-5" >
-            <div class="column is-three-fifths ">
-                <h6 class="title" >Qualification</h6>
-                <p>{{application.selected_course}}</p>
-            </div>
-            <div class="column ">
-                <h6  class="title " >Year</h6>
-                <p>2024</p>
-            </div>
-            <div class="column">
-                <h6  class="title "  >Start Date</h6>
-                <p>01/01/2024</p>
-            </div>
-            
-        </div>
-       
+    <div class="p-3 has-text-white is-size-6" style="background:#004b8d;border-top-left-radius:5px;border-top-right-radius:5px">
+      Selected Course
     </div>
-    
-</section>
+
+    <div class="columns m-0 has-background-light selected-qualification-content" >
+      <div class="column is-three-fifths">
+        <p class="has-text-weight-semibold pt-1 pb-3">Course Name</p>
+        <p>{{course_details.title}}</p>
+      </div>
+      
+      <div class="column is-one-fifth">
+        <p class="has-text-weight-semibold pt-1 pb-3">Code</p>
+        <p>{{course_details.code}}</p>
+      </div>
+      
+      <div class="column">
+        <p class="has-text-weight-semibold pt-1 pb-3">Location</p>
+        <p>
+            {% if course_details.campus %}
+                {{course_details.campus}}
+            {%else%}
+                unspecified
+            {%endif%}
+        </p>
+      </div>
+    </div>
+
+  </section>
+ 
