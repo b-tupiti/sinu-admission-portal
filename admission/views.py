@@ -40,8 +40,9 @@ def create_new_application(request):
         
         course_details = Course.objects.values('code', 'title', 'campus').get(code=course_code)
         context = {'course_details': course_details}
+        print(course_details)
         
-        return render(request, 'admission/application/create-new-application.html', context)
+        return render(request, 'admission/application/sections/new_application/new-application.html', context)
     
     elif request.method == 'POST':     
         email, password = create_applicant_account(request)
@@ -111,10 +112,24 @@ def get_draft_application(request, pk):
         
         context['current_employment'] = Employment.objects.filter(is_current=True).first()
         context['previous_employments'] = Employment.objects.filter(is_current=False)
+    
+    if application.edit_section == Section.PERSONAL_DETAILS:
+        return render(request, 'admission/application/sections/personal_details/pd-base.html', context)
+    
+    if application.edit_section == Section.SPONSOR_DETAILS:
+        return render(request, 'admission/application/sections/sponsor_details/sd-base.html', context)
+    
+    if application.edit_section == Section.EDUCATION_BACKGROUND:
+        return render(request, 'admission/application/sections/education_background/eb-base.html', context)
+    
+    if application.edit_section == Section.EMPLOYMENT_HISTORY:
+        return render(request, 'admission/application/sections/employment_history/eh-base.html', context)
+    
+    if application.edit_section == Section.DECLARATION:
+        return render(request, 'admission/application/sections/declaration/d-base.html', context)
         
-        
-        
-    return render(request, 'admission/application/application-form-template.html', context)
+    # return render(request, 'admission/application/application-form-template.html', context)
+    return render(request, 'admission/application/form-template.html', context)
 
 
 @login_required(login_url='login')
