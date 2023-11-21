@@ -254,15 +254,15 @@ class Application(models.Model):
     
     """ Application Meta Data """
     
-    current_section = models.CharField(
-        verbose_name="The furthest section that the user has reached before submitting",
+    furthest_section = models.CharField(
+        verbose_name="The furthest section that the user has reached.",
         max_length=40,
         choices=Section.choices,
         default=Section.PERSONAL_DETAILS,
     )
     
-    edit_section = models.CharField(
-        verbose_name="The section that is on edit by user",
+    current_section = models.CharField(
+        verbose_name="The section that is on edit by user (current).",
         max_length=40,
         choices=Section.choices,
         default=Section.PERSONAL_DETAILS,

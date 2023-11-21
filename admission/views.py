@@ -14,8 +14,8 @@ from .utils.request_helpers import (
     param_not_found_or_empty
 )
 from .utils.application_updates import (
-    update_current_section, 
-    update_edit_section, 
+    save_current_section, # should be updating furthest section here
+    change_current_section, 
     get_tertiary_qualifications, 
     get_hs_qualifications
 )
@@ -40,7 +40,6 @@ def create_new_application(request):
         
         course_details = Course.objects.values('code', 'title', 'campus').get(code=course_code)
         context = {'course_details': course_details}
-        print(course_details)
         
         return render(request, 'admission/application/sections/new_application/new-application.html', context)
     
@@ -58,7 +57,7 @@ def create_new_application(request):
   
 
 @login_required(login_url='login')
-def get_draft_application(request, pk):
+def get_application(request, pk):
     
     # checks if application exist, else render 404
     try:
@@ -80,7 +79,7 @@ def get_draft_application(request, pk):
     if request.method == 'POST':
         
         if is_put_request(request):
-            application = update_edit_section(request, application)
+            application = change_current_section(request, application)
             
         else:
             
@@ -95,7 +94,7 @@ def get_draft_application(request, pk):
                 return redirect('dashboard')
 
             else:   
-                application = update_current_section(request, application)
+                application = save_current_section(request, application)
         
         application.save()
     
@@ -103,33 +102,35 @@ def get_draft_application(request, pk):
         'application': application
     }
     
-    if application.edit_section == Section.EDUCATION_BACKGROUND: 
+    if application.current_section == Section.EDUCATION_BACKGROUND: 
 
         context['hs_qualifications'] = get_hs_qualifications(application)
         context['tertiary_qualifications'] = get_tertiary_qualifications(application)
         
-    if application.edit_section == Section.EMPLOYMENT_HISTORY:
+    if application.current_section == Section.EMPLOYMENT_HISTORY:
         
         context['current_employment'] = Employment.objects.filter(is_current=True).first()
         context['previous_employments'] = Employment.objects.filter(is_current=False)
     
-    if application.edit_section == Section.PERSONAL_DETAILS:
+    if application.current_section == Section.PERSONAL_DETAILS:
         return render(request, 'admission/application/sections/personal_details/pd-base.html', context)
     
-    if application.edit_section == Section.SPONSOR_DETAILS:
+    if application.current_section == Section.SPONSOR_DETAILS:
         return render(request, 'admission/application/sections/sponsor_details/sd-base.html', context)
     
-    if application.edit_section == Section.EDUCATION_BACKGROUND:
+    if application.current_section == Section.EDUCATION_BACKGROUND:
         return render(request, 'admission/application/sections/education_background/eb-base.html', context)
     
-    if application.edit_section == Section.EMPLOYMENT_HISTORY:
+    if application.current_section == Section.EMPLOYMENT_HISTORY:
         return render(request, 'admission/application/sections/employment_history/eh-base.html', context)
     
-    if application.edit_section == Section.DECLARATION:
+    if application.current_section == Section.DECLARATION:
         return render(request, 'admission/application/sections/declaration/d-base.html', context)
         
     # return render(request, 'admission/application/application-form-template.html', context)
-    return render(request, 'admission/application/form-template.html', context)
+    # return render(request, 'admission/application/form-template.html', context)
+
+
 
 
 @login_required(login_url='login')

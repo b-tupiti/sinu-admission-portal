@@ -44,53 +44,32 @@ class ESection(Enum):
     DECLARATION = 'declaration'
 
 
-# This function fires when the next button is clicked, it checks where the current section is
-# and sets the new current section to the one on its right. It always goes left --> right
-def update_current_section(request, application):
+def save_current_section(request, application):
     """
-    This function handles POST data when a section is saved.
+    saves current section, sets new current section.
     """
-    if ESection.PERSONAL_DETAILS.value in request.POST:
+    try:
+        current_section = request.POST.get('current_section')
         
-        if application.current_section not in [
-            Section.EDUCATION_BACKGROUND, 
-            Section.EMPLOYMENT_HISTORY, 
-            Section.DECLARATION]:
-                save_personal_details(request, application)
-                application.current_section = Section.SPONSOR_DETAILS
-            
-        application.edit_section = Section.SPONSOR_DETAILS
+        if (current_section == Section.PERSONAL_DETAILS):
+            save_personal_details(request, application)
+            application.current_section = Section.SPONSOR_DETAILS
         
-    elif ESection.SPONSOR_DETAILS.value in request.POST:
+        elif (current_section == Section.SPONSOR_DETAILS):
+            save_sponsor_details(request, application)
+            application.current_section = Section.EDUCATION_BACKGROUND
         
-        if application.current_section not in [
-            Section.EMPLOYMENT_HISTORY, 
-            Section.DECLARATION]:
-                save_sponsor_details(request, application)
-                application.current_section = Section.EDUCATION_BACKGROUND
-                
-        application.edit_section = Section.EDUCATION_BACKGROUND
+        elif (current_section == Section.EDUCATION_BACKGROUND):
+            save_education_background(request, application)
+            application.current_section = Section.EMPLOYMENT_HISTORY
         
-    elif ESection.EDUCATION_BACKGROUND.value in request.POST:
+        elif (current_section == Section.EMPLOYMENT_HISTORY):
+            save_employment_history(request, application)
+            application.current_section = Section.DECLARATION
+    finally:
+        return application
         
-        if application.current_section not in [
-            Section.DECLARATION]:
-                save_education_background(request, application)
-                application.current_section = Section.EMPLOYMENT_HISTORY
-        
-        application.edit_section = Section.EMPLOYMENT_HISTORY
-        
-    elif ESection.EMPLOYMENT_HISTORY.value in request.POST:
-        save_employment_history(request, application)
-        application.current_section = Section.DECLARATION
-        application.edit_section = Section.DECLARATION
-        
-    else:      
-        application.current_section = Section.PERSONAL_DETAILS
-        application.edit_section = Section.PERSONAL_DETAILS
-       
-    return application
-
+    
 
 def save_personal_details(request, application):
     application.first_name = request.POST.get('first_name')
@@ -115,21 +94,21 @@ def save_sponsor_details(request, application):
 
 
 
-def update_edit_section(request, application):
+def change_current_section(request, application):
     if ESection.PERSONAL_DETAILS.value in request.POST:    
-        application.edit_section = Section.PERSONAL_DETAILS
+        application.current_section = Section.PERSONAL_DETAILS
                      
     elif ESection.SPONSOR_DETAILS.value in request.POST:
-        application.edit_section = Section.SPONSOR_DETAILS
+        application.current_section = Section.SPONSOR_DETAILS
     
     elif ESection.EDUCATION_BACKGROUND.value in request.POST:
-        application.edit_section = Section.EDUCATION_BACKGROUND
+        application.current_section = Section.EDUCATION_BACKGROUND
         
     elif ESection.EMPLOYMENT_HISTORY.value in request.POST:
-        application.edit_section = Section.EMPLOYMENT_HISTORY
+        application.current_section = Section.EMPLOYMENT_HISTORY
     
     elif ESection.DECLARATION.value in request.POST:
-        application.edit_section = Section.DECLARATION
+        application.current_section = Section.DECLARATION
             
     return application
 

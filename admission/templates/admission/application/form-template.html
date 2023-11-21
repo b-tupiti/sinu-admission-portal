@@ -17,6 +17,7 @@
 
     <form method="post">
       {% csrf_token %}
+      <input hidden name="current_section" value="{{application.current_section}}"/>
       {% block section %}
       {% endblock section %}
     </form>
