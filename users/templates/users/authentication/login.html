@@ -1,54 +1,72 @@
 {% extends 'base_generic.html' %}
 
+
+{% load static %}
 {%block content %}
 
-<div class="is-flex is-justify-content-space-between is-align-items-center mt-5" style="margin:1rem auto;margin-bottom:1.5rem;width:80%; background:white; padding:1rem; border-radius:5px">
-  <h2 class="is-size-5">Sign into the Portal</h2>
-  <button class="button is-size-6 has-text-weight-semibold" style="background:#6da11f;color:#ffffff;border-radius:5px;border:none">Help</button>
-</div>
+{% include 'admission/help/help-modal.html' %}
 
-<form method="POST" style="margin:1rem auto;border:none; border-radius:5px; background:white; padding-bottom:1rem;width:50%">
-  {% csrf_token %} 
-    <h2 class="  mb-4 has-text-white p-3" style=" background:#127594; border-top-left-radius:5px; border-top-right-radius:5px">Portal Login</h2>
-    <div style="margin:1rem">
-      <p  style="font-size: .9em;color:hwb(0 49% 51%);line-height:1.9em" >
-        Students, please log in using your student ID and password. <br>
-        New applicants, if you have not yet received an ID number, log in using your email and password. <br>
-        Agents, please log in using your email and password.
-      </p>
-      <hr class="mb-4" style="background:#e5e5e5">
-      <div class="field">
-          <p class="control has-icons-left has-icons-right" >
-            <input class="input" type="email" placeholder="Email \ Username" name="email" required>
-            <span class="icon is-small is-left">
-              <i class="fas fa-envelope"></i>
-            </span>
-          </p>
-        </div>
-        <div class="field">
-          <p class="control has-icons-left">
-            <input class="input" type="password" placeholder="Password" name="password" required>
-            <span class="icon is-small is-left">
-              <i class="fas fa-lock"></i>
-            </span>
-          </p>
-        </div>
+<main class="container">
+
+  
+
+  <div class="p-4 is-flex is-justify-content-space-between is-align-items-center mt-5 mb-5 has-background-white" >
+    <h2 class="is-size-5">Sign into the Portal</h2>
+    <button id="help-modal-btn" class="button has-text-white help-button" >
+      <span class="has-text-white">Need Help</span> <i class="fa-regular fa-circle-question ml-2"></i>
+    </button>
+  </div>
+
+  <form method="POST" class="" style="">
+    {% csrf_token %} 
+    <h2 class=" has-text-white p-3 bg-sinu-blue">Admissions Portal Login</h2>
+      <div class="has-background-white p-3">
+        <p  style="font-size: .9em;color:hwb(0 49% 51%);line-height:1.9em" >
+          Please login with your email and password to complete your application. <br>
+        </p>
         <hr class="mb-4" style="background:#e5e5e5">
+        <div class="field">
+            <p class="control has-icons-left has-icons-right" >
+              <input class="input" type="email" placeholder="Email \ Username" name="email" required>
+              <span class="icon is-small is-left">
+                <i class="fas fa-envelope"></i>
+              </span>
+            </p>
+          </div>
+          <div class="field">
+            <p class="control has-icons-left">
+              <input class="input" type="password" placeholder="Password" name="password" required>
+              <span class="icon is-small is-left">
+                <i class="fas fa-lock"></i>
+              </span>
+            </p>
+          </div>
+          <hr class="mb-4" style="background:#e5e5e5">
 
-        <div class="columns">
-          <div class="column">
-            <button style="background:#fafafa" class="button  is-fullwidth  has-text-weight-semibold">Forgot Password?</button>
+          <div class="columns">
+            <div class="column">
+              <button style="background:#fafafa" class="button  is-fullwidth  has-text-weight-semibold">Forgot Password?</button>
+            </div>
+            <div class="column">
+              <button type="submit" style="background:#127594" class="button has-text-white   is-fullwidth  has-text-weight-semibold">Login</button>
+            </div>
+          
           </div>
-          <div class="column">
-            <button type="submit" style="background:#127594" class="button has-text-white   is-fullwidth  has-text-weight-semibold">Login</button>
-          </div>
-         
-        </div>
-        
-        
-    </div>
-    
+          
+          
+      </div>
+      
   </form>
 
+  <p class="mt-5 p-3 pt-5 pb-5 bg-sinu-blue has-text-white">
+    Haven't found a program yet? Go to our <a class="has-text-white" style="text-decoration:underline" href="{% url 'course-search' %}">Course Finder</a>.
+  </p>
 
-  {%endblock %}
+</main>
+
+{%endblock %}
+
+{% block scripts %}
+  {{ block.super }}
+  <script src="{% static 'js/help-modal.js' %}"></script>
+{% endblock %} 

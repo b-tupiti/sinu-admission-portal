@@ -7,8 +7,7 @@ from users.views import login_user, logout_user, dashboard, applications, applic
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    #path('mba-admission/', include('admission.urls')),
-    path('', include('courses.urls')), # path: find-a-course 
+    path('', include('courses.urls')), 
     path('admission/', include('admission.urls')),
     
     path('login/', login_user, name='login'),
