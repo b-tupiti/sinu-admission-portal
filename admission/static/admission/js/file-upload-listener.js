@@ -6,5 +6,5 @@ function handlerFileSelect(event){
     const nameEl = parent.lastElementChild;
     
     nameEl.textContent = selectedFile.name;
-    nameEl.classList.add('has-text-dark');
+    nameEl.classList.add('has-text-sinu-blue');
 }

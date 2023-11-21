@@ -15,6 +15,7 @@ def _save_or_replace_sponsorship_letter(request, application):
             application=application,
         )
         letter.save()
+        print(letter)
             
     except IntegrityError as e:
         
@@ -82,9 +83,9 @@ def save_personal_details(request, application):
     
 def save_sponsor_details(request, application):
     
-    if request.FILES.get('sponsorship_letter'):          
-       _save_or_replace_sponsorship_letter(request, application)
-            
+    if request.FILES.get('sponsorship_letter'):    
+        _save_or_replace_sponsorship_letter(request, application)
+       
     application.sponsor_type = _sponsor_type(request.POST.get('sponsor_type'))
     application.sponsor_name = request.POST.get('sponsor_name')
     application.sponsor_email = request.POST.get('sponsor_email')

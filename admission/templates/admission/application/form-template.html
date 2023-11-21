@@ -15,7 +15,7 @@
     {% include 'admission/help/help-modal.html' %}
     {% include 'admission/application/application-form-header.html' %}
 
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
       {% csrf_token %}
       <input hidden name="current_section" value="{{application.current_section}}"/>
       {% block section %}
