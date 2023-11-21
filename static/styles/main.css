@@ -6,7 +6,6 @@ body {
 }
 
 .background {
-  background-color: #113049;
   position: fixed;
   top: 0;
   left: 0;
@@ -15,6 +14,17 @@ body {
   z-index: -100;
 }
 
+.bg-dark-blue {
+  background-color: #113049;
+}
+
+.bg-sinu-blue {
+  background-color: #004b8d;
+}
+
+.bg-white {
+  background-color: #fff;
+}
 
 
 /* main {
@@ -80,6 +90,3 @@ footer {
   color: #004b8d;
 }
 
-.bg-sinu-blue {
-  background-color: #004b8d;
-}

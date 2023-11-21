@@ -1,18 +1,20 @@
-{% extends 'base_course_finder.html' %}
+{% extends 'base_generic.html' %}
+
+{%block navbar %}
+{% include 'navbar.html' with title='Course Finder' %}
+{%endblock navbar %}
+
+{% block background %}
+  <div class="background bg-white"></div>
+{% endblock %}
 
 {% block content %}
 
-<div class="p-4" style="background:rgba(0, 0, 0, 0.7)" >
-  
-  <div class="container" >
-    <h2 class="is-size-1 has-text-white " style="margin:1em auto;margin-bottom: .5em;">{{course.title}}  </h2>
-    <a href="{% url 'create-new-application' %}?course_code={{course.code}}" class="button is-dark has-text-weight-bold" style="margin:1em auto;margin-bottom:1.5em">Apply</a>
+<div class="p-4 bg-dark-blue">
+  <div class="container p-4">
+  <h2 class="is-size-1 has-text-white mt-5 mb-5">{{course.title}}  </h2>
+  <a href="{% url 'create-new-application' %}?course_code={{course.code}}" class="button is-primary has-text-weight-bold" style="margin:1em auto;margin-bottom:1.5em">Apply</a>
   </div>
-
-  
-  
-  
-
 </div>
 
 
@@ -29,7 +31,7 @@
 
 
 
-<div class="pt-5" style="background:#fff;min-height:200px;min-height:68vh">
+<div class="pt-5" style="background:#fff;">
   <div class="container">
 
     <section class="border is-bordered " style="margin-bottom:1em;border:1px solid rgb(234, 234, 234);background:#f5fbff;border-radius:5px" >

@@ -21,11 +21,13 @@
  
   <body>
 
+      {% block background %}
+      <div class="background bg-dark-blue"></div>
+      {% endblock %}
       
-      <div class="background"></div>
-      
-    
-      {% include 'navbar.html' %}
+      {% block navbar %}
+      {% include 'navbar.html' with title='SINU Admissions' %}
+      {% endblock navbar %}
       
       {% block content %}
       {% endblock %} 

@@ -1,6 +1,10 @@
 {% extends 'base_generic.html' %}
 {% load static %}
 
+{%block navbar %}
+{% include 'navbar.html' with title='Course Finder' %}
+{%endblock navbar %}
+
 {% block styles %}
 {{block.super}}
 <link rel="stylesheet" href="{% static 'courses\styles\courses.css' %}">
@@ -11,7 +15,7 @@
     
 
 <section class="container mt-5">
-    <div class="mt-5 columns is-align-items-center bg-sinu-blue p-5 pt-4 pb-4" >
+    <div class="mt-5 columns is-align-items-center bg-sinu-blue  pt-4 pb-4" >
         
         <h1 class="column is-narrow is-size-5 has-text-white mr-5 has-text-weight-bold" >Course Finder
             <span class="is-size-1" style="color:#127594">.</span>
