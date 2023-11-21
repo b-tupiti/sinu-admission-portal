@@ -119,6 +119,8 @@ def filter_document(documents, form_level, doc_type):
     document = documents.filter(form_level=form_level, document_type=doc_type).first()
     return document
 
+
+    
 def get_hs_qualifications(application):
     
     documents = application.high_school_documents.all()

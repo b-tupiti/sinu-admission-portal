@@ -102,16 +102,6 @@ def get_application(request, pk):
         'application': application
     }
     
-    if application.current_section == Section.EDUCATION_BACKGROUND: 
-
-        context['hs_qualifications'] = get_hs_qualifications(application)
-        context['tertiary_qualifications'] = get_tertiary_qualifications(application)
-        
-    if application.current_section == Section.EMPLOYMENT_HISTORY:
-        
-        context['current_employment'] = Employment.objects.filter(is_current=True).first()
-        context['previous_employments'] = Employment.objects.filter(is_current=False)
-    
     if application.current_section == Section.PERSONAL_DETAILS:
         return render(request, 'admission/application/sections/personal_details/pd-base.html', context)
     
@@ -119,16 +109,19 @@ def get_application(request, pk):
         return render(request, 'admission/application/sections/sponsor_details/sd-base.html', context)
     
     if application.current_section == Section.EDUCATION_BACKGROUND:
+        context['hs_qualifications'] = get_hs_qualifications(application)
+        context['tertiary_qualifications'] = get_tertiary_qualifications(application)
         return render(request, 'admission/application/sections/education_background/eb-base.html', context)
     
     if application.current_section == Section.EMPLOYMENT_HISTORY:
+        context['current_employment'] = Employment.objects.filter(is_current=True, application=application).first()
+        context['previous_employments'] = Employment.objects.filter(is_current=False, application=application)
         return render(request, 'admission/application/sections/employment_history/eh-base.html', context)
     
     if application.current_section == Section.DECLARATION:
         return render(request, 'admission/application/sections/declaration/d-base.html', context)
         
-    # return render(request, 'admission/application/application-form-template.html', context)
-    # return render(request, 'admission/application/form-template.html', context)
+
 
 
 
