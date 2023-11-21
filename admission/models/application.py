@@ -2,6 +2,7 @@ from django.db import models
 from users.models.user import User
 from courses.models.course import Course
 from django.urls import reverse
+from django_countries.fields import CountryField
 
 class ApplicationStatus(models.TextChoices):
         DRAFT = "draft", "Draft"
@@ -16,7 +17,70 @@ class Section(models.TextChoices):
     EDUCATION_BACKGROUND = "education_background", "Education Background"
     EMPLOYMENT_HISTORY = "employment_history", "Employment History"
     DECLARATION = "declaration", "Declaration"
+
     
+class Province(models.TextChoices):
+    GUADALCANAL = 'Guadalcanal', 'Guadalcanal'
+    WESTERN = 'Western', 'Western'
+    TEMOTU = 'Temotu', 'Temotu'
+    MALAITA = 'Malaita', 'Malaita'
+    ISABEL = 'Isabel', 'Isabel'
+    CHOISEUL = 'Choiseul', 'Choiseul'
+    MAKIRA = 'Makira', 'Makira'
+    RENBEL = 'Renbel', 'Renbel'
+    CENTRAL = 'Central', 'Central'
+    
+class Constituency(models.TextChoices):
+    AOKE_LANGALANGA = 'Aoke-Langalanga', 'Aoke-Langalanga'
+    BAEGU_ASIFOLA = 'Baegu-Asifola', 'Baegu-Asifola'
+    CENTRAL_GUADALCANAL = 'Central Guadalcanal', 'Central Guadalcanal'
+    CENTRAL_HONIARA = 'Central Honiara', 'Central Honiara'
+    CENTRAL_KWARAE = 'Central Kwara\'ae', 'Central Kwara\'ae'
+    CENTRAL_MAKIRA = 'Central Makira', 'Central Makira'
+    EAST_AREARE = 'East ꞌAreꞌare', 'East ꞌAreꞌare'
+    EAST_CENTRAL_GUADALCANAL = 'East Central Guadalcanal', 'East Central Guadalcanal'
+    EAST_CHOISEUL = 'East Choiseul', 'East Choiseul'
+    EAST_GUADALCANAL = 'East Guadalcanal', 'East Guadalcanal'
+    EAST_HONIARA = 'East Honiara', 'East Honiara'
+    EAST_KWAIO = 'East Kwaio', 'East Kwaio'
+    EAST_MAKIRA = 'East Makira', 'East Makira'
+    EAST_MALAITA = 'East Malaita', 'East Malaita'
+    FALEKA = 'Fataleka', 'Fataleka'
+    GAO_BUGOTU = 'Gao-Bugotu', 'Gao-Bugotu'
+    GIZO_KOLOMBANGARA = 'Gizo-Kolombangara', 'Gizo-Kolombangara'
+    HOGRAO_KIA_HAVULEI = 'Hograno-Kia-Havulei', 'Hograno-Kia-Havulei'
+    LAU_MBAELELEA = 'Lau Mbaelelea', 'Lau Mbaelelea'
+    MALAITA_OUTER_ISLANDS = 'Malaita Outer Islands', 'Malaita Outer Islands'
+    MARINGE_KOKOTA = 'Maringe-Kokota', 'Maringe-Kokota'
+    MAROVO = 'Marovo', 'Marovo'
+    NGGELLA = 'Nggella', 'Nggella'
+    NORTH_EAST_GUADALCANAL = 'North East Guadalcanal', 'North East Guadalcanal'
+    NORTH_GUADALCANAL = 'North Guadalcanal', 'North Guadalcanal'
+    NORTH_MALAITA = 'North Malaita', 'North Malaita'
+    NORTH_NEW_GEORGIA = 'North New Georgia', 'North New Georgia'
+    NORTH_VELLA_LA_VELLA = 'North Vella La Vella', 'North Vella La Vella'
+    NORTH_WEST_CHOISEUL = 'North West Choiseul', 'North West Choiseul'
+    NORTH_WEST_GUADALCANAL = 'North West Guadalcanal', 'North West Guadalcanal'
+    RANNOGGA_SIMBO = 'Rannogga-Simbo', 'Rannogga-Simbo'
+    RENNELL_BELLONA = 'Rennell Bellona', 'Rennell Bellona'
+    SAVO_RUSSELLS = 'Savo-Russells', 'Savo-Russells'
+    SHORTLANDS = 'Shortlands', 'Shortlands'
+    SOUTH_CHOISEUL = 'South Choiseul', 'South Choiseul'
+    SOUTH_GUADALCANAL = 'South Guadalcanal', 'South Guadalcanal'
+    SMALL_MALAITA = 'Small Malaita', 'Small Malaita'
+    SOUTH_NEW_GEORGIA_RENDOVA_TETEPARE = 'South New Georgia-Rendova-Tetepare', 'South New Georgia-Rendova-Tetepare'
+    SOUTH_VELLA_LA_VELLA = 'South Vella La Vella', 'South Vella La Vella'
+    TEMOTU_NENDE = 'Temotu Nende', 'Temotu Nende'
+    TEMOTU_PELE = 'Temotu Pele', 'Temotu Pele'
+    TEMOTU_VATUD = 'Temotu Vatud', 'Temotu Vatud'
+    UGI_ULAWA = 'Ugi-Ulawa', 'Ugi-Ulawa'
+    WEST_AREARE = 'West ꞌAreꞌare', 'West ꞌAreꞌare'
+    WEST_GUADALCANAL = 'West Guadalcanal', 'West Guadalcanal'
+    WEST_HONIARA = 'West Honiara', 'West Honiara'
+    WEST_KWAIO = 'West Kwaio', 'West Kwaio'
+    WEST_KWARAE = 'West Kwara\'ae', 'West Kwara\'ae'
+    WEST_NEW_GEORGIA_VONA_VONA = 'West New Georgia - Vona Vona', 'West New Georgia - Vona Vona'
+    WEST_MAKIRA = 'West Makira', 'West Makira'
     
 class Application(models.Model):
     
@@ -105,7 +169,81 @@ class Application(models.Model):
         null=True,
     )
     
-    phone_number = models.CharField(
+    province = models.CharField(
+        max_length=150,
+        choices=Province.choices,
+        blank=True,
+        null=True,
+    )
+    
+    constituency = models.CharField(
+        max_length=255,
+        choices=Constituency.choices,
+        blank=True,
+        null=True,
+    )
+    
+    ward = models.CharField(
+        max_length=255,
+        choices=Constituency.choices,
+        blank=True,
+        null=True,
+    )
+    
+    citizenship = CountryField(
+        verbose_name='Citizenship',
+        blank=True,
+        null=True,
+    )
+    
+    country_of_birth = CountryField(
+        verbose_name='Country of Birth',
+        blank=True,
+        null=True,
+    )
+    
+    permanent_address = models.TextField(
+        verbose_name='Permanent Address',
+        blank=True,
+        null=True,
+    )
+    
+    guardian_name = models.CharField(
+        verbose_name='Name of Guardian',
+        max_length=255,
+        blank=True,
+        null=True,
+    )
+    
+    guardian_address = models.TextField(
+        verbose_name='Guardian Address',
+        blank=True,
+        null=True,
+    )
+    
+    guardian_phone_number = models.CharField(
+        verbose_name='Guardian Phone Number',
+        max_length=255,
+        blank=True,
+        null=True,
+    )
+    
+    contact_postal = models.TextField(
+        verbose_name='Contact (Postal)',
+        max_length=255,
+        blank=True,
+        null=True,
+    )
+    
+    mobile_phone_number = models.CharField(
+        verbose_name='Mobile Number',
+        max_length=100,
+        blank=True,
+        null=True,
+    )
+    
+    telephone_number = models.CharField(
+        verbose_name='Telephone Number',
         max_length=100,
         blank=True,
         null=True,
@@ -155,9 +293,8 @@ class Application(models.Model):
         blank=True,
     )
     
-    sponsor_address = models.CharField(
+    sponsor_address = models.TextField(
         verbose_name='Sponsor Address',
-        max_length=255,
         null=True,
         blank=True,
     )
