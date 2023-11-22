@@ -103,6 +103,14 @@ def get_application(request, pk):
     }
     
     if application.current_section == Section.PERSONAL_DETAILS:
+        from .models.application import MaritalStatus, Gender, Title, Constituency, Province
+        from django_countries import countries
+        context['marital_status'] =  MaritalStatus
+        context['genders'] =  Gender
+        context['titles'] =  Title
+        context['constituencies'] =  Constituency
+        context['provinces'] =  Province
+        context['countries'] =  countries
         return render(request, 'admission/application/sections/personal_details/pd-base.html', context)
     
     if application.current_section == Section.SPONSOR_DETAILS:

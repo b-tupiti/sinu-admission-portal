@@ -26,9 +26,25 @@ class Province(models.TextChoices):
     MALAITA = 'Malaita', 'Malaita'
     ISABEL = 'Isabel', 'Isabel'
     CHOISEUL = 'Choiseul', 'Choiseul'
-    MAKIRA = 'Makira', 'Makira'
-    RENBEL = 'Renbel', 'Renbel'
+    MAKIRAULAWA = 'Makira/Ulawa', 'Makira/Ulawa'
+    RENBEL = 'Rennell/Bellona', 'Rennell/Bellona'
     CENTRAL = 'Central', 'Central'
+    
+class MaritalStatus(models.TextChoices):
+    SINGLE = 'Single', 'Single'
+    MARRIED = 'Married', 'Married'
+    DIVORCED = 'Divorced', 'Divorced'
+    WIDOW = 'Widow', 'Widow'
+ 
+class Title(models.TextChoices):
+    MR = 'Mr', 'Mr'
+    MRS = 'Mrs', 'Mrs'
+    MS = 'Ms', 'Ms'
+    DR = 'Dr', 'Dr'
+    
+class Gender(models.TextChoices):
+    MALE = 'Male', 'Male'
+    FEMALE = 'Female', 'Female'
     
 class Constituency(models.TextChoices):
     AOKE_LANGALANGA = 'Aoke-Langalanga', 'Aoke-Langalanga'
@@ -122,7 +138,7 @@ class Application(models.Model):
     title = models.CharField(
         verbose_name='Title',
         max_length=3, 
-        choices=(('mr', 'Mr'), ('mrs', 'Mrs'),('ms', 'Ms'), ('dr', 'Dr')),
+        choices=Title.choices,
         blank=True,
         null=True,
     )
@@ -157,14 +173,15 @@ class Application(models.Model):
     gender = models.CharField(
         verbose_name='Gender',
         max_length=6,
-        choices=(('male', 'Male'), ('female', 'Female')),
+        choices=Gender.choices,
         blank=True,
         null=True,
     )
     
     marital_status = models.CharField(
+        verbose_name='Marital Status',
         max_length=8,
-        choices = (('single', 'Single'), ('married', 'Married'),('divorced', 'Divorced'), ('widow', 'Widow')),
+        choices=MaritalStatus.choices,
         blank=True,
         null=True,
     )
@@ -258,6 +275,13 @@ class Application(models.Model):
     has_special_needs =  models.BooleanField(
         verbose_name='Special Needs / Disability',
         default=False,
+    )
+    
+    medical_report = models.FileField(
+        upload_to='medical/',
+        verbose_name='Medical Report',
+        null=True,
+        blank=True,
     )
     
     """SPONSOR Details"""
