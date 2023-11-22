@@ -253,14 +253,25 @@
           <!-- START row -->
           <div class="columns is-desktop is-marginless p-1" >
 
-            <!-- START ward -->
+            <!-- START Province -->
             <div class="column field is-one-quarter-fullhd">
-              <label class="label">Ward</label>
+              <label class="label">Province</label>
               <div class="control">
-                <input name="ward" class="input" type="text" placeholder="" value="{% if ward %} {{application.ward}} {% endif %}">
+                <div class="select is-fullwidth">
+                  <select name="province">
+                    {% if application.province == None %}
+                    <option selected>Please select</option>
+                    {% else %}
+                    <option selected>{{application.province}}</option>
+                    {% endif %}
+                    {% for province in provinces %}
+                    <option>{{province}}</option>
+                    {% endfor %}
+                  </select>
+                </div>
               </div>
             </div>
-            <!-- END ward -->
+            <!-- END Province -->
 
             <!-- START  Constituency -->
             <div class="column field is-one-quarter-fullhd">
@@ -282,25 +293,14 @@
             </div>
             <!-- END Constituency -->
 
-            <!-- START Province -->
+            <!-- START ward -->
             <div class="column field is-one-quarter-fullhd">
-              <label class="label">Province</label>
+              <label class="label">Ward</label>
               <div class="control">
-                <div class="select is-fullwidth">
-                  <select name="province">
-                    {% if application.province == None %}
-                    <option selected>Please select</option>
-                    {% else %}
-                    <option selected>{{application.province}}</option>
-                    {% endif %}
-                    {% for province in provinces %}
-                    <option>{{province}}</option>
-                    {% endfor %}
-                  </select>
-                </div>
+                <input name="ward" class="input" type="text" placeholder="" value="{% if ward %} {{application.ward}} {% endif %}">
               </div>
             </div>
-            <!-- END Province -->
+            <!-- END ward -->
 
           </div>
           <!-- END row -->
