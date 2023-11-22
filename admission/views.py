@@ -17,7 +17,8 @@ from .utils.application_updates import (
     save_current_section, # should be updating furthest section here
     change_current_section, 
     get_tertiary_qualifications, 
-    get_hs_qualifications
+    get_hs_qualifications,
+    handle_submission,
 )
 from courses.utils import course_does_not_exist
 
@@ -88,9 +89,10 @@ def get_application(request, pk):
                 return redirect('application-saved', pk=application.id)
             
             elif 'submit_application' in request.POST:
-                application.application_status = ApplicationStatus.PENDING_DEPOSIT_VERIFICATION
-                application.is_declared = True
-                application.save()
+                handle_submission(request, application)
+                # application.application_status = ApplicationStatus.PENDING_DEPOSIT_VERIFICATION
+                # application.is_declared = True
+                # application.save()
                 return redirect('dashboard')
 
             else:   

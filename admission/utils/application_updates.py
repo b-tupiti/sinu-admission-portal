@@ -8,6 +8,17 @@ from admission.utils.section_save_update.employment_history import save_employme
 from utils.convert_date import convert_date_format
 
 
+def handle_submission(request, application):
+    from admission.models.application import ApplicationStatus
+    try:
+        application.deposit_slip = request.FILES.get('deposit_slip')
+    except:
+        pass
+    application.application_status = ApplicationStatus.PENDING_DEPOSIT_VERIFICATION
+    application.is_declared = True
+    application.save()
+    
+                
 def _save_or_replace_sponsorship_letter(request, application):
     try:
         letter = SponsorshipLetter(
