@@ -98,7 +98,6 @@ function passwordValidityCheck(password){
         <span class="has-text-danger">
             <i class="fa-solid fa-x mr-3"></i>
             <small style="font-size:10px">
-            ${res['message']}
             </small>
         </span>`
         inputs['validPassword'] = false;

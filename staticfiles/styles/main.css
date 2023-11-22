@@ -3,12 +3,39 @@
 
 body {
   font-family: "Merriweather", serif;
+}
+
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height:100%;
+  width: 100%;
+  z-index: -100;
+}
+
+.bg-dark-blue {
   background-color: #113049;
 }
 
+.bg-sinu-blue {
+  background-color: #004b8d;
+}
 
+.bg-light-blue {
+  background-color: #1a79cc;
+}
 
+.light-blue-border-bottom {
+  border-bottom: 1px solid #1a79cc;
+}
+.bg-white {
+  background-color: #fff;
+}
 
+.bg-opaque-blue {
+  background-color:rgba(0, 76, 143,.1);
+}
 
 /* main {
   position: relative;
@@ -68,3 +95,8 @@ footer {
 .help-button i {
   font-weight: lighter;
 }
+
+.has-text-sinu-blue {
+  color: #004b8d;
+}
+
