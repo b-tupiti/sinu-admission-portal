@@ -66,7 +66,7 @@ class ApplicationAdmin(GuardedModelAdmin):
                 'date_of_birth',
                 'gender',
                 'marital_status',
-                'phone_number',
+                'mobile_phone_number',
                 'email',
                 'has_special_needs',
             )
@@ -145,7 +145,7 @@ class ApplicationAdmin(GuardedModelAdmin):
                         'last_name',
                         'date_of_birth',
                         'gender',
-                        'phone_number',
+                        'mobile_phone_number',
                         'email',
                     )
                 }),
@@ -203,7 +203,7 @@ class ApplicationAdmin(GuardedModelAdmin):
                 'middle_name',
                 'last_name',
                 'date_of_birth',
-                'phone_number',
+                'mobile_phone_number',
                 'email',
                 'gender',
                 'sponsor_type',
