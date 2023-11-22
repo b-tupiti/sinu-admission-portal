@@ -18,227 +18,217 @@
 
    <!-- start Personal Details -->
    <section>
+
     <h3 class="p-3  has-text-white " style="background:#004b8d"> Personal Details</h3>
+
+    <!-- START section -->
     <div class="has-background-white p-4">
+      
       <p class="m-3 is-size-7" style="color:rgba(0, 0, 0,.6)">
         Please check the following details and make any changes as required.
       </p>
 
-      <!-- Start first section -->
-      <div class="column is-three-fifths">
+      <!-- START All Parts -->
+      <div class="p-2" >
 
-        <!-- start title  -->
-        <div class="field is-horizontal ">
-          <div class="field-label is-normal">
-              <label class="label">Title</label>
-          </div>
-          <div class="field-body">
-              <div class="field">
-              <div class="control">
-                  <div class="select is-fullwidth">
-                    <select name="title">
-                      {% if application.title == None %}
-                      <option selected>Please select</option>
-                      {% else %}
-                      <option selected>{{application.title}}</option>
-                      {% endif %}
-                      {% for title in titles %}
-                      <option>{{title}}</option>
-                      {% endfor %}
-                  </select>
-                  </div>
-              </div>
-              </div>
-          </div>
-        </div>
-        <!-- end title  -->
+        <!-- START Part 1 -->
+        <div class=" mb-3 light-blue-border-bottom" >
           
-        <!-- start first name -->
-        <div class="field is-horizontal ">
-            <div class="field-label is-normal">
-              <label class="label">First name</label>
-            </div>
-            <div class="field-body">
-              <div class="field">
-                <div class="control">
-                  <input name="first_name" class="input" type="text" placeholder="" value="{{application.first_name}}">
-                </div>
-              </div>
-            </div>
-        </div>
-        <!-- end first name -->
+          <h3 class="has-text-white p-2 bg-light-blue">Part 1: Basic Information</h3>
 
-        <!-- start middle name -->
-        <div class="field is-horizontal  ">
-            <div class="field-label is-normal">
-              <label class="label">Middle name(s)</label>
-            </div>
-            <div class="field-body">
-              <div class="field">
-                <div class="control">
-                  <input name="middle_name" class="input" type="text" placeholder="" value="{{application.middle_name}}">
-                </div>
-              </div>
-            </div>
-        </div>
-        <!-- end middle name -->
+          <!-- Start first row: title, first_name, middle_name, surname -->
+          <div class="columns is-desktop is-marginless p-1" >
 
-        <!-- start surname -->
-        <div class="field is-horizontal  ">
-            <div class="field-label is-normal">
-              <label class="label">Surname</label>
-            </div>
-            <div class="field-body">
-              <div class="field">
-                <div class="control">
-                  <input name="last_name" class="input" type="text" placeholder="" value="{{application.last_name}}">
-                </div>
-              </div>
-            </div>
-        </div>
-        <!-- end surname -->
-
-        <!-- start mobile phone number -->
-        <div class="field is-horizontal">
-          <div class="field-label is-normal">
-            <label class="label">Mobile Number</label>
-          </div>
-          <div class="field-body">
-            <div class="field">
+            <!-- start title  -->
+            <div class="column field is-one-quarter-fullhd">
+              <label class="label">Title</label>
               <div class="control">
-                <input name="mobile_phone_number" class="input" type="text" placeholder="" value="{% if application.mobile_phone_number %}{{application.mobile_phone_number}}{% endif %}">
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- end mobile phone number -->
-
-        <!-- start telephone number -->
-        <div class="field is-horizontal">
-          <div class="field-label is-normal">
-            <label class="label">Telephone Number</label>
-          </div>
-          <div class="field-body">
-            <div class="field">
-              <div class="control">
-                <input name="telephone_number" class="input" type="text" placeholder="" value="{% if application.telephone_number %}{{application.telephone_number}}{% endif %}">
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- end telephone number -->
-
-        <!-- start permanent address -->
-        <div class="field is-horizontal">
-          <div class="field-label is-normal">
-            <label class="label">Permanent Address</label>
-          </div>
-          <div class="field-body">
-            <div class="field">
-              <div class="control">
-                <textarea name="permanent_address" class="textarea" placeholder="Your Address">
-                  {% if application.permanent_address %}
-                  {{ application.permanent_address }}
-                  {% endif %}
-                </textarea>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- end permanent address -->
-
-        <!-- start contact (Postal) -->
-        <div class="field is-horizontal">
-          <div class="field-label is-normal">
-            <label class="label">Contact (Postal)</label>
-          </div>
-          <div class="field-body">
-            <div class="field">
-              <div class="control">
-                <textarea name="contact_postal" class="textarea" placeholder="Address">
-                  {% if application.contact_postal %}
-                  {{ application.contact_postal }}
-                  {% endif %}
-                </textarea>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- end contact (postal) -->
-
-        <!-- start disability -->
-        <div class="field is-horizontal">
-          <div class="checkbox is-flex field-body">
-            
-            <input type="checkbox" name="has_special_needs">
-            <p class="ml-1" >
-                Disability
-            </p>
-
-            <div id="medical-report">
-              <div class="file has-name p-3">
-                <label class="file-label">
-                  <input class="file-input" type="file" name="medical_report">
-                  <span class="file-cta">
-                    <span class="file-icon">
-                      <i class="fas fa-upload"></i>
-                    </span>
-                    <span class="file-label">
-                      Choose a file…
-                    </span>
-                  </span>
-                  <span class="file-name">
-                    {% if application.medical_report %}
-                    {{ application.medical_report.name | filename }}  
+                <div class="select">
+                  <select name="title">
+                    {% if application.title == None %}
+                    <option selected>Please select</option>
                     {% else %}
-                    ...
+                    <option selected>{{application.title}}</option>
                     {% endif %}
-                  </span>
-                </label>
+                    {% for title in titles %}
+                    <option>{{title}}</option>
+                    {% endfor %}
+                </select>
+                </div>
               </div>
             </div>
+            <!-- end title  -->
+            
+              
+            <!-- start first name -->
+            <div class="column field is-one-quarter-fullhd">
+              <label class="label">First Name</label>
+              <div class="control">
+                <input name="first_name" class="input" type="text" placeholder="" value="{{application.first_name}}">
+              </div>
+            </div>
+            <!-- end first name -->
+
+            <!-- start middle name -->
+            <div class="column field is-one-quarter-fullhd">
+              <label class="label">Middle Name(s)</label>
+              <div class="control">
+                <input name="middle_name" class="input" type="text" placeholder="" value="{{application.middle_name}}">
+              </div>
+            </div>
+            <!-- end middle name -->
+
+            <!-- start surname -->
+            <div class="column field is-one-quarter-fullhd">
+              <label class="label">Last Name</label>
+              <div class="control">
+                <input name="last_name" class="input" type="text" placeholder="" value="{{application.last_name}}">
+              </div>
+            </div>
+            <!-- end surname -->
 
           </div>
+          <!-- End first row: title, first_name, middle_name, surname -->
+          
+          <!-- Start second row: gender, dob, marital status -->
+          <div class="columns is-desktop is-marginless p-1" >
+
+            <!-- start gender -->
+            <div class="column field is-one-quarter-fullhd">
+              <label class="label">Gender</label>
+                <div class="control">
+                  <div class="select is-fullwidth">
+                    <select name="gender">
+                      <option>Please select</option>
+                      <option {% if application.gender == 'male' %} selected {%endif%}>Male</option>
+                      <option {% if application.gender == 'female' %} selected {%endif%}>Female</option>
+                    </select>
+                  </div>
+                </div>
+            </div>
+            <!-- end gender -->
+
+            <!-- start dob  -->
+            <div class="column field is-one-quarter-fullhd">
+              <label class="label">Date of Birth</label>
+              <div class="control">
+                <input id="datepicker" name="date_of_birth" class="input" type="text" placeholder="YYYY-MM-DD" value="{{application.date_of_birth|date:"d-m-Y"}}">
+              </div>
+            </div>
+            <!-- end dob  -->
+
+            <!-- start marital status  -->
+            <div class="column field is-one-quarter-fullhd">
+              <label class="label">Marital Status</label>
+              <div class="control">
+                <div class="select is-fullwidth">
+                  <select name="marital_status">
+                    {% if application.marital_status == None %}
+                    <option selected>Please select</option>
+                    {% else %}
+                    <option selected>{{application.marital_status}}</option>
+                    {% endif %}
+                    {% for status in marital_status %}
+                    <option>{{status}}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+            </div>
+            <!-- end marital status  -->
+
+          </div>
+          <!-- End second row: gender, dob, marital status -->
+
         </div>
-        <!-- end disability -->
+        <!-- END Part 1 -->
+        
+        <!-- START Part 2 -->
+        <div class=" mb-3 light-blue-border-bottom" >
+          <h3 class="has-text-white p-2 bg-light-blue" >Part 2: Contact & Address</h3>
 
-        <!-- start guardian name -->
-        <div class="field is-horizontal">
-          <div class="field-label is-normal">
-            <label class="label">Guardian Name</label>
+          <!-- START Row -->
+          <div class="columns is-desktop is-marginless p-1">
+            
+            <!-- start mobile phone number -->
+            <div class="column field is-one-quarter-fullhd">
+              <label class="label">Mobile</label>
+                <div class="control">
+                  <input name="mobile_phone_number" class="input" type="text" placeholder="" value="{% if application.mobile_phone_number %}{{application.mobile_phone_number}}{% endif %}">
+                </div>
+            </div>
+            <!-- end mobile phone number -->
+
+            <!-- start telephone number -->
+            <div class="column field is-one-quarter-fullhd">
+              <label class="label">Telephone</label>
+                <div class="control">
+                  <input name="telephone_number" class="input" type="text" placeholder="" value="{% if application.telephone_number %}{{application.telephone_number}}{% endif %}">
+                </div>
+            </div>
+            <!-- end telephone number -->
+
+            <!-- start permanent address -->
+            <div class="column field is-one-quarter-fullhd">
+              <label class="label">Permanent Address</label>
+                <div class="control">
+                  <textarea name="permanent_address" class="textarea" placeholder="Your Address">
+                    {% if application.permanent_address %}
+                    {{ application.permanent_address }}
+                    {% endif %}
+                  </textarea>
+                </div>
+            </div>
+            <!-- end permanent address -->
+
+            <!-- start postal contact -->
+            <div class="column field is-one-quarter-fullhd">
+              <label class="label">Contact (Postal)</label>
+                <div class="control">
+                  <textarea name="contact_postal" class="textarea" placeholder="Address">
+                    {% if application.contact_postal %}
+                    {{ application.contact_postal }}
+                    {% endif %}
+                  </textarea>
+                </div>
+            </div>
+            <!-- end postal contact -->
+
           </div>
-          <div class="field-body">
-            <div class="field">
+          <!-- END Row -->
+  
+        </div>
+        <!-- END Part 2 -->
+
+        <!-- START Part 3 -->
+        <div class="p-1 mb-3 light-blue-border-bottom" >
+          
+          <h3 class="has-text-white p-2 bg-light-blue" >Part 3: Guardian</h3>
+
+          <!-- START row -->
+          <div class="columns is-desktop is-marginless p-1" >
+
+            <!-- start guardian name -->
+            <div class="column field is-one-quarter-fullhd">
+              <label class="label">Guardian Name</label>
               <div class="control">
                 <input name="guardian_name" class="input" type="text" placeholder="" value="{% if application.guardian_name %}{{application.guardian_name}}{% endif %}">
               </div>
             </div>
-          </div>
-        </div>
-        <!-- end guardian name -->
+            <!-- end guardian name -->
 
-        <!-- start guardian phone -->
-        <div class="field is-horizontal">
-          <div class="field-label is-normal">
-            <label class="label">Guardian Phone Number</label>
-          </div>
-          <div class="field-body">
-            <div class="field">
+            <!-- START guardian phone number -->
+            <div class="column field is-one-quarter-fullhd">
+              <label class="label">Guardian Phone</label>
               <div class="control">
                 <input name="guardian_phone_number" class="input" type="text" placeholder="" value="{% if application.guardian_phone_number %}{{application.guardian_phone_number}}{% endif %}">
               </div>
             </div>
-          </div>
-        </div>
-        <!-- end guardian phone -->
+            <!-- END guardian phone number -->
 
-        <!-- start guardian address -->
-        <div class="field is-horizontal">
-          <div class="field-label is-normal">
-            <label class="label">Guardian Address</label>
-          </div>
-          <div class="field-body">
-            <div class="field">
+            <!-- START guardian address -->
+            <div class="column field is-one-quarter-fullhd">
+              <label class="label">Guardian Address</label>
               <div class="control">
                 <textarea name="guardian_address" class="textarea" placeholder="Address">
                   {% if application.guardian_address %}
@@ -247,204 +237,183 @@
                 </textarea>
               </div>
             </div>
+            <!-- END guardian address -->
+
           </div>
+          <!-- END row -->
+
         </div>
-        <!-- end guardian address -->
+        <!-- END Part 3 -->
 
-        <!-- start gender -->
-        <div class="field is-horizontal ">
-            <div class="field-label is-normal">
-                <label class="label">Gender</label>
-            </div>
-            <div class="field-body">
-                <div class="field">
-                <div class="control">
-                    <div class="select is-fullwidth">
-                      <select name="gender">
-                        <option>Please select</option>
-                        <option {% if application.gender == 'male' %} selected {%endif%}>Male</option>
-                        <option {% if application.gender == 'female' %} selected {%endif%}>Female</option>
-                    </select>
-                    </div>
-                </div>
-                </div>
-            </div>
-        </div>
-        <!-- end gender -->
+        <!-- START Part 4 -->
+        <div class="p-1 mb-3 light-blue-border-bottom" >
+          
+          <h3 class="has-text-white p-2 bg-light-blue" >Part 4: Nationality & Constituency</h3>
 
-        <!-- start dob  -->
-        <div class="field is-horizontal">
-          <div class="field-label is-normal">
-            <label class="label">Date of Birth</label>
-          </div>
-          <div class="field-body">
-            <div class="field">
-              <p class="control">
-                <input id="datepicker" name="date_of_birth" class="input" type="text" placeholder="YYYY-MM-DD" value="{{application.date_of_birth|date:"d-m-Y"}}">
-              </p>
-            </div>
-          </div>
-        </div>
-        <!-- end dob  -->
+          <!-- START row -->
+          <div class="columns is-desktop is-marginless p-1" >
 
-        <!-- start marital status  -->
-        <div class="field is-horizontal ">
-          <div class="field-label is-normal">
-              <label class="label">Marital Status</label>
-          </div>
-          <div class="field-body">
-              <div class="field">
-              <div class="control">
-                  <div class="select is-fullwidth">
-                    <select name="marital_status">
-                      {% if application.marital_status == None %}
-                      <option selected>Please select</option>
-                      {% else %}
-                      <option selected>{{application.marital_status}}</option>
-                      {% endif %}
-                      {% for status in marital_status %}
-                      <option>{{status}}</option>
-                      {% endfor %}
-                  </select>
-                  </div>
-              </div>
-              </div>
-          </div>
-        </div>
-        <!-- end marital status  -->
-
-      </div>
-      <!-- Start second section -->
-
-      <hr>
-
-      <!-- Start second section -->
-      <div class="column is-three-fifths">
-
-        <!-- start ward -->
-        <div class="field is-horizontal ">
-          <div class="field-label is-normal">
-            <label class="label">Ward</label>
-          </div>
-          <div class="field-body">
-            <div class="field">
+            <!-- START ward -->
+            <div class="column field is-one-quarter-fullhd">
+              <label class="label">Ward</label>
               <div class="control">
                 <input name="ward" class="input" type="text" placeholder="" value="{% if ward %} {{application.ward}} {% endif %}">
               </div>
             </div>
-          </div>
-        </div>
-        <!-- end ward -->
+            <!-- END ward -->
 
-        <!-- start Constituency  -->
-        <div class="field is-horizontal ">
-          <div class="field-label is-normal">
+            <!-- START  Constituency -->
+            <div class="column field is-one-quarter-fullhd">
               <label class="label">Constituency</label>
-          </div>
-          <div class="field-body">
-              <div class="field">
               <div class="control">
-                  <div class="select is-fullwidth">
-                    <select name="constituency">
-                      {% if application.constituency == None %}
-                      <option selected>Please select</option>
-                      {% else %}
-                      <option selected>{{application.constituency}}</option>
-                      {% endif %}
-                      {% for constituency in constituencies %}
-                      <option>{{constituency}}</option>
-                      {% endfor %}
-                  </select>
-                  </div>
+                <div class="select is-fullwidth">
+                  <select name="constituency">
+                    {% if application.constituency == None %}
+                    <option selected>Please select</option>
+                    {% else %}
+                    <option selected>{{application.constituency}}</option>
+                    {% endif %}
+                    {% for constituency in constituencies %}
+                    <option>{{constituency}}</option>
+                    {% endfor %}
+                </select>
+                </div>
               </div>
-              </div>
-          </div>
-        </div>
-        <!-- end Constituency  -->
+            </div>
+            <!-- END Constituency -->
 
-        <!-- start Province  -->
-        <div class="field is-horizontal ">
-          <div class="field-label is-normal">
+            <!-- START Province -->
+            <div class="column field is-one-quarter-fullhd">
               <label class="label">Province</label>
-          </div>
-          <div class="field-body">
-              <div class="field">
               <div class="control">
-                  <div class="select is-fullwidth">
-                    <select name="province">
-                      {% if application.province == None %}
-                      <option selected>Please select</option>
-                      {% else %}
-                      <option selected>{{application.province}}</option>
-                      {% endif %}
-                      {% for province in provinces %}
-                      <option>{{province}}</option>
-                      {% endfor %}
+                <div class="select is-fullwidth">
+                  <select name="province">
+                    {% if application.province == None %}
+                    <option selected>Please select</option>
+                    {% else %}
+                    <option selected>{{application.province}}</option>
+                    {% endif %}
+                    {% for province in provinces %}
+                    <option>{{province}}</option>
+                    {% endfor %}
                   </select>
-                  </div>
+                </div>
               </div>
-              </div>
-          </div>
-        </div>
-        <!-- end Province  -->
+            </div>
+            <!-- END Province -->
 
-        
-        <!-- start Country of Birth  -->
-        <div class="field is-horizontal ">
-          <div class="field-label is-normal">
+          </div>
+          <!-- END row -->
+
+          <!-- START row -->
+          <div class="columns is-desktop is-marginless p-1" >
+          
+            <!-- START  Country of Birth -->
+            <div class="column field is-one-quarter-fullhd">
               <label class="label">Country of Birth</label>
-          </div>
-          <div class="field-body">
-              <div class="field">
               <div class="control">
-                  <div class="select is-fullwidth">
-                    <select name="country_of_birth">
-                      {% if application.country_of_birth == None %}
-                      <option selected>Please select</option>
-                      {% else %}
-                      <option selected>{{application.country_of_birth}}</option>
-                      {% endif %}
-                      {% for country in countries %}
-                      <option>{{country.name}}</option>
-                      {% endfor %}
+                <div class="select is-fullwidth">
+                  <select name="country_of_birth">
+                    {% if application.country_of_birth == None %}
+                    <option selected>Please select</option>
+                    {% else %}
+                    <option selected>{{application.country_of_birth}}</option>
+                    {% endif %}
+                    {% for country in countries %}
+                    <option>{{country.name}}</option>
+                    {% endfor %}
                   </select>
-                  </div>
+                </div>
               </div>
-              </div>
-          </div>
-        </div>
-        <!-- end Country of Birth  -->
+            </div>
+            <!-- END Country of Birth -->
 
-        <!-- start Citizenship  -->
-        <div class="field is-horizontal ">
-          <div class="field-label is-normal">
+             <!-- START  Citizenship-->
+             <div class="column field is-one-quarter-fullhd">
               <label class="label">Citizenship</label>
-          </div>
-          <div class="field-body">
-              <div class="field">
               <div class="control">
-                  <div class="select is-fullwidth">
-                    <select name="citizenship">
-                      {% if application.citizenship == None %}
-                      <option selected>Please select</option>
-                      {% else %}
-                      <option selected>{{application.citizenship}}</option>
-                      {% endif %}
-                      {% for country in countries %}
-                      <option>{{country.name}}</option>
-                      {% endfor %}
+                <div class="select is-fullwidth">
+                  <select name="citizenship">
+                    {% if application.citizenship == None %}
+                    <option selected>Please select</option>
+                    {% else %}
+                    <option selected>{{application.citizenship}}</option>
+                    {% endif %}
+                    {% for country in countries %}
+                    <option>{{country.name}}</option>
+                    {% endfor %}
                   </select>
-                  </div>
+                </div>
               </div>
-              </div>
+            </div>
+            <!-- END Citizenship -->
+
           </div>
+          <!-- END row -->
+
         </div>
-        <!-- end Citizenship  -->
+        <!-- END Part 4 -->
+
+
+        <!-- START Part 5 -->
+        <div class=" light-blue-border-bottom" >
+          
+          <h3 class="has-text-white p-2 bg-light-blue" >Part 5: Disability</h3>
+
+          <!-- START row -->
+          <div class="columns is-desktop is-marginless p-1" >
+
+   
+            <!-- START disability -->
+            <div class="column field is-one-quarter-fullhd">
+              <label class="label">Disability</label>
+              <div class="control">
+                <input type="checkbox" name="has_special_needs">
+              </div>
+            </div>
+            <!-- END disability -->
+
+            <!-- start medical record -->
+            <div class="column field is-one-quarter-fullhd">
+              <div class="checkbox is-flex field-body">
+                <div id="medical-report">
+                  <div class="file has-name p-3">
+                    <label class="file-label">
+                      <input class="file-input" type="file" name="medical_report">
+                      <span class="file-cta">
+                        <span class="file-icon">
+                          <i class="fas fa-upload"></i>
+                        </span>
+                        <span class="file-label">
+                          Choose a file…
+                        </span>
+                      </span>
+                      <span class="file-name">
+                        {% if application.medical_report %}
+                        {{ application.medical_report.name | filename }}  
+                        {% else %}
+                        ...
+                        {% endif %}
+                      </span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- end medical record -->
+
+          </div>
+          <!-- END row -->
+
+        </div>
+        <!-- END Part 5 -->
 
       </div>
-      <!-- end second section -->
+      <!-- END All Parts -->
 
     </div>
+    <!-- END section -->
+
   </section>
 <!-- end personal Details -->
 
