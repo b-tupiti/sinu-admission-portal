@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models.application import Application, ApplicationStatus, Section
+from .models.tertiary_qualification import TertiaryQualification
+from .models.document import TQDocument
 from .models.employment import Employment
 from courses.models.course import Course
 from django.shortcuts import redirect
@@ -21,6 +23,12 @@ from .utils.application_updates import (
     handle_submission,
 )
 from courses.utils import course_does_not_exist
+import io
+from django.http import FileResponse
+from admission.utils.generators import render_to_pdf
+import zipfile
+from io import BytesIO
+from django.core.files.base import ContentFile
 
     
 def create_new_application(request):
@@ -156,35 +164,45 @@ def application_saved(request, pk):
     
     return render(request, 'admission/application/application-saved.html', context)
 
+import os
 
-import io
-from django.http import FileResponse
-from admission.utils.generators import render_to_pdf
-
-
-import zipfile
-from io import BytesIO
-from django.core.files.base import ContentFile
 @login_required(login_url='login')
 def download_application(request, pk):
     
+    # get all documents associated with application
+    
     application = Application.objects.get(id=pk)
-    data = {
-        'application': application
-    }
-    pdf = render_to_pdf('admission/pdf_templates/admission_application.html', data)
-    
+    documents = get_documents(application)
+ 
+    pdf = render_to_pdf('admission/pdf_templates/admission_application.html', {'application': application})
     zip_buffer = BytesIO()
-    
     # Create a ZIP file and add the PDF to it
     with zipfile.ZipFile(zip_buffer, 'w') as zipf:
+        
         # You can set the PDF filename within the ZIP file here
-        pdf_filename = "Invoice_%s.pdf" % ("12341231")
+        pdf_filename = "application_%s.pdf" % (f'{application.id}_{application.last_name}-{application.first_name}')
         zipf.writestr(pdf_filename, pdf.getvalue())
+        
+        for document in documents:
+            with open(document.file.path, 'rb') as file:
+                file_content = file.read()
+                zipf.writestr(os.path.basename(document.file.name), file_content)
 
     response = HttpResponse(zip_buffer.getvalue(), content_type='application/zip')
-    zip_filename = "application_files.zip"
+    
+    zip_filename = f"application_{application.last_name}-{application.first_name}.zip"
     content = f"attachment; filename={zip_filename}"
     response['Content-Disposition'] = content
     
     return response
+
+def get_documents(application):
+    
+    # Tertiary Docs
+    tertiary_qualifications = TertiaryQualification.objects.filter(application=application)
+    documents = []
+    for qualification in tertiary_qualifications:
+        documents.extend(TQDocument.objects.filter(qualification=qualification))
+        
+    return documents
+    
