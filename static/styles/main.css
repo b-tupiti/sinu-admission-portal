@@ -22,10 +22,20 @@ body {
   background-color: #004b8d;
 }
 
+.bg-light-blue {
+  background-color: #1a79cc;
+}
+
+.light-blue-border-bottom {
+  border-bottom: 1px solid #1a79cc;
+}
 .bg-white {
   background-color: #fff;
 }
 
+.bg-opaque-blue {
+  background-color:rgba(0, 76, 143,.1);
+}
 
 /* main {
   position: relative;
