@@ -190,7 +190,7 @@ def download_application(request, pk):
 
     response = HttpResponse(zip_buffer.getvalue(), content_type='application/zip')
     
-    zip_filename = f"application_{application.last_name}-{application.first_name}.zip"
+    zip_filename = f"application_{application.id}_{application.first_name}-{application.last_name}.zip"
     content = f"attachment; filename={zip_filename}"
     response['Content-Disposition'] = content
     
