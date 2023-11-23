@@ -1,5 +1,9 @@
 from admission.models.application import Application, ApplicationStatus
 from utils.send_mail import send_mail
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
+from config import settings
+
 
 def send_email_based_on_application_status(instance):
     
@@ -42,9 +46,34 @@ def send_email_based_on_application_status(instance):
             send_mail('sas.admissions@sinu.edu.sb', subject, message)
             
 
+from django.template.loader import render_to_string
 def send_application_created_email(instance):
     
-    # send new application created email
-    subject = "Application {instance.id} created"
-    message = "You started a new application."
-    send_mail(instance.applicant.email, subject, message)
+    applicant_username = f'{instance.applicant}'
+    applicant_name = f'{instance.first_name} {instance.last_name}'.title()
+    course_title = f'{instance.selected_course.title.title()}'
+    
+    subject = f"Your application for {course_title}"
+    
+    context = {
+        'applicant_username': applicant_username,
+        'applicant_name': applicant_name,
+        'course_title': course_title,
+    }
+    html_content = render_to_string('admission/email_templates/thank-you-for-starting-new-application.html', context)
+    from_email = 'study@sinu.edu.sb'
+    
+    mail_obj = Mail(
+        from_email=from_email,
+        to_emails=instance.applicant.email,
+        subject=subject,
+        html_content=html_content,
+    )
+    
+    try:
+        sg = SendGridAPIClient(settings.SENDGRID_API_KEY)
+        response = sg.send(mail_obj)
+        print(response.status_code)
+        
+    except Exception as e:
+        print(str(e))
