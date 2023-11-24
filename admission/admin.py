@@ -111,8 +111,8 @@ class ApplicationAdmin(GuardedModelAdmin):
         }),
         ('Meta', {
             'fields': (
-                'edit_section',
                 'current_section',
+                'furthest_section',
                 'application_status', 
             ),
         }),
