@@ -7,6 +7,7 @@
     position: sticky;
     top: 0;
     z-index: 1000;
+    padding: 0 30px;
 }
 
 
@@ -25,6 +26,8 @@
 
 .navbar .navbar-item{
     color: #ffffff;
+    font-size: small;
+    font-weight: normal;
 }
 
 .navbar .navbar-item:hover {
@@ -48,7 +51,7 @@
 }
 
 .navbar .dropdown-item:hover {
-    background:#e7f2fa;
+    background:#3484be;
 }
 
 .navbar .dropdown-item a {
