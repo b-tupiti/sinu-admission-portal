@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from .models.application import Application, ApplicationStatus, Section
 from .models.tertiary_qualification import TertiaryQualification
 from .models.document import TQDocument
@@ -29,6 +30,7 @@ from admission.utils.generators import render_to_pdf
 import zipfile
 from io import BytesIO
 from django.core.files.base import ContentFile
+from django.db.utils import IntegrityError
 
     
 def create_new_application(request):
@@ -52,13 +54,22 @@ def create_new_application(request):
         
         return render(request, 'admission/application/sections/new_application/new-application.html', context)
     
-    elif request.method == 'POST':     
-        email, password = create_applicant_account(request)
-        user = authenticate(request, email=email, password=password)
+    elif request.method == 'POST':
         
         course_code = request.POST.get('course_code')
         course = Course.objects.get(code=course_code)
         
+        try:     
+            email, password = create_applicant_account(request)
+        except IntegrityError:
+            messages.error(request, 'An account with this email already exists.')
+            course_details = Course.objects.values('code', 'title', 'campus').get(code=course_code)
+            context = {'course_details': course_details}
+            return render(request, 'admission/application/sections/new_application/new-application.html', context)
+        
+        user = authenticate(request, email=email, password=password)
+        
+
         login(request, user)
         application = create_new_admission_application_for_user(user, course)
         
