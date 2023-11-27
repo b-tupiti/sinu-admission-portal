@@ -41,7 +41,10 @@ def login_user(request):
 
         if user is not None:
             login(request, user)
-            return redirect('dashboard')
+            if user.is_staff:
+                return redirect('admin:index')
+            else:
+                return redirect('dashboard')
         else:
             messages.error(request,'your email or password is invalid')
     
