@@ -1,13 +1,16 @@
 {% extends 'base_generic.html' %}
+{% load static %}
 
 {% block content %}
 
 {% include 'admission/application/selected_qualification.html' %}
-
+{% include 'admission/help/help-modal.html' %}
     
 <div class="container is-flex is-justify-content-space-between mt-5 has-background-light p-3 is-align-items-center">
     <span class="has-text-dark is-size-5">Application Form</span>
-    <button class="button has-text-white" style="background: #6da11f;border-radius:5px">Get Help</button>
+    <button id="help-modal-btn" class="button has-text-white help-button" >
+        <span class="has-text-white">Need Help</span> <i class="fa-regular fa-circle-question ml-2"></i>
+    </button>
 </div>
 
 
@@ -48,3 +51,7 @@
 
 
 {% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/help-modal.js' %}"></script>
+{% endblock scripts %}
