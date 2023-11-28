@@ -2,41 +2,34 @@
 
 {% load static %}
 {% block content %}
-
-
-    
-
-
-
-
-      
-
       
         <div  >
              
             <div class="m-3">
 
-                <div class="is-flex is-justify-content-space-between is-align-items-center " style="margin:1.5rem 0;background:#f7f7f7; padding:1.5rem; border-radius:5px">
+                {% include 'admission/help/help-modal.html' %}
+                <div class="mb-5 mt-5 is-flex is-justify-content-space-between is-align-items-center " style="background:#f7f7f7; padding:1.5rem; border-radius:5px">
                     <div>
                         <h2 class="is-size-3 " style="color:#004b8d">Admissions</h2>
                         <p>
                             Your applications and statuses are listed below.
                         </p>
                     </div>
-                    
-                    <button class="button is-size-6 has-text-weight-semibold" style="background:#6da11f;color:#ffffff;border-radius:5px;border:none">Help</button>
+                    <button id="help-modal-btn" class="button has-text-white help-button" >
+                        <span class="has-text-white">Need Help</span> <i class="fa-regular fa-circle-question ml-2"></i>
+                    </button>
                 </div>
 
-                <div  class="has-background-white">
-                    <div style="background:#004b8d;padding:1em;border-top-left-radius:5px;border-top-right-radius:5px"><h2 class="has-text-white">My applications</h2></div>
-                    <div class="pb-2" style="background:#ffffff;box-shadow: 0 2px 3px rgba(179, 179, 179, 0.3);border-bottom-left-radius:5px;border-bottom-right-radius:5px;">
+                <div >
+                    <h2 class="has-text-white p-4" style="background:#004b8d;border-top-left-radius:5px;border-top-right-radius:5px">My applications</h2>
+                    
+                    <div class="p-5 has-background-white" style="box-shadow: 0 2px 3px rgba(179, 179, 179, 0.3);border-bottom-left-radius:5px;border-bottom-right-radius:5px;">
                         
-                            
                         {% if applications %}
                             
                             {% for application in applications %}
 
-                            <section class="m-5" >
+                            <section class="  has-background-white" >
 
                             
                             <div style="background:#d6e3eb;padding:1em;border-radius:5px">
@@ -51,7 +44,7 @@
                                 </div>
                             </div>
 
-                            <div class="is-hiden"  style="background:#ffffff;padding:1em;border-top:none;box-shadow: 0 2px 3px rgba(179, 179, 179, 0.3)">
+                            <div style="padding:1em;border-top:none;box-shadow: 0 2px 3px rgba(179, 179, 179, 0.3)">
                                 <div class="table-container" style="overflow-x:auto">
                                     
 
@@ -75,10 +68,10 @@
                                             
                                             <td style="width:150px">{{application.application_status}}</td>
                                             <td style="width:300px !important">
-                                                {% if application.application_state == 'draft' %}
+                                                {% if application.application_status == 'draft' %}
                                                 <div class=" ">
                                                     <a href="{{application.get_absolute_url}}" class="button is-link mr-2">Go Back to Application</a>
-                                                    <a class="button is-link">Cancel Application</a>
+                                                    <a disabled class="button is-link">Cancel Application</a>
                                                 </div>
                                                 {%endif%}
                                             </td>
@@ -96,13 +89,8 @@
                             {% endfor %}
 
                         {% else %}
-
-                            <span class="has-text-dark">You have no active applications</span>
-
-                            {% endif %}
-
-                        
-                        
+                        <span class="has-text-dark">You have no active applications</span>
+                        {% endif %}
                     </div>
                 </div>
 
@@ -112,6 +100,11 @@
        
       
    
-      <script src="{% static 'users/js/toggle-expansion.js' %}"></script>
+      
 
 {% endblock %}
+
+{% block scripts %}
+<script src="{% static 'users/js/toggle-expansion.js' %}"></script>
+<script src="{% static 'js/help-modal.js' %}"></script>
+{% endblock scripts %}
