@@ -85,6 +85,9 @@ def save_current_section(request, application):
 
 def save_personal_details(request, application):
     
+    if request.FILES.get('medical_report'):    
+        application.medical_report = request.FILES.get('medical_report')
+
     application.title = request.POST.get('title')
     application.first_name = request.POST.get('first_name')
     application.middle_name = request.POST.get('middle_name')

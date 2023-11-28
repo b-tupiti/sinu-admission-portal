@@ -32,7 +32,7 @@
       <div class="p-2" >
 
         <!-- START Part 1 -->
-        <div class=" mb-3 light-blue-border-bottom" >
+        <div class=" mb-3 light-blue-border-bottom bg-opaque-blue" >
           
           <h3 class="has-text-white p-2 bg-light-blue">Part 1: Basic Information</h3>
 
@@ -144,7 +144,7 @@
         <!-- END Part 1 -->
         
         <!-- START Part 2 -->
-        <div class=" mb-3 light-blue-border-bottom" >
+        <div class=" mb-3 light-blue-border-bottom bg-opaque-blue" >
           <h3 class="has-text-white p-2 bg-light-blue" >Part 2: Contact & Address</h3>
 
           <!-- START Row -->
@@ -201,7 +201,7 @@
         <!-- END Part 2 -->
 
         <!-- START Part 3 -->
-        <div class="p-1 mb-3 light-blue-border-bottom" >
+        <div class="p-1 mb-3 light-blue-border-bottom bg-opaque-blue" >
           
           <h3 class="has-text-white p-2 bg-light-blue" >Part 3: Guardian</h3>
 
@@ -246,7 +246,7 @@
         <!-- END Part 3 -->
 
         <!-- START Part 4 -->
-        <div class="p-1 mb-3 light-blue-border-bottom" >
+        <div class="p-1 mb-3 light-blue-border-bottom bg-opaque-blue" >
           
           <h3 class="has-text-white p-2 bg-light-blue" >Part 4: Nationality & Constituency</h3>
 
@@ -356,46 +356,55 @@
 
 
         <!-- START Part 5 -->
-        <div class=" light-blue-border-bottom" >
+        <div class=" light-blue-border-bottom bg-opaque-blue" >
           
-          <h3 class="has-text-white p-2 bg-light-blue" >Part 5: Disability</h3>
+          <h3 class="has-text-white p-2 bg-light-blue" >Part 5: Disability <span class="is-size-6 has-text-white">(Optional)</span></h3>
+
+          <p class="p-3 pt-4 is-size-7">
+            Please check this if you have any Special Needs and Attach appropriate medical Report.
+          </p>
 
           <!-- START row -->
           <div class="columns is-desktop is-marginless p-1" >
 
-   
+            
             <!-- START disability -->
-            <div class="column field is-one-quarter-fullhd">
-              <label class="label">Disability</label>
-              <div class="control">
+            <div class="column field is-horizontal is-one-quarter-fullhd">
+              <label class="label me-4">Disability / Special Needs</label>
+              <div class="control ml-4">
                 <input type="checkbox" name="has_special_needs">
               </div>
             </div>
             <!-- END disability -->
 
             <!-- start medical record -->
-            <div class="column field is-one-quarter-fullhd">
-              <div class="checkbox is-flex field-body">
-                <div id="medical-report">
-                  <div class="file has-name p-3">
-                    <label class="file-label">
-                      <input class="file-input" type="file" name="medical_report">
-                      <span class="file-cta">
-                        <span class="file-icon">
-                          <i class="fas fa-upload"></i>
-                        </span>
-                        <span class="file-label">
-                          Choose a file…
-                        </span>
-                      </span>
-                      <span class="file-name">
-                        {% if application.medical_report %}
-                        {{ application.medical_report.name | filename }}  
-                        {% else %}
-                        ...
-                        {% endif %}
-                      </span>
-                    </label>
+            <div class="column field is-horizontal is-two-quarters-fullhd ">
+              <div class="field-label is-normal">
+                <label class="label has-text-weight-normal is-size-7 " >Medical Report</label>
+              </div>
+              <div class="field-body">
+                <div class="field">
+                  <div class="control">
+                    <div class="file is-info has-name is-small">
+                        <label class="file-label">
+                          <input class="file-input" type="file" name="medical_report">
+                          <span class="file-cta">
+                            <span class="file-icon" style="color: white">
+                              <i class="fas fa-upload"></i>
+                            </span>
+                            <span class="file-label" style="color: white">
+                            browse 
+                            </span>
+                          </span>
+                          <span class="file-name">
+                            {% if application.medical_report %}
+                            <span style="color:#004b8d">{{ application.medical_report.name }}</span>
+                            {% else %}
+                            ... 
+                            {% endif %}
+                          </span>
+                        </label>
+                      </div>
                   </div>
                 </div>
               </div>
@@ -437,4 +446,5 @@
   {{ block.super }}
   <script src="{% static 'js/help-modal.js' %}"></script>
   <script src="{% static 'js/flat-pickr-date-picker.js' %}"></script>
+  <script src="{% static 'admission/js/file-upload-listener.js' %}"></script>
 {% endblock %} 
