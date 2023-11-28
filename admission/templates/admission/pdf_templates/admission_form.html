@@ -96,11 +96,11 @@ WEBSITE: www.sinu.edu.sb <br/>
     <td>MIDDLE NAME*</td>
     <td>SURNAME*</td>
   </tr>
-  <tr>
-    <td>MR</td>
-    <td>Brandon</td>
-    <td>Ryan</td>
-    <td>Tupiti</td>
+  <tr style="color: blue">
+    <td>{{application.title}}</td>
+    <td>{{application.first_name}}</td>
+    <td>{{application.middle_name}}</td>
+    <td>{{application.last_name}}</td>
   </tr>
 </table>
 
@@ -111,10 +111,10 @@ WEBSITE: www.sinu.edu.sb <br/>
       <td>GENDER*</td>
       <td>MARITAL STATUS*</td>
     </tr>
-    <tr>
-      <td>06-03-1995</td>
-      <td>MALE</td>
-      <td>DIVORCED</td>
+    <tr style="color: blue">
+      <td>{{application.date_of_birth}}</td>
+      <td>{{application.gender}}</td>
+      <td>{{application.marital_status}}</td>
     </tr>
   </table>
 
@@ -126,10 +126,10 @@ WEBSITE: www.sinu.edu.sb <br/>
       <td>PROVINCE*</td>
       <td>WARD NAME*</td>
     </tr>
-    <tr>
-      <td>South Small Gela</td>
-      <td>Central Province</td>
-      <td>Ward 5</td>
+    <tr style="color: blue">
+      <td>{{application.constituency}}</td>
+      <td>{{application.province}}</td>
+      <td>{{application.ward}}</td>
     </tr>
   </table>
 
@@ -138,12 +138,10 @@ WEBSITE: www.sinu.edu.sb <br/>
     <tr>
       <td>CITIZENSHIP*</td>
       <td>COUNTRY OF BIRTH*</td>
-      <td>COUNTRY OF CITIZENSHIP*</td>
     </tr>
-    <tr>
-      <td>Solomon Islands</td>
-      <td>Solomon Islands</td>
-      <td>Solomon Islands</td>
+    <tr style="color: blue">
+      <td>{{application.citizenship}}</td>
+      <td>{{application.country_of_birth}}</td>
     </tr>
   </table>
 
@@ -153,18 +151,23 @@ WEBSITE: www.sinu.edu.sb <br/>
       <td>MOBILE PHONE*</td>
       <td>EMAIL ADDRESS*</td>
     </tr>
-    <tr>
-      <td>23444</td>
-      <td>7645453</td>
-      <td>tupitibrandon@gmail.com</td>
+    <tr style="color: blue">
+      <td>{{application.telephone_number}}</td>
+      <td>{{application.mobile_phone_number}}</td>
+      <td>{{application}}</td>
     </tr>
   </table>
 
   <table class="mb-5" width="50%" border="1" cellspacing="0" cellpadding="5">
     <tr>
       <td>Special Needs / Disability</td>
-      <td>No</td>
-
+      <td style="color: blue">
+        {% if application.has_special_needs %}
+          yes
+        {% else %}
+          no
+        {% endif %}
+      </td>
     </tr>
     
   </table>
@@ -179,12 +182,12 @@ WEBSITE: www.sinu.edu.sb <br/>
     <td>SPONSOR EMAIL*</td>
     <td>SPONSOR TYPE*</td>
   </tr>
-  <tr>
-    <td>SIG</td>
-    <td>Lengakiki</td>
-    <td>453422</td>
-    <td>ds@fff.com</td>
-    <td>ds@kljsdf.com</td>
+  <tr style="color: blue">
+    <td>{{application.sponsor_name}}</td>
+    <td>{{application.sponsor_address}}</td>
+    <td>{{application.sponsor_phone_number}}</td>
+    <td>{{application.sponsor_email}}</td>
+    <td>{{application.sponsor_type}}</td>
   </tr>
 </table>
 
@@ -203,11 +206,11 @@ WEBSITE: www.sinu.edu.sb <br/>
     <td>SIXTH FORM*</td>
     <td>FOUNDATION*</td>
   </tr>
-  <tr>
-    <td>School: Selwyn College<br/>Year: 2016</td>
-    <td>School: Honiara High<br/>Year: 2016</td>
-    <td>School: KGVI<br/>Year: 2016</td>
-    <td>School: USP<br/>Year: 2016</td>
+  <tr style="color: blue">
+    <td>School: {{application.third_form_school}}<br/>Year: {{application.third_form_year}}</td>
+    <td>School: {{application.fifth_form_school}}<br/>Year: {{application.fifth_form_year}}</td>
+    <td>School: {{application.sixth_form_school}}<br/>Year: {{application.sixth_form_year}}</td>
+    <td>School: {{application.foundation_school}}<br/>Year: {{application.foundation_year}}</td>
   </tr>
   
   
@@ -226,22 +229,15 @@ WEBSITE: www.sinu.edu.sb <br/>
     <td>Major</td>
     <td>Date Graduated (if applicable)</td>
   </tr>
-  <tr>
-    <td>Massey University</td>
-    <td>Bachelor in Information Sciences</td>
-    <td>2015 - 2018</td>
-    <td>Software Engineering</td>
-    <td>19-02-2019</td>
+
+  {% for qualification in t_qualifications %}
+  <tr style="color: blue">
+    <td>{{qualification.institution_name}}</td>
+    <td>{{qualification.course}}</td>
+    <td>{{qualification.year_start}} - {{qualification.year_end}}</td>
+    <td>{{qualification.major}}</td>
   </tr>
-  <tr>
-    <td>CDAC (Centre for Development of Advanced Computing)</td>
-    <td>Postgraduate Diploma in Advanced Computing</td>
-    <td>2022 - 2022</td>
-    <td>Advanced Computing</td>
-    <td>19-12-2022</td>
-  </tr>
- 
-  
+  {% endfor %}
   
 </table>
 
@@ -255,10 +251,10 @@ WEBSITE: www.sinu.edu.sb <br/>
     <td>Title</td>
     <td>Start</td>
   </tr>
-  <tr>
-    <td>Bmobile</td>
-    <td>IT Officer</td>
-    <td>23-23-2022</td>
+  <tr style="color: blue">
+    <td>{{current_employment.firm}}</td>
+    <td>{{current_employment.job_title}}</td>
+    <td>{{current_employment.month_year_started}}</td>
   </tr>
 </table>
 
@@ -270,24 +266,15 @@ WEBSITE: www.sinu.edu.sb <br/>
     <td>Start</td>
     <td>End</td>
   </tr>
-  <tr>
-    <td>Bmobile</td>
-    <td>IT Officer</td>
-    <td>23-23-2022</td>
-    <td>19-02-2019</td>
+  {% for employment in previous_employments %}
+  <tr style="color: blue">
+    <td>{{employment.firm}}</td>
+    <td>{{employment.job_title}}</td>
+    <td>{{employment.month_year_started}}</td>
+    <td>{{employment.month_year_ended}}</td>
   </tr>
-  <tr>
-    <td>WHO</td>
-    <td>Manager</td>
-    <td>23-23-2022</td>
-    <td>19-02-2019</td>
-  </tr>
-  <tr>
-    <td>Telekom</td>
-    <td>Chief Executive Officer</td>
-    <td>23-23-2022</td>
-    <td>19-02-2019</td>
-  </tr>
+  {% endfor %}
+ 
 </table>
 
 <h2 class="b2" border="1" cellspacing="0" cellpadding="5">SECTION E: DECLARATION</h2>
@@ -302,9 +289,9 @@ is incomplete and/or false.
     <td>Declared</td>
     <td>Date Submitted</td>
   </tr>
-  <tr>
-    <td>yes</td>
-    <td>10-12-2023</td>
+  <tr style="color: blue">
+    <td>{% if application.is_declared %} yes {% else %} no {% endif %}</td>
+    <td></td>
   </tr>
 </table>
 

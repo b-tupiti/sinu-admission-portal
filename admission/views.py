@@ -184,24 +184,62 @@ def download_application(request, pk):
     
     application = Application.objects.get(id=pk)
     documents = get_documents(application)
- 
-    pdf = render_to_pdf('admission/pdf_templates/admission_application.html', {'application': application})
+    t_qualifications = get_tertiary_qualifications(application)
+    context = {
+        'application': application,
+        't_qualifications': t_qualifications
+    }
+    context['current_employment'] = Employment.objects.filter(is_current=True, application=application).first()
+    context['previous_employments'] = Employment.objects.filter(is_current=False, application=application)
+    
+    pdf = render_to_pdf('admission/pdf_templates/admission_form.html', context)
     zip_buffer = BytesIO()
+    
     # Create a ZIP file and add the PDF to it
     with zipfile.ZipFile(zip_buffer, 'w') as zipf:
         
         # You can set the PDF filename within the ZIP file here
-        pdf_filename = "application_%s.pdf" % (f'{application.id}_{application.last_name}-{application.first_name}')
+        pdf_filename = "Admission_Form__%s.pdf" % (f'{application.last_name.upper()}_{application.first_name.upper()}')
         zipf.writestr(pdf_filename, pdf.getvalue())
         
         for document in documents:
             with open(document.file.path, 'rb') as file:
                 file_content = file.read()
-                zipf.writestr(os.path.basename(document.file.name), file_content)
+                doc_filename = f"docs/{os.path.basename(document.file.name)}"
+                zipf.writestr(doc_filename, file_content)
+        
+        # Add the receipt file 
+        if application.receipt:
+            with open(application.receipt.path, 'rb') as receipt_file:
+                receipt_content = receipt_file.read()
+                receipt_filename = os.path.basename(application.receipt.name)
+                zipf.writestr(receipt_filename, receipt_content)  
+                
+        # Add the deposit slip / tt 
+        if application.deposit_slip:
+            with open(application.deposit_slip.path, 'rb') as deposit_file:
+                deposit_content = deposit_file.read()
+                deposit_filename = os.path.basename(application.deposit_slip.name)
+                zipf.writestr(deposit_filename, deposit_content)
+                
+        # Add medical report 
+        if application.medical_report:
+            with open(application.medical_report.path, 'rb') as file:
+                content = file.read()
+                filename = os.path.basename(application.medical_report.name)
+                zipf.writestr(filename, content)    
+        
+        # Add high school documents        
+        hs_documents = application.high_school_documents.all()
+        for document in hs_documents:
+            with open(document.file.path, 'rb') as deposit_file:
+                document_content = document.file.read()
+                document_filename = f"docs/{os.path.basename(document.file.name)}"
+                zipf.writestr(document_filename, document_content) 
 
     response = HttpResponse(zip_buffer.getvalue(), content_type='application/zip')
     
-    zip_filename = f"application_{application.id}_{application.first_name}-{application.last_name}.zip"
+    zip_filename = f"Admission_Application__{application.last_name.upper()}_{application.first_name.upper()}.zip"
     content = f"attachment; filename={zip_filename}"
     response['Content-Disposition'] = content
     
