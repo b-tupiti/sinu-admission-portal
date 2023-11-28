@@ -123,6 +123,11 @@ def get_application(request, pk):
         'application': application
     }
     
+    
+    course_code = application.selected_course.code
+    course_details = Course.objects.values('code', 'title', 'campus').get(code=course_code)
+    context['course_details'] = course_details
+    
     if application.current_section == Section.PERSONAL_DETAILS:
         from .models.application import MaritalStatus, Gender, Title, Constituency, Province
         from django_countries import countries
