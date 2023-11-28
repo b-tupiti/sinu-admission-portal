@@ -1,7 +1,7 @@
 <h3 style="color:#10cfc9">Student and Academic Services</h3>
 
 <p>
-    Dear {{applicant_name}}, <br><br>
+    Dear {% if applicant_title %}{{applicant_title}}{% endif %} {{applicant_name}}, <br><br>
 
     Thank you for submitting your application for <span style="color:#113049;font-weight:600">{{course_title}}</span> starting in 2024. <br><br>
     Before the assessment of your application can begin, the Finance Department will verify the deposit you have made into the SINU BSP bank account, as required. <br><br>

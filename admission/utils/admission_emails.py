@@ -25,6 +25,7 @@ def send_email_based_on_application_status(instance):
     if instance.application_status == ApplicationStatus.PENDING_DEPOSIT_VERIFICATION:
         
         # send mail to user email, application has been received.
+        applicant_title = f'{instance.title}'
         applicant_username = f'{instance.applicant}'
         applicant_name = f'{instance.first_name} {instance.last_name}'.title()
         course_title = f'{instance.selected_course.title.title()}'
@@ -32,6 +33,7 @@ def send_email_based_on_application_status(instance):
         subject = f"Your successfully submitted application for {course_title}"
         
         context = {
+            'applicant_title': applicant_title,
             'applicant_username': applicant_username,
             'applicant_name': applicant_name,
             'course_title': course_title,
@@ -90,6 +92,7 @@ def send_email_based_on_application_status(instance):
     elif instance.application_status == ApplicationStatus.UNDER_ASSESSMENT:
                 
         # send mail to applicant, application is moved forward for assessment.
+        applicant_title = f'{instance.title}'
         applicant_username = f'{instance.applicant}'
         applicant_name = f'{instance.first_name} {instance.last_name}'.title()
         course_title = f'{instance.selected_course.title.title()}'
@@ -97,6 +100,7 @@ def send_email_based_on_application_status(instance):
         subject = f"Your application for {course_title} is moved forward for assessment."
         
         context = {
+            'applicant_title': applicant_title,
             'applicant_username': applicant_username,
             'applicant_name': applicant_name,
             'course_title': course_title,
@@ -155,6 +159,7 @@ def send_email_based_on_application_status(instance):
     elif instance.application_status == ApplicationStatus.APPROVED_AND_OFFER_GRANTED:
         
         # send mail to user email, offer letter granted, attach offer letter.
+        applicant_title = f'{instance.title}'
         applicant_username = f'{instance.applicant}'
         applicant_name = f'{instance.first_name} {instance.last_name}'.title()
         course_title = f'{instance.selected_course.title.title()}'
@@ -162,6 +167,7 @@ def send_email_based_on_application_status(instance):
         subject = f"Application Outcome."
         
         context = {
+            'applicant_title': applicant_title,
             'applicant_username': applicant_username,
             'applicant_name': applicant_name,
             'course_title': course_title,

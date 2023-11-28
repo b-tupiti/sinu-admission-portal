@@ -1,7 +1,7 @@
 <h3 style="color:#10cfc9">Student and Academic Services</h3>
 
 <p>
-    Dear {{applicant_name}}, <br><br>
+    Dear {% if applicant_title %}{{applicant_title}}{% endif %} {{applicant_name}}, <br><br>
 
     Your deposit has been verified, and your application for <span style="color:#113049;font-weight:600">{{course_title}}</span> starting in 2024 is now under assessment. <br><br>
     If you have any queries, please do not hesitate to call us on +677 42617.<br><br><br>
