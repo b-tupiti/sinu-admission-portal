@@ -18,6 +18,7 @@ from .utils.request_helpers import (
 )
 from .utils.application_updates import (
     save_current_section, # should be updating furthest section here
+    save_current_section_modified,
     change_current_section, 
     get_tertiary_qualifications, 
     get_hs_qualifications,
@@ -31,7 +32,7 @@ import zipfile
 from io import BytesIO
 from django.core.files.base import ContentFile
 from django.db.utils import IntegrityError
-
+from django.contrib.auth import logout
     
 def create_new_application(request):
     """
@@ -104,7 +105,8 @@ def get_application(request, pk):
         else:
             
             if 'save_and_exit' in request.POST:
-                application.save()
+                # application = save_current_section(request, application) # this function needs refactoring
+                application = save_current_section_modified(request, application)
                 return redirect('application-saved', pk=application.id)
             
             elif 'submit_application' in request.POST:
@@ -174,8 +176,15 @@ def application_saved(request, pk):
     if application.application_status == ApplicationStatus.PENDING_DEPOSIT_VERIFICATION:
         return redirect('dashboard')
     
+    if request.user.is_authenticated:
+        logout(request)
+    
+    course_code = application.selected_course.code
+    course_details = Course.objects.values('code', 'title', 'campus').get(code=course_code)
+    
     context = {
         'application': application,
+        'course_details': course_details
     }
     
     return render(request, 'admission/application/application-saved.html', context)

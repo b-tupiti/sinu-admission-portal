@@ -56,6 +56,7 @@ class ESection(Enum):
     DECLARATION = 'declaration'
 
 
+## This function needs a review: It should not have any side effects
 def save_current_section(request, application):
     """
     saves current section, sets new current section.
@@ -81,7 +82,25 @@ def save_current_section(request, application):
     finally:
         return application
         
-    
+
+def save_current_section_modified(request, application):
+    try:
+        current_section = request.POST.get('current_section')
+        
+        if (current_section == Section.PERSONAL_DETAILS):
+            save_personal_details(request, application)
+        
+        elif (current_section == Section.SPONSOR_DETAILS):
+            save_sponsor_details(request, application)
+        
+        elif (current_section == Section.EDUCATION_BACKGROUND):
+            save_education_background(request, application)
+        
+        elif (current_section == Section.EMPLOYMENT_HISTORY):
+            save_employment_history(request, application)
+    finally:
+        application.save()
+        return application
 
 def save_personal_details(request, application):
     
