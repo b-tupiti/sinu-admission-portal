@@ -105,6 +105,7 @@
 {% endblock %}
 
 {% block scripts %}
+{{ block.super }}
 <script src="{% static 'users/js/toggle-expansion.js' %}"></script>
 <script src="{% static 'js/help-modal.js' %}"></script>
 {% endblock scripts %}
