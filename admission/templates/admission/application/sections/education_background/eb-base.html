@@ -17,34 +17,41 @@
   <div class="has-background-white p-4">
 
     <!-- Start Secondary Education -->
-    <div class="p-1">
-      <h2 style="font-weight:bold;"> Secondary and Pre-certificate</h2>
-      <p class="mt-1 mb-2 is-size-7" style="color:rgba(0, 0, 0,.6)">
+    <div class="light-blue-border-bottom bg-opaque-blue pb-4 mb-5 mt-3" >
+      
+      <h3 class="has-text-white p-2 bg-light-blue">Secondary and Pre-certificate</h3>
+      
+      <p class="p-3 pt-4 is-size-7">
         NOTE: You must attach Certified Academic Transcript and Certificates for highest Form reached. Current form 5, 6 and 7
         students need to get reference letter from your School's Careers Master and/or Principal. School based semester 1 results
         must be attached. <br>  <br>
         <span> Please note the following: third form = year 9, fifth form = year 11, sixth form = year 12 </span>
       </p>
       
+      <div class="p-2">
       {% for item in hs_qualifications %}
       {% include 'admission/application/sections/education_background/secondary-education-block.html' with header_name=item.level_description file_input_name=item.file_input_name_prefix input_name=item.input_name_prefix school=item.school year=item.year  certificate=item.documents.certificate.name transcript=item.documents.transcript.name %}
       {% endfor %}
+      </div>
+
     </div>
     <!-- End Secondary Education -->
 
-    <hr/>
 
     <!-- Start Tertiary Education -->
-    <div class=" p-1 ">
+    <div class=" light-blue-border-bottom bg-opaque-blue">
 
-      <h2 style="font-weight:bold;"> Tertiary Studies Qualifications</h2>
-      <p class="is-size-7" style="color:rgba(0, 0, 0,.6)">
-        NOTE: You must attach all Certified Academic Transcript and Certificates for the Tertiary Qualification you attained.
+      <h3 class="has-text-white p-2 bg-light-blue">Tertiary Studies Qualifications</h3>
+      
+      <p class="p-3 pt-4 is-size-7">
+        NOTE: You must attach all Certified Academic Transcript and Certificates for the Tertiary Qualification you attained. 
       </p>
       
+      <div class="p-3">
       {% include 'admission/application/sections/education_background/tertiary-education-container.html' %}
+      </div>
 
-    </div>
+    </div> 
     <!-- End Tertiary Education -->
 
   </div>
@@ -72,62 +79,3 @@
   <script src="{% static 'js/flat-pickr-date-picker.js' %}"></script>
   <script src="{% static 'admission/js/file-upload-listener.js' %}"></script>
 {% endblock %} 
-
-
-
-<!-- <div class="application-section-header p-3">
-    Education Background
-</div>  -->
-                
-<!-- <div class="application-content-wrapper" >
-
-    
-    
-    <div class="application-content">
-
-        <section>
-
-            <div class="p-3 mb-3" style="border-bottom:1px solid rgba(0, 0, 0, 0.1);background:#f5f5f5;border-top-left-radius:5px;border-top-right-radius:5px;">
-              <h2 style="font-weight:bold;"> Secondary and Pre-certificate</h2>
-              <p class="mt-1 is-size-7" style="color:rgba(0, 0, 0,.6)">
-                NOTE: You must attach Certified Academic Transcript and Certificates for highest Form reached. Current form 5, 6 and 7
-                students need to get reference letter from your School's Careers Master and/or Principal. School based semester 1 results
-                must be attached.
-              </p>
-            </div>
-
-            
-  
-            {% for item in hs_qualifications %}
-            {% include 'admission/application/sections/education_background/secondary-education-block.html' with header_name=item.level_description file_input_name=item.file_input_name_prefix input_name=item.input_name_prefix school=item.school year=item.year  certificate=item.documents.certificate.name transcript=item.documents.transcript.name %}
-            {% endfor %}
-
-          </section>
-  
-          <section>
-  
-            <div class="p-3 mb-3 mt-5" style="border-bottom:1px solid rgba(0, 0, 0, 0.1);background:#f5f5f5;border-top-left-radius:5px;border-top-right-radius:5px;">
-              <h2 style="font-weight:bold;"> Tertiary Studies Qualifications</h2>
-              <p class="mt-1 is-size-7" style="color:rgba(0, 0, 0,.6)">
-                NOTE: You must attach all Certified Academic Transcript and Certificates for the Tertiary Qualification you attained.
-              </p>
-            </div>
-              
-            {% include 'admission/application/sections/education_background/tertiary-education-container.html' %}
-  
-          </section>
-
-    </div>
-
-    <div class="button-group">
-        <div class="field is-grouped ">
-
-            {% include 'admission/application/save-and-exit-button.html' %}
-            
-            {% include 'admission/application/next-button.html' %}
-        </div>
-    </div>
-
-    
-        
-</div> -->

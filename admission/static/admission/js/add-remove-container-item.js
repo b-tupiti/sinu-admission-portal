@@ -34,7 +34,7 @@ const createEmptyQualificationComponent = (id) => {
 
     const component = document.createElement('div');
     component.setAttribute('id',`item_id-${id}`);
-    component.setAttribute('class','mt-3 ml-1 mr-1 p-4');
+    component.setAttribute('class','mt-3 ml-1 mr-1 p-4 has-background-white');
     component.setAttribute('style', 'border: 1px solid rgba(0, 0, 0, 0.1); border-radius: 5px;');
 
 
