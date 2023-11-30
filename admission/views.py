@@ -119,7 +119,7 @@ def get_application(request, pk):
             else:   
                 application = save_current_section(request, application)
         
-        application.save()
+        # application.save()
     
     context = {
         'application': application
