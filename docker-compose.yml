@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  web:
+  app:
     build: .
     image: admission-app
     command: >
@@ -40,7 +40,7 @@ services:
     env_file:
       - ./.env
     depends_on:
-      - web
+      - app
 
 volumes:
   postgres_data:
