@@ -58,7 +58,6 @@ class ApplicationAdmin(GuardedModelAdmin):
         }),
         ('Personal Details', {
             'fields': (
-                'photo', 
                 'title',
                 'first_name',
                 'middle_name',
