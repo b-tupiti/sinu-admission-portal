@@ -184,7 +184,18 @@ def send_email_based_on_application_status(instance):
         )
         
         # Get the file from the model instance's file field
-        attachment_file_path = instance.letter_of_offer.path
+        # Retrieve environment variables from this env object
+        import environ
+        from config.settings import BASE_DIR
+        env_file_path = BASE_DIR / '.env'
+        env = environ.Env()
+        env.read_env(env_file_path)
+        
+        if env('DJANGO_ENV') == 'production':
+            attachment_file_path = instance.letter_of_offer.url
+        else: 
+            attachment_file_path = instance.letter_of_offer.path
+            
         attachment_file_name = instance.letter_of_offer.name.split('/')[-1] 
 
         with open(attachment_file_path, 'rb') as file:
