@@ -17,10 +17,10 @@ jobs:
           password: ${{secrets.PASSWORD}} 
           port: ${{secrets.PORT}}
           script: |
-            cd /app
+            cd /app/sinu-admission-portal
             git pull origin main
-            docker-compose build
-            docker-compose up -d
+            docker compose build
+            docker compose up -d
 
 
 
