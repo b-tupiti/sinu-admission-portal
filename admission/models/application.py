@@ -137,7 +137,7 @@ class Application(models.Model):
     
     title = models.CharField(
         verbose_name='Title',
-        max_length=5, 
+        max_length=10, 
         choices=Title.choices,
         blank=True,
         null=True,
