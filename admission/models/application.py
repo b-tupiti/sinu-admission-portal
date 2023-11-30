@@ -131,7 +131,7 @@ class Application(models.Model):
     
     title = models.CharField(
         verbose_name='Title',
-        max_length=10, 
+        max_length=100, 
         choices=Title.choices,
         blank=True,
         null=True,
@@ -166,7 +166,7 @@ class Application(models.Model):
     
     gender = models.CharField(
         verbose_name='Gender',
-        max_length=6,
+        max_length=100,
         choices=Gender.choices,
         blank=True,
         null=True,
@@ -174,7 +174,7 @@ class Application(models.Model):
     
     marital_status = models.CharField(
         verbose_name='Marital Status',
-        max_length=8,
+        max_length=100,
         choices=MaritalStatus.choices,
         blank=True,
         null=True,
@@ -281,7 +281,7 @@ class Application(models.Model):
     """SPONSOR Details"""
     
     sponsor_type = models.CharField(
-        max_length=25,
+        max_length=100,
         choices = (
             ('private', 'Private'), 
             ('sponsored', 'Sponsored'),
