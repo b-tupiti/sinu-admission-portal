@@ -1,3 +1,4 @@
+import logging
 from django.db import models
 from users.models.user import User
 from courses.models.course import Course
@@ -456,6 +457,16 @@ class Application(models.Model):
     
     def __str__(self):
         return str(self.id)
+    
+    def save(self, *args, **kwargs):
+        # Log the values of all fields before the save operation
+        for field in self._meta.fields:
+            field_name = field.name
+            field_value = getattr(self, field_name)
+            logging.info(f"Value of {field_name}: {field_value}")
+
+        # Call the original save method
+        super().save(*args, **kwargs)
     
     def get_absolute_url(self):
         """_summary_
