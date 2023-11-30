@@ -463,20 +463,20 @@ class Application(models.Model):
         Returns:
             _type_: _description_
         """
-        if self.current_section == Section.PERSONAL_DETAILS:
-            self.edit_section = Section.PERSONAL_DETAILS  
+        if self.furthest_section == Section.PERSONAL_DETAILS:
+            self.current_section = Section.PERSONAL_DETAILS  
             
-        elif self.current_section == Section.SPONSOR_DETAILS:
-            self.edit_section = Section.SPONSOR_DETAILS
+        elif self.furthest_section == Section.SPONSOR_DETAILS:
+            self.current_section = Section.SPONSOR_DETAILS
             
-        elif self.current_section == Section.EDUCATION_BACKGROUND:
-            self.edit_section = Section.EDUCATION_BACKGROUND
+        elif self.furthest_section == Section.EDUCATION_BACKGROUND:
+            self.current_section = Section.EDUCATION_BACKGROUND
             
-        elif self.current_section == Section.EMPLOYMENT_HISTORY:
-            self.edit_section = Section.EMPLOYMENT_HISTORY
+        elif self.furthest_section == Section.EMPLOYMENT_HISTORY:
+            self.current_section = Section.EMPLOYMENT_HISTORY
             
-        elif self.current_section == Section.DECLARATION:
-            self.edit_section = Section.DECLARATION
+        elif self.furthest_section == Section.DECLARATION:
+            self.current_section = Section.DECLARATION
         
         self.save()
         return reverse('application', kwargs={'pk': self.pk})
