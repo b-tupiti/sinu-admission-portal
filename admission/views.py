@@ -120,6 +120,8 @@ def get_application(request, pk):
                 application = save_current_section(request, application)
         
         application.save()
+        from django.db import connection
+        print(connection.queries)
     
     context = {
         'application': application
