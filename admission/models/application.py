@@ -122,13 +122,6 @@ class Application(models.Model):
     
     """PERSONAL Details"""
     
-    photo = models.ImageField(
-        verbose_name='Photo of Applicant',
-        upload_to='photos/',
-        null=True,
-        blank=True,
-    )
-    
     student_id = models.IntegerField(
         verbose_name='Student ID',
         unique=True, 
