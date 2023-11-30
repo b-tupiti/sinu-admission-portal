@@ -202,12 +202,14 @@ class Application(models.Model):
     )
     
     citizenship = CountryField(
+        max_length=150,
         verbose_name='Citizenship',
         blank=True,
         null=True,
     )
     
     country_of_birth = CountryField(
+        max_length=150,
         verbose_name='Country of Birth',
         blank=True,
         null=True,
