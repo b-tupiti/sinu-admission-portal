@@ -1,8 +1,6 @@
 from pathlib import Path
 from distutils.util import strtobool
 import environ
-from dj_static import Cling
-
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -31,7 +29,6 @@ INSTALLED_APPS = [
     
     'corsheaders',
     'guardian',
-    
     
     'admission',
     'courses',
@@ -74,25 +71,6 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
-# if env('DJANGO_ENV') == 'production':
-#     DATABASES = {
-#         'default': {
-#             'ENGINE': 'django.db.backends.postgresql',
-#             'NAME': env('PGDATABASE'),
-#             'USER': env('PGUSER'),
-#             'PASSWORD': env('PGPASSWORD'),
-#             'HOST': env('PGHOST'),
-#             'PORT': env('PGPORT'),
-#         }
-#     }
-# else:
-#     DATABASES = {
-#         'default': {
-#             'ENGINE': 'django.db.backends.sqlite3',
-#             'NAME': BASE_DIR / 'db.sqlite3',
-#         }
-#     }
 
 if env('DJANGO_ENV') == 'production': 
     DATABASES = {
@@ -137,15 +115,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
-# Mail Server 
-# EMAIL_BACKEND = env('EMAIL_BACKEND')
-# EMAIL_HOST = env('EMAIL_HOST')
-# EMAIL_PORT = env('EMAIL_PORT')
-# EMAIL_USE_TLS = env('EMAIL_USE_TLS')
-# EMAIL_HOST_USER = env('EMAIL_HOST_USER')
-# EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
@@ -163,21 +132,17 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
 
-
-
-
 MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
-if env('DJANGO_ENV') == 'production':
-    DEFAULT_FILE_STORAGE = env('DEFAULT_FILE_STORAGE')
-    AWS_S3_REGION_NAME = env('AWS_S3_REGION_NAME')
-    AWS_STORAGE_BUCKET_NAME = env('AWS_STORAGE_BUCKET_NAME')
-    AWS_S3_ENDPOINT_URL = env('AWS_S3_ENDPOINT_URL')
-    AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
-    AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
-else:
-    MEDIA_ROOT = BASE_DIR / 'media'
+# External Storage for media files. Provider: BackBlaze
 
+DEFAULT_FILE_STORAGE = env('DEFAULT_FILE_STORAGE')
+AWS_S3_REGION_NAME = env('AWS_S3_REGION_NAME')
+AWS_STORAGE_BUCKET_NAME = env('AWS_STORAGE_BUCKET_NAME')
+AWS_S3_ENDPOINT_URL = env('AWS_S3_ENDPOINT_URL')
+AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -187,6 +152,8 @@ AUTH_USER_MODEL = 'users.User'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 BASE_URL = env('BASE_URL')
 LOGIN_URL = 'login'
+
+# Sendgrid Vars
 
 DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
 SENDGRID_API_KEY = env('SENDGRID_API_KEY')
