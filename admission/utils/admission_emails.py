@@ -183,27 +183,49 @@ def send_email_based_on_application_status(instance):
             html_content=html_content,
         )
         
-        # Get the file from the model instance's file field
-        # Retrieve environment variables from this env object
+        #  FIRST ATTEMPT START
         
-        attachment_file_path = instance.letter_of_offer.url
+        from config import settings
+        from b2sdk.v1 import B2Api
+        import os
+        from urllib.parse import urlparse
+        
+        instance_url = instance.letter_of_offer.url
+        instance_filename = instance.letter_of_offer.name
+
+        parsed_url = urlparse(instance_url)
+        path_components = parsed_url.path.split('/')
+        
+        file_path = '/'.join(path_components[2:])
+        
+        b2_api = B2Api()
+        b2_api.authorize_account("production", settings.AWS_ACCESS_KEY_ID, settings.AWS_SECRET_ACCESS_KEY)
+
+        file_path = os.path.join(settings.MEDIA_ROOT, instance_filename) 
+        with open(file_path, 'wb') as f:
+            b2_api.get_download_url_for_file_name(settings.AWS_STORAGE_BUCKET_NAME, file_path)
+
+
+        try:
             
-        attachment_file_name = instance.letter_of_offer.name.split('/')[-1] 
-
-        with open(attachment_file_path, 'rb') as file:
-            file_data = file.read()
-
-        import base64
-        file_data_encoded = base64.b64encode(file_data).decode('utf-8')
-        attachment = Attachment(
-            FileContent(file_data_encoded),
-            FileName(attachment_file_name),
-            FileType('application/pdf'), 
-            Disposition('attachment')
-        )
-
-        mail_obj.add_attachment(attachment)
+            with open(file_path, 'rb') as file:
+                file_data = file.read()
+                    
+            import base64
+            file_data_encoded = base64.b64encode(file_data).decode('utf-8')
+            attachment = Attachment(
+                FileContent(file_data_encoded),
+                FileName(instance.letter_of_offer.name.split('/')[-1]),
+                FileType('application/pdf'), 
+                Disposition('attachment')
+            )
         
+            mail_obj.add_attachment(attachment)
+        
+        except Exception as e:
+            pass
+
+
         try:
             sg = SendGridAPIClient(settings.SENDGRID_API_KEY)
             response = sg.send(mail_obj)
@@ -211,6 +233,7 @@ def send_email_based_on_application_status(instance):
             
         except Exception as e:
             print(str(e))
+            
         
         # send mail to sas.admissions@sinu.edu.sb.
         application_id = f'{instance.id}'
