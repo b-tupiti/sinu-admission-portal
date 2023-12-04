@@ -107,13 +107,27 @@ def save_personal_details(request, application):
     if request.FILES.get('medical_report'):    
         application.medical_report = request.FILES.get('medical_report')
 
-    application.title = request.POST.get('title')
+    # temporarily handling dropdown fields: gender, title marital_status
+    if request.POST.get('title') != 'Please select':
+        application.title = request.POST.get('title')
+    if request.POST.get('gender') != 'Please select':
+        application.gender = request.POST.get('gender')
+    if request.POST.get('marital_status') != 'Please select':
+        application.marital_status = request.POST.get('marital_status')
+    if request.POST.get('province') != 'Please select':
+        application.province = request.POST.get('province')
+    if request.POST.get('constituency') != 'Please select':
+        application.constituency = request.POST.get('constituency')
+    if request.POST.get('country_of_birth') != 'Please select':
+        application.country_of_birth = request.POST.get('country_of_birth')
+    if request.POST.get('citizenship') != 'Please select':
+        application.citizenship = request.POST.get('citizenship')
+        
     application.first_name = request.POST.get('first_name')
     application.middle_name = request.POST.get('middle_name')
     application.last_name = request.POST.get('last_name')
-    application.gender = request.POST.get('gender')
+    
     application.date_of_birth = convert_date_format(request.POST.get('date_of_birth'))
-    application.marital_status = request.POST.get('marital_status')
     
     application.mobile_phone_number = request.POST.get('mobile_phone_number')
     application.telephone_number = request.POST.get('telephone_number')
@@ -123,12 +137,7 @@ def save_personal_details(request, application):
     application.guardian_name = request.POST.get('guardian_name')
     application.guardian_address = request.POST.get('guardian_address')
     application.guardian_phone_number = request.POST.get('guardian_phone_number')
-    
-    application.province = request.POST.get('province')
-    application.constituency = request.POST.get('constituency')
     application.ward = request.POST.get('ward')
-    application.country_of_birth = request.POST.get('country_of_birth')
-    application.citizenship = request.POST.get('citizenship')
     
     application.save()
     
