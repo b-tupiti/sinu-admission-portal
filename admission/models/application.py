@@ -320,6 +320,13 @@ class Application(models.Model):
         blank=True,
     )
     
+    sponsorship_letter = models.FileField(
+        upload_to=upload_path,
+        verbose_name='Sponsorship Letter',
+        null=True,
+        blank=True,
+    )
+    
     """EDUCATION Background"""
     
     third_form_school = models.CharField(

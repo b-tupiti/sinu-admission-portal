@@ -3,7 +3,6 @@ import uuid
 from .application import Application
 from .tertiary_qualification import TertiaryQualification
 
-
 class HSFormLevel(models.TextChoices):
     FORM_3 = "form_3", "Form 3"
     FORM_5 = "form_5", "Form 5"
@@ -15,13 +14,28 @@ class DocumentType(models.TextChoices):
     TRANSCRIPT = "transcript", "Acadmic Transcript"
     CERTIFICATE = "certificate", "Academic Certificate"
     
+
+
+def document_upload_path(instance, filename):
     
+    if isinstance(instance, TQDocument):
+        application = instance.qualification.application
+        return 'application_{0}/{1}'.format(application.id, filename)
+    
+    elif isinstance(instance, HSDocument):
+        application = instance.application
+        return 'application_{0}/{1}'.format(application.id, filename)
+            
+    else:
+        return 'application_{0}/{1}'.format(instance.id, filename)
+    
+
 class Document(models.Model):
     """
     Document model
     """
     
-    file = models.FileField(upload_to='documents/')
+    file = models.FileField(upload_to=document_upload_path)
     created = models.DateTimeField(auto_now_add=True)
     id = models.UUIDField(default=uuid.uuid4, unique=True,
                           primary_key=True, editable=False)   
@@ -32,11 +46,7 @@ class Document(models.Model):
     def __str__(self):
         return self.file.name.split('/')[-1]
         
-     
-class SponsorshipLetter(Document):
-    application = models.OneToOneField(Application, related_name="sponsor_letter", on_delete=models.CASCADE)
-
-   
+        
 class HSDocument(Document):
     application = models.ForeignKey(
         Application,
@@ -71,4 +81,3 @@ class TQDocument(Document):
         max_length=20,
         choices=DocumentType.choices,
     )
-    
