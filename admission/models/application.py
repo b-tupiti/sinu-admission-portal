@@ -4,6 +4,7 @@ from users.models.user import User
 from courses.models.course import Course
 from django.urls import reverse
 from django_countries.fields import CountryField
+from admission.utils.upload_path import upload_path
 
 class ApplicationStatus(models.TextChoices):
         DRAFT = "draft", "Draft"
@@ -274,7 +275,7 @@ class Application(models.Model):
     )
     
     medical_report = models.FileField(
-        upload_to='medical/',
+        upload_to=upload_path,
         verbose_name='Medical Report',
         null=True,
         blank=True,
@@ -387,14 +388,14 @@ class Application(models.Model):
     """ FINANCE GROUP """
     
     deposit_slip = models.FileField(
-        upload_to='slips/',
+        upload_to=upload_path,
         verbose_name='Deposit Slip',
         null=True,
         blank=True,
     )
     
     receipt = models.FileField(
-        upload_to='receipts/',
+        upload_to=upload_path,
         verbose_name='Receipt',
         null=True,
         blank=True,
@@ -403,7 +404,7 @@ class Application(models.Model):
     """ SAS GROUP """
     
     letter_of_offer = models.FileField(
-        upload_to='offer_letters/',
+        upload_to=upload_path,
         verbose_name='Letter of Offer',
         null=True,
         blank=True,
