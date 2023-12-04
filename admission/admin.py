@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models.application import Application, ApplicationStatus
-from .models.document import SponsorshipLetter, HSDocument, TQDocument
+from .models.document import HSDocument, TQDocument
 from .models.tertiary_qualification import TertiaryQualification
 from .models.employment import Employment
 from guardian.admin import GuardedModelAdmin
@@ -28,12 +28,6 @@ class HSDocumentAdmin(admin.ModelAdmin):
     list_display = ('file', 'application', 'form_level', 'document_type')
 
 admin.site.register(HSDocument, HSDocumentAdmin)
-
-
-class SponsorshipLetterAdmin(admin.ModelAdmin):
-    list_display = ('file', 'application')
-
-admin.site.register(SponsorshipLetter, SponsorshipLetterAdmin)
 
 
 class EmploymentAdmin(admin.ModelAdmin):

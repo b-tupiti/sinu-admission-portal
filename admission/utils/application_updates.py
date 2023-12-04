@@ -1,8 +1,7 @@
 from enum import Enum
-from django.db import IntegrityError
 from django.forms import model_to_dict
 from admission.models.application import Section
-from admission.models.document import DocumentType, HSDocument, HSFormLevel, SponsorshipLetter
+from admission.models.document import DocumentType, HSFormLevel
 from admission.utils.section_save_update.education_background import save_education_background
 from admission.utils.section_save_update.employment_history import save_employment_history
 from utils.convert_date import convert_date_format
@@ -18,26 +17,6 @@ def handle_submission(request, application):
     application.is_declared = True
     application.save()
     
-                
-def _save_or_replace_sponsorship_letter(request, application):
-    try:
-        letter = SponsorshipLetter(
-            file=request.FILES.get('sponsorship_letter'),
-            application=application,
-        )
-        letter.save()
-        print(letter)
-            
-    except IntegrityError as e:
-        
-        SponsorshipLetter.objects.filter(application=application).delete()
-        letter = SponsorshipLetter(
-            file=request.FILES.get('sponsorship_letter'),
-            application=application,
-        )
-        
-        letter.save() 
-
 
 def _sponsor_type(sponsor_type):
     if sponsor_type == 'Private':
@@ -145,7 +124,7 @@ def save_personal_details(request, application):
 def save_sponsor_details(request, application):
     
     if request.FILES.get('sponsorship_letter'):    
-        _save_or_replace_sponsorship_letter(request, application)
+        application.sponsorship_letter = request.FILES.get('sponsorship_letter')
        
     application.sponsor_type = _sponsor_type(request.POST.get('sponsor_type'))
     application.sponsor_name = request.POST.get('sponsor_name')
