@@ -38,7 +38,7 @@
 
       <div class="file has-name p-3">
         <label class="file-label">
-          <input class="file-input" type="file" name="deposit_slip" accept=".doc, .docx, .pdf">
+          <input id="slip-input" class="file-input" type="file" name="deposit_slip" accept=".doc, .docx, .pdf">
           <span class="file-cta">
             <span class="file-icon">
               <i class="fas fa-upload"></i>
@@ -47,7 +47,7 @@
               Choose a file…
             </span>
           </span>
-          <span class="file-name">
+          <span class="file-name" id="slip-input-name">
             {% if application.deposit_slip %}
             {{ application.deposit_slip.name | filename }}  
             {% else %}
@@ -68,7 +68,7 @@
       </h3>
 
       <label class="checkbox is-flex p-4">
-        <input type="checkbox">
+        <input id="declaration-checkbox" type="checkbox" name="is_declared">
         <p class="ml-5 is-marginless" style="font-size:13px">
             I Declare that the information given in this application is complete and accurate to the best of my knowledge. <br> 
             I acknowledge that the University reserves the right to deny my admission or cancel my registration if the above information
@@ -86,7 +86,7 @@
   <div class="field is-grouped ">
     {% include 'admission/application/save-and-exit-button.html' %}
     <p class="control">
-      <input type="submit" class="button is-link" name="submit_application" value="Submit Application">
+      <input disabled id="submit-btn" type="submit" class="button is-link" name="submit_application" value="Submit Application">
     </p>
   </div>
 </div>
@@ -98,4 +98,5 @@
   {{ block.super }}
   <script src="{% static 'js/help-modal.js' %}"></script>
   <script src="{% static 'admission/js/file-upload-listener.js' %}"></script>
+  <script src="{% static 'admission/js/enable-submission.js' %}"></script>
 {% endblock %} 
