@@ -154,7 +154,16 @@ BASE_URL = env('BASE_URL')
 LOGIN_URL = 'login'
 
 # Sendgrid Vars
-
 DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
 SENDGRID_API_KEY = env('SENDGRID_API_KEY')
+
+# Email Settings
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'apikey'
+EMAIL_HOST_PASSWORD = env('SENDGRID_API_KEY')
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+# Password reset email template
+PASSWORD_RESET_EMAIL_TEMPLATE = 'users/reset_password_email_template.html'
 
