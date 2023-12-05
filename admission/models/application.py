@@ -440,9 +440,15 @@ class Application(models.Model):
         default=ApplicationStatus.DRAFT
     )
     
+    date_submitted = models.DateTimeField(
+        verbose_name='Submission Date',
+        null=True, 
+        blank=True, 
+        default=None
+    )
+    
     created = models.DateTimeField(auto_now_add=True)
     last_saved = models.DateTimeField(auto_now=True)
-    
     
     @property
     def owner(self):
