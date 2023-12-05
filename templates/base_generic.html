@@ -35,7 +35,7 @@
 
       {% if messages %}
         {% for message in messages %}
-        <div class="mt-5 container notification is-danger is-light">
+        <div class="mt-5 container notification {% if message.tags == 'info' %}is-info{% endif %} {% if message.tags == 'success' %}is-success{% endif %} {% if message.tags == 'warning' %}is-warning{% endif %} {% if message.tags == 'error' %}is-danger{% endif %} is-light">
           {{message}}
         </div>
         {% endfor %}
