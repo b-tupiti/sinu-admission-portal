@@ -5,22 +5,35 @@
 <link rel="stylesheet" href="{% static 'styles\navbar.css' %}"/>
 
 
-<nav class="navbar" role="navigation" aria-label="main navigation">
+{% comment %} <nav class="navbar" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
+        
     <a class="navbar-item" >
       <img  src="{% static 'logo/sinu.png'%}" alt="sinu-logo" width="40" height="28">
       <span class="has-text-white ml-4" style="font-size: large;text-align:center">
 
-       {{title}}
+        {{title}}
       
       </span>
     </a>
-   
+     
+
+
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbar-menu">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+
   </div>
 
-  <div class="navbar-menu "  id="navbar-menu">
-    {% if user.is_authenticated %}
+  <div id="navbar-menu" class="navbar-menu">
+
+
     <div class="navbar-end">
+   
+        <div class="buttons">
+          {% if user.is_authenticated %}
           <div class="navbar-item">
             
             <div class="dropdown is-right" >
@@ -48,15 +61,94 @@
             </div>
           
           </div>
+          {% else %}
+          <a class="navbar-item" href="{% url 'course-search' %}">Course Finder</a>
+          <a class="navbar-item" href="{% url 'login' %}">Portal Login</a>
+          {% endif %}
+          
+        </div>
+      
     </div>
-    {% else %}
-    <div class="navbar-end ">
-      <a class="navbar-item" href="{% url 'course-search' %}">Search for a Course</a>
-      <a class="navbar-item" href="{% url 'login' %}">Portal Login</a>
-    </div>
-    {% endif %}
+  </div>
+</nav> {% endcomment %}
+
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+        
+    <a class="navbar-item" >
+      <img  src="{% static 'logo/sinu.png'%}" alt="sinu-logo" width="40" height="28">
+      <span class="has-text-white ml-4" style="font-size: large;text-align:center">
+
+        {{title}}
+      
+      </span>
+    </a>
+
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbar-menu">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+
   </div>
 
-  
+
+  <div id="navbar-menu" class="navbar-menu bg-sinu-blue">
+
+
+    <div class="navbar-end">
+   
+        <div class="buttons">
+          {% if user.is_authenticated %}
+          <div class="navbar-item">
+            
+            <div class="dropdown is-right" >
+              
+              <div class="dropdown-trigger" style="text-align:center">
+                <button id="dropdown-logout" class="button  transparent" aria-haspopup="true" aria-controls="dropdown-logout">
+                  <span class="icon is-small has-text-white">
+                    <i class="mr-2 fa-solid fa-user-large" aria-hidden="true"></i>
+                  </span>
+                  <span class="has-text-white">{{ user.email }}</span>
+                  <span class="icon is-small has-text-white">
+                    <i class="ml-3 fa-solid fa-caret-down" aria-hidden="true"></i>
+                  </span>
+                </button>
+              </div>
+
+              <div class="dropdown-menu" id="dropdown-logout" role="menu">
+                <div class="dropdown-content is-paddingless" >
+                  <div class="dropdown-item is-paddingless " >
+                    <a href="{% url 'logout' %}" >Logout</a>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          
+          </div>
+          {% else %}
+           
+            <a class="navbar-item" href="{% url 'course-search' %}">Search for a Course</a>
+            <a class="navbar-item" href="{% url 'login' %}">Portal Login</a>
+
+
+            <div class="navbar-item">
+            
+              <div class="dropdown " style="background:#ddd !important">
+                <div class="dropdown-menu mb-4" id="dropdown-logout" role="menu" style="background:#ddd !important">
+                  <a href="{% url 'course-search' %}">Search for a Course</a>
+                  <a  href="{% url 'login' %}">Portal Login</a>
+                </div>
+                 
+              </div>
+            
+            </div>
+
+          {% endif %}
+        </div>
       
+    </div>
+  </div>
 </nav>
