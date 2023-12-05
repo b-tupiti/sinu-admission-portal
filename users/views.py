@@ -52,9 +52,12 @@ def login_user(request):
 
 
 def logout_user(request):
+    
     if request.user.is_authenticated:
         logout(request)
-        messages.info(request, 'you signed out!')
+        message = 'You have successfully logged out of the portal.'
+        messages.info(request, message)
+        
     return redirect('login')
 
 
