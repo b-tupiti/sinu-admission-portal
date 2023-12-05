@@ -1,5 +1,3 @@
-console.log('hi')
-
 // if all inputs are valid, save and continue button will be enabled.
 const inputs = {
     'validPassword': false,
@@ -11,21 +9,21 @@ const confirmPasswordInput = document.getElementById('confirm-new-password');
 const passwordInfo = document.getElementById('validate-password-check');
 const confirmPasswordInfo = document.getElementById('confirm-password-check');
 
-passwordInput.addEventListener('keyup', function(){
+passwordInput.addEventListener('input', function(){
     passwordValidityCheck(this.value);
 
     if(confirmPasswordInput.value)
         confirmPasswordCheck(this.value, confirmPasswordInput.value);
 });
 
-confirmPasswordInput.addEventListener('keydown', function(e){
+confirmPasswordInput.addEventListener('input', function(e){
     if (e.key === 'Tab' || e.key === 'Enter') {
         return;
     }
     confirmPasswordCheck(this.value + e.key, passwordInput.value);
 });
 
-document.addEventListener('keydown', function(){
+document.addEventListener('input', function(){
     
     if(allInputsValid())
         document.getElementById('change-my-password').removeAttribute('disabled');
