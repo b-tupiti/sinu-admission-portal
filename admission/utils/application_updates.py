@@ -5,7 +5,7 @@ from admission.models.document import DocumentType, HSFormLevel
 from admission.utils.section_save_update.education_background import save_education_background
 from admission.utils.section_save_update.employment_history import save_employment_history
 from utils.convert_date import convert_date_format
-
+from django.utils import timezone
 
 def handle_submission(request, application):
     from admission.models.application import ApplicationStatus
@@ -15,6 +15,7 @@ def handle_submission(request, application):
         pass
     application.application_status = ApplicationStatus.PENDING_DEPOSIT_VERIFICATION
     application.is_declared = True
+    application.date_submitted = timezone.now()
     application.save()
     
 
