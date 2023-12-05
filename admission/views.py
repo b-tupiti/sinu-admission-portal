@@ -250,7 +250,7 @@ def download_application(request, pk):
  
         
         # get all tertiary documents
-        for document in tertiary_documents:         
+        for document in tertiary_documents:      
             try:
                 filename, content = fetch_single_doc_from_cloud(document)
                 zipf.writestr(filename, content.getvalue())
@@ -284,15 +284,9 @@ def fetch_single_doc_from_cloud(document):
         settings.AWS_SECRET_ACCESS_KEY
     )
     
-    instance_url = document.url
-    instance_filename = document.name
-    
-    parsed_url = urlparse(instance_url)
-    path_components = parsed_url.path.split('/')
-    
-    file_name = '/'.join(path_components[2:]) # this is the same as instance_filename
-    
-    file_info = b2_api.get_file_info_by_name(settings.AWS_STORAGE_BUCKET_NAME, file_name)
+    instance_filename = document.file.name
+        
+    file_info = b2_api.get_file_info_by_name(settings.AWS_STORAGE_BUCKET_NAME, instance_filename)
     
     file_content = BytesIO()
     b2_api.download_file_by_id(file_info.id_).save(file_content)
