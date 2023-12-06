@@ -32,10 +32,15 @@ def login_user(request):
         email = request.POST['email']
         password = request.POST['password']
         
+        context = {'email': email}
+        
         try:
             user = User.objects.get(email=email)
         except:
-            messages.error(request,'this email does not exist')
+            message = 'No account exists with this email.'
+            messages.info(request, message)
+
+            return render(request, 'users/authentication/login.html', context)
 
         user = authenticate(request, email=email, password=password)
 
@@ -46,8 +51,11 @@ def login_user(request):
             else:
                 return redirect('dashboard')
         else:
-            messages.error(request,'your email or password is invalid')
+            message = 'Your email or password is invalid.'
+            messages.error(request, message)
     
+            return render(request, 'users/authentication/login.html', context)
+
     return render(request, 'users/authentication/login.html')
 
 

@@ -27,7 +27,14 @@
         <hr class="mb-4" style="background:#e5e5e5">
         <div class="field">
             <p class="control has-icons-left has-icons-right" >
-              <input class="input" type="email" placeholder="Email \ Username" name="email" required>
+              <input 
+                class="input" 
+                type="email" 
+                placeholder="Email" 
+                name="email"
+                value="{% if email %}{{email}}{% endif %}" 
+                required
+                >
               <span class="icon is-small is-left">
                 <i class="fas fa-envelope"></i>
               </span>
