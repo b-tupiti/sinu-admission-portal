@@ -172,24 +172,24 @@
             <div class="column field is-one-quarter-fullhd">
               <label class="label">Permanent Address</label>
                 <div class="control">
-                  <textarea name="permanent_address" class="textarea" placeholder="Your Address">
-                    {% if application.permanent_address %}
-                    {{ application.permanent_address }}
-                    {% endif %}
-                  </textarea>
+                  <textarea 
+                    name="permanent_address" 
+                    class="textarea" 
+                    placeholder="Your Address"
+                    >{% if application.permanent_address %}{{ application.permanent_address }}{% endif %}</textarea>
                 </div>
             </div>
             <!-- end permanent address -->
 
             <!-- start postal contact -->
             <div class="column field is-one-quarter-fullhd">
-              <label class="label">Contact (Postal)</label>
+              <label class="label">Postal Address</label>
                 <div class="control">
-                  <textarea name="contact_postal" class="textarea" placeholder="Address">
-                    {% if application.contact_postal %}
-                    {{ application.contact_postal }}
-                    {% endif %}
-                  </textarea>
+                  <textarea 
+                    name="contact_postal" 
+                    class="textarea" 
+                    placeholder="Address"
+                    >{% if application.contact_postal %}{{ application.contact_postal }}{% endif %}</textarea>
                 </div>
             </div>
             <!-- end postal contact -->
@@ -230,11 +230,11 @@
             <div class="column field is-one-quarter-fullhd">
               <label class="label">Guardian Address</label>
               <div class="control">
-                <textarea name="guardian_address" class="textarea" placeholder="Address">
-                  {% if application.guardian_address %}
-                  {{ application.guardian_address }}
-                  {% endif %}
-                </textarea>
+                <textarea 
+                  name="guardian_address" 
+                  class="textarea" 
+                  placeholder="Guardian Address"
+                  >{% if application.guardian_address %}{{ application.guardian_address }}{% endif %}</textarea>
               </div>
             </div>
             <!-- END guardian address -->
