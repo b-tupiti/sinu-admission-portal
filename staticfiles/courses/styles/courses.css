@@ -1,17 +1,27 @@
 .input {
     font-weight: bold;
     font-size: large;
+    background-color: transparent;
+}
 
+.search-bar {
+    border: 1px solid rgb(229, 229, 229) !important;
+    border-radius: 0;
 }
 
 .input:focus {
-    border: 3px solid rgb(255, 255, 255) !important;
-    background: rgba(7, 7, 7,.2);
+    border: 2px solid rgb(255, 255, 255) !important;
     color: white;
 }
 
+input::placeholder {
+    color: white !important;
+    font-size: medium;
+    font-weight: normal;
+}
+
 input:hover {
-    border: 3px solid rgb(106, 106, 106) !important;
+    border: 2px solid rgb(255, 255, 255) !important;
 }
 
 .button {
