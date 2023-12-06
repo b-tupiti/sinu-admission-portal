@@ -103,6 +103,7 @@ def save_personal_details(request, application):
     if request.POST.get('citizenship') != 'Please select':
         application.citizenship = request.POST.get('citizenship')
         
+    application.student_id = request.POST.get('student_id')
     application.first_name = request.POST.get('first_name')
     application.middle_name = request.POST.get('middle_name')
     application.last_name = request.POST.get('last_name')
