@@ -42,6 +42,11 @@ def create_new_application(request):
     for a course, hence it must have existed beforehand.
     """
     
+    if request.user.is_authenticated:
+        message = 'INFO: You can only submit one application at this time.'
+        messages.info(request, message)
+        return redirect('dashboard')
+    
     if request.method == 'GET':
         course_code = request.GET.get('course_code')
         
