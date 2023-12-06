@@ -27,6 +27,9 @@ def group_required(group_name):
 def login_user(request):
     """Logs in a user"""
     
+    if request.user.is_authenticated:
+        return redirect('dashboard')
+    
     if request.method == 'POST':
         
         email = request.POST['email']
