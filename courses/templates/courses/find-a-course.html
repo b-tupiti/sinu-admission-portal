@@ -12,28 +12,32 @@
 
 {% block content %}
 
-    
 
-<section class="container mt-5">
-    <div class="mt-5 columns is-align-items-center bg-sinu-blue  pt-4 pb-4" >
-        
-        <h1 class="column is-narrow is-size-5 has-text-white mr-5 has-text-weight-bold" >Course Search
-            <span class="is-size-1" style="color:#127594">.</span>
+
+<section class="pt-6 pb-6" style="background-color: #102b41;">
+    <div class="container">
+        <h1 class="p-2 has-text-centered-mobile has-text-left-tablet has-text-white is-size-5 has-text-weight-bold mb-4">
+            <span class="is-size-5 has-text-white ">Find a course</span>
         </h1>
+    
+        <div class="bg-sinu-blue p-3 " >
 
-        <div class="column" >
-            <h5 class=" mb-2 is-italic " style="font-size:.9em;color:#dedede">Search for a Course</h5>
-            <div  style="width:100%">
-                <form class="   is-flex "  method="get">
-                    <input class="input" name="search" value="{{search}}" type="text" placeholder="" style="border:none;border-top-right-radius:0px;border-bottom-right-radius:0px;">
-                    <input class="button has-text-weight-semibold  has-text-white" type="submit" value="search" style="background:#127594;border:none">
-                </form>
-            </div>
-        </div>
             
+            
+            <form class="columns is-fullhd  mt-5 mb-5 ml-3 mr-3"  method="get">
+                <div class="column is-four-fifths">
+                    <input  class="input search-bar" name="search" value="{{search}}" type="text" placeholder="Search for a course by name or course code." >
+                </div>
+                <div class="column">
+                    <button class="input button has-text-weight-semibold  has-text-white" type="submit" value="Search" style="background:#127594;border:none">
+                        <span class="has-text-white">Search</span>
+                    </button>
+                </div>
+            </form>
+
+        </div>
     </div>
 </section>
-
 
 
 <section class="container mt-5 p-3">
