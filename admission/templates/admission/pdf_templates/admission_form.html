@@ -98,22 +98,22 @@ WEBSITE: www.sinu.edu.sb <br/>
   </tr>
   <tr style="color: blue">
     <td>
-      {% if %}
+      {% if application.title %}
       {{application.title}}
       {% endif %}
     </td>
     <td>
-      {% if %}
+      {% if pplication.first_name %}
       {{application.first_name}}
       {% endif %}
     </td>
     <td>
-      {% if %}
+      {% if application.middle_name %}
       {{application.middle_name}}
       {% endif %}
     </td>
     <td>
-      {% if %}
+      {% if application.last_name %}
       {{application.last_name}}
       {% endif %}
     </td>
@@ -129,17 +129,17 @@ WEBSITE: www.sinu.edu.sb <br/>
     </tr>
     <tr style="color: blue">
       <td>
-        {% if %}
+        {% if application.date_of_birth %}
         {{application.date_of_birth}}
         {% endif %}
       </td>
       <td>
-        {% if %}
+        {% if application.gender %}
         {{application.gender}}
         {% endif %}
       </td>
       <td>
-        {% if %}
+        {% if application.marital_status %}
         {{application.marital_status}}
         {% endif %}
       </td>
@@ -156,17 +156,17 @@ WEBSITE: www.sinu.edu.sb <br/>
     </tr>
     <tr style="color: blue">
       <td>
-        {% if %}
+        {% if application.constituency %}
         {{application.constituency}}
         {% endif %}
       </td>
       <td>
-        {%if %}
+        {%if application.province %}
         {{application.province}}
         {% endif %}
       </td>
       <td>
-        {% if %}
+        {% if application.ward %}
         {{application.ward}}
         {% endif %}
       </td>
@@ -181,12 +181,12 @@ WEBSITE: www.sinu.edu.sb <br/>
     </tr>
     <tr style="color: blue">
       <td>
-        {% if %}
+        {% if application.citizenship %}
         {{application.citizenship}}
         {% endif %}
       </td>
       <td>
-        {% if %}
+        {% if application.country_of_birth %}
         {{application.country_of_birth}}
         {% endif %}
       </td>
@@ -202,7 +202,7 @@ WEBSITE: www.sinu.edu.sb <br/>
     <tr style="color: blue">
       <td>{{application.telephone_number}}</td>
       <td>{{application.mobile_phone_number}}</td>
-      <td>{{application}}</td>
+      <td>{{application.applicant }}</td>
     </tr>
   </table>
 
@@ -232,27 +232,27 @@ WEBSITE: www.sinu.edu.sb <br/>
   </tr>
   <tr style="color: blue">
     <td>
-      {% if %}
+      {% if application.sponsor_name %}
       {{application.sponsor_name}}
       {% endif %}
     </td>
     <td>
-      {% if %}
+      {% if application.sponsor_address %}
       {{application.sponsor_address}}
       {% endif %}
     </td>
     <td>
-      {% if %}
+      {% if application.sponsor_phone_number %}
       {{application.sponsor_phone_number}}
       {% endif %}
     </td>
     <td>
-      {% if %}
+      {% if pplication.sponsor_email %}
       {{application.sponsor_email}}
       {% endif %}
     </td>
     <td>
-      {% if %}
+      {% if application.sponsor_type %}
       {{application.sponsor_type}}
       {% endif %}
     </td>
