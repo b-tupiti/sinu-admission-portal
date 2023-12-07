@@ -126,7 +126,6 @@ class Application(models.Model):
     student_id = models.CharField(
         verbose_name='Student ID',
         max_length=100, 
-        unique=True, 
         blank=True, 
         null=True
     )
