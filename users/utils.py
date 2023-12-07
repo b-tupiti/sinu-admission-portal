@@ -11,7 +11,7 @@ def create_applicant_account(request):
     middle_name = request.POST.get('middle_name').lower()
     last_name = request.POST.get('last_name').lower()
     gender = request.POST.get('gender').lower()
-    date_of_birth = convert_date_format(request.POST.get('date_of_birth'))
+    date_of_birth = request.POST.get('date_of_birth')
     email = request.POST.get('email')
     password = request.POST.get('password')
     

@@ -26,7 +26,12 @@
             <div class="field-body">
               <div class="field">
                 <div class="control">
-                  <input name="first_name" class="input" type="text" placeholder="" required>
+                  <input 
+                    name="first_name" 
+                    class="input" 
+                    type="text"  
+                    required
+                    >
                 </div>
               </div>
             </div>
@@ -41,7 +46,11 @@
             <div class="field-body">
               <div class="field">
                 <div class="control">
-                  <input name="middle_name" class="input" type="text" placeholder="" >
+                  <input 
+                    name="middle_name" 
+                    class="input" 
+                    type="text"  
+                    >
                 </div>
               </div>
             </div>
@@ -56,7 +65,12 @@
             <div class="field-body">
               <div class="field">
                 <div class="control">
-                  <input name="last_name" class="input" type="text" placeholder="" required>
+                  <input 
+                    name="last_name" 
+                    class="input" 
+                    type="text" 
+                    required
+                    >
                 </div>
               </div>
             </div>
@@ -72,8 +86,11 @@
                 <div class="field">
                 <div class="control">
                     <div class="select is-fullwidth">
-                    <select name="gender">
-                        <option selected>Please select</option>
+                    <select 
+                      name="gender"
+                      required
+                      >
+                        <option selected hidden>Please select</option>
                         <option>Male</option>
                         <option>Female</option>
                     </select>
@@ -92,9 +109,15 @@
           </div>
           <div class="field-body">
             <div class="field">
-              <p class="control">
-                <input id="datepicker" name="date_of_birth" class="input" type="text" placeholder="YYYY-MM-DD">
-              </p>
+              <div class="control">
+                <input 
+                  name="date_of_birth" 
+                  class="input" 
+                  type="date" 
+                  placeholder="YYYY-MM-DD"
+                  required
+                  >
+              </div>
             </div>
           </div>
         </div>
@@ -235,7 +258,6 @@
 </section>
 <!-- End Login Details -->
       
-{% comment %} <input name="course_code" type="text" value="MNRM" hidden> {% endcomment %}
 
 <div class="has-background-light is-flex is-justify-content-center p-3" style="border:1px solid rgba(0, 0, 0,.2);border-top:none">
   <div class="field is-grouped ">
