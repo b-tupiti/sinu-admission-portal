@@ -97,10 +97,26 @@ WEBSITE: www.sinu.edu.sb <br/>
     <td>SURNAME*</td>
   </tr>
   <tr style="color: blue">
-    <td>{{application.title}}</td>
-    <td>{{application.first_name}}</td>
-    <td>{{application.middle_name}}</td>
-    <td>{{application.last_name}}</td>
+    <td>
+      {% if %}
+      {{application.title}}
+      {% endif %}
+    </td>
+    <td>
+      {% if %}
+      {{application.first_name}}
+      {% endif %}
+    </td>
+    <td>
+      {% if %}
+      {{application.middle_name}}
+      {% endif %}
+    </td>
+    <td>
+      {% if %}
+      {{application.last_name}}
+      {% endif %}
+    </td>
   </tr>
 </table>
 
@@ -112,9 +128,21 @@ WEBSITE: www.sinu.edu.sb <br/>
       <td>MARITAL STATUS*</td>
     </tr>
     <tr style="color: blue">
-      <td>{{application.date_of_birth}}</td>
-      <td>{{application.gender}}</td>
-      <td>{{application.marital_status}}</td>
+      <td>
+        {% if %}
+        {{application.date_of_birth}}
+        {% endif %}
+      </td>
+      <td>
+        {% if %}
+        {{application.gender}}
+        {% endif %}
+      </td>
+      <td>
+        {% if %}
+        {{application.marital_status}}
+        {% endif %}
+      </td>
     </tr>
   </table>
 
@@ -127,9 +155,21 @@ WEBSITE: www.sinu.edu.sb <br/>
       <td>WARD NAME*</td>
     </tr>
     <tr style="color: blue">
-      <td>{{application.constituency}}</td>
-      <td>{{application.province}}</td>
-      <td>{{application.ward}}</td>
+      <td>
+        {% if %}
+        {{application.constituency}}
+        {% endif %}
+      </td>
+      <td>
+        {%if %}
+        {{application.province}}
+        {% endif %}
+      </td>
+      <td>
+        {% if %}
+        {{application.ward}}
+        {% endif %}
+      </td>
     </tr>
   </table>
 
@@ -140,8 +180,16 @@ WEBSITE: www.sinu.edu.sb <br/>
       <td>COUNTRY OF BIRTH*</td>
     </tr>
     <tr style="color: blue">
-      <td>{{application.citizenship}}</td>
-      <td>{{application.country_of_birth}}</td>
+      <td>
+        {% if %}
+        {{application.citizenship}}
+        {% endif %}
+      </td>
+      <td>
+        {% if %}
+        {{application.country_of_birth}}
+        {% endif %}
+      </td>
     </tr>
   </table>
 
@@ -183,11 +231,31 @@ WEBSITE: www.sinu.edu.sb <br/>
     <td>SPONSOR TYPE*</td>
   </tr>
   <tr style="color: blue">
-    <td>{{application.sponsor_name}}</td>
-    <td>{{application.sponsor_address}}</td>
-    <td>{{application.sponsor_phone_number}}</td>
-    <td>{{application.sponsor_email}}</td>
-    <td>{{application.sponsor_type}}</td>
+    <td>
+      {% if %}
+      {{application.sponsor_name}}
+      {% endif %}
+    </td>
+    <td>
+      {% if %}
+      {{application.sponsor_address}}
+      {% endif %}
+    </td>
+    <td>
+      {% if %}
+      {{application.sponsor_phone_number}}
+      {% endif %}
+    </td>
+    <td>
+      {% if %}
+      {{application.sponsor_email}}
+      {% endif %}
+    </td>
+    <td>
+      {% if %}
+      {{application.sponsor_type}}
+      {% endif %}
+    </td>
   </tr>
 </table>
 
