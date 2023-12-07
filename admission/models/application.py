@@ -123,8 +123,9 @@ class Application(models.Model):
     
     """PERSONAL Details"""
     
-    student_id = models.IntegerField(
+    student_id = models.CharField(
         verbose_name='Student ID',
+        max_length=100, 
         unique=True, 
         blank=True, 
         null=True
