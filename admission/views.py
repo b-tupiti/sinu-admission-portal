@@ -9,7 +9,7 @@ from django.shortcuts import redirect
 from django.urls import reverse
 from django.contrib.auth import authenticate,login
 from users.utils import create_applicant_account
-from django.http import Http404, StreamingHttpResponse
+from django.http import Http404, HttpResponse
 from .utils.new_application import create_new_admission_application_for_user
 from .utils.request_helpers import (
     is_put_request, 
@@ -270,7 +270,7 @@ def download_application(request, pk):
             except:
                 pass
             
-    response = StreamingHttpResponse(zip_buffer.getvalue(), content_type='application/zip')
+    response = HttpResponse(zip_buffer.getvalue(), content_type='application/zip')
     
     zip_filename = f"Admission_Application__{application.last_name.upper()}_{application.first_name.upper()}.zip"
     content = f"attachment; filename={zip_filename}"
