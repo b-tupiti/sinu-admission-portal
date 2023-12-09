@@ -1,7 +1,8 @@
-from urllib.parse import urlparse
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from utils.download_manager import BackBlazeDownloadManager
+from config import settings
 from .models.application import Application, ApplicationStatus, Section
 from .models.employment import Employment
 from courses.models.course import Course
@@ -28,9 +29,8 @@ import zipfile
 from io import BytesIO
 from django.db.utils import IntegrityError
 from django.contrib.auth import logout
-from config import settings
-from b2sdk.v2 import B2Api
-from urllib.parse import urlparse
+from admission.utils.generate_admission_pdf import generate_admission_pdf
+from admission.utils.get_documents import get_secondary_documents, get_tertiary_documents
     
 def create_new_application(request):
     """
@@ -160,10 +160,6 @@ def get_application(request, pk):
         return render(request, 'admission/application/sections/declaration/d-base.html', context)
         
 
-
-
-
-
 @login_required(login_url='login')
 def application_saved(request, pk):
     
@@ -191,64 +187,55 @@ def application_saved(request, pk):
     
     return render(request, 'admission/application/application-saved.html', context)
 
-import os
 
-
-
-from admission.utils.generate_admission_pdf import generate_admission_pdf
-from admission.utils.get_documents import get_secondary_documents, get_tertiary_documents
 @login_required(login_url='login')
 def download_application(request, pk):
     
+    # Initialize a Download Manager
+    download_manager = BackBlazeDownloadManager(
+        settings.AWS_ACCESS_KEY_ID, 
+        settings.AWS_SECRET_ACCESS_KEY,
+        settings.AWS_STORAGE_BUCKET_NAME
+    )
+    
     # create a zip buffer
     zip_buffer = BytesIO()
+    zip_filename = f"Admission_Application__{application.last_name.upper()}_{application.first_name.upper()}.zip"
     
-    # get application
+    # get application + documents
     application = Application.objects.get(id=pk)
-    
-    # get tertiary_documents
     tertiary_documents = get_tertiary_documents(application)
-    
-    # get secondary_documents
     secondary_documents = get_secondary_documents(application)
     
-    # generate admission pdf file
-    pdf = generate_admission_pdf(application)
-    pdf_filename = "Admission_Form__%s.pdf" % (f'{application.last_name.upper()}_{application.first_name.upper()}')
-        
-    # open zip buffer
     with zipfile.ZipFile(zip_buffer, 'w') as zipf:
         
-        # write pdf to zip buffer
-        zipf.writestr(pdf_filename, pdf.getvalue())
+        filename, pdf = generate_admission_pdf(application)
+        zipf.writestr(filename, pdf.getvalue())
 
-        # get documents associated with application (e.g. receipt, slip, medical_report)
-        # write them to zip buffer
-        
         # medical_report
         try:
-            filename, content = fetch_document_from_cloud(application, 'medical_report')
+            filename, content = download_manager.download_file_of_instance_by_attribute(application, 'medical_report')
             zipf.writestr(filename, content.getvalue())
         except:
             pass
         
         # sponsorship_letter
         try:
-            filename, content = fetch_document_from_cloud(application, 'sponsorship_letter')
+            filename, content = download_manager.download_file_of_instance_by_attribute(application, 'sponsorship_letter')
             zipf.writestr(filename, content.getvalue())
         except:
             pass
         
         # deposit slip
         try:
-            filename, content = fetch_document_from_cloud(application, 'deposit_slip')
+            filename, content = download_manager.download_file_of_instance_by_attribute(application, 'deposit_slip')
             zipf.writestr(filename, content.getvalue())
         except:
             pass
         
         # receipt
         try:
-            filename, content = fetch_document_from_cloud(application, 'receipt')
+            filename, content = download_manager.download_file_of_instance_by_attribute(application, 'receipt')
             zipf.writestr(filename, content.getvalue())
         except:
             pass
@@ -257,7 +244,7 @@ def download_application(request, pk):
         # get all tertiary documents
         for document in tertiary_documents:      
             try:
-                filename, content = fetch_single_doc_from_cloud(document)
+                filename, content = download_manager.download_file_of_instance_by_attribute(document, 'file')
                 zipf.writestr(filename, content.getvalue())
             except:
                 pass
@@ -265,62 +252,16 @@ def download_application(request, pk):
         # get all tertiary documents
         for document in secondary_documents:         
             try:
-                filename, content = fetch_single_doc_from_cloud(document)
+                filename, content = download_manager.download_file_of_instance_by_attribute(document, 'file')
                 zipf.writestr(filename, content.getvalue())
             except:
                 pass
             
-    response = HttpResponse(zip_buffer.getvalue(), content_type='application/zip')
-    
-    zip_filename = f"Admission_Application__{application.last_name.upper()}_{application.first_name.upper()}.zip"
+    response = HttpResponse(
+        zip_buffer.getvalue(), 
+        content_type='application/zip'
+    )
     content = f"attachment; filename={zip_filename}"
     response['Content-Disposition'] = content
     
     return response
-
-
-
-def fetch_single_doc_from_cloud(document):
-    
-    b2_api = B2Api()
-    b2_api.authorize_account(
-        "production", 
-        settings.AWS_ACCESS_KEY_ID, 
-        settings.AWS_SECRET_ACCESS_KEY
-    )
-    
-    instance_filename = document.file.name
-        
-    file_info = b2_api.get_file_info_by_name(settings.AWS_STORAGE_BUCKET_NAME, instance_filename)
-    
-    file_content = BytesIO()
-    b2_api.download_file_by_id(file_info.id_).save(file_content)
-
-    return instance_filename, file_content
-
-def fetch_document_from_cloud(instance, attribute):
-    
-    b2_api = B2Api()
-    b2_api.authorize_account(
-        "production", 
-        settings.AWS_ACCESS_KEY_ID, 
-        settings.AWS_SECRET_ACCESS_KEY
-    )
-    
-    instance_url = getattr(instance, attribute).url
-    instance_filename = getattr(instance, attribute).name
-
-    parsed_url = urlparse(instance_url)
-    path_components = parsed_url.path.split('/')
-    
-    file_name = '/'.join(path_components[2:]) # this is the same as instance_filename
-    
-    file_info = b2_api.get_file_info_by_name(settings.AWS_STORAGE_BUCKET_NAME, file_name)
-    
-    file_content = BytesIO()
-    b2_api.download_file_by_id(file_info.id_).save(file_content)
-    
-    return instance_filename, file_content
-    
-    
-    
