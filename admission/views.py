@@ -198,14 +198,15 @@ def download_application(request, pk):
         settings.AWS_STORAGE_BUCKET_NAME
     )
     
-    # create a zip buffer
-    zip_buffer = BytesIO()
-    zip_filename = f"Admission_Application__{application.last_name.upper()}_{application.first_name.upper()}.zip"
-    
     # get application + documents
     application = Application.objects.get(id=pk)
     tertiary_documents = get_tertiary_documents(application)
     secondary_documents = get_secondary_documents(application)
+    
+    # create a zip buffer
+    zip_buffer = BytesIO()
+    zip_filename = f"Admission_Application__{application.last_name.upper()}_{application.first_name.upper()}.zip"
+
     
     with zipfile.ZipFile(zip_buffer, 'w') as zipf:
         
