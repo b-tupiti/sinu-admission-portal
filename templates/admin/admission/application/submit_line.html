@@ -1,4 +1,10 @@
 {% load i18n admin_urls %}
+{% load static %}
+
+{% block extrahead %}
+<script type="text/javascript" src="{% static 'js/admin-site.js' %}"></script>
+{% endblock %}
+
 <div class="submit-row">
 {% block submit-row %}
 
