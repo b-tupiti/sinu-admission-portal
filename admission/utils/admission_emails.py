@@ -1,4 +1,5 @@
 from admission.models.application import Application, ApplicationStatus
+from utils.download_manager import BackBlazeDownloadManager
 from utils.send_mail import send_mail
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import (
@@ -11,6 +12,7 @@ from sendgrid.helpers.mail import (
 )
 from config import settings
 from django.template.loader import render_to_string
+import base64
 
 
 def send_email_based_on_application_status(instance):
@@ -183,39 +185,20 @@ def send_email_based_on_application_status(instance):
             html_content=html_content,
         )
         
-        #  FIRST ATTEMPT START
-        
-        from config import settings
-        from b2sdk.v1 import B2Api
-        import os
-        from urllib.parse import urlparse
-        
-        instance_url = instance.letter_of_offer.url
-        instance_filename = instance.letter_of_offer.name
-
-        parsed_url = urlparse(instance_url)
-        path_components = parsed_url.path.split('/')
-        
-        file_path = '/'.join(path_components[2:])
-        
-        b2_api = B2Api()
-        b2_api.authorize_account("production", settings.AWS_ACCESS_KEY_ID, settings.AWS_SECRET_ACCESS_KEY)
-
-        file_path = os.path.join(settings.MEDIA_ROOT, instance_filename) 
-        with open(file_path, 'wb') as f:
-            b2_api.get_download_url_for_file_name(settings.AWS_STORAGE_BUCKET_NAME, file_path)
-
+        download_manager = BackBlazeDownloadManager(
+            settings.AWS_ACCESS_KEY_ID, 
+            settings.AWS_SECRET_ACCESS_KEY,
+            settings.AWS_STORAGE_BUCKET_NAME
+        )
+    
+        filename, content = download_manager.download_file_of_instance_by_attribute(instance, 'letter_of_offer')
 
         try:
-            
-            with open(file_path, 'rb') as file:
-                file_data = file.read()
-                    
-            import base64
-            file_data_encoded = base64.b64encode(file_data).decode('utf-8')
+
+            file_data_encoded = base64.b64encode(content.getvalue()).decode('utf-8')
             attachment = Attachment(
                 FileContent(file_data_encoded),
-                FileName(instance.letter_of_offer.name.split('/')[-1]),
+                FileName(filename.split('/')[-1]),
                 FileType('application/pdf'), 
                 Disposition('attachment')
             )
@@ -224,7 +207,6 @@ def send_email_based_on_application_status(instance):
         
         except Exception as e:
             pass
-
 
         try:
             sg = SendGridAPIClient(settings.SENDGRID_API_KEY)
