@@ -39,7 +39,7 @@ admin.site.register(Employment, EmploymentAdmin)
 @admin.register(Application)
 class ApplicationAdmin(GuardedModelAdmin):
     list_display = ('id', 'first_name', 'last_name', 'selected_course', 'application_status')
-    list_filter = ('selected_course',)
+    list_filter = ('application_status', 'selected_course')
     fieldsets = (
          ('Applicant', {
             'fields': (
