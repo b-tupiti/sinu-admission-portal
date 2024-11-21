@@ -89,12 +89,6 @@ GET /dashboard
 
 Returns user dashboard depending on user type (e.g. staff, student).
 
-## Link to the Application (CICD)
-
-The app can be accessed here:
-
-http://enrollonline.sinu.edu.sb
-
 
 ## Future Roadmap
 
